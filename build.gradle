@@ -1,15 +1,30 @@
-def projectName = 'PVStar-API'
+def projectName = 'PV-StarAPI'
 def majorVersion = '0'
-def buildBy = System.properties['user.name']
+def buildBy = null
 
 // Set version number
 if (hasProperty("teamcity")) {
     version = majorVersion + '.' + teamcity["build.number"] + '.git-' + teamcity["build.vcs.number"]
-    buildBy = teamcity["build.triggeredBy.username"]
+
+    if (buildBy == null) {
+        buildBy = teamcity["build.triggeredBy.username"]
+
+        if (!buildBy) {
+            buildBy = teamcity["build.triggeredBy"]
+        }
+
+        if (!buildBy) {
+            buildBy = teamcity["agent.name"]
+        }
+    }
+
 }else {
     version = majorVerion + '.000.git-unknown'
 }
 
+if (buildBy == null) {
+    buildBy = System.properties['user.name']
+}
 
 defaultTasks 'build'
 
@@ -61,7 +76,7 @@ jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 
     manifest {
-        attributes("Built-By": "JCThePants", //System.properties['user.name']
+        attributes("Built-By": buildBy,
                 "Created-By": System.properties['java.vm.version'] + " (" + System.properties['java.vm.vendor'] + ")",
                 "Implementation-Title": projectName,
                 "Implementation-Version": version)
@@ -77,7 +92,7 @@ task simpleNamedJar(type: Jar) {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 
     manifest {
-        attributes("Built-By": "JCThePants", //System.properties['user.name']
+        attributes("Built-By": buildBy,
                 "Created-By": System.properties['java.vm.version'] + " (" + System.properties['java.vm.vendor'] + ")",
                 "Implementation-Title": projectName,
                 "Implementation-Version": version)
