@@ -1,6 +1,13 @@
 def projectName = 'PV-StarAPI'
 def majorVersion = '0'
 def buildBy = null
+def providedDepends = [
+        'C:/JavaRepo/bukkit/bukkit-1.7.9-R0.jar',
+        'GenericsLib.jar'
+]
+
+def compileDepends = null
+def includeFiles = null
 
 // Set version number
 if (hasProperty("teamcity")) {
@@ -63,8 +70,14 @@ sourceSets {
 
 // Add dependencies
 dependencies {
-    provided files('C:/JavaRepo/bukkit/bukkit-1.7.9-R0.jar',
-                   'GenericsLib.jar')
+
+    if (compileDepends) {
+        compile files(compileDepends)
+    }
+
+    if (providedDepends) {
+        provided files(providedDepends)
+    }
 }
 
 
@@ -74,6 +87,10 @@ jar {
     archiveName = projectName + '.' + version + '.jar'
 
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+
+    if (includeFiles) {
+        from includeFiles
+    }
 
     manifest {
         attributes("Built-By": buildBy,
@@ -90,6 +107,10 @@ task simpleNamedJar(type: Jar) {
     archiveName = projectName + '.jar'
 
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+
+    if (includeFiles) {
+        from includeFiles
+    }
 
     manifest {
         attributes("Built-By": buildBy,
