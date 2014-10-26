@@ -7,7 +7,9 @@ def providedDepends = [
 ]
 
 def compileDepends = null
-def includeFiles = null
+def includeFiles = [
+        'LICENSE.txt'
+]
 
 // Set version number
 if (hasProperty("teamcity")) {
