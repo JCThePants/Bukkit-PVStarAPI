@@ -43,7 +43,7 @@ import java.util.Set;
  */
 public abstract class PVStarModule implements IJarModule {
 
-    private final LanguageManager _languageManager = new LanguageManager();
+    private final LanguageManager _languageManager = new LanguageManager(PVStarAPI.getPlugin());
     private final Map<String, IDataNode> _customNodes = new HashMap<>(10);
     private ModuleInfo _moduleInfo;
     private IDataNode _dataNode;
