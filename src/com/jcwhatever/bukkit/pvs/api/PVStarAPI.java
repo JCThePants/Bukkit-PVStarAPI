@@ -27,11 +27,11 @@ package com.jcwhatever.bukkit.pvs.api;
 import com.jcwhatever.bukkit.generic.commands.AbstractCommandHandler;
 import com.jcwhatever.bukkit.generic.events.GenericsEventManager;
 import com.jcwhatever.bukkit.generic.inventory.KitManager;
-import com.jcwhatever.bukkit.generic.language.LanguageManager;
 import com.jcwhatever.bukkit.generic.signs.SignManager;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ExtensionTypeManager;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.ArenaManager;
+import com.jcwhatever.bukkit.pvs.api.commands.CommandHelper;
 import com.jcwhatever.bukkit.pvs.api.points.PointsManager;
 import com.jcwhatever.bukkit.pvs.api.scripting.ScriptManager;
 import com.jcwhatever.bukkit.pvs.api.spawns.SpawnTypeManager;
@@ -77,6 +77,13 @@ public final class PVStarAPI {
     }
 
     /**
+     * Get the command helper.
+     */
+    public static CommandHelper getCommandHelper() {
+        return _implementation.getCommandHelper();
+    }
+
+    /**
      * Get the statistics manager.
      */
     public static StatsManager getStatsManager() {
@@ -102,13 +109,6 @@ public final class PVStarAPI {
      */
     public static SignManager getSignManager() {
         return _implementation.getSignManager();
-    }
-
-    /**
-     * Get the language manager.
-     */
-    public static LanguageManager getLanguageManager() {
-        return _implementation.getLanguageManager();
     }
 
     /**

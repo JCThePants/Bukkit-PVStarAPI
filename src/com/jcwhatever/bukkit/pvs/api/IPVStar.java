@@ -27,11 +27,11 @@ package com.jcwhatever.bukkit.pvs.api;
 import com.jcwhatever.bukkit.generic.commands.AbstractCommandHandler;
 import com.jcwhatever.bukkit.generic.events.GenericsEventManager;
 import com.jcwhatever.bukkit.generic.inventory.KitManager;
-import com.jcwhatever.bukkit.generic.language.LanguageManager;
 import com.jcwhatever.bukkit.generic.signs.SignManager;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ExtensionTypeManager;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.ArenaManager;
+import com.jcwhatever.bukkit.pvs.api.commands.CommandHelper;
 import com.jcwhatever.bukkit.pvs.api.modules.ModuleInfo;
 import com.jcwhatever.bukkit.pvs.api.modules.PVStarModule;
 import com.jcwhatever.bukkit.pvs.api.points.PointsManager;
@@ -99,14 +99,14 @@ public interface IPVStar extends Plugin  {
     SignManager getSignManager();
 
     /**
-     * Get PV-Stars {@code LanguageManager}.
-     */
-    LanguageManager getLanguageManager();
-
-    /**
      * Get PV-Stars command handler.
      */
     AbstractCommandHandler getCommandHandler();
+
+    /**
+     * Get command helper that contains utilities methods for commands.
+     */
+    CommandHelper getCommandHelper();
 
     /**
      * Get PV-Stars global arena event manager.
