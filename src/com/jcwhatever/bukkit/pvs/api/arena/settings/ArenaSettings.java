@@ -105,17 +105,6 @@ public interface ArenaSettings {
     void setMobSpawnEnabled(boolean isEnabled);
 
     /**
-     * Determine if player can break blocks in the
-     * arena.
-     */
-    boolean isArenaDamageEnabled();
-
-    /**
-     * Set if player can break blocks in the arena.
-     */
-    void setArenaDamageEnabled(boolean isEnabled);
-
-    /**
      * Determine if arena auto restores when the arena
      * ends.
      */
