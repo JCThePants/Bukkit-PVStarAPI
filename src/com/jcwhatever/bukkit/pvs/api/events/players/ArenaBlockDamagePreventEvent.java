@@ -35,8 +35,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * Called before a player is prevented from interacting with a block by
- * PV-Star. Cancel the event to allow interaction.
+ * Should be called before a player is prevented from interacting with a block.
+ * Cancel the event to allow interaction.
  */
 @Cancellable
 public class ArenaBlockDamagePreventEvent extends AbstractPlayerEvent {
