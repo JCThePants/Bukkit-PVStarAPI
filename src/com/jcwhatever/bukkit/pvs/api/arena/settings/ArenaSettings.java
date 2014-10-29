@@ -105,17 +105,6 @@ public interface ArenaSettings {
     void setMobSpawnEnabled(boolean isEnabled);
 
     /**
-     * Determine if arena auto restores when the arena
-     * ends.
-     */
-    boolean isAutoRestoreEnabled();
-
-    /**
-     * Set arena auto restore.
-     */
-    void setAutoRestoreEnabled(boolean isEnabled);
-
-    /**
      * Get the location a player is teleported to when
      * they are removed from the arena region.
      *
