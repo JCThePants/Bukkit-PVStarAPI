@@ -31,7 +31,8 @@ import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 
 /**
- * Called before a player is added to an arena.
+ * Called before a player is added to an arena player manager
+ * such as the lobby, game or spectator manager.
  */
 @Cancellable
 public class PlayerPreAddEvent extends AbstractPlayerEvent {

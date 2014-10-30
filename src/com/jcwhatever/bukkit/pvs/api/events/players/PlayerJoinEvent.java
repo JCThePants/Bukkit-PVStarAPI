@@ -1,17 +1,17 @@
 /* This file is part of PV-StarAPI for Bukkit, licensed under the MIT License (MIT).
- *
+ * 
  * Copyright (c) JCThePants (www.jcwhatever.com)
- *
+ * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * 
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,51 +22,61 @@
  */
 
 
-package com.jcwhatever.bukkit.pvs.api.events;
+package com.jcwhatever.bukkit.pvs.api.events.players;
 
 import com.jcwhatever.bukkit.generic.events.Cancellable;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.bukkit.pvs.api.arena.options.ArenaStartReason;
-
-import java.util.Set;
+import com.jcwhatever.bukkit.pvs.api.arena.options.AddPlayerReason;
+import javax.annotation.Nullable;
 
 /**
- * Called before an arena is started.
+ * Event called when player joins an arena through the arena method
+ * {@code join}.
  */
 @Cancellable
-public class ArenaPreStartEvent extends AbstractArenaEvent {
+public class PlayerJoinEvent extends AbstractPlayerEvent{
 
-    private final ArenaStartReason _reason;
-    private final Set<ArenaPlayer> _joiningPlayers;
+    private final AddPlayerReason _reason;
+    private String _rejectionMessage;
 
     /**
      * Constructor.
      *
-     * @param arena   The arena.
-     * @param reason  The reason the arena is starting.
+     * @param arena   The arena being joined.
+     * @param player  The player joining.
+     * @param reason  The reason the player is joining.
      */
-    public ArenaPreStartEvent(Arena arena, Set<ArenaPlayer> joiningPlayers, ArenaStartReason reason) {
-        super(arena, true);
+    public PlayerJoinEvent(Arena arena, ArenaPlayer player, AddPlayerReason reason) {
+        super(arena, player, true);
 
         PreCon.notNull(reason);
 
         _reason = reason;
-        _joiningPlayers = joiningPlayers;
     }
 
     /**
-     * Get the reason the arena is starting.
+     * Get the reason the player is joining the arena.
      */
-    public ArenaStartReason getReason() {
+    public AddPlayerReason getReason() {
         return _reason;
     }
 
     /**
-     * Get the players joining the game.
+     * Get the message displayed to the player if the event is cancelled.
      */
-    public Set<ArenaPlayer> getJoiningPlayers() {
-        return _joiningPlayers;
+    @Nullable
+    public String getRejectionMessage() {
+        return _rejectionMessage;
+    }
+
+    /**
+     * Set the message displayed to the player if the event is cancelled.
+     *
+     * @param rejectionMessage  The message.
+     */
+    public void setRejectionMessage(@Nullable String rejectionMessage) {
+        _rejectionMessage = rejectionMessage;
     }
 }

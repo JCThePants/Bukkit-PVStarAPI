@@ -27,7 +27,6 @@ package com.jcwhatever.bukkit.pvs.api.arena.managers;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.settings.LobbyManagerSettings;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -49,18 +48,16 @@ public interface LobbyManager extends PlayerManager {
     /**
      * Get the next group of players that are all ready.
      *
-     * @return Null if non available.
+     * @return Empty list if none available.
      */
-    @Nullable
     List<ArenaPlayer> getReadyGroup();
 
     /**
      * Get the next group of players that meat minimum players
      * and minimum auto start players settings.
      *
-     * @return Null if none available.
+     * @return Empty list if none available.
      */
-    @Nullable
     List<ArenaPlayer> getNextGroup();
 
     /**
