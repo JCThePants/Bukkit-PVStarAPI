@@ -53,18 +53,6 @@ public interface LobbyManagerSettings extends PlayerManagerSettings {
     void setAutoStart(boolean isEnabled);
 
     /**
-     * Get the number of seconds to countdown from
-     * before the game starts.
-     */
-    int getStartCountdownSeconds();
-
-    /**
-     * Set the number of seconds to countdown from
-     * before the game starts.
-     */
-    void setStartCountdownSeconds(int seconds);
-
-    /**
      * Get the minimum number of players required
      * to auto start.
      */

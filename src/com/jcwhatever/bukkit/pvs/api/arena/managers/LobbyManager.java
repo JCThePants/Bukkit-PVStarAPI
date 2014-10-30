@@ -35,17 +35,6 @@ import java.util.List;
 public interface LobbyManager extends PlayerManager {
 
     /**
-     * Determine if the countdown till the next game is running.
-     */
-    boolean isCountdownRunning();
-
-    /**
-     * Cancel the countdown.
-     */
-    void cancelCountdown();
-
-
-    /**
      * Get the next group of players that are all ready.
      *
      * @return Empty list if none available.
