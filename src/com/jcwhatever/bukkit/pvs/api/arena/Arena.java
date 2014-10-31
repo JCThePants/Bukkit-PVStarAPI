@@ -135,14 +135,14 @@ public interface Arena extends IDisposable {
     ArenaSettings getSettings();
 
     /**
-     * Get the arenas data folder. This is where modules should store custom information
-     * for an arena.
+     * Get the arenas data folder. This is where modules should
+     * store data for an arena.
      */
     File getDataFolder(PVStarModule module);
 
     /**
-     * Get the arenas data folder. This is where modules should store custom information
-     * for an arena.
+     * Get the arenas data folder. This is where arena extensions
+     * should store data for an arena.
      */
     File getDataFolder(ArenaExtension module);
 
