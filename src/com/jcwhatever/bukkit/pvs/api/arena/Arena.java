@@ -25,6 +25,7 @@
 package com.jcwhatever.bukkit.pvs.api.arena;
 
 import com.jcwhatever.bukkit.generic.events.GenericsEventManager;
+import com.jcwhatever.bukkit.generic.mixins.IDisposable;
 import com.jcwhatever.bukkit.generic.permissions.IPermission;
 import com.jcwhatever.bukkit.generic.storage.IDataNode;
 import com.jcwhatever.bukkit.pvs.api.modules.PVStarModule;
@@ -46,7 +47,7 @@ import java.util.UUID;
 /**
  * Arena interface
  */
-public interface Arena {
+public interface Arena extends IDisposable {
 
     /**
      * Get the arenas name.
@@ -212,6 +213,7 @@ public interface Arena {
      * Called when an arena is permanently removed.
      * For arena manager use only.
      */
+    @Override
     void dispose();
 
 
