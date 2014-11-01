@@ -26,7 +26,6 @@ package com.jcwhatever.bukkit.pvs.api.utils;
 
 import com.jcwhatever.bukkit.generic.messaging.Messenger;
 import com.jcwhatever.bukkit.generic.messaging.ChatPaginator;
-import com.jcwhatever.bukkit.generic.messaging.ChatPaginator.PaginatorTemplate;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.generic.utils.TextUtils;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
@@ -219,7 +218,7 @@ public class Msg {
      * @param params  Optional format parameters.
      */
     public static ChatPaginator getPaginator(String title, Object...params) {
-        return new ChatPaginator(PVStarAPI.getPlugin(), 6, PaginatorTemplate.HEADER, PaginatorTemplate.FOOTER, TextUtils.format(title, params));
+        return new ChatPaginator(PVStarAPI.getPlugin(), 6, TextUtils.format(title, params));
     }
 
     /**
