@@ -52,6 +52,16 @@ public interface ScriptManager {
     void registerEventType(PVStarModule module, Class<? extends AbstractArenaEvent> eventClass);
 
     /**
+     * Get a registered event type.
+     *
+     * @param name  The name of the event type. The name is the name of the registering module
+     *              followed by a period and the name of the event class. If the event is a PV-Star
+     *              event, then the name is simply the event class name.
+     */
+    @Nullable
+    Class<? extends AbstractArenaEvent> getEventType(String name);
+
+    /**
      * Add a script.
      *
      * @param script  The script to add.
