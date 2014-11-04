@@ -26,11 +26,14 @@ package com.jcwhatever.bukkit.pvs.api.events.players;
 
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import javax.annotation.Nullable;
 
 /**
  * Called when a player is ready to play in an arena.
  */
 public class PlayerReadyEvent extends AbstractPlayerEvent {
+
+    private String _message;
 
     /**
      * Constructor.
@@ -38,7 +41,28 @@ public class PlayerReadyEvent extends AbstractPlayerEvent {
      * @param arena   The event arena.
      * @param player  The player who is ready.
      */
-    public PlayerReadyEvent(Arena arena, ArenaPlayer player) {
+    public PlayerReadyEvent(Arena arena, ArenaPlayer player, @Nullable String message) {
         super(arena, player, false);
+
+        _message = message;
+    }
+
+    /**
+     * Get message that will be displayed to players in the
+     * related player manager.
+     */
+    @Nullable
+    public String getMessage() {
+        return _message;
+    }
+
+    /**
+     * Set the message that will be displayed to players in
+     * the related player manager.
+     *
+     * @param message  The message to display.
+     */
+    public void setMessage(String message) {
+        _message = message;
     }
 }
