@@ -76,7 +76,7 @@ public class ArenaRegion extends RestorableRegion implements GenericsEventListen
      */
     @Override
     protected boolean canDoPlayerEnter(Player p) {
-        return p.isOnline() &&
+        return getArena().getSettings().isEnabled() && p.isOnline() &&
                !p.isDead();
     }
 
@@ -102,7 +102,7 @@ public class ArenaRegion extends RestorableRegion implements GenericsEventListen
      */
     @Override
     protected boolean canDoPlayerLeave(Player p) {
-        return p.isOnline() &&
+        return getArena().getSettings().isEnabled() && p.isOnline() &&
                !p.isDead();
     }
 
