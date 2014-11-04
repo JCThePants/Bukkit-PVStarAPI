@@ -24,7 +24,6 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena.settings;
 
-import com.jcwhatever.bukkit.pvs.api.arena.options.OutsidersAction;
 import org.bukkit.Location;
 
 import javax.annotation.Nullable;
@@ -119,19 +118,4 @@ public interface ArenaSettings {
      * @param location  The location. Null to use the world spawn location.
      */
     void setRemoveLocation(@Nullable Location location);
-
-
-    /**
-     * Get the action to take when an outsider enters the
-     * arena region.
-     */
-    OutsidersAction getOutsidersAction();
-
-    /**
-     * Set the action to take when an outsider enters the
-     * arena region.
-     *
-     * @param action  The action to take.
-     */
-    void setOutsidersAction(OutsidersAction action);
 }

@@ -25,23 +25,12 @@
 package com.jcwhatever.bukkit.pvs.api.arena.settings;
 
 import com.jcwhatever.bukkit.pvs.api.arena.options.LivesBehavior;
-import com.jcwhatever.bukkit.pvs.api.arena.options.OutOfBoundsAction;
 import com.jcwhatever.bukkit.pvs.api.arena.options.PointsBehavior;
 
 /**
  * Provides settings for an arenas game manager
  */
 public interface GameManagerSettings extends PlayerManagerSettings {
-
-    /**
-     * Get action to take when player leaves the arena region.
-     */
-    OutOfBoundsAction getOutOfBoundsAction();
-
-    /**
-     * Set out of bounds action.
-     */
-    void setOutOfBoundsAction(OutOfBoundsAction action);
 
     /**
      * Get the number of lives the players

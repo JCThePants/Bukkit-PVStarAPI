@@ -24,27 +24,16 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
-import com.jcwhatever.bukkit.generic.events.GenericsEventHandler;
 import com.jcwhatever.bukkit.generic.events.GenericsEventListener;
 import com.jcwhatever.bukkit.generic.regions.RestorableRegion;
 import com.jcwhatever.bukkit.generic.storage.IDataNode;
-import com.jcwhatever.bukkit.generic.utils.Scheduler;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
-import com.jcwhatever.bukkit.pvs.api.arena.options.AddPlayerReason;
-import com.jcwhatever.bukkit.pvs.api.arena.options.ArenaPlayerRelation;
-import com.jcwhatever.bukkit.pvs.api.arena.options.OutOfBoundsAction;
-import com.jcwhatever.bukkit.pvs.api.arena.options.OutsidersAction;
-import com.jcwhatever.bukkit.pvs.api.arena.options.RemovePlayerReason;
-import com.jcwhatever.bukkit.pvs.api.events.ArenaEndedEvent;
-import com.jcwhatever.bukkit.pvs.api.events.ArenaStartedEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionPreRestoreEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionPreSaveEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionRestoredEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionSavedEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.PlayerEnterArenaRegionEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.PlayerLeaveArenaRegionEvent;
-import com.jcwhatever.bukkit.pvs.api.utils.Msg;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 /**
@@ -67,6 +56,8 @@ public class ArenaRegion extends RestorableRegion implements GenericsEventListen
         _arena.getEventManager().register(this);
 
         setMeta(ArenaRegion.class.getName(), this);
+
+        setIsPlayerWatcher(true);
     }
 
     /**
@@ -85,9 +76,7 @@ public class ArenaRegion extends RestorableRegion implements GenericsEventListen
      */
     @Override
     protected boolean canDoPlayerEnter(Player p) {
-        return _arena.getSettings().getOutsidersAction() != OutsidersAction.NONE &&
-               _arena.getGameManager().isRunning() &&
-               p.isOnline() &&
+        return p.isOnline() &&
                !p.isDead();
     }
 
@@ -100,41 +89,8 @@ public class ArenaRegion extends RestorableRegion implements GenericsEventListen
     protected void onPlayerEnter(Player p) {
 
         final ArenaPlayer player = PVStarAPI.getArenaPlayer(p);
-        if (_arena.equals(player.getArena())) {
-            return;
-        }
 
         _arena.getEventManager().call(new PlayerEnterArenaRegionEvent(_arena, player));
-
-        // check again later, gives time for leaving players to be removed from arena
-        Scheduler.runTaskLater(PVStarAPI.getPlugin(), 5, new Runnable() {
-
-            @Override
-            public void run() {
-
-                if (!_arena.getRegion().contains(player.getLocation()))
-                    return;
-
-                OutsidersAction action = _arena.getSettings().getOutsidersAction();
-
-                switch (action) {
-                    case NONE:
-                        // do nothing
-                        return;
-
-                    case JOIN:
-                        _arena.join(player, AddPlayerReason.PLAYER_JOIN);
-                        break;
-
-                    case KICK:
-                        Location kickLocation = _arena.getSettings().getRemoveLocation();
-
-                        player.getHandle().teleport(kickLocation);
-                        Msg.tellError(player, "You're not allowed inside the arena during a match.");
-                        break;
-                }
-            }
-        });
     }
 
     /**
@@ -146,8 +102,8 @@ public class ArenaRegion extends RestorableRegion implements GenericsEventListen
      */
     @Override
     protected boolean canDoPlayerLeave(Player p) {
-        return _arena.getGameManager().isRunning() &&
-                _arena.getGameManager().getSettings().getOutOfBoundsAction() != OutOfBoundsAction.NONE;
+        return p.isOnline() &&
+               !p.isDead();
     }
 
     /**
@@ -159,39 +115,8 @@ public class ArenaRegion extends RestorableRegion implements GenericsEventListen
     protected void onPlayerLeave(Player p) {
 
         ArenaPlayer player = PVStarAPI.getArenaPlayer(p);
-        if (!_arena.equals(player.getArena()))
-            return;
 
         _arena.getEventManager().call(new PlayerLeaveArenaRegionEvent(_arena, player));
-
-        if (_arena.equals(player.getArena()) && player.getArenaRelation() == ArenaPlayerRelation.GAME) {
-
-            switch (_arena.getGameManager().getSettings().getOutOfBoundsAction()) {
-
-                case KICK:
-                    _arena.remove(player, RemovePlayerReason.KICK);
-                    Msg.tellError(p, "Kicked for leaving the arena.");
-                    break;
-
-                case WIN:
-                    if (!_arena.getGameManager().isGameOver())
-                        _arena.getGameManager().setWinner(player);
-                    break;
-
-                case LOSE:
-                    if (!_arena.getGameManager().isGameOver())
-                        _arena.remove(player, RemovePlayerReason.LOSE);
-                    break;
-
-                case RESPAWN:
-                    _arena.getGameManager().respawnPlayer(player);
-                    break;
-
-                default:
-                    break;
-
-            }
-        }
     }
 
     /**
@@ -237,25 +162,4 @@ public class ArenaRegion extends RestorableRegion implements GenericsEventListen
         getArena().setIdle();
         _arena.getEventManager().call(new ArenaRegionRestoredEvent(_arena));
     }
-
-    /**
-     * Event handler. Sets player watcher flag on region if required when
-     * the arena starts.
-     */
-    @GenericsEventHandler
-    private void onArenaStarted(ArenaStartedEvent event) {
-        if (_arena.getGameManager().getSettings().getOutOfBoundsAction() != OutOfBoundsAction.NONE) {
-            setIsPlayerWatcher(true);
-        }
-    }
-
-    /**
-     * Event handler. Sets the arena player watcher flag to false
-     * when the arena ends.
-     */
-    @GenericsEventHandler
-    private void onArenaEnded(ArenaEndedEvent event) {
-        setIsPlayerWatcher(false);
-    }
-
 }
