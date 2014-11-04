@@ -40,6 +40,7 @@ public class PlayerAddedEvent extends AbstractPlayerEvent {
     private final AddPlayerReason _reason;
     private Location _initialSpawnLocation;
     private Location _spawnLocation;
+    private String _message;
 
     /**
      * Constructor.
@@ -49,7 +50,8 @@ public class PlayerAddedEvent extends AbstractPlayerEvent {
      * @param reason         The reason the player is being added.
      * @param spawnLocation  The location the player will be teleported to, if any.
      */
-    public PlayerAddedEvent(Arena arena, ArenaPlayer player, AddPlayerReason reason, @Nullable Location spawnLocation) {
+    public PlayerAddedEvent(Arena arena, ArenaPlayer player, AddPlayerReason reason,
+                            @Nullable Location spawnLocation, @Nullable String message) {
         super(arena, player, false);
 
         PreCon.notNull(reason);
@@ -57,6 +59,7 @@ public class PlayerAddedEvent extends AbstractPlayerEvent {
         _reason = reason;
         _initialSpawnLocation = spawnLocation;
         _spawnLocation = spawnLocation;
+        _message = message;
     }
 
     /**
@@ -90,6 +93,23 @@ public class PlayerAddedEvent extends AbstractPlayerEvent {
      */
     public void setSpawnLocation(@Nullable Location location) {
         _spawnLocation = location;
+    }
+
+    /**
+     * Get the message to display to players in the related player manager.
+     */
+    @Nullable
+    public String getMessage() {
+        return _message;
+    }
+
+    /**
+     * Set the message to display to players in the related player manager.
+     *
+     * @param message  The message to display.
+     */
+    public void setMessage(@Nullable String message) {
+        _message = message;
     }
 
 }
