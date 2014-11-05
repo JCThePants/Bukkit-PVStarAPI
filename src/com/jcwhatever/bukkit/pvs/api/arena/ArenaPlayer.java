@@ -30,10 +30,11 @@ import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 import com.jcwhatever.bukkit.pvs.api.arena.options.ArenaPlayerRelation;
 import com.jcwhatever.bukkit.pvs.api.arena.options.TeamChangeReason;
 import com.jcwhatever.bukkit.pvs.api.arena.settings.PlayerManagerSettings;
+
 import org.bukkit.Location;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
+import javax.annotation.Nullable;
 
 /**
  * Wraps the {@code Player} object and carries extra arena related meta data regarding
@@ -175,6 +176,12 @@ public interface ArenaPlayer extends IPlayerWrapper {
      * @param arenaId  The id of the arena.
      */
     PlayerMeta getMeta(UUID arenaId);
+
+    /**
+     * Get the global meta data object which is used until
+     * the {@code ArenaPlayer} instance is disposed.
+     */
+    PlayerMeta getMeta();
 
     /**
      * Get the players session meta data object,
