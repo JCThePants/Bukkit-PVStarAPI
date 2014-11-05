@@ -53,7 +53,7 @@ public class PlayerJoinQueryEvent extends AbstractArenaEvent {
      * @param player  The player to check.
      */
     public PlayerJoinQueryEvent(Arena arena, ArenaPlayer player) {
-        super(arena, false);
+        super(arena);
 
         _players = new HashSet<>(5);
         _players.add(player);
@@ -66,7 +66,7 @@ public class PlayerJoinQueryEvent extends AbstractArenaEvent {
      * @param players  The players to check.
      */
     public PlayerJoinQueryEvent(Arena arena, Collection<ArenaPlayer> players) {
-        super(arena, false);
+        super(arena);
 
         _players = new HashSet<>(players.size() * 2);
         _players.addAll(players);

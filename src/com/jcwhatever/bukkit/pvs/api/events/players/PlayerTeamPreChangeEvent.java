@@ -24,7 +24,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.players;
 
-import com.jcwhatever.bukkit.generic.events.Cancellable;
+import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
@@ -34,11 +34,11 @@ import com.jcwhatever.bukkit.pvs.api.arena.options.TeamChangeReason;
 /**
  * Called before a players team is set.
  */
-@Cancellable
-public class PlayerTeamPreChangeEvent extends AbstractPlayerEvent {
+public class PlayerTeamPreChangeEvent extends AbstractPlayerEvent implements ICancellable {
 
     private final TeamChangeReason _reason;
     private ArenaTeam _team;
+    private boolean _isCancelled;
 
 
     /**
@@ -48,7 +48,7 @@ public class PlayerTeamPreChangeEvent extends AbstractPlayerEvent {
      * @param player        The event player.
      */
     public PlayerTeamPreChangeEvent(Arena arena, ArenaPlayer player, ArenaTeam team, TeamChangeReason reason) {
-        super(arena, player, true);
+        super(arena, player);
 
         PreCon.notNull(team);
         PreCon.notNull(reason);
@@ -85,5 +85,15 @@ public class PlayerTeamPreChangeEvent extends AbstractPlayerEvent {
      */
     public void setNewTeam(ArenaTeam team) {
         _team = team;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return _isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        _isCancelled = isCancelled;
     }
 }

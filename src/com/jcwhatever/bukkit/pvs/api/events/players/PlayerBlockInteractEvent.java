@@ -24,7 +24,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.players;
 
-import com.jcwhatever.bukkit.generic.events.Cancellable;
+import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
@@ -37,10 +37,10 @@ import org.bukkit.inventory.ItemStack;
 /**
  * Called when a player in an arena interacts with a block.
  */
-@Cancellable
-public class PlayerBlockInteractEvent extends AbstractPlayerEvent {
+public class PlayerBlockInteractEvent extends AbstractPlayerEvent implements ICancellable {
 
     private PlayerInteractEvent _event;
+    private boolean _isCancelled;
 
     /**
      * Constructor.
@@ -50,7 +50,7 @@ public class PlayerBlockInteractEvent extends AbstractPlayerEvent {
      * @param event   The parent event.
      */
     public PlayerBlockInteractEvent(Arena arena, ArenaPlayer player, PlayerInteractEvent event) {
-        super(arena, player, true);
+        super(arena, player);
 
         PreCon.notNull(event);
 
@@ -91,5 +91,15 @@ public class PlayerBlockInteractEvent extends AbstractPlayerEvent {
      */
     public PlayerInteractEvent getParentEvent() {
         return _event;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return _isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        _isCancelled = isCancelled;
     }
 }

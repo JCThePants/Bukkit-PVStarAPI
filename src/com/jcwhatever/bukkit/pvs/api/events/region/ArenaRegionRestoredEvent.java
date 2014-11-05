@@ -38,6 +38,6 @@ public class ArenaRegionRestoredEvent extends AbstractArenaEvent {
      * @param arena  The event arena.
      */
     public ArenaRegionRestoredEvent(Arena arena) {
-        super(arena, false);
+        super(arena);
     }
 }

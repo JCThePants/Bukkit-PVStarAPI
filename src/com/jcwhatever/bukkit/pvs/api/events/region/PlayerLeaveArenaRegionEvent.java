@@ -43,7 +43,7 @@ public class PlayerLeaveArenaRegionEvent extends AbstractArenaEvent {
      * @param player  The player leaving the arena.
      */
     public PlayerLeaveArenaRegionEvent(Arena arena, ArenaPlayer player) {
-        super(arena, false);
+        super(arena);
         PreCon.notNull(player);
 
         _player = player;

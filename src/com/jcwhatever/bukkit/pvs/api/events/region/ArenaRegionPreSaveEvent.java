@@ -38,6 +38,6 @@ public class ArenaRegionPreSaveEvent extends AbstractArenaEvent {
      * @param arena  The event arena.
      */
     public ArenaRegionPreSaveEvent(Arena arena) {
-        super(arena, false);
+        super(arena);
     }
 }

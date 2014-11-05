@@ -44,7 +44,7 @@ public class PlayerWinEvent extends AbstractPlayerEvent {
      * @param player  The winning player.
      */
     public PlayerWinEvent(Arena arena, ArenaPlayer player, @Nullable String message) {
-        super(arena, player, false);
+        super(arena, player);
 
         _initialMessage = message;
         _message = message;

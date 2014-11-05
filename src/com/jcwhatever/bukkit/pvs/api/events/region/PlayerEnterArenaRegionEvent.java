@@ -43,7 +43,7 @@ public class PlayerEnterArenaRegionEvent extends AbstractArenaEvent {
      * @param player  The player entering the region.
      */
     public PlayerEnterArenaRegionEvent(Arena arena, ArenaPlayer player) {
-        super(arena, false);
+        super(arena);
         PreCon.notNull(player);
 
         _player = player;

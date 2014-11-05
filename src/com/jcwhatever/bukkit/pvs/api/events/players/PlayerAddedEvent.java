@@ -52,7 +52,7 @@ public class PlayerAddedEvent extends AbstractPlayerEvent {
      */
     public PlayerAddedEvent(Arena arena, ArenaPlayer player, AddPlayerReason reason,
                             @Nullable Location spawnLocation, @Nullable String message) {
-        super(arena, player, false);
+        super(arena, player);
 
         PreCon.notNull(reason);
 

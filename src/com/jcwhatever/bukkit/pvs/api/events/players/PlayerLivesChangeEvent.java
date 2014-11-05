@@ -24,18 +24,18 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.players;
 
-import com.jcwhatever.bukkit.generic.events.Cancellable;
+import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 
 /**
  * Called when the players lives is incremented or decremented.
  */
-@Cancellable
-public class PlayerLivesChangeEvent extends AbstractPlayerEvent {
+public class PlayerLivesChangeEvent extends AbstractPlayerEvent implements ICancellable {
 
     private int _previousLives;
     private int _newLives;
+    private boolean _isCancelled;
 
     /**
      * Constructor.
@@ -46,7 +46,7 @@ public class PlayerLivesChangeEvent extends AbstractPlayerEvent {
      * @param newLives       The number of lives the player will have.
      */
     public PlayerLivesChangeEvent(Arena arena, ArenaPlayer player, int previousLives, int newLives) {
-        super(arena, player, true);
+        super(arena, player);
 
         _previousLives = previousLives;
         _newLives = newLives;
@@ -73,5 +73,15 @@ public class PlayerLivesChangeEvent extends AbstractPlayerEvent {
      */
     public void setNewLives(int lives) {
         _newLives = lives;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return _isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        _isCancelled = isCancelled;
     }
 }

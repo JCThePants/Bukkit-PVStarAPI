@@ -24,20 +24,20 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.players;
 
-import com.jcwhatever.bukkit.generic.events.Cancellable;
+import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
-import com.jcwhatever.bukkit.pvs.api.arena.options.AddPlayerReason;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.bukkit.pvs.api.arena.options.AddPlayerReason;
 
 /**
  * Called before a player is added to an arena player manager
  * such as the lobby, game or spectator manager.
  */
-@Cancellable
-public class PlayerPreAddEvent extends AbstractPlayerEvent {
+public class PlayerPreAddEvent extends AbstractPlayerEvent implements ICancellable {
 
     private final AddPlayerReason _reason;
+    private boolean _isCancelled;
 
     /**
      * Constructor.
@@ -47,7 +47,7 @@ public class PlayerPreAddEvent extends AbstractPlayerEvent {
      * @param reason  The reason the player is being added.
      */
     public PlayerPreAddEvent(Arena arena, ArenaPlayer player, AddPlayerReason reason) {
-        super(arena, player, true);
+        super(arena, player);
 
         PreCon.notNull(reason);
 
@@ -59,5 +59,15 @@ public class PlayerPreAddEvent extends AbstractPlayerEvent {
      */
     public AddPlayerReason getReason() {
         return _reason;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return _isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        _isCancelled = isCancelled;
     }
 }

@@ -42,7 +42,7 @@ public class ArenaStartedEvent extends AbstractArenaEvent {
      * @param reason  The reason the arena was started.
      */
     public ArenaStartedEvent(Arena arena, ArenaStartReason reason) {
-        super(arena, false);
+        super(arena);
 
         PreCon.notNull(reason);
 

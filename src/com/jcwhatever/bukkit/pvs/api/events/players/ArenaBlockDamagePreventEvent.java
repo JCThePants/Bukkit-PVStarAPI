@@ -24,7 +24,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.players;
 
-import com.jcwhatever.bukkit.generic.events.Cancellable;
+import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
@@ -38,11 +38,10 @@ import org.bukkit.inventory.ItemStack;
  * Should be called before a player is prevented from interacting with a block.
  * Cancel the event to allow interaction.
  */
-@Cancellable
-public class ArenaBlockDamagePreventEvent extends AbstractPlayerEvent {
+public class ArenaBlockDamagePreventEvent extends AbstractPlayerEvent implements ICancellable {
 
     private PlayerInteractEvent _event;
-
+    private boolean _isCancelled;
 
     /**
      * Constructor.
@@ -52,7 +51,7 @@ public class ArenaBlockDamagePreventEvent extends AbstractPlayerEvent {
      * @param event   The parent event.
      */
     public ArenaBlockDamagePreventEvent(Arena arena, ArenaPlayer player, PlayerInteractEvent event) {
-        super(arena, player, true);
+        super(arena, player);
 
         PreCon.notNull(event);
 
@@ -93,5 +92,15 @@ public class ArenaBlockDamagePreventEvent extends AbstractPlayerEvent {
      */
     public PlayerInteractEvent getParentEvent() {
         return _event;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return _isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        _isCancelled = isCancelled;
     }
 }

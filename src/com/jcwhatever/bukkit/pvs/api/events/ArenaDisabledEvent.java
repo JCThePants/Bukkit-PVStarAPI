@@ -37,6 +37,6 @@ public class ArenaDisabledEvent extends AbstractArenaEvent {
      * @param arena  The event arena.
      */
     public ArenaDisabledEvent(Arena arena) {
-        super(arena, false);
+        super(arena);
     }
 }

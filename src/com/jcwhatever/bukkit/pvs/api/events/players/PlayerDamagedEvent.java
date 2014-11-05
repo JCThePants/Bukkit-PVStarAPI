@@ -24,7 +24,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.players;
 
-import com.jcwhatever.bukkit.generic.events.Cancellable;
+import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
@@ -41,12 +41,12 @@ import javax.annotation.Nullable;
 /**
  * Called when an arena player is damaged.
  */
-@Cancellable
-public class PlayerDamagedEvent extends AbstractPlayerEvent {
+public class PlayerDamagedEvent extends AbstractPlayerEvent implements ICancellable {
 
     private EntityDamageEvent _event;
     private Entity _damagerEntity;
     private ArenaPlayer _damagerPlayer;
+    private boolean _isCancelled;
 
     /**
      * Constructor.
@@ -56,7 +56,7 @@ public class PlayerDamagedEvent extends AbstractPlayerEvent {
      * @param event   The parent event.
      */
     public PlayerDamagedEvent(Arena arena, ArenaPlayer player, EntityDamageEvent event) {
-        super(arena, player, true);
+        super(arena, player);
 
         _event = event;
 
@@ -118,5 +118,15 @@ public class PlayerDamagedEvent extends AbstractPlayerEvent {
      */
     public DamageCause getCause() {
         return _event.getCause();
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return _isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        _isCancelled = isCancelled;
     }
 }

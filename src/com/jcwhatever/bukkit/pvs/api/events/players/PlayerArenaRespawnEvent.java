@@ -45,7 +45,7 @@ public class PlayerArenaRespawnEvent extends AbstractPlayerEvent {
      * @param respawnLocation  The location the player will be respawned at.
      */
     public PlayerArenaRespawnEvent(Arena arena, ArenaPlayer player, Location respawnLocation) {
-        super(arena, player, false);
+        super(arena, player);
 
         PreCon.notNull(respawnLocation);
 

@@ -48,7 +48,7 @@ public class TeamLoseEvent extends AbstractTeamEvent {
      * @param loseMessage   The message to display to players in the game.
      */
     public TeamLoseEvent(Arena arena, ArenaTeam team, Collection<ArenaPlayer> teamPlayers, @Nullable String loseMessage) {
-        super(arena, team, teamPlayers, false);
+        super(arena, team, teamPlayers);
 
         _initialMessage = loseMessage;
         _message = loseMessage;

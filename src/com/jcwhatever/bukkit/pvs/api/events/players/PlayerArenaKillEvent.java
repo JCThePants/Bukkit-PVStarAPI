@@ -54,7 +54,7 @@ public class PlayerArenaKillEvent extends AbstractPlayerEvent {
      * @param deadEntity  The living entity that was killed.
      */
     public PlayerArenaKillEvent(Arena arena, ArenaPlayer killer, EntityDeathEvent event, LivingEntity deadEntity) {
-        super(arena, killer, false);
+        super(arena, killer);
 
         PreCon.notNull(event);
         PreCon.notNull(deadEntity);

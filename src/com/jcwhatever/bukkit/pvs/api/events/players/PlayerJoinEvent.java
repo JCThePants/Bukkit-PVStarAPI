@@ -24,22 +24,23 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.players;
 
-import com.jcwhatever.bukkit.generic.events.Cancellable;
+import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.options.AddPlayerReason;
+
 import javax.annotation.Nullable;
 
 /**
  * Event called when player joins an arena through the arena method
  * {@code join}.
  */
-@Cancellable
-public class PlayerJoinEvent extends AbstractPlayerEvent{
+public class PlayerJoinEvent extends AbstractPlayerEvent implements ICancellable{
 
     private final AddPlayerReason _reason;
     private String _rejectionMessage;
+    private boolean _isCancelled;
 
     /**
      * Constructor.
@@ -49,7 +50,7 @@ public class PlayerJoinEvent extends AbstractPlayerEvent{
      * @param reason  The reason the player is joining.
      */
     public PlayerJoinEvent(Arena arena, ArenaPlayer player, AddPlayerReason reason) {
-        super(arena, player, true);
+        super(arena, player);
 
         PreCon.notNull(reason);
 
@@ -78,5 +79,15 @@ public class PlayerJoinEvent extends AbstractPlayerEvent{
      */
     public void setRejectionMessage(@Nullable String rejectionMessage) {
         _rejectionMessage = rejectionMessage;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return _isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        _isCancelled = isCancelled;
     }
 }

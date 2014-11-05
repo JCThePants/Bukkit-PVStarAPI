@@ -42,7 +42,7 @@ public class PlayerReadyEvent extends AbstractPlayerEvent {
      * @param player  The player who is ready.
      */
     public PlayerReadyEvent(Arena arena, ArenaPlayer player, @Nullable String message) {
-        super(arena, player, false);
+        super(arena, player);
 
         _message = message;
     }

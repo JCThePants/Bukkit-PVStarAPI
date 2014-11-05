@@ -48,7 +48,7 @@ public class TeamWinEvent extends AbstractTeamEvent {
      * @param winMessage   The message to display to players in the game.
      */
     public TeamWinEvent(Arena arena, ArenaTeam team, Collection<ArenaPlayer> teamPlayers, @Nullable String winMessage) {
-        super(arena, team, teamPlayers, false);
+        super(arena, team, teamPlayers);
 
         _initialMessage = winMessage;
         _message = winMessage;

@@ -24,14 +24,15 @@
 
 package com.jcwhatever.bukkit.pvs.api.events;
 
-import com.jcwhatever.bukkit.generic.events.Cancellable;
+import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 
 /**
  * Called before an arena is enabled.
  */
-@Cancellable
-public class ArenaPreEnableEvent extends AbstractArenaEvent {
+public class ArenaPreEnableEvent extends AbstractArenaEvent implements ICancellable {
+
+    private boolean _isCancelled;
 
     /**
      * Constructor.
@@ -39,6 +40,16 @@ public class ArenaPreEnableEvent extends AbstractArenaEvent {
      * @param arena  The event arena.
      */
     public ArenaPreEnableEvent(Arena arena) {
-        super(arena, true);
+        super(arena);
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return _isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        _isCancelled = isCancelled;
     }
 }

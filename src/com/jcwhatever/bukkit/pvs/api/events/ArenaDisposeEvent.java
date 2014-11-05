@@ -37,6 +37,6 @@ public class ArenaDisposeEvent extends AbstractArenaEvent {
      * @param arena  The event arena.
      */
     public ArenaDisposeEvent(Arena arena) {
-        super(arena, false);
+        super(arena);
     }
 }

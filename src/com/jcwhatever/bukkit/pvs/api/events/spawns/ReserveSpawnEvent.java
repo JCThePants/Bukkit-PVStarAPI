@@ -24,7 +24,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.spawns;
 
-import com.jcwhatever.bukkit.generic.events.Cancellable;
+import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
@@ -33,10 +33,10 @@ import com.jcwhatever.bukkit.pvs.api.spawns.Spawnpoint;
 /**
  * Called when a spawnpoint is reserved in an arena.
  */
-@Cancellable
-public class ReserveSpawnEvent extends AbstractSpawnEvent {
+public class ReserveSpawnEvent extends AbstractSpawnEvent implements ICancellable {
 
     private ArenaPlayer _player;
+    private boolean _isCancelled;
 
     /**
      * Constructor.
@@ -46,7 +46,7 @@ public class ReserveSpawnEvent extends AbstractSpawnEvent {
      * @param spawn   The spawnpoint being reserved.
      */
     public ReserveSpawnEvent(Arena arena, ArenaPlayer player, Spawnpoint spawn) {
-        super(arena, spawn, true);
+        super(arena, spawn);
 
         PreCon.notNull(player);
 
@@ -58,5 +58,15 @@ public class ReserveSpawnEvent extends AbstractSpawnEvent {
      */
     public ArenaPlayer getPlayer() {
         return _player;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return _isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        _isCancelled = isCancelled;
     }
 }

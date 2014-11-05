@@ -44,7 +44,7 @@ public class PlayerLoseEvent extends AbstractPlayerEvent {
      * @param player  The player who lost.
      */
     public PlayerLoseEvent(Arena arena, ArenaPlayer player, @Nullable String loseMessage) {
-        super(arena, player, false);
+        super(arena, player);
 
         _initialMessage = loseMessage;
         _message = loseMessage;

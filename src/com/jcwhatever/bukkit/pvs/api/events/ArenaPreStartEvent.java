@@ -24,7 +24,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.events;
 
-import com.jcwhatever.bukkit.generic.events.Cancellable;
+import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
@@ -35,11 +35,11 @@ import java.util.Set;
 /**
  * Called before an arena is started.
  */
-@Cancellable
-public class ArenaPreStartEvent extends AbstractArenaEvent {
+public class ArenaPreStartEvent extends AbstractArenaEvent implements ICancellable {
 
     private final ArenaStartReason _reason;
     private final Set<ArenaPlayer> _joiningPlayers;
+    private boolean _isCancelled;
 
     /**
      * Constructor.
@@ -48,7 +48,7 @@ public class ArenaPreStartEvent extends AbstractArenaEvent {
      * @param reason  The reason the arena is starting.
      */
     public ArenaPreStartEvent(Arena arena, Set<ArenaPlayer> joiningPlayers, ArenaStartReason reason) {
-        super(arena, true);
+        super(arena);
 
         PreCon.notNull(reason);
 
@@ -68,5 +68,15 @@ public class ArenaPreStartEvent extends AbstractArenaEvent {
      */
     public Set<ArenaPlayer> getJoiningPlayers() {
         return _joiningPlayers;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return _isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        _isCancelled = isCancelled;
     }
 }

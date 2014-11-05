@@ -41,10 +41,9 @@ public abstract class AbstractSpawnEvent extends AbstractArenaEvent {
      *
      * @param arena          The event arena.
      * @param spawn          The event spawnpoint.
-     * @param isCancellable  True if the event is cancellable.
      */
-    public AbstractSpawnEvent(Arena arena, Spawnpoint spawn, boolean isCancellable) {
-        super(arena, isCancellable);
+    public AbstractSpawnEvent(Arena arena, Spawnpoint spawn) {
+        super(arena);
 
         PreCon.notNull(spawn);
 

@@ -24,7 +24,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.players;
 
-import com.jcwhatever.bukkit.generic.events.Cancellable;
+import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -36,11 +36,11 @@ import java.util.List;
 /**
  * Called when a player dies in an arena.
  */
-@Cancellable
-public class PlayerArenaDeathEvent extends AbstractPlayerEvent {
+public class PlayerArenaDeathEvent extends AbstractPlayerEvent implements ICancellable {
 
     private final PlayerDeathEvent _event;
     private final ArenaPlayer _killer;
+    private boolean _isCancelled;
 
     /**
      * Constructor.
@@ -51,7 +51,7 @@ public class PlayerArenaDeathEvent extends AbstractPlayerEvent {
      * @param event   The parent event.
      */
     public PlayerArenaDeathEvent(Arena arena, ArenaPlayer player, @Nullable ArenaPlayer killer, PlayerDeathEvent event) {
-        super(arena, player, true);
+        super(arena, player);
         _event = event;
         _killer = killer;
     }
@@ -168,4 +168,13 @@ public class PlayerArenaDeathEvent extends AbstractPlayerEvent {
         _event.setKeepLevel(keepLevel);
     }
 
+    @Override
+    public boolean isCancelled() {
+        return _isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        _isCancelled = isCancelled;
+    }
 }

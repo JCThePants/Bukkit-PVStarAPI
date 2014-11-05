@@ -49,7 +49,7 @@ public class PlayerRemovedEvent extends AbstractPlayerEvent {
      * @param reason  The reason the player was removed.
      */
     public PlayerRemovedEvent(Arena arena, ArenaPlayer player, RemovePlayerReason reason, @Nullable Location restoreLocation) {
-        super(arena, player, false);
+        super(arena, player);
 
         PreCon.notNull(reason);
 

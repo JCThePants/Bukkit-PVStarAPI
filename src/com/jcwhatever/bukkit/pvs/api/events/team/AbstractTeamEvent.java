@@ -49,10 +49,9 @@ public abstract class AbstractTeamEvent extends AbstractArenaEvent {
      * @param arena          The event arena.
      * @param team           The event team.
      * @param teamPlayers    The players on the team.
-     * @param isCancellable  True if the event is cancellable.
      */
-    public AbstractTeamEvent(Arena arena, ArenaTeam team, Collection<ArenaPlayer> teamPlayers, boolean isCancellable) {
-        super(arena, isCancellable);
+    public AbstractTeamEvent(Arena arena, ArenaTeam team, Collection<ArenaPlayer> teamPlayers) {
+        super(arena);
 
         PreCon.notNull(team);
         PreCon.notNull(teamPlayers);

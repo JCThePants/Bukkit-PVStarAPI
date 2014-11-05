@@ -41,10 +41,9 @@ public abstract class AbstractPlayerEvent extends AbstractArenaEvent {
      *
      * @param arena          The event arena.
      * @param player         The event player.
-     * @param isCancellable  True if the event is cancellable.
      */
-    public AbstractPlayerEvent(Arena arena, ArenaPlayer player, boolean isCancellable) {
-        super(arena, isCancellable);
+    public AbstractPlayerEvent(Arena arena, ArenaPlayer player) {
+        super(arena);
 
         PreCon.notNull(player);
 

@@ -45,7 +45,7 @@ public class PlayerTeamChangedEvent extends AbstractPlayerEvent {
      * @param player        The event player.
      */
     public PlayerTeamChangedEvent(Arena arena, ArenaPlayer player, ArenaTeam previousTeam, TeamChangeReason reason) {
-        super(arena, player, false);
+        super(arena, player);
 
         PreCon.notNull(previousTeam);
         PreCon.notNull(reason);
