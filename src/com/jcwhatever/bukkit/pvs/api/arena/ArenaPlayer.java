@@ -191,7 +191,7 @@ public interface ArenaPlayer extends IPlayerWrapper {
      *
      * @param blame  The arena player to blame.
      */
-    void kill(ArenaPlayer blame);
+    void kill(@Nullable ArenaPlayer blame);
 
     /**
      * Register the player as being part of
