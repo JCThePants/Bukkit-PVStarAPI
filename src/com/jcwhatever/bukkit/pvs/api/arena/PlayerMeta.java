@@ -24,9 +24,12 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
+import javax.annotation.Nullable;
+
 public interface PlayerMeta {
 
-    void set(Object key, Object data);
+    void set(Object key, @Nullable Object data);
 
+    @Nullable
     <T> T get(Object key);
 }
