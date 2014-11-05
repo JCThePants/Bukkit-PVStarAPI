@@ -79,6 +79,7 @@ public class PlayerRemovedEvent extends AbstractPlayerEvent {
      * Get the restore location initially set when
      * the event was called.
      */
+    @Nullable
     public Location getInitialRestoreLocation() {
         return isRestoring() ? _initialRestoreLocation : null;
     }
@@ -86,6 +87,7 @@ public class PlayerRemovedEvent extends AbstractPlayerEvent {
     /**
      * Get the restore location.
      */
+    @Nullable
     public Location getRestoreLocation() {
         return isRestoring() ? _restoreLocation : null;
     }
@@ -95,7 +97,7 @@ public class PlayerRemovedEvent extends AbstractPlayerEvent {
      *
      * @param location The location.
      */
-    public void setRestoreLocation(Location location) {
+    public void setRestoreLocation(@Nullable Location location) {
         _restoreLocation = location;
     }
 }
