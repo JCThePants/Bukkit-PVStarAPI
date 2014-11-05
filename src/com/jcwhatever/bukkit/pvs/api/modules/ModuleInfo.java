@@ -25,6 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.modules;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -51,6 +52,11 @@ public interface ModuleInfo {
      * Get the module description.
      */
     String getDescription();
+
+    /**
+     * Get the modules author names.
+     */
+    List<String> getAuthors();
 
     /**
      * Get the logical version of the module.

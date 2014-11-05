@@ -34,6 +34,7 @@ import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -71,6 +72,13 @@ public abstract class PVStarModule implements IJarModule {
      */
     public final String getDescription() {
         return getInfo().getDescription();
+    }
+
+    /**
+     * Get the modules author names.
+     */
+    public final List<String> getAuthors() {
+        return getInfo().getAuthors();
     }
 
     /**
