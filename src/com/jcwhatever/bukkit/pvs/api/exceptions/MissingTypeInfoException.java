@@ -26,7 +26,7 @@
 package com.jcwhatever.bukkit.pvs.api.exceptions;
 
 /**
- * Created by John on 10/2/2014.
+ * Thrown when a class type does not have a required annotation.
  */
 public class MissingTypeInfoException extends RuntimeException {
 
@@ -40,6 +40,4 @@ public class MissingTypeInfoException extends RuntimeException {
     public String getMessage() {
         return _msg;
     }
-
-
 }
