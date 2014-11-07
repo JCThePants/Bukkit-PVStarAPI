@@ -163,6 +163,7 @@ public enum ArenaTeam {
             while (iterator.hasNext()) {
                 team = iterator.next();
 
+                //noinspection EqualsBetweenInconvertibleTypes
                 if (team.equals(arenaTeam)) {
                     iterator.remove();
                     team.uses--;
