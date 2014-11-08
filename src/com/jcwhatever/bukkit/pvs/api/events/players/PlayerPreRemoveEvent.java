@@ -29,6 +29,7 @@ import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 import com.jcwhatever.bukkit.pvs.api.arena.options.RemovePlayerReason;
 
 /**
@@ -46,10 +47,12 @@ public class PlayerPreRemoveEvent extends AbstractPlayerEvent implements ICancel
      * @param player  The player to be removed.
      * @param reason  The reason the player is being removed.
      */
-    public PlayerPreRemoveEvent(Arena arena, ArenaPlayer player, RemovePlayerReason reason) {
-        super(arena, player);
+    public PlayerPreRemoveEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
+                                RemovePlayerReason reason) {
+        super(arena, player, relatedManager);
 
         PreCon.notNull(reason);
+        PreCon.notNull(relatedManager);
 
         _reason = reason;
     }

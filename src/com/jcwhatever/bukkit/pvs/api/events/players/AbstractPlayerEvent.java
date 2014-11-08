@@ -28,7 +28,9 @@ package com.jcwhatever.bukkit.pvs.api.events.players;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 import com.jcwhatever.bukkit.pvs.api.events.AbstractArenaEvent;
+import javax.annotation.Nullable;
 
 /**
  * An arena event that deals with a player
@@ -36,6 +38,7 @@ import com.jcwhatever.bukkit.pvs.api.events.AbstractArenaEvent;
 public abstract class AbstractPlayerEvent extends AbstractArenaEvent {
 
     private final ArenaPlayer _player;
+    private final PlayerManager _relatedManager;
 
     /**
      * Constructor.
@@ -43,12 +46,14 @@ public abstract class AbstractPlayerEvent extends AbstractArenaEvent {
      * @param arena          The event arena.
      * @param player         The event player.
      */
-    public AbstractPlayerEvent(Arena arena, ArenaPlayer player) {
+    public AbstractPlayerEvent(Arena arena, ArenaPlayer player, @Nullable PlayerManager relatedManager) {
         super(arena);
 
         PreCon.notNull(player);
+        PreCon.notNull(relatedManager);
 
         _player = player;
+        _relatedManager = relatedManager;
     }
 
     /**
@@ -56,6 +61,14 @@ public abstract class AbstractPlayerEvent extends AbstractArenaEvent {
      */
     public ArenaPlayer getPlayer() {
         return _player;
+    }
+
+    /**
+     * Get the arena player manager (Lobby, Game, or Spectator) related to the event.
+     */
+    @Nullable
+    public PlayerManager getRelatedManager() {
+        return _relatedManager;
     }
 
 }

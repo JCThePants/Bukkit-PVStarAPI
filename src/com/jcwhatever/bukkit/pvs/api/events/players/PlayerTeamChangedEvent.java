@@ -29,6 +29,7 @@ import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaTeam;
+import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 import com.jcwhatever.bukkit.pvs.api.arena.options.TeamChangeReason;
 
 /**
@@ -45,8 +46,9 @@ public class PlayerTeamChangedEvent extends AbstractPlayerEvent {
      * @param arena         The event arena.
      * @param player        The event player.
      */
-    public PlayerTeamChangedEvent(Arena arena, ArenaPlayer player, ArenaTeam previousTeam, TeamChangeReason reason) {
-        super(arena, player);
+    public PlayerTeamChangedEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
+                                  ArenaTeam previousTeam, TeamChangeReason reason) {
+        super(arena, player, relatedManager);
 
         PreCon.notNull(previousTeam);
         PreCon.notNull(reason);

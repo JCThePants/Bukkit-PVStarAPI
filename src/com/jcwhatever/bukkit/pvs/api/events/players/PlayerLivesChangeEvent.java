@@ -28,6 +28,7 @@ package com.jcwhatever.bukkit.pvs.api.events.players;
 import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 
 /**
  * Called when the players lives is incremented or decremented.
@@ -46,8 +47,9 @@ public class PlayerLivesChangeEvent extends AbstractPlayerEvent implements ICanc
      * @param previousLives  The number of lives the player had.
      * @param newLives       The number of lives the player will have.
      */
-    public PlayerLivesChangeEvent(Arena arena, ArenaPlayer player, int previousLives, int newLives) {
-        super(arena, player);
+    public PlayerLivesChangeEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
+                                  int previousLives, int newLives) {
+        super(arena, player, relatedManager);
 
         _previousLives = previousLives;
         _newLives = newLives;
