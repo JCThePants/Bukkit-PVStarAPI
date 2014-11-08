@@ -44,9 +44,21 @@ public interface TeamManager {
      * Get available teams in the arena. Available teams
      * are determined by the teams set on spawnpoints in
      * the spawn manager.
-     *
-     * @return
      */
     Set<ArenaTeam> getTeams();
 
+    /**
+     * Get the teams currently in the arena.
+     */
+    Set<ArenaTeam> getCurrentTeams();
+
+    /**
+     * Get the total number of teams possible in the arena.
+     */
+    int totalTeams();
+
+    /**
+     * Get the number of teams currently in the arena.
+     */
+    int totalCurrentTeams();
 }
