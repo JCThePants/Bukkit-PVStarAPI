@@ -50,7 +50,6 @@ public abstract class AbstractPlayerEvent extends AbstractArenaEvent {
         super(arena);
 
         PreCon.notNull(player);
-        PreCon.notNull(relatedManager);
 
         _player = player;
         _relatedManager = relatedManager;
