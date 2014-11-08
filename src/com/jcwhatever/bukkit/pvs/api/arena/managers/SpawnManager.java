@@ -31,10 +31,9 @@ import com.jcwhatever.bukkit.pvs.api.arena.ArenaTeam;
 import com.jcwhatever.bukkit.pvs.api.spawns.SpawnType;
 import com.jcwhatever.bukkit.pvs.api.spawns.Spawnpoint;
 
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+import javax.annotation.Nullable;
 
 /**
  * Manages an arenas spawn points.
@@ -117,12 +116,6 @@ public interface SpawnManager {
      */
     @Nullable
     Spawnpoint getRandomSpectatorSpawn(ArenaTeam team);
-
-
-    /**
-     * Get all teams available from the spawns
-     */
-    Set<ArenaTeam> getTeams();
 
     /**
      * Get all spawnpoints
