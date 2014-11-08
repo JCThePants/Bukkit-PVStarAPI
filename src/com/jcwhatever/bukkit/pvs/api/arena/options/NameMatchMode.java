@@ -29,6 +29,7 @@ package com.jcwhatever.bukkit.pvs.api.arena.options;
  * Describes how a name should be searched.
  */
 public enum NameMatchMode {
+
     /**
      * A name must be an exact match, case-sensitive.
      */
