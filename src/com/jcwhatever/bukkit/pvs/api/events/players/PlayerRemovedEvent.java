@@ -28,7 +28,9 @@ package com.jcwhatever.bukkit.pvs.api.events.players;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 import com.jcwhatever.bukkit.pvs.api.arena.options.RemovePlayerReason;
+
 import org.bukkit.Location;
 
 import javax.annotation.Nullable;
@@ -45,14 +47,17 @@ public class PlayerRemovedEvent extends AbstractPlayerEvent {
     /**
      * Constructor.
      *
-     * @param arena   The event arena.
-     * @param player  The player who was removed.
-     * @param reason  The reason the player was removed.
+     * @param arena           The event arena.
+     * @param player          The player who was removed.
+     * @param relatedManager  The manager the player is being removed from.
+     * @param reason          The reason the player was removed.
      */
-    public PlayerRemovedEvent(Arena arena, ArenaPlayer player, RemovePlayerReason reason, @Nullable Location restoreLocation) {
-        super(arena, player);
+    public PlayerRemovedEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
+                              RemovePlayerReason reason, @Nullable Location restoreLocation) {
+        super(arena, player, relatedManager);
 
         PreCon.notNull(reason);
+        PreCon.notNull(relatedManager);
 
         _reason = reason;
         _initialRestoreLocation = restoreLocation;

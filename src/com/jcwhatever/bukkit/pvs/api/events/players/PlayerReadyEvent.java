@@ -25,8 +25,11 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.players;
 
+import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
+
 import javax.annotation.Nullable;
 
 /**
@@ -42,8 +45,10 @@ public class PlayerReadyEvent extends AbstractPlayerEvent {
      * @param arena   The event arena.
      * @param player  The player who is ready.
      */
-    public PlayerReadyEvent(Arena arena, ArenaPlayer player, @Nullable String message) {
-        super(arena, player);
+    public PlayerReadyEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager, @Nullable String message) {
+        super(arena, player, relatedManager);
+
+        PreCon.notNull(relatedManager);
 
         _message = message;
     }

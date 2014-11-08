@@ -29,6 +29,7 @@ import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 import com.jcwhatever.bukkit.pvs.api.arena.options.AddPlayerReason;
 
 /**
@@ -47,10 +48,12 @@ public class PlayerPreAddEvent extends AbstractPlayerEvent implements ICancellab
      * @param player  The player to be added.
      * @param reason  The reason the player is being added.
      */
-    public PlayerPreAddEvent(Arena arena, ArenaPlayer player, AddPlayerReason reason) {
-        super(arena, player);
+    public PlayerPreAddEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
+                             AddPlayerReason reason) {
+        super(arena, player, relatedManager);
 
         PreCon.notNull(reason);
+        PreCon.notNull(relatedManager);
 
         _reason = reason;
     }

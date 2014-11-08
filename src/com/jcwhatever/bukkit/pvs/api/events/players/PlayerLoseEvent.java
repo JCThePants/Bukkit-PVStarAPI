@@ -27,6 +27,7 @@ package com.jcwhatever.bukkit.pvs.api.events.players;
 
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 
 import javax.annotation.Nullable;
 
@@ -44,8 +45,8 @@ public class PlayerLoseEvent extends AbstractPlayerEvent {
      * @param arena   The event arena.
      * @param player  The player who lost.
      */
-    public PlayerLoseEvent(Arena arena, ArenaPlayer player, @Nullable String loseMessage) {
-        super(arena, player);
+    public PlayerLoseEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager, @Nullable String loseMessage) {
+        super(arena, player, relatedManager);
 
         _initialMessage = loseMessage;
         _message = loseMessage;

@@ -29,6 +29,8 @@ import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
+
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.block.Action;
@@ -51,8 +53,9 @@ public class ArenaBlockDamagePreventEvent extends AbstractPlayerEvent implements
      * @param player  The player prevented from damaging a block.
      * @param event   The parent event.
      */
-    public ArenaBlockDamagePreventEvent(Arena arena, ArenaPlayer player, PlayerInteractEvent event) {
-        super(arena, player);
+    public ArenaBlockDamagePreventEvent(Arena arena, ArenaPlayer player,
+                                        PlayerManager relatedManager, PlayerInteractEvent event) {
+        super(arena, player, relatedManager);
 
         PreCon.notNull(event);
 

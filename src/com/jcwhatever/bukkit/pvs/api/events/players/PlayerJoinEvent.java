@@ -29,6 +29,7 @@ import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 import com.jcwhatever.bukkit.pvs.api.arena.options.AddPlayerReason;
 
 import javax.annotation.Nullable;
@@ -50,8 +51,9 @@ public class PlayerJoinEvent extends AbstractPlayerEvent implements ICancellable
      * @param player  The player joining.
      * @param reason  The reason the player is joining.
      */
-    public PlayerJoinEvent(Arena arena, ArenaPlayer player, AddPlayerReason reason) {
-        super(arena, player);
+    public PlayerJoinEvent(Arena arena, ArenaPlayer player, @Nullable PlayerManager relatedManager,
+                           AddPlayerReason reason) {
+        super(arena, player, relatedManager);
 
         PreCon.notNull(reason);
 

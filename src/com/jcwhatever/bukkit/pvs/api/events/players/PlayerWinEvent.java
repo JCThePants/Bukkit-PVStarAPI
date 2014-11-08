@@ -27,6 +27,7 @@ package com.jcwhatever.bukkit.pvs.api.events.players;
 
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 
 import javax.annotation.Nullable;
 
@@ -44,8 +45,9 @@ public class PlayerWinEvent extends AbstractPlayerEvent {
      * @param arena   The event arena.
      * @param player  The winning player.
      */
-    public PlayerWinEvent(Arena arena, ArenaPlayer player, @Nullable String message) {
-        super(arena, player);
+    public PlayerWinEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
+                          @Nullable String message) {
+        super(arena, player, relatedManager);
 
         _initialMessage = message;
         _message = message;

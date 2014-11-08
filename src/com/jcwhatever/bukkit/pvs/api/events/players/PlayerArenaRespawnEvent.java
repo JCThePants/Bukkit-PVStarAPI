@@ -28,7 +28,11 @@ package com.jcwhatever.bukkit.pvs.api.events.players;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
+
 import org.bukkit.Location;
+
+import javax.annotation.Nullable;
 
 /**
  * Called when a player is respawned in an arena.
@@ -45,8 +49,9 @@ public class PlayerArenaRespawnEvent extends AbstractPlayerEvent {
      * @param player           The player being respawned.
      * @param respawnLocation  The location the player will be respawned at.
      */
-    public PlayerArenaRespawnEvent(Arena arena, ArenaPlayer player, Location respawnLocation) {
-        super(arena, player);
+    public PlayerArenaRespawnEvent(Arena arena, ArenaPlayer player,
+                                   @Nullable PlayerManager relatedManager, Location respawnLocation) {
+        super(arena, player, relatedManager);
 
         PreCon.notNull(respawnLocation);
 
