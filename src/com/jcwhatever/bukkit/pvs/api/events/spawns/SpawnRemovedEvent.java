@@ -22,37 +22,23 @@
  * THE SOFTWARE.
  */
 
-
 package com.jcwhatever.bukkit.pvs.api.events.spawns;
 
-import com.jcwhatever.bukkit.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.spawns.Spawnpoint;
 
 /**
- * Called when a spawn is added to an arena.
+ * Called after a spawnpoint is removed from an arena.
  */
-public class AddSpawnEvent extends AbstractSpawnEvent implements ICancellable {
-
-    private boolean _isCancelled;
+public class SpawnRemovedEvent extends AbstractSpawnEvent {
 
     /**
      * Constructor.
      *
      * @param arena  The event arena.
-     * @param spawn  The spawnpoint being added.
+     * @param spawn  The spawnpoint being removed.
      */
-    public AddSpawnEvent(Arena arena, Spawnpoint spawn) {
+    public SpawnRemovedEvent(Arena arena, Spawnpoint spawn) {
         super(arena, spawn);
-    }
-
-    @Override
-    public boolean isCancelled() {
-        return _isCancelled;
-    }
-
-    @Override
-    public void setCancelled(boolean isCancelled) {
-        _isCancelled = isCancelled;
     }
 }

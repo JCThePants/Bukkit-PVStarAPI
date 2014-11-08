@@ -30,9 +30,9 @@ import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.spawns.Spawnpoint;
 
 /**
- * Called when a spawnpoint is removed from an arena.
+ * Called before a spawnpoint is removed from an arena.
  */
-public class RemoveSpawnEvent extends AbstractSpawnEvent implements ICancellable {
+public class SpawnPreRemoveEvent extends AbstractSpawnEvent implements ICancellable {
 
     private boolean _isCancelled;
 
@@ -42,7 +42,7 @@ public class RemoveSpawnEvent extends AbstractSpawnEvent implements ICancellable
      * @param arena  The event arena.
      * @param spawn  The spawnpoint being removed.
      */
-    public RemoveSpawnEvent(Arena arena, Spawnpoint spawn) {
+    public SpawnPreRemoveEvent(Arena arena, Spawnpoint spawn) {
         super(arena, spawn);
     }
 
