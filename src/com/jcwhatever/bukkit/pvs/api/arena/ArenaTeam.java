@@ -26,6 +26,7 @@
 package com.jcwhatever.bukkit.pvs.api.arena;
 
 import com.jcwhatever.bukkit.generic.utils.TextUtils.TextColor;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
@@ -36,6 +37,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
+import javax.annotation.Nullable;
 
 public enum ArenaTeam {
     
@@ -137,12 +139,18 @@ public enum ArenaTeam {
         /**
          * Get the next team a player should be put on.
          */
+        @Nullable
         public ArenaTeam next() {
 
+            if (_teams.isEmpty())
+                return null;
+
+            // remove team from beginning of queue
             Team team = _teams.remove();
 
             team.uses++;
 
+            // add team to end of queue
             _teams.add(team);
 
             return team.team;
