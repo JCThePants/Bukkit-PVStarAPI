@@ -77,9 +77,8 @@ public class ArenaRegion extends RestorableRegion implements GenericsEventListen
      */
     @Override
     protected boolean canDoPlayerEnter(Player p) {
-        return getArena().getSettings().isEnabled() && p.isOnline() &&
-                PVStarAPI.getPlugin().isEnabled() &&
-               !p.isDead();
+        return getArena().getSettings().isEnabled() &&
+                PVStarAPI.getPlugin().isEnabled();
     }
 
     /**
@@ -104,9 +103,8 @@ public class ArenaRegion extends RestorableRegion implements GenericsEventListen
      */
     @Override
     protected boolean canDoPlayerLeave(Player p) {
-        return getArena().getSettings().isEnabled() && p.isOnline() &&
-               PVStarAPI.getPlugin().isEnabled() &&
-               !p.isDead();
+        return getArena().getSettings().isEnabled() &&
+               PVStarAPI.getPlugin().isEnabled();
     }
 
     /**
