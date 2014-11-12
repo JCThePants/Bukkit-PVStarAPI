@@ -54,7 +54,6 @@ public abstract class ScriptApi implements IScriptApi {
      * Reset the api and release all objects stored from
      * the script.
      */
-    @Override
     public final void reset() {
 
         onReset();
