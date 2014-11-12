@@ -26,12 +26,10 @@
 package com.jcwhatever.bukkit.pvs.api.scripting;
 
 import com.jcwhatever.bukkit.generic.scripting.api.IScriptApi;
-import com.jcwhatever.bukkit.pvs.api.events.AbstractArenaEvent;
-import com.jcwhatever.bukkit.pvs.api.modules.PVStarModule;
 
+import java.util.List;
 import javax.annotation.Nullable;
 import javax.script.ScriptEngineManager;
-import java.util.List;
 
 /**
  * Manages unevaluated scripts which can
@@ -43,24 +41,6 @@ public interface ScriptManager {
      * Get the script engine manager that provides script engines.
      */
     ScriptEngineManager getEngineManager();
-
-    /**
-     * Register an arena event class to make it available to scripts.
-     *
-     * @param eventClass  The owning module.
-     * @param eventClass  The event class to register.
-     */
-    void registerEventType(PVStarModule module, Class<? extends AbstractArenaEvent> eventClass);
-
-    /**
-     * Get a registered event type.
-     *
-     * @param name  The name of the event type. The name is the name of the registering module
-     *              followed by a period and the name of the event class. If the event is a PV-Star
-     *              event, then the name is simply the event class name.
-     */
-    @Nullable
-    Class<? extends AbstractArenaEvent> getEventType(String name);
 
     /**
      * Add a script.
