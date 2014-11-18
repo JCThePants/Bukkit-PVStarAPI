@@ -65,7 +65,7 @@ public enum JoinRejectReason {
     /**
      * The arena game is already in progress.
      */
-    ALREADY_RUNNING,
+    ARENA_RUNNING,
 
     /**
      * Other reasons.
