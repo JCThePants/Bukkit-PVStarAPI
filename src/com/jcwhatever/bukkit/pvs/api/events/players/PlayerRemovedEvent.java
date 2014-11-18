@@ -36,7 +36,7 @@ import org.bukkit.Location;
 import javax.annotation.Nullable;
 
 /**
- * Called after a player is removed from an arena.
+ * Called after a player is removed from an arena player manager (lobby, game or spectator).
  */
 public class PlayerRemovedEvent extends AbstractPlayerEvent {
 
