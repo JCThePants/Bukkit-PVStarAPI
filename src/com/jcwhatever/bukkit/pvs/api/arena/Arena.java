@@ -29,7 +29,6 @@ import com.jcwhatever.bukkit.generic.events.GenericsEventManager;
 import com.jcwhatever.bukkit.generic.mixins.IDisposable;
 import com.jcwhatever.bukkit.generic.permissions.IPermission;
 import com.jcwhatever.bukkit.generic.storage.IDataNode;
-import com.jcwhatever.bukkit.pvs.api.modules.PVStarModule;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ArenaExtension;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ArenaExtensionManager;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.GameManager;
@@ -37,9 +36,9 @@ import com.jcwhatever.bukkit.pvs.api.arena.managers.LobbyManager;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.SpawnManager;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.SpectatorManager;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.TeamManager;
-import com.jcwhatever.bukkit.pvs.api.arena.options.AddPlayerReason;
 import com.jcwhatever.bukkit.pvs.api.arena.options.RemovePlayerReason;
 import com.jcwhatever.bukkit.pvs.api.arena.settings.ArenaSettings;
+import com.jcwhatever.bukkit.pvs.api.modules.PVStarModule;
 import com.jcwhatever.bukkit.pvs.api.scripting.ArenaScriptManager;
 
 import java.io.File;
@@ -184,11 +183,10 @@ public interface Arena extends IDisposable {
      * Join a player to the arena.
      *
      * @param player  The joining player.
-     * @param reason  The reason the player is joining.
      *
      * @return  True if the player was added to the arena.
      */
-    boolean join(ArenaPlayer player, AddPlayerReason reason);
+    boolean join(ArenaPlayer player);
 
     /**
      * Remove a player from the arena. Should not be used for arena relation
