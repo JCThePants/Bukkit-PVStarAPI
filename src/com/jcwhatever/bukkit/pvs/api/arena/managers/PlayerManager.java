@@ -25,10 +25,13 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena.managers;
 
+import com.jcwhatever.bukkit.generic.utils.Result;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.options.AddPlayerReason;
 import com.jcwhatever.bukkit.pvs.api.arena.options.RemovePlayerReason;
+
+import org.bukkit.Location;
 
 import java.util.List;
 
@@ -84,9 +87,9 @@ public interface PlayerManager {
      * @param player  The player to remove.
      * @param reason  The reason the player is being removed.
      *
-     * @return  True if the player was being managed by the instance and was removed.
+     * @return  A location to send the player.
      */
-    public boolean removePlayer(ArenaPlayer player, RemovePlayerReason reason);
+    public Result<Location> removePlayer(ArenaPlayer player, RemovePlayerReason reason);
 
     /**
      * Tell all players being managed.
