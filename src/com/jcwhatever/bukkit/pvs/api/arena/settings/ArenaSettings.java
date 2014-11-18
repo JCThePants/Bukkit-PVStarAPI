@@ -36,8 +36,23 @@ public interface ArenaSettings {
 
     /**
      * Determine if the arena is enabled.
+     *
+     * <p>May return false if the conditions required
+     * for an arena to be enabled are not met.</p>
+     *
+     * <p>This method should be used to determine if
+     * the arena is currently enabled.</p>
      */
     boolean isEnabled();
+
+    /**
+     * Returns the enabled setting as configured.
+     * Used to determine the desired setting.</p>
+     *
+     * <p>Should not be used to determine if the arena is
+     * currently enabled.</p>
+     */
+    boolean isConfigEnabled();
 
     /**
      * Set arena enabled.
@@ -45,6 +60,14 @@ public interface ArenaSettings {
      * @param isEnabled  True to enable.
      */
     void setEnabled(boolean isEnabled);
+
+    /**
+     * Sets the arenas enabled state without changing
+     * config settings.
+     *
+     * @param isEnabled  True to enable.
+     */
+    void setTransientEnabled(boolean isEnabled);
 
     /**
      * Determine if the arena is visible to players
