@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-
 package com.jcwhatever.bukkit.pvs.api.events.players;
 
 import com.jcwhatever.bukkit.generic.utils.PreCon;
@@ -31,15 +30,27 @@ import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 import com.jcwhatever.bukkit.pvs.api.arena.options.RemovePlayerReason;
 
+import org.bukkit.Location;
+
+import javax.annotation.Nullable;
+
 /**
- * Called after a player is removed from an arena player manager (lobby, game or spectator).
+ * Called after a player is removed from an arena.
  *
- * <p>Not to be confused with {@code PlayerLeaveEvent}, which is used when a player is
- * removed from the arena.</p>
+ * <p>Not to be confused with {@code PlayerPreRemoveEvent} and {@code PlayerRemovedEvent},
+ * which are used when a player is removed from an arenas {@code PlayerManager}.
+ * (ie. lobby, game or spectator)</p>
+ *
+ * <p>Although {@code PlayerPreRemoveEvent} and {@code PlayerRemovedEvent} are
+ * called before {@code PlayerLeaveEvent}, in cases where the player is not actually
+ * leaving the arena ({@code RemovePlayerReason.ARENA_RELATION_CHANGE}),
+ * {@code PlayerLeaveEvent} is not called.</p>
  */
-public class PlayerRemovedEvent extends AbstractPlayerEvent {
+public class PlayerLeaveEvent extends AbstractPlayerEvent {
 
     private final RemovePlayerReason _reason;
+    private final Location _initialRestoreLocation;
+    private Location _restoreLocation;
 
     /**
      * Constructor.
@@ -49,14 +60,16 @@ public class PlayerRemovedEvent extends AbstractPlayerEvent {
      * @param relatedManager  The manager the player is being removed from.
      * @param reason          The reason the player was removed.
      */
-    public PlayerRemovedEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
-                              RemovePlayerReason reason) {
+    public PlayerLeaveEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
+                              RemovePlayerReason reason, @Nullable Location restoreLocation) {
         super(arena, player, relatedManager);
 
         PreCon.notNull(reason);
         PreCon.notNull(relatedManager);
 
         _reason = reason;
+        _initialRestoreLocation = restoreLocation;
+        _restoreLocation = restoreLocation;
     }
 
     /**
@@ -64,5 +77,40 @@ public class PlayerRemovedEvent extends AbstractPlayerEvent {
      */
     public RemovePlayerReason getReason() {
         return _reason;
+    }
+
+    /**
+     * Determine if the player is being restored to a location.
+     */
+    public boolean isRestoring() {
+        return _reason != RemovePlayerReason.FORWARDING &&
+                _reason != RemovePlayerReason.ARENA_RELATION_CHANGE &&
+                _reason != RemovePlayerReason.LOGOUT;
+    }
+
+    /**
+     * Get the restore location initially set when
+     * the event was called.
+     */
+    @Nullable
+    public Location getInitialRestoreLocation() {
+        return isRestoring() ? _initialRestoreLocation : null;
+    }
+
+    /**
+     * Get the restore location.
+     */
+    @Nullable
+    public Location getRestoreLocation() {
+        return isRestoring() ? _restoreLocation : null;
+    }
+
+    /**
+     * Set the restore location.
+     *
+     * @param location The location.
+     */
+    public void setRestoreLocation(@Nullable Location location) {
+        _restoreLocation = location;
     }
 }
