@@ -33,6 +33,7 @@ import com.jcwhatever.bukkit.pvs.api.arena.settings.PlayerManagerSettings;
 
 import org.bukkit.Location;
 
+import java.util.Date;
 import java.util.UUID;
 import javax.annotation.Nullable;
 
@@ -69,6 +70,13 @@ public interface ArenaPlayer extends IPlayerWrapper {
      */
     @Nullable
     Arena getArena();
+
+    /**
+     * Get the most recent date/time that a player
+     * joined an arena during their current login session.
+     */
+    @Nullable
+    Date getJoinDate();
 
     /**
      * Get the players team.
