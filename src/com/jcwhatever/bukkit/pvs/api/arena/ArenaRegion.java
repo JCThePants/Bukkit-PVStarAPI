@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
-import com.jcwhatever.bukkit.generic.events.GenericsEventListener;
+import com.jcwhatever.bukkit.generic.events.IGenericsEventListener;
 import com.jcwhatever.bukkit.generic.regions.RestorableRegion;
 import com.jcwhatever.bukkit.generic.storage.IDataNode;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
@@ -40,7 +40,7 @@ import org.bukkit.entity.Player;
 /**
  * A region that represents the bounds of an arena.
  */
-public class ArenaRegion extends RestorableRegion implements GenericsEventListener {
+public class ArenaRegion extends RestorableRegion implements IGenericsEventListener {
 
     private final Arena _arena;
 
