@@ -33,9 +33,8 @@ import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 
 /**
- * Arena extension.
- * Each instance is used for a single arena.
- *
+ * Base implementation of an Arena extension. Each
+ * instance is used for a single arena.
  */
 public abstract class ArenaExtension {
 
@@ -138,7 +137,6 @@ public abstract class ArenaExtension {
     public final String getDescription() {
         return _extensionInfo.description();
     }
-
 
     /**
      * Called when the extension is enabled.

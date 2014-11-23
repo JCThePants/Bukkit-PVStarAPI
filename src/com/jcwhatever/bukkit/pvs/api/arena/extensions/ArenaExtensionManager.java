@@ -27,13 +27,11 @@ package com.jcwhatever.bukkit.pvs.api.arena.extensions;
 
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 
-import javax.annotation.Nullable;
 import java.util.Set;
+import javax.annotation.Nullable;
 
 /**
- *
  *  Manages extension instances for a specific arena instance.
- *
  */
 public abstract class ArenaExtensionManager {
 

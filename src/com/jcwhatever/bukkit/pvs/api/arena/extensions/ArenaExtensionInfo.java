@@ -32,6 +32,8 @@ import java.lang.annotation.Target;
 
 /**
  * Arena extension info annotation.
+ *
+ * <p>Required for all arena extension types.</p>
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
