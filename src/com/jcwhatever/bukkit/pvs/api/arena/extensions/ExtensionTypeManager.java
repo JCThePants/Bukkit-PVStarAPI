@@ -25,9 +25,9 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena.extensions;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.Nullable;
 
 /**
  * Manages extension types that are available to
@@ -38,7 +38,7 @@ public interface ExtensionTypeManager {
     /**
      * Get the names of all available extensions
      */
-    Set<String> getExensionNames();
+    Set<String> getExtensionNames();
 
     /**
      * Get all available extension types.
