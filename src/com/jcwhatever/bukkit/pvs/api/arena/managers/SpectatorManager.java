@@ -28,7 +28,7 @@ package com.jcwhatever.bukkit.pvs.api.arena.managers;
 import com.jcwhatever.bukkit.pvs.api.arena.settings.SpectatorManagerSettings;
 
 /**
- * Manages an arenas spectators.
+ * Manages an arenas spectator players.
  */
 public interface SpectatorManager extends PlayerManager {
 

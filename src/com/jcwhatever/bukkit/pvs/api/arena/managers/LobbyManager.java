@@ -31,7 +31,7 @@ import com.jcwhatever.bukkit.pvs.api.arena.settings.LobbyManagerSettings;
 import java.util.List;
 
 /**
- * Manages an arenas lobby.
+ * Manages an arenas lobby players.
  */
 public interface LobbyManager extends PlayerManager {
 

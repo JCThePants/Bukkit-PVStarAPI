@@ -31,11 +31,11 @@ import com.jcwhatever.bukkit.pvs.api.arena.ArenaTeam;
 import com.jcwhatever.bukkit.pvs.api.arena.options.ArenaStartReason;
 import com.jcwhatever.bukkit.pvs.api.arena.settings.GameManagerSettings;
 
-import javax.annotation.Nullable;
 import java.util.Date;
+import javax.annotation.Nullable;
 
 /**
- * Manages an arenas game sessions.
+ * Manages an arenas game session/players.
  */
 public interface GameManager extends PlayerManager {
 
