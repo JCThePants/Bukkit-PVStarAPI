@@ -25,6 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.region;
 
+import com.jcwhatever.bukkit.generic.regions.Region.EnterRegionReason;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
@@ -35,7 +36,8 @@ import com.jcwhatever.bukkit.pvs.api.events.AbstractArenaEvent;
  */
 public class PlayerEnterArenaRegionEvent extends AbstractArenaEvent {
 
-    private ArenaPlayer _player;
+    private final ArenaPlayer _player;
+    private final EnterRegionReason _reason;
 
     /**
      * Constructor.
@@ -43,11 +45,13 @@ public class PlayerEnterArenaRegionEvent extends AbstractArenaEvent {
      * @param arena   The event arena.
      * @param player  The player entering the region.
      */
-    public PlayerEnterArenaRegionEvent(Arena arena, ArenaPlayer player) {
+    public PlayerEnterArenaRegionEvent(Arena arena, ArenaPlayer player, EnterRegionReason reason) {
         super(arena);
         PreCon.notNull(player);
+        PreCon.notNull(reason);
 
         _player = player;
+        _reason = reason;
     }
 
     /**
@@ -55,5 +59,13 @@ public class PlayerEnterArenaRegionEvent extends AbstractArenaEvent {
      */
     public ArenaPlayer getPlayer() {
         return _player;
+    }
+
+    /**
+     * Get the reason the player is entering the
+     * arena region.
+     */
+    public EnterRegionReason getReason() {
+        return _reason;
     }
 }

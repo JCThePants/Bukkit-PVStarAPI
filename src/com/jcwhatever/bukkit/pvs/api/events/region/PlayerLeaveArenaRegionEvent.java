@@ -25,6 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.region;
 
+import com.jcwhatever.bukkit.generic.regions.Region.LeaveRegionReason;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
@@ -35,7 +36,8 @@ import com.jcwhatever.bukkit.pvs.api.events.AbstractArenaEvent;
  */
 public class PlayerLeaveArenaRegionEvent extends AbstractArenaEvent {
 
-    private ArenaPlayer _player;
+    private final ArenaPlayer _player;
+    private final LeaveRegionReason _reason;
 
     /**
      * Constructor.
@@ -43,11 +45,13 @@ public class PlayerLeaveArenaRegionEvent extends AbstractArenaEvent {
      * @param arena   The event arena.
      * @param player  The player leaving the arena.
      */
-    public PlayerLeaveArenaRegionEvent(Arena arena, ArenaPlayer player) {
+    public PlayerLeaveArenaRegionEvent(Arena arena, ArenaPlayer player, LeaveRegionReason reason) {
         super(arena);
         PreCon.notNull(player);
+        PreCon.notNull(reason);
 
         _player = player;
+        _reason = reason;
     }
 
     /**
@@ -55,5 +59,13 @@ public class PlayerLeaveArenaRegionEvent extends AbstractArenaEvent {
      */
     public ArenaPlayer getPlayer() {
         return _player;
+    }
+
+    /**
+     * Get the reason the player is leaving the
+     * arena region.
+     */
+    public LeaveRegionReason getReason() {
+        return _reason;
     }
 }

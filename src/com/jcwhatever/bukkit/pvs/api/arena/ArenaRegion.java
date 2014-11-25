@@ -76,7 +76,7 @@ public class ArenaRegion extends RestorableRegion implements IGenericsEventListe
      * @return  True to allow calling {@code onPlayerEnter}.
      */
     @Override
-    protected boolean canDoPlayerEnter(Player p) {
+    protected boolean canDoPlayerEnter(Player p, EnterRegionReason reason) {
         return getArena().getSettings().isEnabled() &&
                 PVStarAPI.getPlugin().isEnabled();
     }
@@ -87,11 +87,11 @@ public class ArenaRegion extends RestorableRegion implements IGenericsEventListe
      * @param p  The player entering the region.
      */
     @Override
-    protected void onPlayerEnter(Player p) {
+    protected void onPlayerEnter(Player p, EnterRegionReason reason) {
 
         final ArenaPlayer player = PVStarAPI.getArenaPlayer(p);
 
-        _arena.getEventManager().call(new PlayerEnterArenaRegionEvent(_arena, player));
+        _arena.getEventManager().call(new PlayerEnterArenaRegionEvent(_arena, player, reason));
     }
 
     /**
@@ -102,7 +102,7 @@ public class ArenaRegion extends RestorableRegion implements IGenericsEventListe
      * @return  True to allow calling {@code onPlayerLeave}.
      */
     @Override
-    protected boolean canDoPlayerLeave(Player p) {
+    protected boolean canDoPlayerLeave(Player p, LeaveRegionReason reason) {
         return getArena().getSettings().isEnabled() &&
                PVStarAPI.getPlugin().isEnabled();
     }
@@ -113,11 +113,11 @@ public class ArenaRegion extends RestorableRegion implements IGenericsEventListe
      * @param p  The player leaving the region.
      */
     @Override
-    protected void onPlayerLeave(Player p) {
+    protected void onPlayerLeave(Player p, LeaveRegionReason reason) {
 
         ArenaPlayer player = PVStarAPI.getArenaPlayer(p);
 
-        _arena.getEventManager().call(new PlayerLeaveArenaRegionEvent(_arena, player));
+        _arena.getEventManager().call(new PlayerLeaveArenaRegionEvent(_arena, player, reason));
     }
 
     /**
