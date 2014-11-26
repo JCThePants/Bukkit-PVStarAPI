@@ -86,12 +86,7 @@ public class ArenaScheduler {
         PreCon.positiveNumber(initialDelay);
         PreCon.positiveNumber(interval);
 
-        ScheduledTask task = Scheduler.runTaskRepeat(PVStarAPI.getPlugin(), initialDelay, interval, wrapRunnable(arena, runnable, true));
-
-        if (!arena.getGameManager().isRunning())
-            task.cancel();
-
-        return task;
+        return Scheduler.runTaskRepeat(PVStarAPI.getPlugin(), initialDelay, interval, wrapRunnable(arena, runnable, true));
     }
 
     private static Runnable wrapRunnable(final Arena arena, final Runnable runnable, boolean isRepeating) {
@@ -99,18 +94,21 @@ public class ArenaScheduler {
         if (!isRepeating)
             return runnable;
 
-        final Date sessionToken = arena.getGameManager().getStartTime();
-
         return new TaskHandler(runnable instanceof TaskHandler ? (TaskHandler)runnable : null) {
+
+            private Date _sessionToken;
 
             @Override
             public void run() {
 
                 ScheduledTask task = getTask();
 
+                if (_sessionToken == null)
+                    _sessionToken = arena.getGameManager().getStartTime();
+
                 if (task != null) {
                     if (!arena.getGameManager().isRunning() ||
-                            sessionToken != arena.getGameManager().getStartTime()) {
+                            _sessionToken != arena.getGameManager().getStartTime()) {
                         cancelTask();
                         return;
                     }
