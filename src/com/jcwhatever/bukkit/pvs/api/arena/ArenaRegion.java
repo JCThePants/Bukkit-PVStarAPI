@@ -26,6 +26,8 @@
 package com.jcwhatever.bukkit.pvs.api.arena;
 
 import com.jcwhatever.bukkit.generic.events.IGenericsEventListener;
+import com.jcwhatever.bukkit.generic.regions.Region.RegionPriority;
+import com.jcwhatever.bukkit.generic.regions.RegionPriorityInfo;
 import com.jcwhatever.bukkit.generic.regions.RestorableRegion;
 import com.jcwhatever.bukkit.generic.storage.IDataNode;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
@@ -35,11 +37,13 @@ import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionRestoredEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionSavedEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.PlayerEnterArenaRegionEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.PlayerLeaveArenaRegionEvent;
+
 import org.bukkit.entity.Player;
 
 /**
  * A region that represents the bounds of an arena.
  */
+@RegionPriorityInfo(enter = RegionPriority.HIGH, leave = RegionPriority.LOW)
 public class ArenaRegion extends RestorableRegion implements IGenericsEventListener {
 
     private final Arena _arena;
