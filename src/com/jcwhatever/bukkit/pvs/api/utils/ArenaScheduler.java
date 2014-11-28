@@ -25,10 +25,10 @@
 
 package com.jcwhatever.bukkit.pvs.api.utils;
 
+import com.jcwhatever.bukkit.generic.GenericsLib;
 import com.jcwhatever.bukkit.generic.scheduler.ScheduledTask;
 import com.jcwhatever.bukkit.generic.scheduler.TaskHandler;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
-import com.jcwhatever.bukkit.generic.utils.Scheduler;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 
@@ -40,9 +40,6 @@ import java.util.Date;
  * <p>Delayed Tasks added while the arena is not running will still run.</p>
  *
  * <p>Repeating Tasks do not run unless the arena is running.</p>
- *
- * @author JC The Pants
- *
  */
 public class ArenaScheduler {
 
@@ -57,7 +54,8 @@ public class ArenaScheduler {
      * @param runnable    The task to run
      */
     public static ScheduledTask runTaskLater(Arena arena, int delayTicks, Runnable runnable) {
-         return Scheduler.runTaskLater(PVStarAPI.getPlugin(), delayTicks, wrapRunnable(arena, runnable, false));
+         return GenericsLib.getScheduler()
+                 .runTaskLater(PVStarAPI.getPlugin(), delayTicks, wrapRunnable(arena, runnable, false));
     }
 
     /**
@@ -68,7 +66,8 @@ public class ArenaScheduler {
      * @param runnable  The task to run
      */
     public static ScheduledTask runTaskLater(Arena arena, Runnable runnable) {
-        return Scheduler.runTaskLater(PVStarAPI.getPlugin(), wrapRunnable(arena, runnable, false));
+        return GenericsLib.getScheduler()
+                .runTaskLater(PVStarAPI.getPlugin(), wrapRunnable(arena, runnable, false));
     }
 
     /**
@@ -86,7 +85,8 @@ public class ArenaScheduler {
         PreCon.positiveNumber(initialDelay);
         PreCon.positiveNumber(interval);
 
-        return Scheduler.runTaskRepeat(PVStarAPI.getPlugin(), initialDelay, interval, wrapRunnable(arena, runnable, true));
+        return GenericsLib.getScheduler()
+                .runTaskRepeat(PVStarAPI.getPlugin(), initialDelay, interval, wrapRunnable(arena, runnable, true));
     }
 
     private static Runnable wrapRunnable(final Arena arena, final Runnable runnable, boolean isRepeating) {
