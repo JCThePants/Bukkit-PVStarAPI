@@ -46,15 +46,19 @@ public interface ScriptManager {
      * Add a script.
      *
      * @param script  The script to add.
+     *
+     * @return  True if the script was added.
      */
-    void addScript(Script script);
+    boolean addScript(Script script);
 
     /**
      * Remove a script.
      *
      * @param scriptName  The name of the script to remove.
+     *
+     * @return  True if the script was found and removed.
      */
-    void removeScript(String scriptName);
+    boolean removeScript(String scriptName);
 
     /**
      * Register an api type to be included with all

@@ -92,7 +92,7 @@ public interface ArenaScriptManager {
      * @param scriptName  The name of the script. (the relative path using dots instead of dashes)
      */
     @Nullable
-    EvaluatedScript getEvaluatedScript(String scriptName);
+    EvaluatedScript getEvaluated(String scriptName);
 
     /**
      * Get the names of all loaded scripts.
@@ -102,7 +102,7 @@ public interface ArenaScriptManager {
     /**
      * Get all scripts.
      */
-    List<EvaluatedScript> getEvaluatedScripts();
+    List<EvaluatedScript> getEvaluated();
 
     /**
      * Reload all scripts in the arena.
