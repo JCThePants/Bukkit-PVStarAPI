@@ -59,7 +59,7 @@ public abstract class ScriptApi implements IScriptApi {
         onReset();
 
         for (IScriptApiObject api : _apiObjects.values()) {
-            api.reset();
+            api.dispose();
         }
 
         _apiObjects.clear();
