@@ -39,7 +39,6 @@ import com.jcwhatever.bukkit.pvs.api.arena.managers.TeamManager;
 import com.jcwhatever.bukkit.pvs.api.arena.options.RemovePlayerReason;
 import com.jcwhatever.bukkit.pvs.api.arena.settings.ArenaSettings;
 import com.jcwhatever.bukkit.pvs.api.modules.PVStarModule;
-import com.jcwhatever.bukkit.pvs.api.scripting.ArenaScriptManager;
 
 import java.io.File;
 import java.util.UUID;
@@ -123,11 +122,6 @@ public interface Arena extends IDisposable {
      * Get the arenas extension manager.
      */
     ArenaExtensionManager getExtensionManager();
-
-    /**
-     * Get the arenas script manager.
-     */
-    ArenaScriptManager getScriptManager();
 
     /**
      * Get the arenas settings.

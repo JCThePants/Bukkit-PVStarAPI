@@ -36,13 +36,13 @@ import com.jcwhatever.bukkit.pvs.api.commands.CommandHelper;
 import com.jcwhatever.bukkit.pvs.api.modules.ModuleInfo;
 import com.jcwhatever.bukkit.pvs.api.modules.PVStarModule;
 import com.jcwhatever.bukkit.pvs.api.points.PointsManager;
-import com.jcwhatever.bukkit.pvs.api.scripting.ScriptManager;
 import com.jcwhatever.bukkit.pvs.api.spawns.SpawnTypeManager;
 import com.jcwhatever.bukkit.pvs.api.stats.StatsManager;
+
 import org.bukkit.plugin.Plugin;
 
-import javax.annotation.Nullable;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  *
@@ -113,11 +113,6 @@ public interface IPVStar extends Plugin  {
      * Get PV-Stars global arena event manager.
      */
     GenericsEventManager getEventManager();
-
-    /**
-     * Get PV-Stars script engine manager.
-     */
-    ScriptManager getScriptManager();
 
     /**
      * Get a loaded {@code PVStarModule} instance  by case sensitive module name.

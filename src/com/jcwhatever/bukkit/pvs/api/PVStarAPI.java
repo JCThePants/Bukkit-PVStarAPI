@@ -34,7 +34,6 @@ import com.jcwhatever.bukkit.pvs.api.arena.extensions.ExtensionTypeManager;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.ArenaManager;
 import com.jcwhatever.bukkit.pvs.api.commands.CommandHelper;
 import com.jcwhatever.bukkit.pvs.api.points.PointsManager;
-import com.jcwhatever.bukkit.pvs.api.scripting.ScriptManager;
 import com.jcwhatever.bukkit.pvs.api.spawns.SpawnTypeManager;
 import com.jcwhatever.bukkit.pvs.api.stats.StatsManager;
 
@@ -126,13 +125,6 @@ public final class PVStarAPI {
      */
     public static GenericsEventManager getEventManager() {
         return _implementation.getEventManager();
-    }
-
-    /**
-     * Get PV-Star's global script manager.
-     */
-    public static ScriptManager getScriptManager() {
-        return _implementation.getScriptManager();
     }
 
     /**
