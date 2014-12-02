@@ -26,7 +26,7 @@
 package com.jcwhatever.bukkit.pvs.api.modules;
 
 import com.jcwhatever.bukkit.generic.language.LanguageManager;
-import com.jcwhatever.bukkit.generic.modules.IJarModule;
+import com.jcwhatever.bukkit.generic.mixins.IDisposable;
 import com.jcwhatever.bukkit.generic.storage.DataStorage;
 import com.jcwhatever.bukkit.generic.storage.DataStorage.DataPath;
 import com.jcwhatever.bukkit.generic.storage.IDataNode;
@@ -43,7 +43,7 @@ import java.util.Set;
  *
  * <p>PV star modules must extend this class in order to be recognized.</p>
  */
-public abstract class PVStarModule implements IJarModule {
+public abstract class PVStarModule implements IDisposable {
 
     private final LanguageManager _languageManager = new LanguageManager(PVStarAPI.getPlugin(), this);
     private final Map<String, IDataNode> _customNodes = new HashMap<>(10);
@@ -134,6 +134,7 @@ public abstract class PVStarModule implements IJarModule {
     /**
      * Determine if the module has been disposed.
      */
+    @Override
     public final boolean isDisposed() {
         return _isDisposed;
     }
