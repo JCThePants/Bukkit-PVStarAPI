@@ -1,4 +1,4 @@
-Bukkit-PVStarAPI
+PVStarAPI for Spigot 1.8
 ================
 
-PV-StarAPI for Bukkit. API for PV-Star implementation. Under heavy development, expect large changes.
+API for PV-Star implementation. Under heavy development, expect breaking changes.
