@@ -166,7 +166,7 @@ public class Msg {
 
         String formatted = TextUtils.format(message, params);
 
-        Player[] players = Bukkit.getServer().getOnlinePlayers();
+        Collection<? extends Player> players = Bukkit.getOnlinePlayers();
         for (Player p : players) {
 
             ArenaPlayer player = PVStarAPI.getArenaPlayer(p);
