@@ -26,7 +26,7 @@
 package com.jcwhatever.bukkit.pvs.api.stats;
 
 import com.jcwhatever.bukkit.generic.utils.PreCon;
-import com.jcwhatever.bukkit.generic.utils.TextUtils;
+import com.jcwhatever.bukkit.generic.utils.text.TextUtils;
 
 import java.text.DecimalFormat;
 
