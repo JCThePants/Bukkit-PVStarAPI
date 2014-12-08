@@ -28,6 +28,7 @@ package com.jcwhatever.bukkit.pvs.api;
 import com.jcwhatever.bukkit.generic.commands.AbstractCommandHandler;
 import com.jcwhatever.bukkit.generic.events.GenericsEventManager;
 import com.jcwhatever.bukkit.generic.inventory.KitManager;
+import com.jcwhatever.bukkit.generic.messaging.IMessenger;
 import com.jcwhatever.bukkit.generic.signs.SignManager;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ExtensionTypeManager;
@@ -113,6 +114,11 @@ public interface IPVStar extends Plugin  {
      * Get PV-Stars global arena event manager.
      */
     GenericsEventManager getEventManager();
+
+    /**
+     * Get PV-Stars chat and console messenger.
+     */
+    IMessenger getMessenger();
 
     /**
      * Get a loaded {@code PVStarModule} instance  by case sensitive module name.
