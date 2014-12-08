@@ -25,13 +25,15 @@
 
 package com.jcwhatever.bukkit.pvs.api.utils;
 
-import com.jcwhatever.bukkit.generic.messaging.Messenger;
+import com.jcwhatever.bukkit.generic.GenericsPlugin;
 import com.jcwhatever.bukkit.generic.messaging.ChatPaginator;
+import com.jcwhatever.bukkit.generic.messaging.IMessenger;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.generic.utils.text.TextUtils;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -59,7 +61,7 @@ public class Msg {
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        Messenger.tell(PVStarAPI.getPlugin(), sender, message, params);
+        msg().tell(sender, message, params);
     }
 
     /**
@@ -74,7 +76,7 @@ public class Msg {
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        Messenger.tell(PVStarAPI.getPlugin(), player.getHandle(), message, params);
+        msg().tell(player.getHandle(), message, params);
     }
 
     /**
@@ -92,7 +94,7 @@ public class Msg {
         String formatted = TextUtils.format(message, params);
 
         for (ArenaPlayer player : players) {
-            Messenger.tell(PVStarAPI.getPlugin(), player.getHandle(), formatted);
+            msg().tell(player.getHandle(), formatted);
         }
     }
 
@@ -108,7 +110,7 @@ public class Msg {
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        Messenger.tell(PVStarAPI.getPlugin(), sender, "{RED}" + message, params);
+        msg().tell(sender, "{RED}" + message, params);
     }
 
     /**
@@ -123,7 +125,7 @@ public class Msg {
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        Messenger.tell(PVStarAPI.getPlugin(), player.getHandle(), "{RED}" + message, params);
+        msg().tell(player.getHandle(), "{RED}" + message, params);
     }
 
     /**
@@ -186,7 +188,7 @@ public class Msg {
      * @param params    Optional format parameters.
      */
     public static void tellImportant(UUID playerId, String context, String message, Object...params) {
-    	Messenger.tellImportant(PVStarAPI.getPlugin(), playerId, context, message, params);
+    	msg().tellImportant(playerId, context, message, params);
     }
 
     /**
@@ -196,7 +198,7 @@ public class Msg {
      * @param params   Optional format parameters.
      */
     public static void broadcast(String message, Object...params) {
-        Messenger.broadcast(PVStarAPI.getPlugin(), message, params);
+        msg().broadcast(PVStarAPI.getPlugin(), message, params);
 
     }
 
@@ -209,7 +211,7 @@ public class Msg {
      * @param params   Optional format parameters.
      */
     public static void broadcast(String message, Collection<Player> exclude, Object...params) {
-        Messenger.broadcast(PVStarAPI.getPlugin(), message, exclude, params);
+        msg().broadcast(message, exclude, params);
     }
 
     /**
@@ -232,7 +234,8 @@ public class Msg {
     public static void debug(String message, Object...params) {
         if (!PVStarAPI.getPlugin().isDebugging())
             return;
-        Messenger.debug(PVStarAPI.getPlugin(), message, params);
+
+        msg().debug(message, params);
     }
 
     /**
@@ -242,7 +245,7 @@ public class Msg {
      * @param params   Optional format parameters.
      */
     public static void info(String message, Object...params) {
-		Messenger.info(PVStarAPI.getPlugin(), message, params);
+		msg().info(message, params);
 	}
 
     /**
@@ -252,7 +255,7 @@ public class Msg {
      * @param params   Optional format parameters.
      */
     public static void warning(String message, Object...params) {
-    	Messenger.warning(PVStarAPI.getPlugin(), message, params);
+    	msg().warning(message, params);
     }
 
     /**
@@ -262,7 +265,11 @@ public class Msg {
      * @param params   Optional format parameters.
      */
     public static void severe(String message, Object...params) {
-    	Messenger.severe(PVStarAPI.getPlugin(), message, params);
+    	msg().severe(message, params);
+    }
+
+    private static IMessenger msg() {
+        return ((GenericsPlugin)PVStarAPI.getPlugin()).getMessenger();
     }
 
 }
