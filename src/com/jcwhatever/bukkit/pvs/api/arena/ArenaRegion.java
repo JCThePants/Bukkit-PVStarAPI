@@ -30,6 +30,7 @@ import com.jcwhatever.bukkit.generic.regions.Region.RegionPriority;
 import com.jcwhatever.bukkit.generic.regions.RegionPriorityInfo;
 import com.jcwhatever.bukkit.generic.regions.RestorableRegion;
 import com.jcwhatever.bukkit.generic.storage.IDataNode;
+import com.jcwhatever.bukkit.generic.utils.MetaKey;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionPreRestoreEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionPreSaveEvent;
@@ -46,6 +47,9 @@ import org.bukkit.entity.Player;
 @RegionPriorityInfo(enter = RegionPriority.HIGH, leave = RegionPriority.LOW)
 public class ArenaRegion extends RestorableRegion implements IGenericsEventListener {
 
+    public static final MetaKey<ArenaRegion>
+            ARENA_REGION_KEY = new MetaKey<ArenaRegion>(ArenaRegion.class);
+
     private final Arena _arena;
 
     /**
@@ -60,7 +64,7 @@ public class ArenaRegion extends RestorableRegion implements IGenericsEventListe
 
         _arena.getEventManager().register(this);
 
-        setMeta(ArenaRegion.class.getName(), this);
+        setMeta(ARENA_REGION_KEY, this);
 
         setIsPlayerWatcher(true);
     }
