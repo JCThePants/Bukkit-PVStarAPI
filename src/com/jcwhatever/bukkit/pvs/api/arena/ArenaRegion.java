@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
-import com.jcwhatever.bukkit.generic.events.IGenericsEventListener;
+import com.jcwhatever.bukkit.generic.events.manager.IGenericsEventListener;
 import com.jcwhatever.bukkit.generic.regions.Region.RegionPriority;
 import com.jcwhatever.bukkit.generic.regions.RegionPriorityInfo;
 import com.jcwhatever.bukkit.generic.regions.RestorableRegion;

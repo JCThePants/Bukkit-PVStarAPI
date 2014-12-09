@@ -26,7 +26,7 @@
 package com.jcwhatever.bukkit.pvs.api;
 
 import com.jcwhatever.bukkit.generic.commands.AbstractCommandHandler;
-import com.jcwhatever.bukkit.generic.events.GenericsEventManager;
+import com.jcwhatever.bukkit.generic.events.manager.GenericsEventManager;
 import com.jcwhatever.bukkit.generic.inventory.KitManager;
 import com.jcwhatever.bukkit.generic.messaging.IMessenger;
 import com.jcwhatever.bukkit.generic.signs.SignManager;

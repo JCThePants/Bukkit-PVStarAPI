@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
-import com.jcwhatever.bukkit.generic.events.GenericsEventManager;
+import com.jcwhatever.bukkit.generic.events.manager.GenericsEventManager;
 import com.jcwhatever.bukkit.generic.mixins.IDisposable;
 import com.jcwhatever.bukkit.generic.permissions.IPermission;
 import com.jcwhatever.bukkit.generic.storage.IDataNode;
