@@ -187,9 +187,7 @@ public abstract class PVStarModule implements IDisposable {
     public final void dispose() {
 
         if (_isDisposed)
-            throw new RuntimeException(
-                    "Module named " + getName() + " is disposed and cannot be re-disposed. " +
-                            " Please note that the dispose() method is reserved for internal use only.");
+            return;
 
         _isDisposed = true;
 
