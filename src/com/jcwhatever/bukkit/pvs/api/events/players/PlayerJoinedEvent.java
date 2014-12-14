@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
 
 /**
  * Event called when player joins an arena through the arena method
- * {@code join}.
+ * {@code join} or game manager method {@code forwardPlayer}.
  */
 public class PlayerJoinedEvent extends AbstractPlayerEvent {
 
