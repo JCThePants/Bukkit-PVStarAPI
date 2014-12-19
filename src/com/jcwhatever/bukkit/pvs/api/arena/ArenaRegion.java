@@ -66,7 +66,7 @@ public class ArenaRegion extends RestorableRegion implements IEventListener {
 
         setMeta(ARENA_REGION_KEY, this);
 
-        setIsPlayerWatcher(true);
+        setEventListener(true);
     }
 
     /**
