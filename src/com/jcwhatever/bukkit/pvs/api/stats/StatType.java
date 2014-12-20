@@ -25,6 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.stats;
 
+import com.jcwhatever.bukkit.generic.mixins.INamed;
 import com.jcwhatever.bukkit.generic.utils.PreCon;
 import com.jcwhatever.bukkit.generic.utils.text.TextUtils;
 
@@ -33,7 +34,7 @@ import java.text.DecimalFormat;
 /**
  * Represents a type of statistic that is tracked.
  */
-public class StatType {
+public class StatType implements INamed {
 
     private static final DecimalFormat DEFAULT_FORMATTER = new DecimalFormat("0");
 
@@ -75,6 +76,7 @@ public class StatType {
     /**
      * Get the name of the statistic.
      */
+    @Override
     public String getName() {
         return _statName;
     }

@@ -27,6 +27,7 @@ package com.jcwhatever.bukkit.pvs.api.arena;
 
 import com.jcwhatever.bukkit.generic.events.manager.GenericsEventManager;
 import com.jcwhatever.bukkit.generic.mixins.IDisposable;
+import com.jcwhatever.bukkit.generic.mixins.INamedInsensitive;
 import com.jcwhatever.bukkit.generic.permissions.IPermission;
 import com.jcwhatever.bukkit.generic.storage.IDataNode;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ArenaExtension;
@@ -46,11 +47,12 @@ import java.util.UUID;
 /**
  * Arena interface
  */
-public interface Arena extends IDisposable {
+public interface Arena extends INamedInsensitive, IDisposable {
 
     /**
      * Get the arenas name.
      */
+    @Override
     String getName();
 
     /**
@@ -63,6 +65,7 @@ public interface Arena extends IDisposable {
     /**
      * Get the arenas name in lower case letters.
      */
+    @Override
     String getSearchName();
 
     /**

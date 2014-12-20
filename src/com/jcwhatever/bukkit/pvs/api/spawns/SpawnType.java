@@ -25,30 +25,34 @@
 
 package com.jcwhatever.bukkit.pvs.api.spawns;
 
+import com.jcwhatever.bukkit.generic.mixins.INamedInsensitive;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
-import javax.annotation.Nullable;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * Represents the type of spawn of a spawn point. If the spawn type
  * represents a mob, the mob can be spawned using the instance.
  */
-public abstract class SpawnType {
+public abstract class SpawnType implements INamedInsensitive {
 
     private String _searchName;
 
     /**
      * Get the spawn type name.
      */
+    @Override
     public abstract String getName();
 
     /**
      * Get the spawn type name in lowercase.
      */
+    @Override
     public final String getSearchName() {
         if (_searchName == null)
             _searchName = getName().toLowerCase();
