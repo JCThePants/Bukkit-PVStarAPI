@@ -267,7 +267,7 @@ public class Spawnpoint extends Location implements INamedLocation {
     public void spawn(ArenaPlayer p) {
         PreCon.notNull(p);
 
-        p.getHandle().teleport(this, TeleportCause.PLUGIN);
+        p.getPlayer().teleport(this, TeleportCause.PLUGIN);
     }
 
 }

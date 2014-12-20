@@ -75,7 +75,7 @@ public class Msg {
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        msg().tell(player.getHandle(), message, params);
+        msg().tell(player.getPlayer(), message, params);
     }
 
     /**
@@ -93,7 +93,7 @@ public class Msg {
         String formatted = TextUtils.format(message, params);
 
         for (ArenaPlayer player : players) {
-            msg().tell(player.getHandle(), formatted);
+            msg().tell(player.getPlayer(), formatted);
         }
     }
 
@@ -124,7 +124,7 @@ public class Msg {
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        msg().tell(player.getHandle(), "{RED}" + message, params);
+        msg().tell(player.getPlayer(), "{RED}" + message, params);
     }
 
     /**
@@ -146,13 +146,13 @@ public class Msg {
         String formatted = TextUtils.format(message, params);
 
         for (ArenaPlayer player : lobby)
-            tell(player.getHandle(), formatted);
+            tell(player.getPlayer(), formatted);
 
         for (ArenaPlayer player : spectators)
-            tell(player.getHandle(), formatted);
+            tell(player.getPlayer(), formatted);
 
         for (ArenaPlayer player : gamers)
-            tell(player.getHandle(), formatted);
+            tell(player.getPlayer(), formatted);
     }
 
     /**

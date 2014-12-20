@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
-import com.jcwhatever.bukkit.generic.mixins.IPlayerWrapper;
+import com.jcwhatever.bukkit.generic.mixins.IPlayerReference;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 import com.jcwhatever.bukkit.pvs.api.arena.options.ArenaPlayerRelation;
 import com.jcwhatever.bukkit.pvs.api.arena.options.TeamChangeReason;
@@ -41,7 +41,7 @@ import javax.annotation.Nullable;
  * Wraps the {@code Player} object and carries extra arena related meta data regarding
  * the player.
  */
-public interface ArenaPlayer extends IPlayerWrapper {
+public interface ArenaPlayer extends IPlayerReference {
 
     /**
      * Get the players unique minecraft Id.
