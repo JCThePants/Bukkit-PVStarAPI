@@ -27,7 +27,7 @@ package com.jcwhatever.bukkit.pvs.api.commands;
 
 import com.jcwhatever.bukkit.generic.commands.AbstractCommand;
 import com.jcwhatever.bukkit.generic.commands.arguments.CommandArguments;
-import com.jcwhatever.bukkit.generic.commands.exceptions.InvalidValueException;
+import com.jcwhatever.bukkit.generic.commands.exceptions.InvalidArgumentException;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ArenaExtension;
@@ -65,9 +65,9 @@ public abstract class AbstractPVCommand extends AbstractCommand {
          * @param args               The command arguments.
          * @param infoParameterName  The name of the parameter that toggles info. Should equal "info" for info.
          *
-         * @throws InvalidValueException
+         * @throws com.jcwhatever.bukkit.generic.commands.exceptions.InvalidArgumentException
          */
-        public static ArenaReturned getInfoToggled(CommandArguments args, String infoParameterName) throws InvalidValueException {
+        public static ArenaReturned getInfoToggled(CommandArguments args, String infoParameterName) throws InvalidArgumentException {
             return args.getString(infoParameterName).equals("info") ? ArenaReturned.ALWAYS : ArenaReturned.NOT_RUNNNING;
         }
     }
