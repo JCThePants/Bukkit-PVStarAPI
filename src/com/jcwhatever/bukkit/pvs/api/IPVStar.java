@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api;
 
-import com.jcwhatever.bukkit.generic.commands.AbstractCommandHandler;
+import com.jcwhatever.bukkit.generic.commands.CommandDispatcher;
 import com.jcwhatever.bukkit.generic.events.manager.GenericsEventManager;
 import com.jcwhatever.bukkit.generic.inventory.KitManager;
 import com.jcwhatever.bukkit.generic.messaging.IMessenger;
@@ -103,7 +103,7 @@ public interface IPVStar extends Plugin  {
     /**
      * Get PV-Stars command handler.
      */
-    AbstractCommandHandler getCommandHandler();
+    CommandDispatcher getCommandHandler();
 
     /**
      * Get command helper that contains utilities methods for commands.

@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api;
 
-import com.jcwhatever.bukkit.generic.commands.AbstractCommandHandler;
+import com.jcwhatever.bukkit.generic.commands.CommandDispatcher;
 import com.jcwhatever.bukkit.generic.events.manager.GenericsEventManager;
 import com.jcwhatever.bukkit.generic.inventory.KitManager;
 import com.jcwhatever.bukkit.generic.signs.SignManager;
@@ -72,7 +72,7 @@ public final class PVStarAPI {
     /**
      * Get the command handler.
      */
-    public static AbstractCommandHandler getCommandHandler() {
+    public static CommandDispatcher getCommandHandler() {
         return _implementation.getCommandHandler();
     }
 
