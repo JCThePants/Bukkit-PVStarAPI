@@ -65,7 +65,7 @@ public abstract class AbstractPVCommand extends AbstractCommand {
          * @param args               The command arguments.
          * @param infoParameterName  The name of the parameter that toggles info. Should equal "info" for info.
          *
-         * @throws com.jcwhatever.bukkit.generic.commands.exceptions.InvalidArgumentException
+         * @throws InvalidArgumentException
          */
         public static ArenaReturned getInfoToggled(CommandArguments args, String infoParameterName) throws InvalidArgumentException {
             return args.getString(infoParameterName).equals("info") ? ArenaReturned.ALWAYS : ArenaReturned.NOT_RUNNNING;
