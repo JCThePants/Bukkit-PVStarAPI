@@ -25,8 +25,8 @@
 
 package com.jcwhatever.bukkit.pvs.api.utils;
 
-import com.jcwhatever.bukkit.generic.converters.ValueConverter;
-import com.jcwhatever.bukkit.generic.utils.Utils;
+import com.jcwhatever.generic.utils.converters.ValueConverter;
+import com.jcwhatever.generic.utils.Utils;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.options.NameMatchMode;

@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena.managers;
 
-import com.jcwhatever.bukkit.generic.utils.Result;
+import com.jcwhatever.generic.utils.Result;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.options.AddPlayerReason;

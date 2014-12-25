@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.spawns;
 
-import com.jcwhatever.bukkit.generic.mixins.ICancellable;
+import com.jcwhatever.generic.mixins.ICancellable;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.spawns.Spawnpoint;
 

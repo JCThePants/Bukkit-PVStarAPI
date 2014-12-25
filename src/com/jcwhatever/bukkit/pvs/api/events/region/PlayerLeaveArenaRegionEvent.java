@@ -25,8 +25,8 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.region;
 
-import com.jcwhatever.bukkit.generic.regions.Region.LeaveRegionReason;
-import com.jcwhatever.bukkit.generic.utils.PreCon;
+import com.jcwhatever.generic.regions.Region.LeaveRegionReason;
+import com.jcwhatever.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.events.AbstractArenaEvent;

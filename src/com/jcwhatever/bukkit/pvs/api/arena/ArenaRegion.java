@@ -25,12 +25,12 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
-import com.jcwhatever.bukkit.generic.events.manager.IEventListener;
-import com.jcwhatever.bukkit.generic.regions.Region.RegionPriority;
-import com.jcwhatever.bukkit.generic.regions.RegionPriorityInfo;
-import com.jcwhatever.bukkit.generic.regions.RestorableRegion;
-import com.jcwhatever.bukkit.generic.storage.IDataNode;
-import com.jcwhatever.bukkit.generic.utils.MetaKey;
+import com.jcwhatever.generic.events.manager.IEventListener;
+import com.jcwhatever.generic.regions.Region.RegionPriority;
+import com.jcwhatever.generic.regions.RegionPriorityInfo;
+import com.jcwhatever.generic.regions.RestorableRegion;
+import com.jcwhatever.generic.storage.IDataNode;
+import com.jcwhatever.generic.utils.MetaKey;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionPreRestoreEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionPreSaveEvent;

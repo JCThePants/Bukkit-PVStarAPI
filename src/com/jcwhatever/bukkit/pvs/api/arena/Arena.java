@@ -25,11 +25,11 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
-import com.jcwhatever.bukkit.generic.events.manager.GenericsEventManager;
-import com.jcwhatever.bukkit.generic.mixins.IDisposable;
-import com.jcwhatever.bukkit.generic.mixins.INamedInsensitive;
-import com.jcwhatever.bukkit.generic.permissions.IPermission;
-import com.jcwhatever.bukkit.generic.storage.IDataNode;
+import com.jcwhatever.generic.events.manager.GenericsEventManager;
+import com.jcwhatever.generic.mixins.IDisposable;
+import com.jcwhatever.generic.mixins.INamedInsensitive;
+import com.jcwhatever.generic.permissions.IPermission;
+import com.jcwhatever.generic.storage.IDataNode;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ArenaExtension;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ArenaExtensionManager;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.GameManager;

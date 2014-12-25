@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
-import com.jcwhatever.bukkit.generic.utils.text.TextColor;
+import com.jcwhatever.generic.utils.text.TextColor;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

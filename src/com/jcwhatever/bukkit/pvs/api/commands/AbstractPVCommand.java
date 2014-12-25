@@ -25,9 +25,9 @@
 
 package com.jcwhatever.bukkit.pvs.api.commands;
 
-import com.jcwhatever.bukkit.generic.commands.AbstractCommand;
-import com.jcwhatever.bukkit.generic.commands.arguments.CommandArguments;
-import com.jcwhatever.bukkit.generic.commands.exceptions.InvalidArgumentException;
+import com.jcwhatever.generic.commands.AbstractCommand;
+import com.jcwhatever.generic.commands.arguments.CommandArguments;
+import com.jcwhatever.generic.commands.exceptions.InvalidArgumentException;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ArenaExtension;

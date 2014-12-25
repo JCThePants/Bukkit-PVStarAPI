@@ -25,12 +25,12 @@
 
 package com.jcwhatever.bukkit.pvs.api.modules;
 
-import com.jcwhatever.bukkit.generic.language.LanguageManager;
-import com.jcwhatever.bukkit.generic.mixins.IDisposable;
-import com.jcwhatever.bukkit.generic.storage.DataStorage;
-import com.jcwhatever.bukkit.generic.storage.DataPath;
-import com.jcwhatever.bukkit.generic.storage.IDataNode;
-import com.jcwhatever.bukkit.generic.utils.PreCon;
+import com.jcwhatever.generic.language.LanguageManager;
+import com.jcwhatever.generic.mixins.IDisposable;
+import com.jcwhatever.generic.storage.DataStorage;
+import com.jcwhatever.generic.storage.DataPath;
+import com.jcwhatever.generic.storage.IDataNode;
+import com.jcwhatever.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 
 import java.util.HashMap;

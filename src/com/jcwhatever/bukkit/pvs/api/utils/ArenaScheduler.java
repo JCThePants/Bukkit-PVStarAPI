@@ -25,10 +25,10 @@
 
 package com.jcwhatever.bukkit.pvs.api.utils;
 
-import com.jcwhatever.bukkit.generic.GenericsLib;
-import com.jcwhatever.bukkit.generic.scheduler.ScheduledTask;
-import com.jcwhatever.bukkit.generic.scheduler.TaskHandler;
-import com.jcwhatever.bukkit.generic.utils.PreCon;
+import com.jcwhatever.generic.GenericsLib;
+import com.jcwhatever.generic.scheduler.ScheduledTask;
+import com.jcwhatever.generic.scheduler.TaskHandler;
+import com.jcwhatever.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 

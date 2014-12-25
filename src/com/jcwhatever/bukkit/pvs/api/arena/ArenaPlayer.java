@@ -25,8 +25,8 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
-import com.jcwhatever.bukkit.generic.mixins.INamed;
-import com.jcwhatever.bukkit.generic.mixins.IPlayerReference;
+import com.jcwhatever.generic.mixins.INamed;
+import com.jcwhatever.generic.mixins.IPlayerReference;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 import com.jcwhatever.bukkit.pvs.api.arena.options.ArenaPlayerRelation;
 import com.jcwhatever.bukkit.pvs.api.arena.options.TeamChangeReason;

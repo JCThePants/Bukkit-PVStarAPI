@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.spawns;
 
-import com.jcwhatever.bukkit.generic.utils.PreCon;
+import com.jcwhatever.generic.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.events.AbstractArenaEvent;
 import com.jcwhatever.bukkit.pvs.api.spawns.Spawnpoint;

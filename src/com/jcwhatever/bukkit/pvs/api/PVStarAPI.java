@@ -25,10 +25,10 @@
 
 package com.jcwhatever.bukkit.pvs.api;
 
-import com.jcwhatever.bukkit.generic.commands.CommandDispatcher;
-import com.jcwhatever.bukkit.generic.events.manager.GenericsEventManager;
-import com.jcwhatever.bukkit.generic.inventory.KitManager;
-import com.jcwhatever.bukkit.generic.signs.SignManager;
+import com.jcwhatever.generic.commands.CommandDispatcher;
+import com.jcwhatever.generic.events.manager.GenericsEventManager;
+import com.jcwhatever.generic.inventory.KitManager;
+import com.jcwhatever.generic.signs.SignManager;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ExtensionTypeManager;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.ArenaManager;
