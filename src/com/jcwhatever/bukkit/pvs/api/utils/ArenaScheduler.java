@@ -25,10 +25,10 @@
 
 package com.jcwhatever.bukkit.pvs.api.utils;
 
-import com.jcwhatever.generic.GenericsLib;
-import com.jcwhatever.generic.scheduler.ScheduledTask;
-import com.jcwhatever.generic.scheduler.TaskHandler;
-import com.jcwhatever.generic.utils.PreCon;
+import com.jcwhatever.nucleus.Nucleus;
+import com.jcwhatever.nucleus.scheduler.ScheduledTask;
+import com.jcwhatever.nucleus.scheduler.TaskHandler;
+import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 
@@ -54,7 +54,7 @@ public class ArenaScheduler {
      * @param runnable    The task to run
      */
     public static ScheduledTask runTaskLater(Arena arena, int delayTicks, Runnable runnable) {
-         return GenericsLib.getScheduler()
+         return Nucleus.getScheduler()
                  .runTaskLater(PVStarAPI.getPlugin(), delayTicks, wrapRunnable(arena, runnable, false));
     }
 
@@ -66,7 +66,7 @@ public class ArenaScheduler {
      * @param runnable  The task to run
      */
     public static ScheduledTask runTaskLater(Arena arena, Runnable runnable) {
-        return GenericsLib.getScheduler()
+        return Nucleus.getScheduler()
                 .runTaskLater(PVStarAPI.getPlugin(), wrapRunnable(arena, runnable, false));
     }
 
@@ -85,7 +85,7 @@ public class ArenaScheduler {
         PreCon.positiveNumber(initialDelay);
         PreCon.positiveNumber(interval);
 
-        return GenericsLib.getScheduler()
+        return Nucleus.getScheduler()
                 .runTaskRepeat(PVStarAPI.getPlugin(), initialDelay, interval, wrapRunnable(arena, runnable, true));
     }
 

@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena.settings;
 
-import com.jcwhatever.generic.storage.IDataNode;
+import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 
 /**

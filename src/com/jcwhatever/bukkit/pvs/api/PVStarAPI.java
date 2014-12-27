@@ -25,10 +25,10 @@
 
 package com.jcwhatever.bukkit.pvs.api;
 
-import com.jcwhatever.generic.commands.CommandDispatcher;
-import com.jcwhatever.generic.events.manager.GenericsEventManager;
-import com.jcwhatever.generic.kits.KitManager;
-import com.jcwhatever.generic.signs.SignManager;
+import com.jcwhatever.nucleus.commands.CommandDispatcher;
+import com.jcwhatever.nucleus.events.manager.NucleusEventManager;
+import com.jcwhatever.nucleus.kits.KitManager;
+import com.jcwhatever.nucleus.signs.SignManager;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ExtensionTypeManager;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.ArenaManager;
@@ -123,7 +123,7 @@ public final class PVStarAPI {
      * event manager instead if you need to subscribe to events
      * for a specific arena.
      */
-    public static GenericsEventManager getEventManager() {
+    public static NucleusEventManager getEventManager() {
         return _implementation.getEventManager();
     }
 

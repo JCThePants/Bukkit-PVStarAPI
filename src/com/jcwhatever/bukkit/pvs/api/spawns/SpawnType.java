@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.spawns;
 
-import com.jcwhatever.generic.mixins.INamedInsensitive;
+import com.jcwhatever.nucleus.mixins.INamedInsensitive;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 
 import org.bukkit.Location;

@@ -25,10 +25,10 @@
 
 package com.jcwhatever.bukkit.pvs.api.spawns;
 
-import com.jcwhatever.generic.mixins.INamedLocation;
-import com.jcwhatever.generic.mixins.INamedLocationDistance;
-import com.jcwhatever.generic.mixins.implemented.NamedLocationDistance;
-import com.jcwhatever.generic.utils.PreCon;
+import com.jcwhatever.nucleus.mixins.INamedLocation;
+import com.jcwhatever.nucleus.mixins.INamedLocationDistance;
+import com.jcwhatever.nucleus.mixins.implemented.NamedLocationDistance;
+import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaTeam;

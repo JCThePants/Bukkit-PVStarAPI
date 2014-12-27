@@ -24,8 +24,8 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.players;
 
-import com.jcwhatever.generic.mixins.ICancellable;
-import com.jcwhatever.generic.utils.PreCon;
+import com.jcwhatever.nucleus.mixins.ICancellable;
+import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.options.JoinRejectReason;

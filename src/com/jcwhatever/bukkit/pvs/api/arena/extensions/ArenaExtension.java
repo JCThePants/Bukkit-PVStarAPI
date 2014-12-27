@@ -25,10 +25,10 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena.extensions;
 
-import com.jcwhatever.generic.storage.DataStorage;
-import com.jcwhatever.generic.storage.DataPath;
-import com.jcwhatever.generic.storage.IDataNode;
-import com.jcwhatever.generic.utils.PreCon;
+import com.jcwhatever.nucleus.storage.DataStorage;
+import com.jcwhatever.nucleus.storage.DataPath;
+import com.jcwhatever.nucleus.storage.IDataNode;
+import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 

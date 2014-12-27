@@ -25,9 +25,9 @@
 
 package com.jcwhatever.bukkit.pvs.api.stats;
 
-import com.jcwhatever.generic.mixins.INamed;
-import com.jcwhatever.generic.utils.PreCon;
-import com.jcwhatever.generic.utils.text.TextUtils;
+import com.jcwhatever.nucleus.mixins.INamed;
+import com.jcwhatever.nucleus.utils.PreCon;
+import com.jcwhatever.nucleus.utils.text.TextUtils;
 
 import java.text.DecimalFormat;
 
