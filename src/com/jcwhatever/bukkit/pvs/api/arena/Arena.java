@@ -28,7 +28,7 @@ package com.jcwhatever.bukkit.pvs.api.arena;
 import com.jcwhatever.nucleus.events.manager.NucleusEventManager;
 import com.jcwhatever.nucleus.mixins.IDisposable;
 import com.jcwhatever.nucleus.mixins.INamedInsensitive;
-import com.jcwhatever.nucleus.permissions.IPermission;
+import com.jcwhatever.nucleus.providers.permissions.IPermission;
 import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ArenaExtension;
 import com.jcwhatever.bukkit.pvs.api.arena.extensions.ArenaExtensionManager;
