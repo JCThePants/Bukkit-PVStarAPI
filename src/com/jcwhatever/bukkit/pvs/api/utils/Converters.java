@@ -25,11 +25,11 @@
 
 package com.jcwhatever.bukkit.pvs.api.utils;
 
-import com.jcwhatever.nucleus.utils.converters.ValueConverter;
-import com.jcwhatever.nucleus.utils.Utils;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.options.NameMatchMode;
+import com.jcwhatever.nucleus.utils.converters.ValueConverter;
+import com.jcwhatever.nucleus.utils.text.TextUtils;
 
 import java.util.List;
 import java.util.UUID;
@@ -60,7 +60,7 @@ public class Converters {
                     return matches.get(0).getId();
 
                 // try converting string to uuid
-                return Utils.getId((String) value);
+                return TextUtils.parseUUID((String) value);
             }
 
             if (value instanceof Arena) {
