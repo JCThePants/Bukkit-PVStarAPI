@@ -57,7 +57,7 @@ public abstract class ArenaExtension {
         _arena = arena;
 
         _dataNodePath = "arenas." + arena.getId() + ".extensions." + info.name();
-        _dataNode = DataStorage.getStorage(PVStarAPI.getPlugin(), new DataPath(_dataNodePath));
+        _dataNode = DataStorage.get(PVStarAPI.getPlugin(), new DataPath(_dataNodePath));
         _dataNode.load();
 
         _isInitialized = true;
@@ -106,7 +106,7 @@ public abstract class ArenaExtension {
     public final void dispose() {
         _isEnabled = false;
         onDispose();
-        DataStorage.removeStorage(PVStarAPI.getPlugin(), new DataPath(_dataNodePath));
+        DataStorage.remove(PVStarAPI.getPlugin(), new DataPath(_dataNodePath));
     }
 
     /**

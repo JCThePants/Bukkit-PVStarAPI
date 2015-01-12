@@ -207,7 +207,7 @@ public abstract class PVStarModule implements IDisposable {
      */
     public final IDataNode getDataNode() {
         if (_dataNode == null) {
-            _dataNode = DataStorage.getStorage(PVStarAPI.getPlugin(), new DataPath("modules." + getName() + ".config"));
+            _dataNode = DataStorage.get(PVStarAPI.getPlugin(), new DataPath("modules." + getName() + ".config"));
             _dataNode.load();
         }
 
@@ -229,7 +229,7 @@ public abstract class PVStarModule implements IDisposable {
             return node;
 
         DataPath dataPath = new DataPath("modules." + getName()).getPath(path);
-        node = DataStorage.getStorage(PVStarAPI.getPlugin(), dataPath);
+        node = DataStorage.get(PVStarAPI.getPlugin(), dataPath);
         node.load();
 
         _customNodes.put(key, node);
