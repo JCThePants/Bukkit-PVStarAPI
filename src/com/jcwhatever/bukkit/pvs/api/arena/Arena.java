@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
-import com.jcwhatever.nucleus.events.manager.NucleusEventManager;
+import com.jcwhatever.nucleus.events.manager.EventManager;
 import com.jcwhatever.nucleus.mixins.IDisposable;
 import com.jcwhatever.nucleus.mixins.INamedInsensitive;
 import com.jcwhatever.nucleus.providers.permissions.IPermission;
@@ -94,7 +94,7 @@ public interface Arena extends INamedInsensitive, IDisposable {
     /**
      * Get the arenas event manager.
      */
-    NucleusEventManager getEventManager();
+    EventManager getEventManager();
 
     /**
      * Get the arenas lobby manager.

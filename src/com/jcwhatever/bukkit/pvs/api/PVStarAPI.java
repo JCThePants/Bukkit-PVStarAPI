@@ -26,7 +26,7 @@
 package com.jcwhatever.bukkit.pvs.api;
 
 import com.jcwhatever.nucleus.commands.CommandDispatcher;
-import com.jcwhatever.nucleus.events.manager.NucleusEventManager;
+import com.jcwhatever.nucleus.events.manager.EventManager;
 import com.jcwhatever.nucleus.kits.KitManager;
 import com.jcwhatever.nucleus.signs.SignManager;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
@@ -123,7 +123,7 @@ public final class PVStarAPI {
      * event manager instead if you need to subscribe to events
      * for a specific arena.
      */
-    public static NucleusEventManager getEventManager() {
+    public static EventManager getEventManager() {
         return _implementation.getEventManager();
     }
 

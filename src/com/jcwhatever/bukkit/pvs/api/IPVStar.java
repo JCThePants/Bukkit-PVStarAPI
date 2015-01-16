@@ -26,7 +26,7 @@
 package com.jcwhatever.bukkit.pvs.api;
 
 import com.jcwhatever.nucleus.commands.CommandDispatcher;
-import com.jcwhatever.nucleus.events.manager.NucleusEventManager;
+import com.jcwhatever.nucleus.events.manager.EventManager;
 import com.jcwhatever.nucleus.kits.KitManager;
 import com.jcwhatever.nucleus.messaging.IMessenger;
 import com.jcwhatever.nucleus.signs.SignManager;
@@ -113,7 +113,7 @@ public interface IPVStar extends Plugin  {
     /**
      * Get PV-Stars global arena event manager.
      */
-    NucleusEventManager getEventManager();
+    EventManager getEventManager();
 
     /**
      * Get PV-Stars chat and console messenger.

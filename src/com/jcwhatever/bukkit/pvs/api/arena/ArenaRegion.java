@@ -25,12 +25,6 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
-import com.jcwhatever.nucleus.events.manager.IEventListener;
-import com.jcwhatever.nucleus.regions.Region.RegionPriority;
-import com.jcwhatever.nucleus.regions.RegionPriorityInfo;
-import com.jcwhatever.nucleus.regions.RestorableRegion;
-import com.jcwhatever.nucleus.storage.IDataNode;
-import com.jcwhatever.nucleus.utils.MetaKey;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionPreRestoreEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionPreSaveEvent;
@@ -38,6 +32,11 @@ import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionRestoredEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionSavedEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.PlayerEnterArenaRegionEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.PlayerLeaveArenaRegionEvent;
+import com.jcwhatever.nucleus.regions.Region.RegionPriority;
+import com.jcwhatever.nucleus.regions.RegionPriorityInfo;
+import com.jcwhatever.nucleus.regions.RestorableRegion;
+import com.jcwhatever.nucleus.storage.IDataNode;
+import com.jcwhatever.nucleus.utils.MetaKey;
 
 import org.bukkit.entity.Player;
 
@@ -45,7 +44,7 @@ import org.bukkit.entity.Player;
  * A region that represents the bounds of an arena.
  */
 @RegionPriorityInfo(enter = RegionPriority.HIGH, leave = RegionPriority.LOW)
-public class ArenaRegion extends RestorableRegion implements IEventListener {
+public class ArenaRegion extends RestorableRegion {
 
     public static final MetaKey<ArenaRegion>
             ARENA_REGION_KEY = new MetaKey<ArenaRegion>(ArenaRegion.class);
@@ -61,8 +60,6 @@ public class ArenaRegion extends RestorableRegion implements IEventListener {
     public ArenaRegion(Arena arena, IDataNode dataNode) {
         super(PVStarAPI.getPlugin(), arena.getId().toString(), dataNode);
         _arena = arena;
-
-        _arena.getEventManager().register(this);
 
         setMeta(ARENA_REGION_KEY, this);
 
@@ -99,7 +96,7 @@ public class ArenaRegion extends RestorableRegion implements IEventListener {
 
         final ArenaPlayer player = PVStarAPI.getArenaPlayer(p);
 
-        _arena.getEventManager().call(new PlayerEnterArenaRegionEvent(_arena, player, reason));
+        _arena.getEventManager().call(this, new PlayerEnterArenaRegionEvent(_arena, player, reason));
     }
 
     /**
@@ -125,7 +122,7 @@ public class ArenaRegion extends RestorableRegion implements IEventListener {
 
         ArenaPlayer player = PVStarAPI.getArenaPlayer(p);
 
-        _arena.getEventManager().call(new PlayerLeaveArenaRegionEvent(_arena, player, reason));
+        _arena.getEventManager().call(this, new PlayerLeaveArenaRegionEvent(_arena, player, reason));
     }
 
     /**
@@ -142,7 +139,7 @@ public class ArenaRegion extends RestorableRegion implements IEventListener {
     @Override
     protected void onSave() {
         getArena().setBusy();
-        _arena.getEventManager().call(new ArenaRegionPreSaveEvent(_arena));
+        _arena.getEventManager().call(this, new ArenaRegionPreSaveEvent(_arena));
     }
 
     /**
@@ -151,7 +148,7 @@ public class ArenaRegion extends RestorableRegion implements IEventListener {
     @Override
     protected void onSaveComplete() {
         getArena().setIdle();
-        _arena.getEventManager().call(new ArenaRegionSavedEvent(_arena));
+        _arena.getEventManager().call(this, new ArenaRegionSavedEvent(_arena));
     }
 
     /**
@@ -160,7 +157,7 @@ public class ArenaRegion extends RestorableRegion implements IEventListener {
     @Override
     protected void onRestore() {
         getArena().setBusy();
-        _arena.getEventManager().call(new ArenaRegionPreRestoreEvent(_arena));
+        _arena.getEventManager().call(this, new ArenaRegionPreRestoreEvent(_arena));
     }
 
     /**
@@ -169,6 +166,6 @@ public class ArenaRegion extends RestorableRegion implements IEventListener {
     @Override
     protected void onRestoreComplete() {
         getArena().setIdle();
-        _arena.getEventManager().call(new ArenaRegionRestoredEvent(_arena));
+        _arena.getEventManager().call(this, new ArenaRegionRestoredEvent(_arena));
     }
 }
