@@ -82,7 +82,7 @@ public abstract class PointsType {
         PointsHandler handler = getNewHandler(arena, node);
 
         node.set("enabled", true);
-        node.saveAsync(null);
+        node.save();
 
         _handlers.put(arena.getId(), handler);
 
@@ -107,7 +107,7 @@ public abstract class PointsType {
 
         IDataNode node = arena.getDataNode("points." + getName());
         node.remove();
-        node.saveAsync(null);
+        node.save();
 
         return true;
     }
