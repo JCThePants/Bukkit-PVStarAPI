@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.utils;
 
-import com.jcwhatever.nucleus.scheduler.ScheduledTask;
+import com.jcwhatever.nucleus.utils.scheduler.ScheduledTask;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 
 import java.util.LinkedList;
