@@ -25,7 +25,7 @@
 
 package com.jcwhatever.bukkit.pvs.api.modules;
 
-import com.jcwhatever.nucleus.language.LanguageManager;
+import com.jcwhatever.nucleus.utils.language.LanguageManager;
 import com.jcwhatever.nucleus.mixins.IDisposable;
 import com.jcwhatever.nucleus.storage.DataStorage;
 import com.jcwhatever.nucleus.storage.DataPath;
