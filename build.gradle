@@ -49,6 +49,18 @@ def snapshotDepends = [
         'com.jcwhatever.bukkit:NucleusFramework:0.0-SNAPSHOT'
 ];
 
+// source directory
+def sourceDir = 'src'
+
+// resource directory
+def resourceDir = null
+
+// test source directory
+def testSourceDir = null
+
+// test resource directory
+def testResourceDir = null
+
 /**
  * MAVEN TASK SETTINGS
  */
@@ -121,7 +133,13 @@ sourceSets {
         runtimeClasspath += configurations.provided
 
         java {
-            srcDir 'src'
+            srcDir sourceDir
+        }
+
+        if (resourceDir) {
+            resources {
+                srcDir resourceDir
+            }
         }
     }
 
@@ -130,8 +148,16 @@ sourceSets {
         compileClasspath += configurations.provided
         runtimeClasspath += configurations.provided
 
-        java {
-            srcDir 'tests'
+        if (testSourceDir) {
+            java {
+                srcDir testSourceDir
+            }
+        }
+
+        if (testResourceDir) {
+            resources {
+                srcDir testResourceDir
+            }
         }
     }
 }
