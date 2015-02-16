@@ -53,7 +53,7 @@ public interface ArenaStats {
      * Get a statistics value.
      *
      * @param type          The statistic type.
-     * @param playerId      The id of the player as a {@code String}.
+     * @param playerId      The id of the player as a {@link java.lang.String}.
      * @param trackingType  The tracking type.
      */
     double getValue(StatType type, String playerId, StatTrackType trackingType);
@@ -71,10 +71,10 @@ public interface ArenaStats {
     double addScore(StatType type, UUID playerId, double amount);
 
     /**
-     * Get the ids of all players with a statistic type recorded in the arena as a {@code Set} of {@code String}.
+     * Get the ids of all players with a statistic type recorded in the arena as a
+     * {@link java.util.Set} of {@link java.lang.String}.
      *
      * @param type  The statistic type.
-     * @return
      */
     Set<String> getRawPlayerIds(StatType type);
 }

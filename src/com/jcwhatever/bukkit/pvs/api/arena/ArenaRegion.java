@@ -74,14 +74,14 @@ public class ArenaRegion extends RestorableRegion {
     }
 
     /**
-     * Determine if {@code onPlayerEnter} can be called.
+     * Determine if {@link #onPlayerEnter} can be called.
      *
-     * @param p  The player entering the region.
+     * @param player  The player entering the region.
      *
-     * @return  True to allow calling {@code onPlayerEnter}.
+     * @return  True to allow calling {@link #onPlayerEnter}.
      */
     @Override
-    protected boolean canDoPlayerEnter(Player p, EnterRegionReason reason) {
+    protected boolean canDoPlayerEnter(Player player, EnterRegionReason reason) {
         return getArena().getSettings().isEnabled() &&
                 PVStarAPI.getPlugin().isEnabled();
     }
@@ -100,14 +100,14 @@ public class ArenaRegion extends RestorableRegion {
     }
 
     /**
-     * Determine if {@code onPlayerLeave} can be called.
+     * Determine if {@link #onPlayerLeave} can be called.
      *
-     * @param p  The player leaving the region.
+     * @param player  The player leaving the region.
      *
-     * @return  True to allow calling {@code onPlayerLeave}.
+     * @return  True to allow calling {@link #onPlayerLeave}.
      */
     @Override
-    protected boolean canDoPlayerLeave(Player p, LeaveRegionReason reason) {
+    protected boolean canDoPlayerLeave(Player player, LeaveRegionReason reason) {
         return getArena().getSettings().isEnabled() &&
                PVStarAPI.getPlugin().isEnabled();
     }

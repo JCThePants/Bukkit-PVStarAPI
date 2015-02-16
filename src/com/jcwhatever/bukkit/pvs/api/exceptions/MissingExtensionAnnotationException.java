@@ -29,7 +29,7 @@ import com.jcwhatever.bukkit.pvs.api.arena.extensions.ArenaExtension;
 
 /**
  * Thrown when an arena extension type is missing its required
- * {@code ArenaExtensionInfo} annotation.
+ * {@link com.jcwhatever.bukkit.pvs.api.arena.extensions.ArenaExtensionInfo} annotation.
  */
 public class MissingExtensionAnnotationException extends RuntimeException {
 

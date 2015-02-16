@@ -33,7 +33,8 @@ import javax.annotation.Nullable;
 
 /**
  * Event called when player joins an arena through the arena method
- * {@code join} or game manager method {@code forwardPlayer}.
+ * {@link Arena#join} or game manager method
+ * {@link com.jcwhatever.bukkit.pvs.api.arena.managers.GameManager#forwardPlayer}.
  */
 public class PlayerJoinedEvent extends AbstractPlayerEvent {
 

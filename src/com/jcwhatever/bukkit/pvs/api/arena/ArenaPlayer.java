@@ -39,7 +39,7 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 
 /**
- * Wraps the {@code Player} object and carries extra arena related meta data regarding
+ * Wraps the {@link org.bukkit.entity.Player} object and carries extra arena related meta data regarding
  * the player.
  */
 public interface ArenaPlayer extends INamed, IPlayerReference {
@@ -68,7 +68,6 @@ public interface ArenaPlayer extends INamed, IPlayerReference {
 
     /**
      * Get the arena the player is currently in.
-     * @return
      */
     @Nullable
     Arena getArena();
@@ -117,7 +116,7 @@ public interface ArenaPlayer extends INamed, IPlayerReference {
     int incrementPoints(int amount);
 
     /**
-     * Get the {@code ArenaPlayerGroup} the player is part of.
+     * Get the {@link ArenaPlayerGroup} the player is part of.
      */
     @Nullable
     ArenaPlayerGroup getPlayerGroup();
@@ -171,7 +170,7 @@ public interface ArenaPlayer extends INamed, IPlayerReference {
     PlayerManager getRelatedManager();
 
     /**
-     * Get {@code PlayerSettings} implementation from the
+     * Get {@link PlayerManagerSettings} implementation from the
      * arena the player is in based on their current arena relation.
      * i.e. If the player is in the lobby, returns the lobby managers
      * settings.
@@ -181,7 +180,7 @@ public interface ArenaPlayer extends INamed, IPlayerReference {
 
     /**
      * Get the players meta data object for a specific arena,
-     * which is used until the {@code ArenaPlayer} instance is disposed.
+     * which is used until the {@link ArenaPlayer} instance is disposed.
      *
      * @param arenaId  The id of the arena.
      */
@@ -189,7 +188,7 @@ public interface ArenaPlayer extends INamed, IPlayerReference {
 
     /**
      * Get the global meta data object which is used until
-     * the {@code ArenaPlayer} instance is disposed.
+     * the {@link ArenaPlayer} instance is disposed.
      */
     PlayerMeta getMeta();
 

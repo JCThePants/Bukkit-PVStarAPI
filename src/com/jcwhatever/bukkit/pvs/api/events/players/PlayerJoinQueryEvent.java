@@ -37,7 +37,7 @@ import java.util.Set;
  * Use to check if other modules are willing to allow a player to join an arena
  * without the player actually joining the arena.
  *
- * <p>To prevent a player from joining, handle the {@code PlayerPreAddEvent} instead.</p>
+ * <p>To prevent a player from joining, handle the {@link PlayerPreAddEvent} instead.</p>
  *
  * <p>Multiple players can be checked at the same time. The players should be rechecked by
  * the calling module in case other modules remove or add players. Adding players to the player

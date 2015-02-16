@@ -97,7 +97,7 @@ public class StatType implements INamed {
 
     /**
      * Format a statistic value using the types decimal formatter
-     * into a {@code String}.
+     * into a {@link String}.
      *
      * @param value  The value to format.
      */

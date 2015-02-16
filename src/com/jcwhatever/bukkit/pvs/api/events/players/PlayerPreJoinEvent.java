@@ -40,7 +40,7 @@ import javax.annotation.Nullable;
 
 /**
  * Event called before a player joins an arena through the arena method
- * {@code join}.
+ * {@link Arena#join}.
  */
 public class PlayerPreJoinEvent extends AbstractPlayerEvent implements ICancellable {
 

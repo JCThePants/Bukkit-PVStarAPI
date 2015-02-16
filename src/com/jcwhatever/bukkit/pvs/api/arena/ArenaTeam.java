@@ -87,7 +87,7 @@ public enum ArenaTeam {
 
     /**
      * Get the block material used to represent the team.
-     * @return {@code MaterialData} object.
+     * @return {@link org.bukkit.material.MaterialData} object.
      */
     public MaterialData getTeamBlock() {
         if (_teamId >= 0 && _teamId <= 15)
@@ -107,9 +107,6 @@ public enum ArenaTeam {
 
     /**
      * Team distribution helper
-     *
-     * @author JC The Pants
-     *
      */
     public static class TeamDistributor {
 
@@ -118,7 +115,7 @@ public enum ArenaTeam {
 
         /**
          * Constructor
-         * @param teams  {@code ArenaTeam} parameters as available teams.
+         * @param teams  {@link ArenaTeam} parameters as available teams.
          */
         public TeamDistributor(ArenaTeam... teams) {
             Collections.addAll(_cache, teams);
@@ -128,7 +125,7 @@ public enum ArenaTeam {
 
         /**
          * Constructor
-         * @param teams  Collection of {@code ArenaTeam} objects as available teams.
+         * @param teams  Collection of {@link ArenaTeam} objects as available teams.
          */
         public TeamDistributor(Collection<ArenaTeam> teams) {
             _cache.addAll(teams);
@@ -219,10 +216,7 @@ public enum ArenaTeam {
                 if (obj instanceof Team)
                     return obj == this;
 
-                if (obj instanceof ArenaTeam)
-                    return obj == this.team;
-
-                return false;
+                return obj instanceof ArenaTeam && obj == this.team;
             }
 
             @Override
@@ -235,7 +229,5 @@ public enum ArenaTeam {
                 return Integer.compare(this.uses, team.uses);
             }
         }
-
     }
-
 }

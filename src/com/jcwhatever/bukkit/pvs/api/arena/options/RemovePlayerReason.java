@@ -61,7 +61,7 @@ public enum RemovePlayerReason {
      * The player is being kicked from the arena.
      *
      * <p>Not to be confused with removal due to being
-     * kicked from the server, in which case {@code LOGOUT}
+     * kicked from the server, in which case {@link RemovePlayerReason#LOGOUT}
      * is used.</p>
      */
     KICK,

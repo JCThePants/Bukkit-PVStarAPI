@@ -34,7 +34,7 @@ import com.jcwhatever.bukkit.pvs.api.arena.options.RemovePlayerReason;
 /**
  * Called after a player is removed from an arena player manager (lobby, game or spectator).
  *
- * <p>Not to be confused with {@code PlayerLeaveEvent}, which is used when a player is
+ * <p>Not to be confused with {@link PlayerLeaveEvent}, which is used when a player is
  * removed from the arena.</p>
  */
 public class PlayerRemovedEvent extends AbstractPlayerEvent {

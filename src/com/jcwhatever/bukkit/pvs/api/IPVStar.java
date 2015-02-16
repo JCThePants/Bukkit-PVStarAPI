@@ -65,38 +65,38 @@ public interface IPVStar extends Plugin  {
     ArenaPlayer getArenaPlayer(Object player);
 
     /**
-     * Get PV-Stars {@code ArenaManager} implementation.
+     * Get PV-Stars {@link ArenaManager} implementation.
      */
     ArenaManager getArenaManager();
 
     /**
-     * Get PV-Stars {@code SpawnTypeManager} implementation.
+     * Get PV-Stars {@link SpawnTypeManager} implementation.
      */
     SpawnTypeManager getSpawnTypeManager();
 
     /**
-     * Get PV-Stars {@code StatsManager} implementation.
+     * Get PV-Stars {@link StatsManager} implementation.
      * @return
      */
     StatsManager getStatsManager();
 
     /**
-     * Get PV-Stars {@code GlobalExtensionManager} implementation.
+     * Get PV-Stars {@link ExtensionTypeManager} implementation.
      */
     ExtensionTypeManager getExtensionManager();
 
     /**
-     * Get PV-Stars {@code PointsManager} implementation.
+     * Get PV-Stars {@link PointsManager} implementation.
      */
     PointsManager getPointsManager();
 
     /**
-     * Get PV-Stars {@code KitManager}.
+     * Get PV-Stars {@link KitManager}.
      */
     KitManager getKitManager();
 
     /**
-     * Get PV-Stars {@code SignManager}.
+     * Get PV-Stars {@link SignManager}.
      */
     SignManager getSignManager();
 
@@ -121,15 +121,15 @@ public interface IPVStar extends Plugin  {
     IMessenger getMessenger();
 
     /**
-     * Get a loaded {@code PVStarModule} instance  by case sensitive module name.
+     * Get a loaded {@link PVStarModule} instance  by case sensitive module name.
      *
-     * @param name  The name of the {@code PVStarModule} module
+     * @param name  The name of the {@link PVStarModule} module
      */
     @Nullable
     PVStarModule getModule(String name);
 
     /**
-     * Get all loaded {@code PVStarModule} instances.
+     * Get all loaded {@link PVStarModule} instances.
      */
     List<PVStarModule> getModules();
 

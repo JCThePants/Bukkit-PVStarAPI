@@ -47,7 +47,7 @@ public final class PVStarAPI {
 	private static IPVStar _implementation;
 
     /**
-     * Get an {@code ArenaPlayer} wrapper for the specified player.
+     * Get an {@link ArenaPlayer} wrapper for the specified player.
      *
      * @param player  The player.
      */
@@ -140,5 +140,4 @@ public final class PVStarAPI {
     public static void setImplementation(IPVStar implementation) {
         _implementation = implementation;
     }
-	
 }

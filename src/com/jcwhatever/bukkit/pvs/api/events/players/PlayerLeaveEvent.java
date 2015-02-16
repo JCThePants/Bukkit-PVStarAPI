@@ -37,14 +37,14 @@ import javax.annotation.Nullable;
 /**
  * Called after a player is removed from an arena.
  *
- * <p>Not to be confused with {@code PlayerPreRemoveEvent} and {@code PlayerRemovedEvent},
- * which are used when a player is removed from an arenas {@code PlayerManager}.
+ * <p>Not to be confused with {@link PlayerPreRemoveEvent} and {@link PlayerRemovedEvent},
+ * which are used when a player is removed from an arenas {@link PlayerManager}.
  * (ie. lobby, game or spectator)</p>
  *
- * <p>Although {@code PlayerPreRemoveEvent} and {@code PlayerRemovedEvent} are
- * called before {@code PlayerLeaveEvent}, in cases where the player is not actually
- * leaving the arena ({@code RemovePlayerReason.ARENA_RELATION_CHANGE}),
- * {@code PlayerLeaveEvent} is not called.</p>
+ * <p>Although {@link PlayerPreRemoveEvent} and {@link PlayerRemovedEvent} are
+ * called before {@link PlayerLeaveEvent}, in cases where the player is not actually
+ * leaving the arena ({@link RemovePlayerReason#ARENA_RELATION_CHANGE}),
+ * {@link PlayerLeaveEvent} is not called.</p>
  */
 public class PlayerLeaveEvent extends AbstractPlayerEvent {
 
