@@ -25,12 +25,12 @@
 
 package com.jcwhatever.bukkit.pvs.api.utils;
 
-import com.jcwhatever.nucleus.Nucleus;
-import com.jcwhatever.nucleus.utils.scheduler.ScheduledTask;
-import com.jcwhatever.nucleus.utils.scheduler.TaskHandler;
-import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.PVStarAPI;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
+import com.jcwhatever.nucleus.Nucleus;
+import com.jcwhatever.nucleus.utils.PreCon;
+import com.jcwhatever.nucleus.utils.scheduler.IScheduledTask;
+import com.jcwhatever.nucleus.utils.scheduler.TaskHandler;
 
 import java.util.Date;
 
@@ -53,7 +53,7 @@ public class ArenaScheduler {
      * @param delayTicks  Delay in ticks before executing the task
      * @param runnable    The task to run
      */
-    public static ScheduledTask runTaskLater(Arena arena, int delayTicks, Runnable runnable) {
+    public static IScheduledTask runTaskLater(Arena arena, int delayTicks, Runnable runnable) {
          return Nucleus.getScheduler()
                  .runTaskLater(PVStarAPI.getPlugin(), delayTicks, wrapRunnable(arena, runnable, false));
     }
@@ -65,7 +65,7 @@ public class ArenaScheduler {
      * @param arena     The arena the task is for
      * @param runnable  The task to run
      */
-    public static ScheduledTask runTaskLater(Arena arena, Runnable runnable) {
+    public static IScheduledTask runTaskLater(Arena arena, Runnable runnable) {
         return Nucleus.getScheduler()
                 .runTaskLater(PVStarAPI.getPlugin(), wrapRunnable(arena, runnable, false));
     }
@@ -79,7 +79,7 @@ public class ArenaScheduler {
      * @param interval      The delay in ticks between tasks
      * @param runnable      The task to run
      */
-    public static ScheduledTask runTaskRepeat(Arena arena, int initialDelay, int interval, Runnable runnable) {
+    public static IScheduledTask runTaskRepeat(Arena arena, int initialDelay, int interval, Runnable runnable) {
         PreCon.notNull(arena);
         PreCon.notNull(runnable);
         PreCon.positiveNumber(initialDelay);
@@ -101,7 +101,7 @@ public class ArenaScheduler {
             @Override
             public void run() {
 
-                ScheduledTask task = getTask();
+                IScheduledTask task = getTask();
 
                 if (_sessionToken == null)
                     _sessionToken = arena.getGameManager().getStartTime();

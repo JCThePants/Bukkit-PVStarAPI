@@ -25,8 +25,8 @@
 
 package com.jcwhatever.bukkit.pvs.api.utils;
 
-import com.jcwhatever.nucleus.utils.scheduler.ScheduledTask;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
+import com.jcwhatever.nucleus.utils.scheduler.IScheduledTask;
 
 import java.util.LinkedList;
 
@@ -36,7 +36,7 @@ import java.util.LinkedList;
 public class ArenaBatchScheduler {
 
     private Arena _arena;
-    private LinkedList<ScheduledTask> _tasks = new LinkedList<ScheduledTask>();
+    private LinkedList<IScheduledTask> _tasks = new LinkedList<>();
 
     public ArenaBatchScheduler(Arena arena) {
         _arena = arena;
@@ -56,8 +56,8 @@ public class ArenaBatchScheduler {
      * @param delayTicks  Delay in ticks before executing the task
      * @return
      */
-    public ScheduledTask runTaskLater(Runnable runnable, int delayTicks) {
-        ScheduledTask task = ArenaScheduler.runTaskLater(_arena, delayTicks, runnable);
+    public IScheduledTask runTaskLater(Runnable runnable, int delayTicks) {
+        IScheduledTask task = ArenaScheduler.runTaskLater(_arena, delayTicks, runnable);
 
         _tasks.add(task);
 
@@ -71,8 +71,8 @@ public class ArenaBatchScheduler {
      * @param runnable  The task to run
      * @return
      */
-    public ScheduledTask runTaskLater(Runnable runnable) {
-        ScheduledTask task = ArenaScheduler.runTaskLater(_arena, runnable);
+    public IScheduledTask runTaskLater(Runnable runnable) {
+        IScheduledTask task = ArenaScheduler.runTaskLater(_arena, runnable);
 
         _tasks.add(task);
 
@@ -87,9 +87,9 @@ public class ArenaBatchScheduler {
      * @param interval      The delay in ticks between tasks
      * @param runnable      The task to run
      */
-    public ScheduledTask runTaskRepeat(int initialDelay, int interval, Runnable runnable) {
+    public IScheduledTask runTaskRepeat(int initialDelay, int interval, Runnable runnable) {
 
-        ScheduledTask task = ArenaScheduler.runTaskRepeat(_arena, initialDelay, interval, runnable);
+        IScheduledTask task = ArenaScheduler.runTaskRepeat(_arena, initialDelay, interval, runnable);
 
         _tasks.add(task);
 
