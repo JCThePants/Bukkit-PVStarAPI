@@ -25,11 +25,11 @@
 
 package com.jcwhatever.bukkit.pvs.api.events.region;
 
-import com.jcwhatever.nucleus.regions.Region.EnterRegionReason;
-import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.events.AbstractArenaEvent;
+import com.jcwhatever.nucleus.regions.options.EnterRegionReason;
+import com.jcwhatever.nucleus.utils.PreCon;
 
 /**
  * Called when a player enters an arena region.

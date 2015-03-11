@@ -32,9 +32,11 @@ import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionRestoredEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.ArenaRegionSavedEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.PlayerEnterArenaRegionEvent;
 import com.jcwhatever.bukkit.pvs.api.events.region.PlayerLeaveArenaRegionEvent;
-import com.jcwhatever.nucleus.regions.Region.RegionPriority;
 import com.jcwhatever.nucleus.regions.RegionPriorityInfo;
 import com.jcwhatever.nucleus.regions.RestorableRegion;
+import com.jcwhatever.nucleus.regions.options.EnterRegionReason;
+import com.jcwhatever.nucleus.regions.options.LeaveRegionReason;
+import com.jcwhatever.nucleus.regions.options.RegionPriority;
 import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.nucleus.utils.MetaKey;
 
