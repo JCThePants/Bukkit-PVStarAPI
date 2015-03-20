@@ -25,20 +25,19 @@
 
 package com.jcwhatever.bukkit.pvs.api.spawns;
 
-import com.jcwhatever.nucleus.mixins.INamedLocation;
-import com.jcwhatever.nucleus.mixins.INamedLocationDistance;
-import com.jcwhatever.nucleus.mixins.implemented.NamedLocationDistance;
-import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.bukkit.pvs.api.arena.ArenaTeam;
+import com.jcwhatever.nucleus.utils.NamedLocation;
+import com.jcwhatever.nucleus.utils.PreCon;
+
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
-import javax.annotation.Nullable;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * A named location used for specifying locations within arenas.
@@ -46,14 +45,10 @@ import java.util.List;
  * @author JC The Pants
  *
  */
-public class Spawnpoint extends Location implements INamedLocation {
+public class Spawnpoint extends NamedLocation {
 
-
-    private final String _name;
-    private final String _searchName;
     private final SpawnType _type;
     private ArenaTeam _team = ArenaTeam.NONE;
-
 
     /**
      * Constructor.
@@ -66,14 +61,7 @@ public class Spawnpoint extends Location implements INamedLocation {
      * @param z      Z coordinates.
      */
     public Spawnpoint(String name, SpawnType type, World world, double x, double y, double z) {
-        super(world, x, y, z);
-
-        PreCon.notNullOrEmpty(name);
-        PreCon.notNull(type);
-
-        _name = name;
-        _searchName = name.toLowerCase();
-        _type = type;
+        this(name, type, world, x, y, z, 0.0f, 0.0f);
     }
 
     /**
@@ -88,14 +76,12 @@ public class Spawnpoint extends Location implements INamedLocation {
      * @param yaw    Yaw angle.
      * @param pitch  Pitch angle.
      */
-    public Spawnpoint(String name, SpawnType type, World world, double x, double y, double z, float yaw, float pitch) {
-        super(world, x, y, z, yaw, pitch);
+    public Spawnpoint(String name, SpawnType type, World world,
+                      double x, double y, double z, float yaw, float pitch) {
+        super(name, world, x, y, z, yaw, pitch);
 
-        PreCon.notNullOrEmpty(name);
         PreCon.notNull(type);
 
-        _name = name;
-        _searchName = name.toLowerCase();
         _type = type;
     }
 
@@ -107,13 +93,10 @@ public class Spawnpoint extends Location implements INamedLocation {
      * @param location  The location data to duplicate.
      */
     public Spawnpoint(String name, SpawnType type, Location location) {
-        super(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+        super(name, location);
 
-        PreCon.notNullOrEmpty(name);
         PreCon.notNull(type);
 
-        _name = name;
-        _searchName = name.toLowerCase();
         _type = type;
     }
 
@@ -128,16 +111,12 @@ public class Spawnpoint extends Location implements INamedLocation {
      * @param y      Y coordinates.
      * @param z      Z coordinates.
      */
-    public Spawnpoint(String name, SpawnType type, ArenaTeam team, World world, double x, double y, double z) {
-        super(world, x, y, z);
+    public Spawnpoint(String name, SpawnType type, ArenaTeam team, World world,
+                      double x, double y, double z) {
+        this(name, type, world, x, y, z);
 
-        PreCon.notNullOrEmpty(name);
-        PreCon.notNull(type);
         PreCon.notNull(team);
 
-        _name = name;
-        _searchName = name.toLowerCase();
-        _type = type;
         _team = team;
     }
 
@@ -154,16 +133,12 @@ public class Spawnpoint extends Location implements INamedLocation {
      * @param yaw    Yaw angle.
      * @param pitch  Pitch angle.
      */
-    public Spawnpoint(String name, SpawnType type, ArenaTeam team, World world, double x, double y, double z, float yaw, float pitch) {
-        super(world, x, y, z, yaw, pitch);
+    public Spawnpoint(String name, SpawnType type, ArenaTeam team, World world,
+                      double x, double y, double z, float yaw, float pitch) {
+        this(name, type, world, x, y, z, yaw, pitch);
 
-        PreCon.notNullOrEmpty(name);
-        PreCon.notNull(type);
         PreCon.notNull(team);
 
-        _name = name;
-        _searchName = name.toLowerCase();
-        _type = type;
         _team = team;
     }
 
@@ -176,41 +151,11 @@ public class Spawnpoint extends Location implements INamedLocation {
      * @param location  The location data to duplicate.
      */
     public Spawnpoint(String name, SpawnType type, ArenaTeam team, Location location) {
-        super(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+        this(name, type, location);
 
-        PreCon.notNullOrEmpty(name);
-        PreCon.notNull(type);
         PreCon.notNull(team);
 
-        _name = name;
-        _searchName = name.toLowerCase();
-        _type = type;
         _team = team;
-    }
-
-
-    /**
-     * Get the spawn name.
-     */
-    @Override
-    public final String getName() {
-        return _name;
-    }
-
-    /**
-     * Get the name of the spawn in lower case.
-     */
-    @Override
-    public final String getSearchName() {
-        return _searchName;
-    }
-
-    /**
-     * Get the location
-     */
-    @Override
-    public Location getLocation() {
-        return this;
     }
 
     /**
@@ -228,19 +173,6 @@ public class Spawnpoint extends Location implements INamedLocation {
     }
 
     /**
-     * Get the distance to the specified location.
-     *
-     * @param location  The destination location.
-     */
-    @Override
-    public INamedLocationDistance getDistance(Location location) {
-        PreCon.notNull(location);
-
-        return new NamedLocationDistance(this, location);
-    }
-
-
-    /**
      * Spawn an entity if the spawn type allows.
      *
      * @param arena  The arena to spawn for.
@@ -256,7 +188,7 @@ public class Spawnpoint extends Location implements INamedLocation {
         if (!_type.isSpawner())
             return null;
 
-        return _type.spawn(arena, getLocation(), count);
+        return _type.spawn(arena, this, count);
     }
 
     /**
@@ -269,5 +201,4 @@ public class Spawnpoint extends Location implements INamedLocation {
 
         p.getPlayer().teleport(this, TeleportCause.PLUGIN);
     }
-
 }
