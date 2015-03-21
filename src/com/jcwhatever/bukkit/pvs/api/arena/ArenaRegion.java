@@ -63,7 +63,7 @@ public class ArenaRegion extends RestorableRegion {
         super(PVStarAPI.getPlugin(), arena.getId().toString(), dataNode);
         _arena = arena;
 
-        setMeta(ARENA_REGION_KEY, this);
+        getMeta().set(ARENA_REGION_KEY, this);
 
         setEventListener(true);
     }
