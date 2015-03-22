@@ -53,7 +53,6 @@ public interface LobbyManager extends PlayerManager {
     /**
      * Get the lobby manager settings.
      */
-    abstract LobbyManagerSettings getSettings();
-
+    LobbyManagerSettings getSettings();
 }
 

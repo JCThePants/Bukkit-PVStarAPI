@@ -171,7 +171,7 @@ public interface SpawnManager {
      *
      * @param spawns  The collection to add
      */
-    void addSpawns(Collection<Spawnpoint> spawns);
+    void addSpawns(Collection<? extends Spawnpoint> spawns);
 
     /**
      * Remove a spawnpoint.
@@ -187,32 +187,30 @@ public interface SpawnManager {
      *
      * @param spawns  The collection to remove.
      */
-    void removeSpawns(Collection<Spawnpoint> spawns);
+    void removeSpawns(Collection<? extends Spawnpoint> spawns);
 
 
     /**
      * Reserves a spawn point for a player by removing it as a candidate
      * for the managers getter methods (getRandomSpawn, getSpawns, etc).
      *
-     * @param p      The player to reserve the spawn for.
-     * @param spawn  The spawnpoint to reserve.
+     * @param player  The player to reserve the spawn for.
+     * @param spawn   The spawnpoint to reserve.
      */
-    void reserveSpawn(ArenaPlayer p, Spawnpoint spawn);
+    void reserveSpawn(ArenaPlayer player, Spawnpoint spawn);
 
     /**
      * Removes the reserved status of the spawnpoint reserved for a player
      * and makes it available via the managers spawnpoint getter methods.
      *
-     * @param p  The player the spawn was reserved for.
+     * @param player  The player the spawn was reserved for.
      */
-    void unreserveSpawn(ArenaPlayer p);
+    void unreserveSpawn(ArenaPlayer player);
 
     /**
      * Clear all reserved spawns and make them available via the managers
      * spawnpoint getter methods.
      */
     void clearReserved();
-
-
 }
 

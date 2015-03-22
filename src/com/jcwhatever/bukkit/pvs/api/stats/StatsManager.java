@@ -25,9 +25,9 @@
 
 package com.jcwhatever.bukkit.pvs.api.stats;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
+import javax.annotation.Nullable;
 
 /**
  * Manages statistics data storage and statistic types.
@@ -43,7 +43,6 @@ public interface StatsManager {
 
     /**
      * Get available statistic types.
-     * @return
      */
     public List<StatType> getTypes();
 
@@ -55,12 +54,10 @@ public interface StatsManager {
     @Nullable
     public StatType getType(String name);
 
-
     /**
      * Get statistics for an arena.
      *
      * @param arenaId  The id of the arena.
      */
     public ArenaStats getArenaStats(UUID arenaId);
-
 }

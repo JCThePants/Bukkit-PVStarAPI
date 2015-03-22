@@ -25,14 +25,14 @@
 
 package com.jcwhatever.bukkit.pvs.api.points;
 
+import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import javax.annotation.Nullable;
 
 /**
  * Represents a way a player can receive points.
@@ -40,7 +40,7 @@ import java.util.UUID;
 public abstract class PointsType {
 
     // keyed to arena id
-    private Map<UUID, PointsHandler> _handlers = new HashMap<>(25);
+    private final Map<UUID, PointsHandler> _handlers = new HashMap<>(25);
 
     /**
      * The name of the type.
@@ -123,11 +123,10 @@ public abstract class PointsType {
     protected abstract PointsHandler getNewHandler(Arena arena, IDataNode dataNode);
 
     /**
-     * Called when a points handler is removed from an arena.
+     * Invoked when a points handler is removed from an arena.
      *
      * @param arena    The arena.
      * @param handler  The removed handler.
      */
     protected abstract void onRemove(Arena arena, PointsHandler handler);
-
 }

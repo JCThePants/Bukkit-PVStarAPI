@@ -86,7 +86,7 @@ public abstract class ArenaExtension {
             return;
 
         _isEnabled = true;
-        onEnable();
+        onAttach();
     }
 
     /**
@@ -97,7 +97,7 @@ public abstract class ArenaExtension {
             return;
 
         _isEnabled = false;
-        onDisable();
+        onRemove();
     }
 
     /**
@@ -139,17 +139,17 @@ public abstract class ArenaExtension {
     }
 
     /**
-     * Called when the extension is enabled.
+     * Invoked when the extension is attached to an arena.
      */
-    protected abstract void onEnable();
+    protected abstract void onAttach();
 
     /**
-     * Called when the extension is disabled.
+     * Invoked when the extension is removed from an arena.
      */
-    protected abstract void onDisable();
+    protected abstract void onRemove();
 
     /**
-     * Called when the extension is disposed.
+     * Invoked when the extension is disposed.
      */
     protected void onDispose() {}
 }

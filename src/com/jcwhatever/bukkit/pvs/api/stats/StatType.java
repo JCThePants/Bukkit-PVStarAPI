@@ -73,9 +73,6 @@ public class StatType implements INamed {
         _format = format;
     }
 
-    /**
-     * Get the name of the statistic.
-     */
     @Override
     public String getName() {
         return _statName;
@@ -104,5 +101,4 @@ public class StatType implements INamed {
     public String formatDisplay(double value) {
         return _format.format(value);
     }
-
 }

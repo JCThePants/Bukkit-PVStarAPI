@@ -26,6 +26,7 @@
 package com.jcwhatever.bukkit.pvs.api.utils;
 
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
+import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.nucleus.utils.scheduler.IScheduledTask;
 
 import java.util.LinkedList;
@@ -35,13 +36,23 @@ import java.util.LinkedList;
  */
 public class ArenaBatchScheduler {
 
-    private Arena _arena;
-    private LinkedList<IScheduledTask> _tasks = new LinkedList<>();
+    private final Arena _arena;
+    private final LinkedList<IScheduledTask> _tasks = new LinkedList<>();
 
+    /**
+     * Constructor.
+     *
+     * @param arena  The arena to schedule tasks for.
+     */
     public ArenaBatchScheduler(Arena arena) {
+        PreCon.notNull(arena);
+
         _arena = arena;
     }
 
+    /**
+     * Cancel all tasks scheduled.
+     */
     public void cancelAll() {
         while (!_tasks.isEmpty()) {
             _tasks.remove().cancel();
@@ -95,6 +106,4 @@ public class ArenaBatchScheduler {
 
         return task;
     }
-
-
 }

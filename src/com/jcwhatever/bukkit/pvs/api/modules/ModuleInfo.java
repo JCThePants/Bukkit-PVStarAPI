@@ -82,5 +82,4 @@ public interface ModuleInfo {
      * Get the names of optional PV-Star module dependencies.
      */
     Set<String> getModuleSoftDepends();
-
 }

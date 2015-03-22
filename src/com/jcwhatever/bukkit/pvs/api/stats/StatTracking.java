@@ -30,6 +30,7 @@ package com.jcwhatever.bukkit.pvs.api.stats;
  * a statistics type.
  */
 public enum StatTracking {
+
     /**
      * Statistics type only tracks total of all scores earned.
      */

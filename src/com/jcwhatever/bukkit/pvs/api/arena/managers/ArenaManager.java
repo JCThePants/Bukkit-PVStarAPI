@@ -27,13 +27,14 @@ package com.jcwhatever.bukkit.pvs.api.arena.managers;
 
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 import com.jcwhatever.bukkit.pvs.api.arena.options.NameMatchMode;
+
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
+import javax.annotation.Nullable;
 
 /**
  * Manages arenas.
@@ -75,10 +76,10 @@ public interface ArenaManager {
     /**
      * Get the arena the player is in.
      *
-     * @param p  The player to check.
+     * @param player  The player to check.
      */
     @Nullable
-    Arena getArena(Player p);
+    Arena getArena(Player player);
 
     /**
      * Get the arena the location is in.
@@ -125,5 +126,4 @@ public interface ArenaManager {
      * @return  True if the arena was found and removed.
      */
     boolean removeArena(UUID arenaId);
-
 }

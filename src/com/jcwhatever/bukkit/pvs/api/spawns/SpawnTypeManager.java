@@ -27,8 +27,8 @@ package com.jcwhatever.bukkit.pvs.api.spawns;
 
 import org.bukkit.entity.EntityType;
 
-import javax.annotation.Nullable;
 import java.util.List;
+import javax.annotation.Nullable;
 
 public interface SpawnTypeManager {
 
@@ -44,7 +44,6 @@ public interface SpawnTypeManager {
 
     /**
      * Get the spawn type used to mark spectator spawn points.
-     * @return
      */
     SpawnType getSpectatorSpawnType();
 
@@ -64,6 +63,8 @@ public interface SpawnTypeManager {
      * Get a spawn type by type name.
      *
      * @param typeName  The type name.
+     *
+     * @return  The {@link SpawnType} or null if not found.
      */
     @Nullable
     SpawnType getType(String typeName);
@@ -72,8 +73,8 @@ public interface SpawnTypeManager {
      * Register a spawn type
      *
      * @param spawnType  The type to register
-     * @return
+     *
+     * @return  True if the type was registered successfully.
      */
     boolean registerType(SpawnType spawnType);
-
 }

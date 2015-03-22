@@ -78,7 +78,7 @@ public interface ArenaSettings {
     /**
      * Set the arenas visibility to players.
      */
-    void setIsVisible(boolean isVisible);
+    void setVisible(boolean isVisible);
 
     /**
      * Get a custom type name for display.

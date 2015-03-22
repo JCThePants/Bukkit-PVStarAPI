@@ -56,5 +56,4 @@ public interface PointsHandler {
      * @param points  The number of points.
      */
     void setPoints(int points);
-
 }

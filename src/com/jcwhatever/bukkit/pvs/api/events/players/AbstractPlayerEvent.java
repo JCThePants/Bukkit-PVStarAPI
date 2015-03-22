@@ -69,5 +69,4 @@ public abstract class AbstractPlayerEvent extends AbstractArenaEvent {
     public PlayerManager getRelatedManager() {
         return _relatedManager;
     }
-
 }

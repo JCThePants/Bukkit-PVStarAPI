@@ -64,5 +64,4 @@ public interface LobbyManagerSettings extends PlayerManagerSettings {
      * to auto start.
      */
     void setMinAutoStartPlayers(int minPlayers);
-
 }

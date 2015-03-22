@@ -270,6 +270,5 @@ public class Msg {
     private static IMessenger msg() {
         return PVStarAPI.getPlugin().getMessenger();
     }
-
 }
 

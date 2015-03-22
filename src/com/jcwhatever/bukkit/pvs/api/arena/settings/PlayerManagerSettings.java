@@ -137,5 +137,4 @@ public interface PlayerManagerSettings {
      * @param isEnabled  True to enable spawn reserving.
      */
     void setPlayerSpawnsReserved(boolean isEnabled);
-
 }

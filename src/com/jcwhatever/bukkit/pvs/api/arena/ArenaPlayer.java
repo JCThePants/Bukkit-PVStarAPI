@@ -25,12 +25,14 @@
 
 package com.jcwhatever.bukkit.pvs.api.arena;
 
-import com.jcwhatever.nucleus.mixins.INamed;
-import com.jcwhatever.nucleus.mixins.IPlayerReference;
 import com.jcwhatever.bukkit.pvs.api.arena.managers.PlayerManager;
 import com.jcwhatever.bukkit.pvs.api.arena.options.ArenaPlayerRelation;
 import com.jcwhatever.bukkit.pvs.api.arena.options.TeamChangeReason;
 import com.jcwhatever.bukkit.pvs.api.arena.settings.PlayerManagerSettings;
+import com.jcwhatever.nucleus.mixins.IMeta;
+import com.jcwhatever.nucleus.mixins.INamed;
+import com.jcwhatever.nucleus.mixins.IPlayerReference;
+import com.jcwhatever.nucleus.utils.MetaStore;
 
 import org.bukkit.Location;
 
@@ -42,7 +44,7 @@ import javax.annotation.Nullable;
  * Wraps the {@link org.bukkit.entity.Player} object and carries extra arena related meta data regarding
  * the player.
  */
-public interface ArenaPlayer extends INamed, IPlayerReference {
+public interface ArenaPlayer extends INamed, IMeta, IPlayerReference {
 
     /**
      * Get the players unique minecraft Id.
@@ -184,19 +186,20 @@ public interface ArenaPlayer extends INamed, IPlayerReference {
      *
      * @param arenaId  The id of the arena.
      */
-    PlayerMeta getMeta(UUID arenaId);
+    MetaStore getMeta(UUID arenaId);
 
     /**
      * Get the global meta data object which is used until
      * the {@link ArenaPlayer} instance is disposed.
      */
-    PlayerMeta getMeta();
+    @Override
+    MetaStore getMeta();
 
     /**
      * Get the players session meta data object,
      * which is used until the player joins another arena.
      */
-    PlayerMeta getSessionMeta();
+    MetaStore getSessionMeta();
 
     /**
      * Kill the player

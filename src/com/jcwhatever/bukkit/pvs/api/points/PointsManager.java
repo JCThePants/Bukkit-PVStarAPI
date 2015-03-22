@@ -27,8 +27,8 @@ package com.jcwhatever.bukkit.pvs.api.points;
 
 import com.jcwhatever.bukkit.pvs.api.arena.Arena;
 
-import javax.annotation.Nullable;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * Manages points types.
@@ -72,6 +72,4 @@ public interface PointsManager {
      * @param arena  The arena.
      */
     void loadTypes(Arena arena);
-
-
 }

@@ -114,5 +114,4 @@ public class PlayerAddedEvent extends AbstractPlayerEvent {
     public void setMessage(@Nullable String message) {
         _message = message;
     }
-
 }

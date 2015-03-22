@@ -76,7 +76,6 @@ public interface IPVStar extends Plugin  {
 
     /**
      * Get PV-Stars {@link StatsManager} implementation.
-     * @return
      */
     StatsManager getStatsManager();
 
@@ -139,5 +138,4 @@ public interface IPVStar extends Plugin  {
      * @param module  The module to get information about.
      */
     ModuleInfo getModuleInfo(PVStarModule module);
-
 }

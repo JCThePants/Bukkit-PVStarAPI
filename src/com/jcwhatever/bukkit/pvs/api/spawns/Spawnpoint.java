@@ -194,11 +194,11 @@ public class Spawnpoint extends NamedLocation {
     /**
      * Teleport an arena player to the spawnpoint.
      *
-     * @param p  The player to spawn.
+     * @param player  The player to spawn.
      */
-    public void spawn(ArenaPlayer p) {
-        PreCon.notNull(p);
+    public void spawn(ArenaPlayer player) {
+        PreCon.notNull(player);
 
-        p.getPlayer().teleport(this, TeleportCause.PLUGIN);
+        player.getPlayer().teleport(this, TeleportCause.PLUGIN);
     }
 }

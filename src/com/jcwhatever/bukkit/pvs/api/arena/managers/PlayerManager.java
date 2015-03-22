@@ -98,6 +98,4 @@ public interface PlayerManager {
      * @param params   Optional format parameters.
      */
     public void tell(String message, Object... params);
-
-
 }

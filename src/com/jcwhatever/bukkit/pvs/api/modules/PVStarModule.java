@@ -111,7 +111,6 @@ public abstract class PVStarModule implements IDisposable {
 
     /**
      * Get the names of optional PV-Star module dependencies.
-     * @return
      */
     public Set<String> getModuleSoftDepends() {
         return getInfo().getModuleSoftDepends();
@@ -140,7 +139,7 @@ public abstract class PVStarModule implements IDisposable {
     }
 
     /**
-     * Internal Use Only. Called before the module is enabled.
+     * Internal Use Only. Invoked before the module is enabled.
      */
     public final void preEnable() {
 
@@ -160,7 +159,7 @@ public abstract class PVStarModule implements IDisposable {
     }
 
     /**
-     * Internal Use only. Called to enable the module.
+     * Internal Use only. Invoked to enable the module.
      */
     public final void enable () {
 
@@ -180,7 +179,7 @@ public abstract class PVStarModule implements IDisposable {
     }
 
     /**
-     * Internal Use Only. Called to dispose resources used by the module before it
+     * Internal Use Only. Invoked to dispose resources used by the module before it
      * is discarded.
      */
     @Override
@@ -203,7 +202,6 @@ public abstract class PVStarModule implements IDisposable {
 
     /**
      * Get the modules data node.
-     * @return
      */
     public final IDataNode getDataNode() {
         if (_dataNode == null) {
@@ -238,20 +236,19 @@ public abstract class PVStarModule implements IDisposable {
     }
 
     /**
-     * Called during pre-enable. Types should be registered here.
+     * Invoked during pre-enable. Types should be registered here.
      */
     protected abstract void onRegisterTypes();
 
     /**
-     * Called when the module is enabled.
+     * Invoked when the module is enabled.
      */
     protected abstract void onEnable();
 
     /**
-     * Called when the module is disposed.
+     * Invoked when the module is disposed.
      */
     protected void onDispose() {}
-
 
     // get module info
     private ModuleInfo getInfo() {
@@ -260,5 +257,4 @@ public abstract class PVStarModule implements IDisposable {
 
         return _moduleInfo;
     }
-
 }

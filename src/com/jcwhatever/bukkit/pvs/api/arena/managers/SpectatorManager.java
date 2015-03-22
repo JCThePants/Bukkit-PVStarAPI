@@ -36,5 +36,4 @@ public interface SpectatorManager extends PlayerManager {
      * Get the spectator manager settings.
      */
     SpectatorManagerSettings getSettings();
-
 }

@@ -197,7 +197,7 @@ public interface Arena extends INamedInsensitive, IDisposable {
     boolean remove(ArenaPlayer player, RemovePlayerReason reason);
 
     /**
-     * Called when the arena is initialized by the arena manager.
+     * Invoked when the arena is initialized by the arena manager.
      * For arena manager use only.
      *
      * @param id        The arenas id.
@@ -206,12 +206,9 @@ public interface Arena extends INamedInsensitive, IDisposable {
     void init(UUID id, String name);
 
     /**
-     * Called when an arena is permanently removed.
+     * Invoked when an arena is permanently removed.
      * For arena manager use only.
      */
     @Override
     void dispose();
-
-
-    
 }

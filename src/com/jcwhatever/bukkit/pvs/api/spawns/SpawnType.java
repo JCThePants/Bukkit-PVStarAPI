@@ -62,10 +62,8 @@ public abstract class SpawnType implements INamedInsensitive {
 
     /**
      * Get the spawn type description.
-     * @return
      */
     public abstract String getDescription();
-
 
     /**
      * Determine if the spawn type can spawn entities.
@@ -91,7 +89,6 @@ public abstract class SpawnType implements INamedInsensitive {
     @Nullable
     public abstract EntityType[] getEntityTypes();
 
-
     /**
      * Spawn a mob.
      *
@@ -103,5 +100,4 @@ public abstract class SpawnType implements INamedInsensitive {
      */
     @Nullable
     public abstract List<Entity> spawn(Arena arena, Location location, int count);
-
 }
