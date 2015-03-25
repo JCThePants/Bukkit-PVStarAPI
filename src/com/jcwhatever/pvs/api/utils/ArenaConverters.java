@@ -25,26 +25,67 @@
 
 package com.jcwhatever.pvs.api.utils;
 
+import com.jcwhatever.nucleus.utils.converters.Converter;
+import com.jcwhatever.nucleus.utils.text.TextUtils;
 import com.jcwhatever.pvs.api.PVStarAPI;
 import com.jcwhatever.pvs.api.arena.Arena;
 import com.jcwhatever.pvs.api.arena.options.NameMatchMode;
-import com.jcwhatever.nucleus.utils.converters.ValueConverter;
-import com.jcwhatever.nucleus.utils.text.TextUtils;
 
 import java.util.List;
 import java.util.UUID;
+import javax.annotation.Nullable;
 
-public class Converters {
+public class ArenaConverters {
 
     /**
-     * Convert arena name to arena ID
+     * Convert to arena name.
      */
-    public static final ValueConverter<UUID, String> ARENA_NAME_ID = new ValueConverter<UUID, String>() {
+    public static final Converter<String> ARENA_NAME = new Converter<String>() {
+
+        @Override
+        protected String onConvert(@Nullable Object value) {
+
+            UUID arenaId = null;
+
+            if (value instanceof String) {
+
+                arenaId = TextUtils.parseUUID((String)value);
+                if (arenaId == null) {
+                    List<Arena> arenas = PVStarAPI.getArenaManager().getArena(
+                            (String) value, NameMatchMode.CASE_INSENSITIVE);
+
+                    return arenas.size() == 1 ? arenas.get(0).getName() : null;
+                }
+            }
+
+            // see if value is already a uuid
+            if (value instanceof UUID) {
+                arenaId = (UUID)value;
+            }
+
+            if (arenaId == null)
+                return null;
+
+            Arena arena = PVStarAPI.getArenaManager().getArena(arenaId);
+            if (arena == null)
+                return null;
+
+            return arena.getName();
+        }
+    };
+
+    /**
+     * Convert to arena ID.
+     */
+    public static final Converter<UUID> ARENA_ID = new Converter<UUID>() {
 
         @Override
         protected UUID onConvert(Object value) {
+
             // see if value is already a uuid
             if (value instanceof UUID) {
+
+                // verify UUID
                 Arena arena = PVStarAPI.getArenaManager().getArena((UUID) value);
                 if (arena == null)
                     return null;
@@ -55,7 +96,8 @@ public class Converters {
             if (value instanceof String) {
 
                 // see if string corresponds to arena name
-                List<Arena> matches = PVStarAPI.getArenaManager().getArena((String) value, NameMatchMode.CASE_INSENSITIVE);
+                List<Arena> matches = PVStarAPI.getArenaManager().getArena(
+                        (String) value, NameMatchMode.CASE_INSENSITIVE);
                 if (matches.size() == 1)
                     return matches.get(0).getId();
 
@@ -64,25 +106,10 @@ public class Converters {
             }
 
             if (value instanceof Arena) {
-                Arena arena = (Arena)value;
-                return arena.getId();
+                return ((Arena)value).getId();
             }
 
             return null;
         }
-
-        @Override
-        protected String onUnconvert(Object value) {
-            UUID arenaId = onConvert(value);
-            if (arenaId == null)
-                return null;
-
-            Arena arena = PVStarAPI.getArenaManager().getArena(arenaId);
-            if (arena == null)
-                return null;
-
-            return arena.getName();
-        }
-
     };
 }
