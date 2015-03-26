@@ -36,7 +36,7 @@ import com.jcwhatever.nucleus.regions.RegionPriorityInfo;
 import com.jcwhatever.nucleus.regions.RestorableRegion;
 import com.jcwhatever.nucleus.regions.options.EnterRegionReason;
 import com.jcwhatever.nucleus.regions.options.LeaveRegionReason;
-import com.jcwhatever.nucleus.regions.options.RegionPriority;
+import com.jcwhatever.nucleus.regions.options.RegionEventPriority;
 import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.nucleus.utils.MetaKey;
 
@@ -45,7 +45,7 @@ import org.bukkit.entity.Player;
 /**
  * A region that represents the bounds of an arena.
  */
-@RegionPriorityInfo(enter = RegionPriority.HIGH, leave = RegionPriority.LOW)
+@RegionPriorityInfo(enter = RegionEventPriority.HIGH, leave = RegionEventPriority.LOW)
 public class ArenaRegion extends RestorableRegion {
 
     public static final MetaKey<ArenaRegion>
