@@ -28,7 +28,6 @@ package com.jcwhatever.pvs.api;
 import com.jcwhatever.nucleus.commands.CommandDispatcher;
 import com.jcwhatever.nucleus.events.manager.EventManager;
 import com.jcwhatever.nucleus.utils.kits.KitManager;
-import com.jcwhatever.nucleus.utils.signs.SignManager;
 import com.jcwhatever.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.pvs.api.arena.extensions.ExtensionTypeManager;
 import com.jcwhatever.pvs.api.arena.managers.ArenaManager;
@@ -102,13 +101,6 @@ public final class PVStarAPI {
      */
     public static KitManager getKitManager() {
         return _implementation.getKitManager();
-    }
-
-    /**
-     * Get the sign manager.
-     */
-    public static SignManager getSignManager() {
-        return _implementation.getSignManager();
     }
 
     /**
