@@ -27,7 +27,7 @@ package com.jcwhatever.pvs.api;
 
 import com.jcwhatever.nucleus.commands.CommandDispatcher;
 import com.jcwhatever.nucleus.events.manager.EventManager;
-import com.jcwhatever.nucleus.messaging.IMessenger;
+import com.jcwhatever.nucleus.managed.messaging.IMessenger;
 import com.jcwhatever.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.pvs.api.arena.extensions.ExtensionTypeManager;
 import com.jcwhatever.pvs.api.arena.managers.ArenaManager;

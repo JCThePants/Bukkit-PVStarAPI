@@ -25,8 +25,8 @@
 
 package com.jcwhatever.pvs.api.utils;
 
-import com.jcwhatever.nucleus.messaging.ChatPaginator;
-import com.jcwhatever.nucleus.messaging.IMessenger;
+import com.jcwhatever.nucleus.managed.messaging.ChatPaginator;
+import com.jcwhatever.nucleus.managed.messaging.IMessenger;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.nucleus.utils.text.TextUtils;
 import com.jcwhatever.pvs.api.PVStarAPI;
