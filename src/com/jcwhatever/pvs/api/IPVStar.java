@@ -27,7 +27,6 @@ package com.jcwhatever.pvs.api;
 
 import com.jcwhatever.nucleus.commands.CommandDispatcher;
 import com.jcwhatever.nucleus.events.manager.EventManager;
-import com.jcwhatever.nucleus.utils.kits.KitManager;
 import com.jcwhatever.nucleus.messaging.IMessenger;
 import com.jcwhatever.pvs.api.arena.ArenaPlayer;
 import com.jcwhatever.pvs.api.arena.extensions.ExtensionTypeManager;
@@ -87,11 +86,6 @@ public interface IPVStar extends Plugin  {
      * Get PV-Stars {@link com.jcwhatever.pvs.api.points.PointsManager} implementation.
      */
     PointsManager getPointsManager();
-
-    /**
-     * Get PV-Stars {@link KitManager}.
-     */
-    KitManager getKitManager();
 
     /**
      * Get PV-Stars command handler.
