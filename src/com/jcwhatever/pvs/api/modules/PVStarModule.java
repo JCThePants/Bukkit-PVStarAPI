@@ -25,7 +25,8 @@
 
 package com.jcwhatever.pvs.api.modules;
 
-import com.jcwhatever.nucleus.utils.language.LanguageManager;
+import com.jcwhatever.nucleus.Nucleus;
+import com.jcwhatever.nucleus.managed.language.ILanguageContext;
 import com.jcwhatever.nucleus.mixins.IDisposable;
 import com.jcwhatever.nucleus.providers.storage.DataStorage;
 import com.jcwhatever.nucleus.storage.DataPath;
@@ -45,7 +46,9 @@ import java.util.Set;
  */
 public abstract class PVStarModule implements IDisposable {
 
-    private final LanguageManager _languageManager = new LanguageManager(PVStarAPI.getPlugin(), this);
+    private final ILanguageContext _languageContext =
+            Nucleus.getLanguageManager().createContext(PVStarAPI.getPlugin(), this);
+
     private final Map<String, IDataNode> _customNodes = new HashMap<>(10);
     private ModuleInfo _moduleInfo;
     private IDataNode _dataNode;
@@ -194,10 +197,10 @@ public abstract class PVStarModule implements IDisposable {
     }
 
     /**
-     * Get the modules language manager.
+     * Get the modules language context.
      */
-    public final LanguageManager getLanguageManager() {
-        return _languageManager;
+    public final ILanguageContext getLanguageContext() {
+        return _languageContext;
     }
 
     /**
