@@ -29,8 +29,8 @@ import com.jcwhatever.pvs.api.PVStarAPI;
 import com.jcwhatever.pvs.api.arena.Arena;
 import com.jcwhatever.nucleus.Nucleus;
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.nucleus.utils.scheduler.IScheduledTask;
-import com.jcwhatever.nucleus.utils.scheduler.TaskHandler;
+import com.jcwhatever.nucleus.managed.scheduler.IScheduledTask;
+import com.jcwhatever.nucleus.managed.scheduler.TaskHandler;
 
 import java.util.Date;
 
