@@ -139,7 +139,7 @@ public class ArenaRegion extends RestorableRegion {
      * Called when the arena region is saved to disk.
      */
     @Override
-    protected void onSave() {
+    protected void onPreSave() {
         getArena().setBusy();
         _arena.getEventManager().call(this, new ArenaRegionPreSaveEvent(_arena));
     }
@@ -157,7 +157,7 @@ public class ArenaRegion extends RestorableRegion {
      * Called when the arena region is restored from disk.
      */
     @Override
-    protected void onRestore() {
+    protected void onPreRestore() {
         getArena().setBusy();
         _arena.getEventManager().call(this, new ArenaRegionPreRestoreEvent(_arena));
     }
@@ -166,7 +166,7 @@ public class ArenaRegion extends RestorableRegion {
      * Called when the arena region restore operation is complete.
      */
     @Override
-    protected void onRestoreComplete() {
+    protected void onRestore() {
         getArena().setIdle();
         _arena.getEventManager().call(this, new ArenaRegionRestoredEvent(_arena));
     }
