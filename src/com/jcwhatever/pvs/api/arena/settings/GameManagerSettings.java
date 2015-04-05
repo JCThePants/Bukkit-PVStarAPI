@@ -80,12 +80,6 @@ public interface GameManagerSettings extends PlayerManagerSettings {
     void setPointsBehavior(PointsBehavior behavior);
 
     /**
-     * Determine if entities such as dropped items
-     * should be removed when the game ends.
-     */
-    boolean hasPostGameEntityCleanup();
-
-    /**
      * Set entities such dropped items removed
      * when the game ends.
      *
