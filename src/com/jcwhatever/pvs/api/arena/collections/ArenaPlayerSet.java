@@ -22,52 +22,19 @@
  * THE SOFTWARE.
  */
 
+package com.jcwhatever.pvs.api.arena.collections;
 
-package com.jcwhatever.pvs.api.events.team;
+import com.jcwhatever.pvs.api.arena.ArenaPlayer;
 
-import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
-import com.jcwhatever.pvs.api.arena.ArenaTeam;
-import com.jcwhatever.pvs.api.events.AbstractArenaEvent;
+import org.bukkit.entity.Player;
+
+import java.util.Set;
 
 /**
- * An arena event that deals with a team
+ * Set of {@link ArenaPlayer}.
  */
-public abstract class AbstractTeamEvent extends AbstractArenaEvent {
+public interface ArenaPlayerSet extends ArenaPlayerCollection, Set<ArenaPlayer> {
 
-    private final ArenaTeam _team;
-    private final ArenaPlayerCollection _teamPlayers;
-
-    /**
-     * Constructor.
-     *
-     * @param arena          The event arena.
-     * @param team           The event team.
-     * @param teamPlayers    The players on the team.
-     */
-    public AbstractTeamEvent(Arena arena, ArenaTeam team, ArenaPlayerCollection teamPlayers) {
-        super(arena);
-
-        PreCon.notNull(team);
-        PreCon.notNull(teamPlayers);
-
-        _team = team;
-        _teamPlayers = teamPlayers;
-    }
-
-    /**
-     * Get the event team.
-     */
-    public ArenaTeam getTeam() {
-        return _team;
-    }
-
-    /**
-     * Get the players on the team in an unmodifiable list.
-     */
-    public ArenaPlayerCollection getTeamPlayers() {
-        return _teamPlayers;
-    }
+    @Override
+    Set<Player> asPlayers();
 }
-

@@ -26,11 +26,10 @@
 package com.jcwhatever.pvs.api.events.team;
 
 import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
 
 import javax.annotation.Nullable;
-import java.util.Collection;
 
 /**
  * Called when an arena team loses.
@@ -48,7 +47,7 @@ public class TeamLoseEvent extends AbstractTeamEvent {
      * @param teamPlayers   The players on the team.
      * @param loseMessage   The message to display to players in the game.
      */
-    public TeamLoseEvent(Arena arena, ArenaTeam team, Collection<ArenaPlayer> teamPlayers, @Nullable String loseMessage) {
+    public TeamLoseEvent(Arena arena, ArenaTeam team, ArenaPlayerCollection teamPlayers, @Nullable String loseMessage) {
         super(arena, team, teamPlayers);
 
         _initialMessage = loseMessage;

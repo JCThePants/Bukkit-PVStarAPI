@@ -25,8 +25,9 @@
 
 package com.jcwhatever.pvs.api.arena;
 
+import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
+
 import java.util.Collection;
-import java.util.List;
 
 /**
  * A group of players associated with each other due
@@ -71,9 +72,8 @@ public interface ArenaPlayerGroup {
      * Filters the collection of players to players that are in the group
      *
      * @param players  The collection of players to filter.
-     * @return
      */
-    List<ArenaPlayer> filterPlayers(Collection<ArenaPlayer> players);
+    ArenaPlayerCollection filterPlayers(Collection<ArenaPlayer> players);
 
     /**
      * Tell a message to all players in the group.
@@ -102,14 +102,14 @@ public interface ArenaPlayerGroup {
     /**
      * Get all players in the group
      */
-    List<ArenaPlayer> getPlayers();
+    ArenaPlayerCollection getPlayers();
 
     /**
      * Get players in the group who are in the specified arena.
      *
      * @param arena  The arena.
      */
-    List<ArenaPlayer> getPlayers(Arena arena);
+    ArenaPlayerCollection getPlayers(Arena arena);
 
 
 }

@@ -28,10 +28,8 @@ package com.jcwhatever.pvs.api.events;
 import com.jcwhatever.nucleus.mixins.ICancellable;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
 import com.jcwhatever.pvs.api.arena.options.ArenaStartReason;
-
-import java.util.Set;
 
 /**
  * Called before an arena is started.
@@ -39,7 +37,7 @@ import java.util.Set;
 public class ArenaPreStartEvent extends AbstractArenaEvent implements ICancellable {
 
     private final ArenaStartReason _reason;
-    private final Set<ArenaPlayer> _joiningPlayers;
+    private final ArenaPlayerCollection _joiningPlayers;
     private boolean _isCancelled;
 
     /**
@@ -48,7 +46,7 @@ public class ArenaPreStartEvent extends AbstractArenaEvent implements ICancellab
      * @param arena   The arena.
      * @param reason  The reason the arena is starting.
      */
-    public ArenaPreStartEvent(Arena arena, Set<ArenaPlayer> joiningPlayers, ArenaStartReason reason) {
+    public ArenaPreStartEvent(Arena arena, ArenaPlayerCollection joiningPlayers, ArenaStartReason reason) {
         super(arena);
 
         PreCon.notNull(reason);
@@ -67,7 +65,7 @@ public class ArenaPreStartEvent extends AbstractArenaEvent implements ICancellab
     /**
      * Get the players joining the game.
      */
-    public Set<ArenaPlayer> getJoiningPlayers() {
+    public ArenaPlayerCollection getJoiningPlayers() {
         return _joiningPlayers;
     }
 

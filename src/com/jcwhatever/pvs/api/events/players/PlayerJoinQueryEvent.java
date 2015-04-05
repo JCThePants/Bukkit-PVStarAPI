@@ -27,11 +27,11 @@ package com.jcwhatever.pvs.api.events.players;
 
 import com.jcwhatever.pvs.api.arena.Arena;
 import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
 import com.jcwhatever.pvs.api.events.AbstractArenaEvent;
+import com.jcwhatever.pvs.api.utils.ArenaPlayerHashSet;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Use to check if other modules are willing to allow a player to join an arena
@@ -45,7 +45,7 @@ import java.util.Set;
  */
 public class PlayerJoinQueryEvent extends AbstractArenaEvent {
 
-    private Set<ArenaPlayer> _players;
+    private ArenaPlayerCollection _players;
 
     /**
      * Constructor.
@@ -56,7 +56,7 @@ public class PlayerJoinQueryEvent extends AbstractArenaEvent {
     public PlayerJoinQueryEvent(Arena arena, ArenaPlayer player) {
         super(arena);
 
-        _players = new HashSet<>(5);
+        _players = new ArenaPlayerHashSet(5);
         _players.add(player);
     }
 
@@ -69,14 +69,14 @@ public class PlayerJoinQueryEvent extends AbstractArenaEvent {
     public PlayerJoinQueryEvent(Arena arena, Collection<ArenaPlayer> players) {
         super(arena);
 
-        _players = new HashSet<>(players.size() * 2);
+        _players = new ArenaPlayerHashSet(players.size() * 2);
         _players.addAll(players);
     }
 
     /**
      * Get the players being checked.
      */
-    public Set<ArenaPlayer> getPlayers() {
+    public ArenaPlayerCollection getPlayers() {
         return _players;
     }
 }

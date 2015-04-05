@@ -22,52 +22,29 @@
  * THE SOFTWARE.
  */
 
+package com.jcwhatever.pvs.api.arena.collections;
 
-package com.jcwhatever.pvs.api.events.team;
+import com.jcwhatever.pvs.api.arena.ArenaPlayer;
 
-import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
-import com.jcwhatever.pvs.api.arena.ArenaTeam;
-import com.jcwhatever.pvs.api.events.AbstractArenaEvent;
+import org.bukkit.entity.Player;
+
+import java.util.Collection;
 
 /**
- * An arena event that deals with a team
+ * Collection of {@link ArenaPlayer}.
  */
-public abstract class AbstractTeamEvent extends AbstractArenaEvent {
-
-    private final ArenaTeam _team;
-    private final ArenaPlayerCollection _teamPlayers;
+public interface ArenaPlayerCollection extends Collection<ArenaPlayer> {
 
     /**
-     * Constructor.
+     * Determine if the list can be modified.
      *
-     * @param arena          The event arena.
-     * @param team           The event team.
-     * @param teamPlayers    The players on the team.
+     * @return  True if the list cannot be modified, otherwise false.
      */
-    public AbstractTeamEvent(Arena arena, ArenaTeam team, ArenaPlayerCollection teamPlayers) {
-        super(arena);
-
-        PreCon.notNull(team);
-        PreCon.notNull(teamPlayers);
-
-        _team = team;
-        _teamPlayers = teamPlayers;
-    }
+    boolean isReadonly();
 
     /**
-     * Get the event team.
+     * Get a collection that represents the {@link ArenaPlayer}'s in the
+     * {@link ArenaPlayerCollection} as {@link Player}'s.
      */
-    public ArenaTeam getTeam() {
-        return _team;
-    }
-
-    /**
-     * Get the players on the team in an unmodifiable list.
-     */
-    public ArenaPlayerCollection getTeamPlayers() {
-        return _teamPlayers;
-    }
+    Collection<Player> asPlayers();
 }
-

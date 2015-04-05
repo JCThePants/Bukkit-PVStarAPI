@@ -28,12 +28,11 @@ package com.jcwhatever.pvs.api.arena.managers;
 import com.jcwhatever.nucleus.utils.Result;
 import com.jcwhatever.pvs.api.arena.Arena;
 import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
 import com.jcwhatever.pvs.api.arena.options.AddPlayerReason;
 import com.jcwhatever.pvs.api.arena.options.RemovePlayerReason;
 
 import org.bukkit.Location;
-
-import java.util.List;
 
 /**
  * The base implementation for player managers
@@ -44,24 +43,24 @@ public interface PlayerManager {
     /**
      * Get the managers owning arena.
      */
-    public Arena getArena();
+    Arena getArena();
 
     /**
      * Get the players being managed.
      */
-    public List<ArenaPlayer> getPlayers();
+    ArenaPlayerCollection getPlayers();
 
     /**
      * Get the number of players being managed.
      */
-    public int getPlayerCount();
+    int getPlayerCount();
 
     /**
      * Determine if the manager is managing the specified player.
      *
      * @param player  The player to check.
      */
-    public boolean hasPlayer(ArenaPlayer player);
+    boolean hasPlayer(ArenaPlayer player);
 
     /**
      * Respawn the specified player if the player is being managed
@@ -69,7 +68,7 @@ public interface PlayerManager {
      *
      * @param player  The player to respawn.
      */
-    public boolean respawnPlayer(ArenaPlayer player);
+    boolean respawnPlayer(ArenaPlayer player);
 
     /**
      * Add a player to the manager instance to be managed.
@@ -79,7 +78,7 @@ public interface PlayerManager {
      *
      * @return  True if the player was added.
      */
-    public boolean addPlayer(ArenaPlayer player, AddPlayerReason reason);
+    boolean addPlayer(ArenaPlayer player, AddPlayerReason reason);
 
     /**
      * Remove a player from the manager instance.
@@ -89,7 +88,7 @@ public interface PlayerManager {
      *
      * @return  A location to send the player.
      */
-    public Result<Location> removePlayer(ArenaPlayer player, RemovePlayerReason reason);
+    Result<Location> removePlayer(ArenaPlayer player, RemovePlayerReason reason);
 
     /**
      * Tell all players being managed.
@@ -97,5 +96,5 @@ public interface PlayerManager {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public void tell(String message, Object... params);
+    void tell(String message, Object... params);
 }

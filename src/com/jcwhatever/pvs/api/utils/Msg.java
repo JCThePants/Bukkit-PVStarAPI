@@ -32,13 +32,13 @@ import com.jcwhatever.nucleus.utils.text.TextUtils;
 import com.jcwhatever.pvs.api.PVStarAPI;
 import com.jcwhatever.pvs.api.arena.Arena;
 import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -139,9 +139,9 @@ public class Msg {
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        List<ArenaPlayer> lobby = arena.getLobbyManager().getPlayers();
-        List<ArenaPlayer> spectators = arena.getSpectatorManager().getPlayers();
-        List<ArenaPlayer> gamers = arena.getGameManager().getPlayers();
+        ArenaPlayerCollection lobby = arena.getLobbyManager().getPlayers();
+        ArenaPlayerCollection spectators = arena.getSpectatorManager().getPlayers();
+        ArenaPlayerCollection gamers = arena.getGameManager().getPlayers();
 
         String formatted = TextUtils.format(message, params);
 

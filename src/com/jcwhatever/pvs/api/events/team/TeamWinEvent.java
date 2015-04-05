@@ -26,11 +26,10 @@
 package com.jcwhatever.pvs.api.events.team;
 
 import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
 
 import javax.annotation.Nullable;
-import java.util.Collection;
 
 /**
  * Called when an arena team wins.
@@ -48,7 +47,7 @@ public class TeamWinEvent extends AbstractTeamEvent {
      * @param teamPlayers  The players on the team.
      * @param winMessage   The message to display to players in the game.
      */
-    public TeamWinEvent(Arena arena, ArenaTeam team, Collection<ArenaPlayer> teamPlayers, @Nullable String winMessage) {
+    public TeamWinEvent(Arena arena, ArenaTeam team, ArenaPlayerCollection teamPlayers, @Nullable String winMessage) {
         super(arena, team, teamPlayers);
 
         _initialMessage = winMessage;

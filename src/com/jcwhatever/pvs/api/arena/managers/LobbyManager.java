@@ -25,10 +25,8 @@
 
 package com.jcwhatever.pvs.api.arena.managers;
 
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
 import com.jcwhatever.pvs.api.arena.settings.LobbyManagerSettings;
-
-import java.util.List;
 
 /**
  * Manages an arenas lobby players.
@@ -40,7 +38,7 @@ public interface LobbyManager extends PlayerManager {
      *
      * @return Empty list if none available.
      */
-    List<ArenaPlayer> getReadyGroup();
+    ArenaPlayerCollection getReadyGroup();
 
     /**
      * Get the next group of players that meat minimum players
@@ -48,7 +46,7 @@ public interface LobbyManager extends PlayerManager {
      *
      * @return Empty list if none available.
      */
-    List<ArenaPlayer> getNextGroup();
+    ArenaPlayerCollection getNextGroup();
 
     /**
      * Get the lobby manager settings.
