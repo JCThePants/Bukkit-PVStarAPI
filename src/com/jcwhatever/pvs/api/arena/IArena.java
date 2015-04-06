@@ -26,7 +26,6 @@
 package com.jcwhatever.pvs.api.arena;
 
 import com.jcwhatever.nucleus.events.manager.EventManager;
-import com.jcwhatever.nucleus.mixins.IDisposable;
 import com.jcwhatever.nucleus.mixins.INamedInsensitive;
 import com.jcwhatever.nucleus.providers.permissions.IPermission;
 import com.jcwhatever.nucleus.storage.IDataNode;
@@ -47,7 +46,7 @@ import java.util.UUID;
 /**
  * Arena interface
  */
-public interface IArena extends INamedInsensitive, IDisposable {
+public interface IArena extends INamedInsensitive {
 
     /**
      * Get the arenas name in lower case letters.
@@ -191,22 +190,4 @@ public interface IArena extends INamedInsensitive, IDisposable {
      * @return  True if the player was removed.
      */
     boolean remove(IArenaPlayer player, RemovePlayerReason reason);
-
-    /**
-     * Invoked when the arena is initialized by the arena manager.
-     *
-     * <p>For arena manager use only.</p>
-     *
-     * @param id        The arenas id.
-     * @param name      The name of the arena.
-     */
-    void init(UUID id, String name);
-
-    /**
-     * Invoked when an arena is permanently removed.
-     *
-     * <p>For arena manager use only.</p>
-     */
-    @Override
-    void dispose();
 }
