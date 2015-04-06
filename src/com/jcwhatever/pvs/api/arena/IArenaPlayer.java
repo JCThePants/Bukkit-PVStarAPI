@@ -65,6 +65,15 @@ public interface IArenaPlayer extends INamed, IMeta, IArenaOwned, IPlayerReferen
     Location getLocation();
 
     /**
+     * Copy the players current location values into an output {@link Location}.
+     *
+     * @param output  The output {@link Location}.
+     *
+     * @return  The output {@link Location}.
+     */
+    Location getLocation(Location output);
+
+    /**
      * Get the arena the player is currently in.
      */
     @Override
