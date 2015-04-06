@@ -208,33 +208,5 @@ public interface IArenaPlayer extends INamed, IMeta, IPlayerReference {
      * @param blame  The arena player to blame.
      */
     void kill(@Nullable IArenaPlayer blame);
-
-    /**
-     * Register the player as being part of
-     * the specified arena.
-     *
-     * <p>Intended for internal use.</p>
-     *
-     * @param arena  The arena the player is in.
-     */
-    void setCurrentArena(IArena arena);
-
-    /**
-     * Clear all flags related to the players current arena.
-     *
-     * <p>Effectively updates the player to "Not in an arena" status.</p>
-     *
-     * <p>Intended for internal use.</p>
-     */
-    void clearArena();
-
-    /**
-     * Set the player group the player is in.
-     *
-     * <p>Intended for internal use.</p>
-     *
-     * @param playerGroup  The player group.
-     */
-    void setPlayerGroup(@Nullable IArenaPlayerGroup playerGroup);
 }
 
