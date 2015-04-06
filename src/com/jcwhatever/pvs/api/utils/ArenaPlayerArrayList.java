@@ -86,7 +86,7 @@ public class ArenaPlayerArrayList extends ListWrapper<ArenaPlayer> implements Ar
     }
 
     @Override
-    public boolean isReadonly() {
+    public boolean isReadOnly() {
         return _isReadonly;
     }
 

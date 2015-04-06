@@ -24,6 +24,7 @@
 
 package com.jcwhatever.pvs.api.arena.collections;
 
+import com.jcwhatever.nucleus.mixins.IReadOnly;
 import com.jcwhatever.pvs.api.arena.ArenaPlayer;
 
 import org.bukkit.entity.Player;
@@ -33,14 +34,15 @@ import java.util.Collection;
 /**
  * Collection of {@link ArenaPlayer}.
  */
-public interface ArenaPlayerCollection extends Collection<ArenaPlayer> {
+public interface ArenaPlayerCollection extends Collection<ArenaPlayer>, IReadOnly {
 
     /**
      * Determine if the list can be modified.
      *
      * @return  True if the list cannot be modified, otherwise false.
      */
-    boolean isReadonly();
+    @Override
+    boolean isReadOnly();
 
     /**
      * Get a collection that represents the {@link ArenaPlayer}'s in the

@@ -87,7 +87,7 @@ public class ArenaPlayerHashSet extends SetWrapper<ArenaPlayer> implements Arena
     }
 
     @Override
-    public boolean isReadonly() {
+    public boolean isReadOnly() {
         return _isReadonly;
     }
 
