@@ -42,7 +42,6 @@ public abstract class ArenaExtension {
     private ArenaExtensionRegistration _registration;
     private ArenaExtensionInfo _extensionInfo;
     private IArena _arena;
-    private boolean _isInitialized;
     private boolean _isAttached;
     private IDataNode _dataNode;
     private String _dataNodePath;
@@ -53,13 +52,6 @@ public abstract class ArenaExtension {
      */
     public final IArena getArena() {
         return _arena;
-    }
-
-    /**
-     * Determine if the module has finished initializing.
-     */
-    public final boolean isInitialized() {
-        return _isInitialized;
     }
 
     /**
@@ -123,14 +115,14 @@ public abstract class ArenaExtension {
          * @param info       The extensions info.
          * @param arena      The arena to attach the extension to.
          */
-        public void init(ArenaExtension extension, ArenaExtensionInfo info, IArena arena) {
+        public void attach(ArenaExtension extension, ArenaExtensionInfo info, IArena arena) {
             PreCon.notNull(extension);
             PreCon.notNull(info);
             PreCon.notNull(arena);
             PreCon.isValid(extension._registration == this, "Invalid registration.");
 
-            if (extension._isInitialized)
-                throw new IllegalStateException("An arena module cannot be initialized more than once.");
+            if (extension._isAttached)
+                throw new IllegalStateException("An arena module cannot be attached more than once.");
 
             extension._extensionInfo = info;
             extension._arena = arena;
@@ -138,20 +130,6 @@ public abstract class ArenaExtension {
             extension._dataNodePath = "arenas." + arena.getId() + ".extensions." + info.name();
             extension._dataNode = DataStorage.get(PVStarAPI.getPlugin(), new DataPath(extension._dataNodePath));
             extension._dataNode.load();
-
-            extension._isInitialized = true;
-        }
-
-        /**
-         * Finish initializing the extension by attaching it.
-         *
-         * @param extension  The extension to attach.
-         */
-        public void attach(ArenaExtension extension) {
-            PreCon.isValid(extension._registration == this, "Invalid registration.");
-
-            if (extension._isAttached)
-                throw new IllegalStateException("Extension is already attached.");
 
             extension._isAttached = true;
             extension.onAttach();
