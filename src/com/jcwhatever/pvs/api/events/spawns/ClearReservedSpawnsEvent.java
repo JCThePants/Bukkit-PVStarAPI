@@ -26,7 +26,7 @@
 package com.jcwhatever.pvs.api.events.spawns;
 
 import com.jcwhatever.nucleus.mixins.ICancellable;
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.events.AbstractArenaEvent;
 
 /**
@@ -41,7 +41,7 @@ public class ClearReservedSpawnsEvent extends AbstractArenaEvent implements ICan
      *
      * @param arena  The event arena.
      */
-    public ClearReservedSpawnsEvent (Arena arena) {
+    public ClearReservedSpawnsEvent (IArena arena) {
         super(arena);
     }
 

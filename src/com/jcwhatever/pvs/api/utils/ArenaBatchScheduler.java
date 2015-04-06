@@ -25,7 +25,7 @@
 
 package com.jcwhatever.pvs.api.utils;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.nucleus.managed.scheduler.IScheduledTask;
 
@@ -36,7 +36,7 @@ import java.util.LinkedList;
  */
 public class ArenaBatchScheduler {
 
-    private final Arena _arena;
+    private final IArena _arena;
     private final LinkedList<IScheduledTask> _tasks = new LinkedList<>();
 
     /**
@@ -44,7 +44,7 @@ public class ArenaBatchScheduler {
      *
      * @param arena  The arena to schedule tasks for.
      */
-    public ArenaBatchScheduler(Arena arena) {
+    public ArenaBatchScheduler(IArena arena) {
         PreCon.notNull(arena);
 
         _arena = arena;

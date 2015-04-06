@@ -26,19 +26,19 @@
 package com.jcwhatever.pvs.api.events;
 
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 public abstract class AbstractArenaEvent {
 
-    private Arena _arena;
+    private IArena _arena;
 
-    public AbstractArenaEvent(Arena arena) {
+    public AbstractArenaEvent(IArena arena) {
         PreCon.notNull(arena);
 
         _arena = arena;
     }
 
-    public final Arena getArena() {
+    public final IArena getArena() {
         return _arena;
     }
 }

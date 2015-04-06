@@ -26,9 +26,9 @@
 package com.jcwhatever.pvs.api.events.players;
 
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.PlayerManager;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
 import com.jcwhatever.pvs.api.events.AbstractArenaEvent;
 import javax.annotation.Nullable;
 
@@ -37,8 +37,8 @@ import javax.annotation.Nullable;
  */
 public abstract class AbstractPlayerEvent extends AbstractArenaEvent {
 
-    private final ArenaPlayer _player;
-    private final PlayerManager _relatedManager;
+    private final IArenaPlayer _player;
+    private final IPlayerManager _relatedManager;
 
     /**
      * Constructor.
@@ -46,7 +46,7 @@ public abstract class AbstractPlayerEvent extends AbstractArenaEvent {
      * @param arena          The event arena.
      * @param player         The event player.
      */
-    public AbstractPlayerEvent(Arena arena, ArenaPlayer player, @Nullable PlayerManager relatedManager) {
+    public AbstractPlayerEvent(IArena arena, IArenaPlayer player, @Nullable IPlayerManager relatedManager) {
         super(arena);
 
         PreCon.notNull(player);
@@ -58,7 +58,7 @@ public abstract class AbstractPlayerEvent extends AbstractArenaEvent {
     /**
      * Get the event player.
      */
-    public ArenaPlayer getPlayer() {
+    public IArenaPlayer getPlayer() {
         return _player;
     }
 
@@ -66,7 +66,7 @@ public abstract class AbstractPlayerEvent extends AbstractArenaEvent {
      * Get the arena player manager (Lobby, Game, or Spectator) related to the event.
      */
     @Nullable
-    public PlayerManager getRelatedManager() {
+    public IPlayerManager getRelatedManager() {
         return _relatedManager;
     }
 }

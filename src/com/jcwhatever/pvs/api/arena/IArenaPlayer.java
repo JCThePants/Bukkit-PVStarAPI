@@ -25,10 +25,10 @@
 
 package com.jcwhatever.pvs.api.arena;
 
-import com.jcwhatever.pvs.api.arena.managers.PlayerManager;
+import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
 import com.jcwhatever.pvs.api.arena.options.ArenaPlayerRelation;
 import com.jcwhatever.pvs.api.arena.options.TeamChangeReason;
-import com.jcwhatever.pvs.api.arena.settings.PlayerManagerSettings;
+import com.jcwhatever.pvs.api.arena.settings.IPlayerManagerSettings;
 import com.jcwhatever.nucleus.mixins.IMeta;
 import com.jcwhatever.nucleus.mixins.INamed;
 import com.jcwhatever.nucleus.mixins.IPlayerReference;
@@ -41,10 +41,10 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 
 /**
- * Wraps the {@link org.bukkit.entity.Player} object and carries extra arena related meta data regarding
- * the player.
+ * Wraps the {@link org.bukkit.entity.Player} object and carries extra arena
+ * related meta data regarding the player.
  */
-public interface ArenaPlayer extends INamed, IMeta, IPlayerReference {
+public interface IArenaPlayer extends INamed, IMeta, IPlayerReference {
 
     /**
      * Get the players unique minecraft Id.
@@ -52,14 +52,9 @@ public interface ArenaPlayer extends INamed, IMeta, IPlayerReference {
     UUID getUniqueId();
 
     /**
-     * Get the players minecraft name.
-     */
-    @Override
-    String getName();
-
-    /**
-     * Get the players display name. Returns the player name
-     * if the player has no display name set.
+     * Get the players display name.
+     *
+     * @return The player name if the player has no display name set.
      */
     String getDisplayName();
 
@@ -72,11 +67,11 @@ public interface ArenaPlayer extends INamed, IMeta, IPlayerReference {
      * Get the arena the player is currently in.
      */
     @Nullable
-    Arena getArena();
+    IArena getArena();
 
     /**
-     * Get the most recent date/time that a player
-     * joined an arena during their current login session.
+     * Get the most recent date/time that a player joined an arena during
+     * their current login session.
      */
     @Nullable
     Date getJoinDate();
@@ -118,10 +113,10 @@ public interface ArenaPlayer extends INamed, IMeta, IPlayerReference {
     int incrementPoints(int amount);
 
     /**
-     * Get the {@link ArenaPlayerGroup} the player is part of.
+     * Get the {@link IArenaPlayerGroup} the player is part of.
      */
     @Nullable
-    ArenaPlayerGroup getPlayerGroup();
+    IArenaPlayerGroup getPlayerGroup();
 
     /**
      * Determine if the player is ready to play.
@@ -169,20 +164,21 @@ public interface ArenaPlayer extends INamed, IMeta, IPlayerReference {
      * (i.e. Lobby, Game, Spectator)
      */
     @Nullable
-    PlayerManager getRelatedManager();
+    IPlayerManager getRelatedManager();
 
     /**
-     * Get {@link PlayerManagerSettings} implementation from the
+     * Get {@link IPlayerManagerSettings} implementation from the
      * arena the player is in based on their current arena relation.
-     * i.e. If the player is in the lobby, returns the lobby managers
-     * settings.
+     *
+     * <p>i.e. If the player is in the lobby, returns the lobby managers
+     * settings.</p>
      */
     @Nullable
-    PlayerManagerSettings getRelatedSettings();
+    IPlayerManagerSettings getRelatedSettings();
 
     /**
      * Get the players meta data object for a specific arena,
-     * which is used until the {@link ArenaPlayer} instance is disposed.
+     * which is used until the {@link IArenaPlayer} instance is disposed.
      *
      * @param arenaId  The id of the arena.
      */
@@ -190,14 +186,14 @@ public interface ArenaPlayer extends INamed, IMeta, IPlayerReference {
 
     /**
      * Get the global meta data object which is used until
-     * the {@link ArenaPlayer} instance is disposed.
+     * the {@link IArenaPlayer} instance is disposed.
      */
     @Override
     MetaStore getMeta();
 
     /**
-     * Get the players session meta data object,
-     * which is used until the player joins another arena.
+     * Get the players session meta data object, which is used until the
+     * player joins another arena.
      */
     MetaStore getSessionMeta();
 
@@ -211,7 +207,7 @@ public interface ArenaPlayer extends INamed, IMeta, IPlayerReference {
      *
      * @param blame  The arena player to blame.
      */
-    void kill(@Nullable ArenaPlayer blame);
+    void kill(@Nullable IArenaPlayer blame);
 
     /**
      * Register the player as being part of
@@ -221,12 +217,12 @@ public interface ArenaPlayer extends INamed, IMeta, IPlayerReference {
      *
      * @param arena  The arena the player is in.
      */
-    void setCurrentArena(Arena arena);
-
+    void setCurrentArena(IArena arena);
 
     /**
-     * Clear all flags related to the players current arena. Effectively
-     * updates the player to "Not in an arena" status.
+     * Clear all flags related to the players current arena.
+     *
+     * <p>Effectively updates the player to "Not in an arena" status.</p>
      *
      * <p>Intended for internal use.</p>
      */
@@ -239,7 +235,6 @@ public interface ArenaPlayer extends INamed, IMeta, IPlayerReference {
      *
      * @param playerGroup  The player group.
      */
-    void setPlayerGroup(@Nullable ArenaPlayerGroup playerGroup);
-
+    void setPlayerGroup(@Nullable IArenaPlayerGroup playerGroup);
 }
 

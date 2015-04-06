@@ -25,7 +25,7 @@
 
 package com.jcwhatever.pvs.api.commands;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.extensions.ArenaExtension;
 import com.jcwhatever.pvs.api.commands.AbstractPVCommand.ArenaReturned;
 
@@ -35,7 +35,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public interface CommandHelper {
+public interface ICommandHelper {
 
     /**
      * Get the command senders currently selected arena.
@@ -44,7 +44,7 @@ public interface CommandHelper {
      * @param returned  Specify return conditions.
      */
     @Nullable
-    Arena getSelectedArena(CommandSender sender, ArenaReturned returned);
+    IArena getSelectedArena(CommandSender sender, ArenaReturned returned);
 
     /**
      * Get an extension instance from an arena.
@@ -55,7 +55,7 @@ public interface CommandHelper {
      * @param <T>     The extension type.
      */
     @Nullable
-    <T extends ArenaExtension> T getExtension(CommandSender sender, Arena arena, Class<T> clazz);
+    <T extends ArenaExtension> T getExtension(CommandSender sender, IArena arena, Class<T> clazz);
 
     /**
      * Get an arena by name.
@@ -64,7 +64,7 @@ public interface CommandHelper {
      * @param arenaName  The name or partial name of the arena to find.
      */
     @Nullable
-    Arena getArena(CommandSender sender, String arenaName);
+    IArena getArena(CommandSender sender, String arenaName);
 
     /**
      * Get an arena by exact name. (non-case sensitive)
@@ -72,7 +72,7 @@ public interface CommandHelper {
      * @param arenaName  The name of the arena.
      */
     @Nullable
-    Arena getArena(String arenaName);
+    IArena getArena(String arenaName);
 
     /**
      * Get a list of arena ids from a comma delimited string of arena names.

@@ -26,7 +26,7 @@
 package com.jcwhatever.pvs.api.events.spawns;
 
 import com.jcwhatever.nucleus.mixins.ICancellable;
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.spawns.Spawnpoint;
 
 /**
@@ -42,7 +42,7 @@ public class SpawnPreRemoveEvent extends AbstractSpawnEvent implements ICancella
      * @param arena  The event arena.
      * @param spawn  The spawnpoint being removed.
      */
-    public SpawnPreRemoveEvent(Arena arena, Spawnpoint spawn) {
+    public SpawnPreRemoveEvent(IArena arena, Spawnpoint spawn) {
         super(arena, spawn);
     }
 

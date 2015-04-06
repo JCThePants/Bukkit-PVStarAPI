@@ -27,8 +27,8 @@ package com.jcwhatever.pvs.api.events.spawns;
 
 import com.jcwhatever.nucleus.mixins.ICancellable;
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.spawns.Spawnpoint;
 
 /**
@@ -36,7 +36,7 @@ import com.jcwhatever.pvs.api.spawns.Spawnpoint;
  */
 public class ReserveSpawnEvent extends AbstractSpawnEvent implements ICancellable {
 
-    private ArenaPlayer _player;
+    private IArenaPlayer _player;
     private boolean _isCancelled;
 
     /**
@@ -46,7 +46,7 @@ public class ReserveSpawnEvent extends AbstractSpawnEvent implements ICancellabl
      * @param player  The player the spawnpoint is being reserved for.
      * @param spawn   The spawnpoint being reserved.
      */
-    public ReserveSpawnEvent(Arena arena, ArenaPlayer player, Spawnpoint spawn) {
+    public ReserveSpawnEvent(IArena arena, IArenaPlayer player, Spawnpoint spawn) {
         super(arena, spawn);
 
         PreCon.notNull(player);
@@ -57,7 +57,7 @@ public class ReserveSpawnEvent extends AbstractSpawnEvent implements ICancellabl
     /**
      * Get the player the spawnpoint is being reserved for.
      */
-    public ArenaPlayer getPlayer() {
+    public IArenaPlayer getPlayer() {
         return _player;
     }
 

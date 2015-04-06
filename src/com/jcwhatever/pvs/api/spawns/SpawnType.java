@@ -26,7 +26,7 @@
 package com.jcwhatever.pvs.api.spawns;
 
 import com.jcwhatever.nucleus.mixins.INamedInsensitive;
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -99,5 +99,5 @@ public abstract class SpawnType implements INamedInsensitive {
      * @return
      */
     @Nullable
-    public abstract List<Entity> spawn(Arena arena, Location location, int count);
+    public abstract List<Entity> spawn(IArena arena, Location location, int count);
 }

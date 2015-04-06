@@ -27,13 +27,13 @@ package com.jcwhatever.pvs.api;
 
 import com.jcwhatever.nucleus.commands.CommandDispatcher;
 import com.jcwhatever.nucleus.events.manager.EventManager;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.extensions.ExtensionTypeManager;
-import com.jcwhatever.pvs.api.arena.managers.ArenaManager;
-import com.jcwhatever.pvs.api.commands.CommandHelper;
-import com.jcwhatever.pvs.api.points.PointsManager;
-import com.jcwhatever.pvs.api.spawns.SpawnTypeManager;
-import com.jcwhatever.pvs.api.stats.StatsManager;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.extensions.IExtensionTypeManager;
+import com.jcwhatever.pvs.api.arena.managers.IArenaManager;
+import com.jcwhatever.pvs.api.commands.ICommandHelper;
+import com.jcwhatever.pvs.api.points.IPointsManager;
+import com.jcwhatever.pvs.api.spawns.ISpawnTypeManager;
+import com.jcwhatever.pvs.api.stats.IStatsManager;
 
 /**
  * PV-Star static API
@@ -45,25 +45,25 @@ public final class PVStarAPI {
 	private static IPVStar _implementation;
 
     /**
-     * Get an {@link ArenaPlayer} wrapper for the specified player.
+     * Get an {@link IArenaPlayer} wrapper for the specified player.
      *
      * @param player  The player.
      */
-    public static ArenaPlayer getArenaPlayer(Object player) {
+    public static IArenaPlayer getArenaPlayer(Object player) {
         return _implementation.getArenaPlayer(player);
     }
 
     /**
      * Get the arena manager.
      */
-    public static ArenaManager getArenaManager() {
+    public static IArenaManager getArenaManager() {
         return _implementation.getArenaManager();
     }
 
     /**
      * Get the spawn type manager.
      */
-    public static SpawnTypeManager getSpawnTypeManager() {
+    public static ISpawnTypeManager getSpawnTypeManager() {
         return _implementation.getSpawnTypeManager();
     }
 
@@ -77,28 +77,28 @@ public final class PVStarAPI {
     /**
      * Get the command helper.
      */
-    public static CommandHelper getCommandHelper() {
+    public static ICommandHelper getCommandHelper() {
         return _implementation.getCommandHelper();
     }
 
     /**
      * Get the statistics manager.
      */
-    public static StatsManager getStatsManager() {
+    public static IStatsManager getStatsManager() {
         return _implementation.getStatsManager();
     }
 
     /**
      * Get the points manager.
      */
-    public static PointsManager getPointsManager() {
+    public static IPointsManager getPointsManager() {
         return _implementation.getPointsManager();
     }
 
     /**
      * Get the global extension manager.
      */
-    public static ExtensionTypeManager getExtensionManager() {
+    public static IExtensionTypeManager getExtensionManager() {
         return _implementation.getExtensionManager();
     }
 

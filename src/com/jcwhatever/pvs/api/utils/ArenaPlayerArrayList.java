@@ -28,8 +28,8 @@ import com.jcwhatever.nucleus.collections.wrap.ConversionListWrapper;
 import com.jcwhatever.nucleus.collections.wrap.ListWrapper;
 import com.jcwhatever.nucleus.utils.player.PlayerUtils;
 import com.jcwhatever.pvs.api.PVStarAPI;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerList;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerList;
 
 import org.bukkit.entity.Player;
 
@@ -38,13 +38,13 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * {@link ArrayList} implementation of {@link ArenaPlayerList}.
+ * {@link ArrayList} implementation of {@link IArenaPlayerList}.
  */
-public class ArenaPlayerArrayList extends ListWrapper<ArenaPlayer> implements ArenaPlayerList {
+public class ArenaPlayerArrayList extends ListWrapper<IArenaPlayer> implements IArenaPlayerList {
 
     public static final ArenaPlayerArrayList EMPTY = new ArenaPlayerArrayList(0).seal();
 
-    private final List<ArenaPlayer> _list;
+    private final List<IArenaPlayer> _list;
     private final List<Player> _asPlayerList = new PlayerList();
 
     private boolean _isReadonly;
@@ -71,7 +71,7 @@ public class ArenaPlayerArrayList extends ListWrapper<ArenaPlayer> implements Ar
      * @param players     The players to initialize the collection with.
      * @param isReadonly  True to make the list readonly, otherwise false.
      */
-    public ArenaPlayerArrayList(Collection<? extends ArenaPlayer> players, boolean isReadonly) {
+    public ArenaPlayerArrayList(Collection<? extends IArenaPlayer> players, boolean isReadonly) {
         _list = new ArrayList<>(players);
         _isReadonly = isReadonly;
     }
@@ -96,12 +96,12 @@ public class ArenaPlayerArrayList extends ListWrapper<ArenaPlayer> implements Ar
     }
 
     @Override
-    protected List<ArenaPlayer> list() {
+    protected List<IArenaPlayer> list() {
         return _list;
     }
 
     @Override
-    protected boolean onPreAdd(ArenaPlayer player) {
+    protected boolean onPreAdd(IArenaPlayer player) {
 
         if (_isReadonly)
             throw new UnsupportedOperationException("The ArenaPlayer list is readonly.");
@@ -118,20 +118,20 @@ public class ArenaPlayerArrayList extends ListWrapper<ArenaPlayer> implements Ar
         return true;
     }
 
-    private class PlayerList extends ConversionListWrapper<Player, ArenaPlayer> {
+    private class PlayerList extends ConversionListWrapper<Player, IArenaPlayer> {
 
         @Override
-        protected List<ArenaPlayer> list() {
+        protected List<IArenaPlayer> list() {
             return _list;
         }
 
         @Override
-        protected Player convert(ArenaPlayer internal) {
+        protected Player convert(IArenaPlayer internal) {
             return PlayerUtils.getPlayer(internal);
         }
 
         @Override
-        protected ArenaPlayer unconvert(Object external) {
+        protected IArenaPlayer unconvert(Object external) {
             return PVStarAPI.getArenaPlayer(external);
         }
     }

@@ -25,9 +25,9 @@
 
 package com.jcwhatever.pvs.api.events.players;
 
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
 import com.jcwhatever.pvs.api.events.AbstractArenaEvent;
 import com.jcwhatever.pvs.api.utils.ArenaPlayerHashSet;
 
@@ -45,7 +45,7 @@ import java.util.Collection;
  */
 public class PlayerJoinQueryEvent extends AbstractArenaEvent {
 
-    private ArenaPlayerCollection _players;
+    private IArenaPlayerCollection _players;
 
     /**
      * Constructor.
@@ -53,7 +53,7 @@ public class PlayerJoinQueryEvent extends AbstractArenaEvent {
      * @param arena   The event arena.
      * @param player  The player to check.
      */
-    public PlayerJoinQueryEvent(Arena arena, ArenaPlayer player) {
+    public PlayerJoinQueryEvent(IArena arena, IArenaPlayer player) {
         super(arena);
 
         _players = new ArenaPlayerHashSet(5);
@@ -66,7 +66,7 @@ public class PlayerJoinQueryEvent extends AbstractArenaEvent {
      * @param arena    The event arena.
      * @param players  The players to check.
      */
-    public PlayerJoinQueryEvent(Arena arena, Collection<ArenaPlayer> players) {
+    public PlayerJoinQueryEvent(IArena arena, Collection<IArenaPlayer> players) {
         super(arena);
 
         _players = new ArenaPlayerHashSet(players.size() * 2);
@@ -76,7 +76,7 @@ public class PlayerJoinQueryEvent extends AbstractArenaEvent {
     /**
      * Get the players being checked.
      */
-    public ArenaPlayerCollection getPlayers() {
+    public IArenaPlayerCollection getPlayers() {
         return _players;
     }
 }

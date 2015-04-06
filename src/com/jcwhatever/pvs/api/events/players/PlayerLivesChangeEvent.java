@@ -26,9 +26,9 @@
 package com.jcwhatever.pvs.api.events.players;
 
 import com.jcwhatever.nucleus.mixins.ICancellable;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.PlayerManager;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
 
 /**
  * Called when the players lives is incremented or decremented.
@@ -47,7 +47,7 @@ public class PlayerLivesChangeEvent extends AbstractPlayerEvent implements ICanc
      * @param previousLives  The number of lives the player had.
      * @param newLives       The number of lives the player will have.
      */
-    public PlayerLivesChangeEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
+    public PlayerLivesChangeEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager,
                                   int previousLives, int newLives) {
         super(arena, player, relatedManager);
 

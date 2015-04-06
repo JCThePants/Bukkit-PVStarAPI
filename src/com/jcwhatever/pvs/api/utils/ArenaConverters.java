@@ -28,7 +28,7 @@ package com.jcwhatever.pvs.api.utils;
 import com.jcwhatever.nucleus.utils.converters.Converter;
 import com.jcwhatever.nucleus.utils.text.TextUtils;
 import com.jcwhatever.pvs.api.PVStarAPI;
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.options.NameMatchMode;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public class ArenaConverters {
 
                 arenaId = TextUtils.parseUUID((String)value);
                 if (arenaId == null) {
-                    List<Arena> arenas = PVStarAPI.getArenaManager().getArena(
+                    List<IArena> arenas = PVStarAPI.getArenaManager().getArena(
                             (String) value, NameMatchMode.CASE_INSENSITIVE);
 
                     return arenas.size() == 1 ? arenas.get(0).getName() : null;
@@ -66,7 +66,7 @@ public class ArenaConverters {
             if (arenaId == null)
                 return null;
 
-            Arena arena = PVStarAPI.getArenaManager().getArena(arenaId);
+            IArena arena = PVStarAPI.getArenaManager().getArena(arenaId);
             if (arena == null)
                 return null;
 
@@ -86,7 +86,7 @@ public class ArenaConverters {
             if (value instanceof UUID) {
 
                 // verify UUID
-                Arena arena = PVStarAPI.getArenaManager().getArena((UUID) value);
+                IArena arena = PVStarAPI.getArenaManager().getArena((UUID) value);
                 if (arena == null)
                     return null;
 
@@ -96,7 +96,7 @@ public class ArenaConverters {
             if (value instanceof String) {
 
                 // see if string corresponds to arena name
-                List<Arena> matches = PVStarAPI.getArenaManager().getArena(
+                List<IArena> matches = PVStarAPI.getArenaManager().getArena(
                         (String) value, NameMatchMode.CASE_INSENSITIVE);
                 if (matches.size() == 1)
                     return matches.get(0).getId();
@@ -105,8 +105,8 @@ public class ArenaConverters {
                 return TextUtils.parseUUID((String) value);
             }
 
-            if (value instanceof Arena) {
-                return ((Arena)value).getId();
+            if (value instanceof IArena) {
+                return ((IArena)value).getId();
             }
 
             return null;

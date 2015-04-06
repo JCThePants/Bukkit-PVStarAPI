@@ -25,7 +25,7 @@
 
 package com.jcwhatever.pvs.api.events.region;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.events.AbstractArenaEvent;
 
 /**
@@ -38,7 +38,7 @@ public class ArenaRegionRestoredEvent extends AbstractArenaEvent {
      *
      * @param arena  The event arena.
      */
-    public ArenaRegionRestoredEvent(Arena arena) {
+    public ArenaRegionRestoredEvent(IArena arena) {
         super(arena);
     }
 }

@@ -26,7 +26,7 @@
 package com.jcwhatever.pvs.api.events.spawns;
 
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.events.AbstractArenaEvent;
 import com.jcwhatever.pvs.api.spawns.Spawnpoint;
 
@@ -43,7 +43,7 @@ public abstract class AbstractSpawnEvent extends AbstractArenaEvent {
      * @param arena          The event arena.
      * @param spawn          The event spawnpoint.
      */
-    public AbstractSpawnEvent(Arena arena, Spawnpoint spawn) {
+    public AbstractSpawnEvent(IArena arena, Spawnpoint spawn) {
         super(arena);
 
         PreCon.notNull(spawn);

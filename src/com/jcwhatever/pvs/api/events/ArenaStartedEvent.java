@@ -26,7 +26,7 @@
 package com.jcwhatever.pvs.api.events;
 
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.options.ArenaStartReason;
 
 /**
@@ -42,7 +42,7 @@ public class ArenaStartedEvent extends AbstractArenaEvent {
      * @param arena   The event arena.
      * @param reason  The reason the arena was started.
      */
-    public ArenaStartedEvent(Arena arena, ArenaStartReason reason) {
+    public ArenaStartedEvent(IArena arena, ArenaStartReason reason) {
         super(arena);
 
         PreCon.notNull(reason);

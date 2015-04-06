@@ -26,9 +26,9 @@
 package com.jcwhatever.pvs.api.events.players;
 
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.PlayerManager;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
 import com.jcwhatever.pvs.api.arena.options.RemovePlayerReason;
 
 /**
@@ -49,7 +49,7 @@ public class PlayerRemovedEvent extends AbstractPlayerEvent {
      * @param relatedManager  The manager the player is being removed from.
      * @param reason          The reason the player was removed.
      */
-    public PlayerRemovedEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
+    public PlayerRemovedEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager,
                               RemovePlayerReason reason) {
         super(arena, player, relatedManager);
 

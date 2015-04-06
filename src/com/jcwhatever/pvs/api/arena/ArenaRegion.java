@@ -51,7 +51,7 @@ public class ArenaRegion extends RestorableRegion {
     public static final MetaKey<ArenaRegion>
             ARENA_REGION_KEY = new MetaKey<ArenaRegion>(ArenaRegion.class);
 
-    private final Arena _arena;
+    private final IArena _arena;
 
     /**
      * Constructor.
@@ -59,7 +59,7 @@ public class ArenaRegion extends RestorableRegion {
      * @param arena     The owning arena.
      * @param dataNode  The regions data node.
      */
-    public ArenaRegion(Arena arena, IDataNode dataNode) {
+    public ArenaRegion(IArena arena, IDataNode dataNode) {
         super(PVStarAPI.getPlugin(), arena.getId().toString(), dataNode);
         _arena = arena;
 
@@ -71,7 +71,7 @@ public class ArenaRegion extends RestorableRegion {
     /**
      * Get the owning arena.
      */
-    public Arena getArena() {
+    public IArena getArena() {
         return _arena;
     }
 
@@ -96,7 +96,7 @@ public class ArenaRegion extends RestorableRegion {
     @Override
     protected void onPlayerEnter(Player p, EnterRegionReason reason) {
 
-        final ArenaPlayer player = PVStarAPI.getArenaPlayer(p);
+        final IArenaPlayer player = PVStarAPI.getArenaPlayer(p);
 
         _arena.getEventManager().call(this, new PlayerEnterArenaRegionEvent(_arena, player, reason));
     }
@@ -122,7 +122,7 @@ public class ArenaRegion extends RestorableRegion {
     @Override
     protected void onPlayerLeave(Player p, LeaveRegionReason reason) {
 
-        ArenaPlayer player = PVStarAPI.getArenaPlayer(p);
+        IArenaPlayer player = PVStarAPI.getArenaPlayer(p);
 
         _arena.getEventManager().call(this, new PlayerLeaveArenaRegionEvent(_arena, player, reason));
     }

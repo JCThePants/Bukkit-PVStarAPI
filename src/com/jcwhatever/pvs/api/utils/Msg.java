@@ -30,9 +30,9 @@ import com.jcwhatever.nucleus.managed.messaging.IMessenger;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.nucleus.utils.text.TextUtils;
 import com.jcwhatever.pvs.api.PVStarAPI;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -70,7 +70,7 @@ public class Msg {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public static void tell(ArenaPlayer player, String message, Object...params) {
+    public static void tell(IArenaPlayer player, String message, Object...params) {
         PreCon.notNull(player);
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
@@ -85,14 +85,14 @@ public class Msg {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public static void tell(Collection<ArenaPlayer> players, String message, Object...params) {
+    public static void tell(Collection<IArenaPlayer> players, String message, Object...params) {
         PreCon.notNull(players);
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
         String formatted = TextUtils.format(message, params);
 
-        for (ArenaPlayer player : players) {
+        for (IArenaPlayer player : players) {
             msg().tell(player.getPlayer(), formatted);
         }
     }
@@ -119,7 +119,7 @@ public class Msg {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public static void tellError(ArenaPlayer player, String message, Object...params) {
+    public static void tellError(IArenaPlayer player, String message, Object...params) {
         PreCon.notNull(player);
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
@@ -134,24 +134,24 @@ public class Msg {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public static void tellArena(Arena arena, String message, Object... params) {
+    public static void tellArena(IArena arena, String message, Object... params) {
         PreCon.notNull(arena);
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        ArenaPlayerCollection lobby = arena.getLobbyManager().getPlayers();
-        ArenaPlayerCollection spectators = arena.getSpectatorManager().getPlayers();
-        ArenaPlayerCollection gamers = arena.getGameManager().getPlayers();
+        IArenaPlayerCollection lobby = arena.getLobbyManager().getPlayers();
+        IArenaPlayerCollection spectators = arena.getSpectatorManager().getPlayers();
+        IArenaPlayerCollection gamers = arena.getGameManager().getPlayers();
 
         String formatted = TextUtils.format(message, params);
 
-        for (ArenaPlayer player : lobby)
+        for (IArenaPlayer player : lobby)
             tell(player.getPlayer(), formatted);
 
-        for (ArenaPlayer player : spectators)
+        for (IArenaPlayer player : spectators)
             tell(player.getPlayer(), formatted);
 
-        for (ArenaPlayer player : gamers)
+        for (IArenaPlayer player : gamers)
             tell(player.getPlayer(), formatted);
     }
 
@@ -170,7 +170,7 @@ public class Msg {
         Collection<? extends Player> players = Bukkit.getOnlinePlayers();
         for (Player p : players) {
 
-            ArenaPlayer player = PVStarAPI.getArenaPlayer(p);
+            IArenaPlayer player = PVStarAPI.getArenaPlayer(p);
             if (player.getArena() != null)
                 continue;
 

@@ -25,7 +25,7 @@
 
 package com.jcwhatever.pvs.api.points;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.nucleus.utils.PreCon;
 
@@ -40,7 +40,7 @@ import javax.annotation.Nullable;
 public abstract class PointsType {
 
     // keyed to arena id
-    private final Map<UUID, PointsHandler> _handlers = new HashMap<>(25);
+    private final Map<UUID, IPointsHandler> _handlers = new HashMap<>(25);
 
     /**
      * The name of the type.
@@ -60,7 +60,7 @@ public abstract class PointsType {
      * @return Null if the arena does not have the points type added..
      */
     @Nullable
-    public final PointsHandler getHandler(Arena arena) {
+    public final IPointsHandler getHandler(IArena arena) {
         return _handlers.get(arena.getId());
     }
 
@@ -71,7 +71,7 @@ public abstract class PointsType {
      *
      * @return  True if the handler was added.
      */
-    public final boolean add(Arena arena) {
+    public final boolean add(IArena arena) {
         PreCon.notNull(arena);
 
         if (_handlers.containsKey(arena.getId()))
@@ -79,7 +79,7 @@ public abstract class PointsType {
 
         IDataNode node = arena.getDataNode("points." + getName());
 
-        PointsHandler handler = getNewHandler(arena, node);
+        IPointsHandler handler = getNewHandler(arena, node);
 
         node.set("enabled", true);
         node.save();
@@ -96,10 +96,10 @@ public abstract class PointsType {
      *
      * @return  True if the handler was found and removed.
      */
-    public final boolean remove(Arena arena) {
+    public final boolean remove(IArena arena) {
         PreCon.notNull(arena);
 
-        PointsHandler handler = _handlers.remove(arena.getId());
+        IPointsHandler handler = _handlers.remove(arena.getId());
         if (handler == null)
             return false;
 
@@ -120,7 +120,7 @@ public abstract class PointsType {
      * @param arena     The arena.
      * @param dataNode  The data node.
      */
-    protected abstract PointsHandler getNewHandler(Arena arena, IDataNode dataNode);
+    protected abstract IPointsHandler getNewHandler(IArena arena, IDataNode dataNode);
 
     /**
      * Invoked when a points handler is removed from an arena.
@@ -128,5 +128,5 @@ public abstract class PointsType {
      * @param arena    The arena.
      * @param handler  The removed handler.
      */
-    protected abstract void onRemove(Arena arena, PointsHandler handler);
+    protected abstract void onRemove(IArena arena, IPointsHandler handler);
 }

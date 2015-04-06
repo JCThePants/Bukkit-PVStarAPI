@@ -25,7 +25,7 @@
 
 package com.jcwhatever.pvs.api.arena.managers;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.options.NameMatchMode;
 
 import org.bukkit.Location;
@@ -39,7 +39,7 @@ import javax.annotation.Nullable;
 /**
  * Manages arenas.
  */
-public interface ArenaManager {
+public interface IArenaManager {
 
     /**
      * Get the command senders selected arena.
@@ -47,7 +47,7 @@ public interface ArenaManager {
      * @param sender  The command sender.
      */
     @Nullable
-    Arena getSelectedArena(CommandSender sender);
+    IArena getSelectedArena(CommandSender sender);
 
     /**
      * Set the command senders selected arena.
@@ -55,7 +55,7 @@ public interface ArenaManager {
      * @param sender  The command sender.
      * @param arena   The arena.
      */
-    void setSelectedArena(CommandSender sender, Arena arena);
+    void setSelectedArena(CommandSender sender, IArena arena);
 
     /**
      * Change an arenas name.
@@ -71,7 +71,7 @@ public interface ArenaManager {
      * @param arenaId  The id of the arena.
      */
     @Nullable
-    Arena getArena(UUID arenaId);
+    IArena getArena(UUID arenaId);
 
     /**
      * Get the arena the player is in.
@@ -79,7 +79,7 @@ public interface ArenaManager {
      * @param player  The player to check.
      */
     @Nullable
-    Arena getArena(Player player);
+    IArena getArena(Player player);
 
     /**
      * Get the arena the location is in.
@@ -87,7 +87,7 @@ public interface ArenaManager {
      * @param location  The location.
      */
     @Nullable
-    Arena getArena(Location location);
+    IArena getArena(Location location);
 
     /**
      * Get a list of arenas by name and match mode.
@@ -95,12 +95,12 @@ public interface ArenaManager {
      * @param arenaName  The name to search.
      * @param matchMode  The search match mode.
      */
-    List<Arena> getArena(String arenaName, NameMatchMode matchMode);
+    List<IArena> getArena(String arenaName, NameMatchMode matchMode);
 
     /**
      * Get a list of all arenas.
      */
-    List<Arena> getArenas();
+    List<IArena> getArenas();
 
     /**
      * Get the total number of arenas.
@@ -116,7 +116,7 @@ public interface ArenaManager {
      * @return  Null if failed to create arena.
      */
     @Nullable
-    Arena addArena(String arenaName, String typeName);
+    IArena addArena(String arenaName, String typeName);
 
     /**
      * Remove an arena.

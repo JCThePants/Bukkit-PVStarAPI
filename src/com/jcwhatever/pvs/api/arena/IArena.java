@@ -32,13 +32,13 @@ import com.jcwhatever.nucleus.providers.permissions.IPermission;
 import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.pvs.api.arena.extensions.ArenaExtension;
 import com.jcwhatever.pvs.api.arena.extensions.ArenaExtensionManager;
-import com.jcwhatever.pvs.api.arena.managers.GameManager;
-import com.jcwhatever.pvs.api.arena.managers.LobbyManager;
-import com.jcwhatever.pvs.api.arena.managers.SpawnManager;
-import com.jcwhatever.pvs.api.arena.managers.SpectatorManager;
-import com.jcwhatever.pvs.api.arena.managers.TeamManager;
+import com.jcwhatever.pvs.api.arena.managers.IGameManager;
+import com.jcwhatever.pvs.api.arena.managers.ILobbyManager;
+import com.jcwhatever.pvs.api.arena.managers.ISpawnManager;
+import com.jcwhatever.pvs.api.arena.managers.ISpectatorManager;
+import com.jcwhatever.pvs.api.arena.managers.ITeamManager;
 import com.jcwhatever.pvs.api.arena.options.RemovePlayerReason;
-import com.jcwhatever.pvs.api.arena.settings.ArenaSettings;
+import com.jcwhatever.pvs.api.arena.settings.IArenaSettings;
 import com.jcwhatever.pvs.api.modules.PVStarModule;
 
 import java.io.File;
@@ -47,20 +47,7 @@ import java.util.UUID;
 /**
  * Arena interface
  */
-public interface Arena extends INamedInsensitive, IDisposable {
-
-    /**
-     * Get the arenas name.
-     */
-    @Override
-    String getName();
-
-    /**
-     * Set the arenas name.
-     *
-     * @param name  The name of the arena.
-     */
-    void setName(String name);
+public interface IArena extends INamedInsensitive, IDisposable {
 
     /**
      * Get the arenas name in lower case letters.
@@ -69,15 +56,23 @@ public interface Arena extends INamedInsensitive, IDisposable {
     String getSearchName();
 
     /**
+     * Set the name of the arena.
+     *
+     * @param name  The arena name.
+     */
+    void setName(String name);
+
+    /**
      * Get the arenas unique ID.
      */
     UUID getId();
 
     /**
-     * Determine if the arena is busy. No actions
-     * can be performed while the arena is busy.
+     * Determine if the arena is busy.
      *
-     * Arena may be busy after a game ends while it performs cleanup.
+     * <p>No actions can be performed while the arena is busy.</p>
+     *
+     * <p>Arena may be busy after a game ends while it performs cleanup.</p>
      */
     boolean isBusy();
 
@@ -99,27 +94,27 @@ public interface Arena extends INamedInsensitive, IDisposable {
     /**
      * Get the arenas lobby manager.
      */
-    LobbyManager getLobbyManager();
+    ILobbyManager getLobbyManager();
 
     /**
      * Get the arenas game manager.
      */
-    GameManager getGameManager();
+    IGameManager getGameManager();
 
     /**
      * Get the arenas spectator manager.
      */
-    SpectatorManager getSpectatorManager();
+    ISpectatorManager getSpectatorManager();
 
     /**
      * Get the arenas team manager.
      */
-    TeamManager getTeamManager();
+    ITeamManager getTeamManager();
 
     /**
      * Get the arenas spawn point manager.
      */
-    SpawnManager getSpawnManager();
+    ISpawnManager getSpawnManager();
 
     /**
      * Get the arenas extension manager.
@@ -129,17 +124,19 @@ public interface Arena extends INamedInsensitive, IDisposable {
     /**
      * Get the arenas settings.
      */
-    ArenaSettings getSettings();
+    IArenaSettings getSettings();
 
     /**
-     * Get the arenas data folder. This is where modules should
-     * store data for an arena.
+     * Get the arenas data folder.
+     *
+     * <p>This is where modules should store data for an arena.</p>
      */
     File getDataFolder(PVStarModule module);
 
     /**
-     * Get the arenas data folder. This is where arena extensions
-     * should store data for an arena.
+     * Get the arenas data folder.
+     *
+     * <p>This is where arena extensions should store data for an arena.</p>
      */
     File getDataFolder(ArenaExtension module);
 
@@ -149,8 +146,7 @@ public interface Arena extends INamedInsensitive, IDisposable {
     IDataNode getDataNode(String nodeName);
 
     /**
-     * Get the permission players must have in order
-     * to join the arena.
+     * Get the permission players must have in order to join the arena.
      */
     IPermission getPermission();
 
@@ -169,7 +165,7 @@ public interface Arena extends INamedInsensitive, IDisposable {
      * 
      * @param player  The player to check.
      */
-    boolean hasPlayer(ArenaPlayer player);
+    boolean hasPlayer(IArenaPlayer player);
 
     /**
      * Determine if players can join the arena.
@@ -183,7 +179,7 @@ public interface Arena extends INamedInsensitive, IDisposable {
      *
      * @return  True if the player was added to the arena.
      */
-    boolean join(ArenaPlayer player);
+    boolean join(IArenaPlayer player);
 
     /**
      * Remove a player from the arena. Should not be used for arena relation
@@ -194,11 +190,12 @@ public interface Arena extends INamedInsensitive, IDisposable {
      *
      * @return  True if the player was removed.
      */
-    boolean remove(ArenaPlayer player, RemovePlayerReason reason);
+    boolean remove(IArenaPlayer player, RemovePlayerReason reason);
 
     /**
      * Invoked when the arena is initialized by the arena manager.
-     * For arena manager use only.
+     *
+     * <p>For arena manager use only.</p>
      *
      * @param id        The arenas id.
      * @param name      The name of the arena.
@@ -207,7 +204,8 @@ public interface Arena extends INamedInsensitive, IDisposable {
 
     /**
      * Invoked when an arena is permanently removed.
-     * For arena manager use only.
+     *
+     * <p>For arena manager use only.</p>
      */
     @Override
     void dispose();

@@ -22,38 +22,31 @@
  * THE SOFTWARE.
  */
 
+package com.jcwhatever.pvs.api.arena.collections;
 
-package com.jcwhatever.pvs.api.points;
+import com.jcwhatever.nucleus.mixins.IReadOnly;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import org.bukkit.entity.Player;
+
+import java.util.Collection;
 
 /**
- * A points handler that handles incrementing points for
- * players in an arena.
+ * Collection of {@link IArenaPlayer}.
  */
-public interface PointsHandler {
+public interface IArenaPlayerCollection extends Collection<IArenaPlayer>, IReadOnly {
 
     /**
-     * Get the owning arena.
-     */
-    Arena getArena();
-
-    /**
-     * Get the points type the handler is for.
-     */
-    PointsType getPointsType();
-
-    /**
-     * Get the number of points a player receives
-     * for the points type.
-     */
-    int getPoints();
-
-    /**
-     * Set the number of points a player receives
-     * for the points type.
+     * Determine if the list can be modified.
      *
-     * @param points  The number of points.
+     * @return  True if the list cannot be modified, otherwise false.
      */
-    void setPoints(int points);
+    @Override
+    boolean isReadOnly();
+
+    /**
+     * Get a collection that represents the {@link IArenaPlayer}'s in the
+     * {@link IArenaPlayerCollection} as {@link Player}'s.
+     */
+    Collection<Player> asPlayers();
 }

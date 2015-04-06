@@ -25,30 +25,27 @@
 
 package com.jcwhatever.pvs.api.arena;
 
-import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
+import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
 
 import java.util.Collection;
 
 /**
- * A group of players associated with each other due
- * to starting an arena together, regardless of team.
+ * A group of players associated with each other due to starting an arena
+ * together, regardless of team.
  *
- * <p>Players stay in the same group when they are forwarded
- * to other arenas.</p>
+ * <p>Players stay in the same group when they are forwarded to other arenas.</p>
  */
-public interface ArenaPlayerGroup {
+public interface IArenaPlayerGroup {
 
     /**
      * Determine if the group has a player.
      *
      * @param player  The player to check for.
-     * @return
      */
-    boolean hasPlayer(ArenaPlayer player);
+    boolean hasPlayer(IArenaPlayer player);
 
     /**
      * Get the number of players in the group.
-     * @return
      */
     int size();
 
@@ -57,7 +54,7 @@ public interface ArenaPlayerGroup {
      *
      * @param arena  The arena.
      */
-    int size(Arena arena);
+    int size(IArena arena);
 
     /**
      * Determine if players in the provided collection are ready.
@@ -66,14 +63,14 @@ public interface ArenaPlayerGroup {
      *
      * @param players  The players to check.
      */
-    boolean isReady(Collection<ArenaPlayer> players);
+    boolean isReady(Collection<IArenaPlayer> players);
 
     /**
      * Filters the collection of players to players that are in the group
      *
      * @param players  The collection of players to filter.
      */
-    ArenaPlayerCollection filterPlayers(Collection<ArenaPlayer> players);
+    IArenaPlayerCollection filterPlayers(Collection<IArenaPlayer> players);
 
     /**
      * Tell a message to all players in the group.
@@ -90,26 +87,24 @@ public interface ArenaPlayerGroup {
      *
      * @param player  The player to add.
      */
-    void addPlayer(ArenaPlayer player);
+    void addPlayer(IArenaPlayer player);
 
     /**
      * Remove a player from the group.
      *
      * @param player  The player to remove.
      */
-    void removePlayer(ArenaPlayer player);
+    void removePlayer(IArenaPlayer player);
 
     /**
      * Get all players in the group
      */
-    ArenaPlayerCollection getPlayers();
+    IArenaPlayerCollection getPlayers();
 
     /**
      * Get players in the group who are in the specified arena.
      *
      * @param arena  The arena.
      */
-    ArenaPlayerCollection getPlayers(Arena arena);
-
-
+    IArenaPlayerCollection getPlayers(IArena arena);
 }

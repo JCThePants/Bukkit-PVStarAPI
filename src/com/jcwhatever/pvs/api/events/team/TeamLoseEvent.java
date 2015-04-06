@@ -25,8 +25,8 @@
 
 package com.jcwhatever.pvs.api.events.team;
 
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
 
 import javax.annotation.Nullable;
@@ -47,7 +47,7 @@ public class TeamLoseEvent extends AbstractTeamEvent {
      * @param teamPlayers   The players on the team.
      * @param loseMessage   The message to display to players in the game.
      */
-    public TeamLoseEvent(Arena arena, ArenaTeam team, ArenaPlayerCollection teamPlayers, @Nullable String loseMessage) {
+    public TeamLoseEvent(IArena arena, ArenaTeam team, IArenaPlayerCollection teamPlayers, @Nullable String loseMessage) {
         super(arena, team, teamPlayers);
 
         _initialMessage = loseMessage;

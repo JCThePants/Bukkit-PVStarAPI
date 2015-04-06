@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 /**
  * Provides settings for an arena.
  */
-public interface ArenaSettings {
+public interface IArenaSettings {
 
     /**
      * Determine if the arena is enabled.

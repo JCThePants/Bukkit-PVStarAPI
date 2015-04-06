@@ -24,7 +24,7 @@
 
 package com.jcwhatever.pvs.api.events;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 /*
  * Called when an arena initially enters a busy state.
@@ -36,7 +36,7 @@ public class ArenaBusyEvent extends AbstractArenaEvent {
      *
      * @param arena  The arena.
      */
-    public ArenaBusyEvent(Arena arena) {
+    public ArenaBusyEvent(IArena arena) {
         super(arena);
     }
 }

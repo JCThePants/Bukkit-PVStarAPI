@@ -22,19 +22,38 @@
  * THE SOFTWARE.
  */
 
-package com.jcwhatever.pvs.api.arena.collections;
 
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+package com.jcwhatever.pvs.api.points;
 
-import org.bukkit.entity.Player;
-
-import java.util.Set;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 /**
- * Set of {@link ArenaPlayer}.
+ * A points handler that handles incrementing points for
+ * players in an arena.
  */
-public interface ArenaPlayerSet extends ArenaPlayerCollection, Set<ArenaPlayer> {
+public interface IPointsHandler {
 
-    @Override
-    Set<Player> asPlayers();
+    /**
+     * Get the owning arena.
+     */
+    IArena getArena();
+
+    /**
+     * Get the points type the handler is for.
+     */
+    PointsType getPointsType();
+
+    /**
+     * Get the number of points a player receives
+     * for the points type.
+     */
+    int getPoints();
+
+    /**
+     * Set the number of points a player receives
+     * for the points type.
+     *
+     * @param points  The number of points.
+     */
+    void setPoints(int points);
 }

@@ -25,8 +25,8 @@
 
 package com.jcwhatever.pvs.api.events.region;
 
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.events.AbstractArenaEvent;
 import com.jcwhatever.nucleus.regions.options.LeaveRegionReason;
 import com.jcwhatever.nucleus.utils.PreCon;
@@ -36,7 +36,7 @@ import com.jcwhatever.nucleus.utils.PreCon;
  */
 public class PlayerLeaveArenaRegionEvent extends AbstractArenaEvent {
 
-    private final ArenaPlayer _player;
+    private final IArenaPlayer _player;
     private final LeaveRegionReason _reason;
 
     /**
@@ -45,7 +45,7 @@ public class PlayerLeaveArenaRegionEvent extends AbstractArenaEvent {
      * @param arena   The event arena.
      * @param player  The player leaving the arena.
      */
-    public PlayerLeaveArenaRegionEvent(Arena arena, ArenaPlayer player, LeaveRegionReason reason) {
+    public PlayerLeaveArenaRegionEvent(IArena arena, IArenaPlayer player, LeaveRegionReason reason) {
         super(arena);
         PreCon.notNull(player);
         PreCon.notNull(reason);
@@ -57,7 +57,7 @@ public class PlayerLeaveArenaRegionEvent extends AbstractArenaEvent {
     /**
      * Get the player leaving the arena region.
      */
-    public ArenaPlayer getPlayer() {
+    public IArenaPlayer getPlayer() {
         return _player;
     }
 

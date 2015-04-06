@@ -24,7 +24,7 @@
 
 package com.jcwhatever.pvs.api.events.spawns;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.spawns.Spawnpoint;
 
 /**
@@ -38,7 +38,7 @@ public class SpawnAddedEvent  extends AbstractSpawnEvent {
      * @param arena  The event arena.
      * @param spawn  The spawnpoint being added.
      */
-    public SpawnAddedEvent(Arena arena, Spawnpoint spawn) {
+    public SpawnAddedEvent(IArena arena, Spawnpoint spawn) {
         super(arena, spawn);
     }
 }

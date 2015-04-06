@@ -27,10 +27,10 @@ package com.jcwhatever.pvs.api.events.players;
 
 import com.jcwhatever.nucleus.mixins.ICancellable;
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
-import com.jcwhatever.pvs.api.arena.managers.PlayerManager;
+import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
 import com.jcwhatever.pvs.api.arena.options.TeamChangeReason;
 
 /**
@@ -49,7 +49,7 @@ public class PlayerTeamPreChangeEvent extends AbstractPlayerEvent implements ICa
      * @param arena         The event arena.
      * @param player        The event player.
      */
-    public PlayerTeamPreChangeEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
+    public PlayerTeamPreChangeEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager,
                                     ArenaTeam team, TeamChangeReason reason) {
         super(arena, player, relatedManager);
 

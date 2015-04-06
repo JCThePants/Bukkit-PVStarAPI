@@ -25,16 +25,17 @@
 
 package com.jcwhatever.pvs.api.events.players;
 
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.PlayerManager;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.managers.IGameManager;
+import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
 
 import javax.annotation.Nullable;
 
 /**
  * Event called when player joins an arena through the arena method
- * {@link Arena#join} or game manager method
- * {@link com.jcwhatever.pvs.api.arena.managers.GameManager#forwardPlayer}.
+ * {@link IArena#join} or game manager method
+ * {@link IGameManager#forwardPlayer}.
  */
 public class PlayerJoinedEvent extends AbstractPlayerEvent {
 
@@ -44,7 +45,7 @@ public class PlayerJoinedEvent extends AbstractPlayerEvent {
      * @param arena   The arena being joined.
      * @param player  The player joining.
      */
-    public PlayerJoinedEvent(Arena arena, ArenaPlayer player, @Nullable PlayerManager relatedManager) {
+    public PlayerJoinedEvent(IArena arena, IArenaPlayer player, @Nullable IPlayerManager relatedManager) {
         super(arena, player, relatedManager);
     }
 }

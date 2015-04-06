@@ -30,23 +30,24 @@ import com.jcwhatever.nucleus.storage.DataPath;
 import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.PVStarAPI;
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 /**
- * Base implementation of an Arena extension. Each
- * instance is used for a single arena.
+ * Abstract implementation of an Arena extension.
+ *
+ * <p>Each instance is used for a single arena.</p>
  */
 public abstract class ArenaExtension {
 
     private ArenaExtensionInfo _extensionInfo;
-    private Arena _arena;
+    private IArena _arena;
     private boolean _isInitialized;
     private boolean _isEnabled;
     private IDataNode _dataNode;
     private String _dataNodePath;
 
     // Initialize module
-    final void init(ArenaExtensionInfo info, Arena arena) {
+    final void init(ArenaExtensionInfo info, IArena arena) {
         PreCon.notNull(info);
         PreCon.notNull(arena);
 
@@ -64,10 +65,9 @@ public abstract class ArenaExtension {
     }
 
     /**
-     * Get the arena the module instance
-     * was created for.
+     * Get the arena the module instance was created for.
      */
-    public final Arena getArena() {
+    public final IArena getArena() {
         return _arena;
     }
 
@@ -110,8 +110,7 @@ public abstract class ArenaExtension {
     }
 
     /**
-     * Determine if the module has finished
-     * initializing.
+     * Determine if the module has finished initializing.
      */
     public final boolean isInitialized() {
         return _isInitialized;

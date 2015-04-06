@@ -26,29 +26,29 @@
 package com.jcwhatever.pvs.api.arena.managers;
 
 import com.jcwhatever.nucleus.utils.Result;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
 import com.jcwhatever.pvs.api.arena.options.AddPlayerReason;
 import com.jcwhatever.pvs.api.arena.options.RemovePlayerReason;
 
 import org.bukkit.Location;
 
 /**
- * The base implementation for player managers
+ * The base interface for player managers.
  * (LobbyManager, GameManager, SpectatorManager)
  */
-public interface PlayerManager {
+public interface IPlayerManager {
 
     /**
      * Get the managers owning arena.
      */
-    Arena getArena();
+    IArena getArena();
 
     /**
      * Get the players being managed.
      */
-    ArenaPlayerCollection getPlayers();
+    IArenaPlayerCollection getPlayers();
 
     /**
      * Get the number of players being managed.
@@ -60,7 +60,7 @@ public interface PlayerManager {
      *
      * @param player  The player to check.
      */
-    boolean hasPlayer(ArenaPlayer player);
+    boolean hasPlayer(IArenaPlayer player);
 
     /**
      * Respawn the specified player if the player is being managed
@@ -68,7 +68,7 @@ public interface PlayerManager {
      *
      * @param player  The player to respawn.
      */
-    boolean respawnPlayer(ArenaPlayer player);
+    boolean respawnPlayer(IArenaPlayer player);
 
     /**
      * Add a player to the manager instance to be managed.
@@ -78,7 +78,7 @@ public interface PlayerManager {
      *
      * @return  True if the player was added.
      */
-    boolean addPlayer(ArenaPlayer player, AddPlayerReason reason);
+    boolean addPlayer(IArenaPlayer player, AddPlayerReason reason);
 
     /**
      * Remove a player from the manager instance.
@@ -88,7 +88,7 @@ public interface PlayerManager {
      *
      * @return  A location to send the player.
      */
-    Result<Location> removePlayer(ArenaPlayer player, RemovePlayerReason reason);
+    Result<Location> removePlayer(IArenaPlayer player, RemovePlayerReason reason);
 
     /**
      * Tell all players being managed.

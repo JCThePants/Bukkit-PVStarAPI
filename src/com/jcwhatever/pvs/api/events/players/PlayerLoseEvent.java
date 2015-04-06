@@ -25,9 +25,9 @@
 
 package com.jcwhatever.pvs.api.events.players;
 
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.PlayerManager;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
 
 import javax.annotation.Nullable;
 
@@ -45,7 +45,7 @@ public class PlayerLoseEvent extends AbstractPlayerEvent {
      * @param arena   The event arena.
      * @param player  The player who lost.
      */
-    public PlayerLoseEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager, @Nullable String loseMessage) {
+    public PlayerLoseEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager, @Nullable String loseMessage) {
         super(arena, player, relatedManager);
 
         _initialMessage = loseMessage;

@@ -30,7 +30,7 @@ import org.bukkit.entity.EntityType;
 import java.util.List;
 import javax.annotation.Nullable;
 
-public interface SpawnTypeManager {
+public interface ISpawnTypeManager {
 
     /**
      * Get the spawn type used to mark lobby spawn points.

@@ -25,7 +25,7 @@
 
 package com.jcwhatever.pvs.api.arena.extensions;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 import java.util.Set;
 import javax.annotation.Nullable;
@@ -38,7 +38,7 @@ public abstract class ArenaExtensionManager {
     /**
      * Get the owning arena.
      */
-    public abstract Arena getArena();
+    public abstract IArena getArena();
 
     /**
      * Determine if the arena has an extension.

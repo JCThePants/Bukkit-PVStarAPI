@@ -23,41 +23,42 @@
  */
 
 
-package com.jcwhatever.pvs.api.stats;
+package com.jcwhatever.pvs.api.arena.managers;
 
-import java.util.List;
-import java.util.UUID;
-import javax.annotation.Nullable;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.ArenaTeam;
+
+import java.util.Set;
 
 /**
- * Manages statistics data storage and statistic types.
+ * Manages teams in an arena.
  */
-public interface StatsManager {
+public interface ITeamManager {
 
     /**
-     * Register a statistic type.
-     *
-     * @param type  The statistic type.
+     * Get the owning arena.
      */
-    public void registerType(StatType type);
+    IArena getArena();
 
     /**
-     * Get available statistic types.
+     * Get available teams in the arena. Available teams
+     * are determined by the teams set on spawnpoints in
+     * the spawn manager.
      */
-    public List<StatType> getTypes();
+    Set<ArenaTeam> getTeams();
 
     /**
-     * Get a statistic type by name.
-     *
-     * @param name  The name of the statistic.
+     * Get the teams currently in the arena.
      */
-    @Nullable
-    public StatType getType(String name);
+    Set<ArenaTeam> getCurrentTeams();
 
     /**
-     * Get statistics for an arena.
-     *
-     * @param arenaId  The id of the arena.
+     * Get the total number of teams possible in the arena.
      */
-    public ArenaStats getArenaStats(UUID arenaId);
+    int totalTeams();
+
+    /**
+     * Get the number of teams currently in the arena.
+     */
+    int totalCurrentTeams();
 }

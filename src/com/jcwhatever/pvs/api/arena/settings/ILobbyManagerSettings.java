@@ -23,41 +23,45 @@
  */
 
 
-package com.jcwhatever.pvs.api.arena.extensions;
-
-import java.util.List;
-import java.util.Set;
-import javax.annotation.Nullable;
+package com.jcwhatever.pvs.api.arena.settings;
 
 /**
- * Manages extension types that are available to
- * use on arenas.
+ * Provides settings for an arenas lobby manager.
  */
-public interface ExtensionTypeManager {
+public interface ILobbyManagerSettings extends IPlayerManagerSettings {
 
     /**
-     * Get the names of all available extensions
+     * Determine if players are immobilized in the lobby.
      */
-    Set<String> getExtensionNames();
+    boolean isImmobilized();
 
     /**
-     * Get all available extension types.
-     */
-    List<Class<? extends ArenaExtension>> getExtensionClasses();
-
-    /**
-     * Get an extension type by name.
+     * Set players immobilized in the lobby.
      *
-     * @param name  The name of the extension
+     * @param isEnabled  True to immobilize players.
      */
-    @Nullable
-    Class<? extends ArenaExtension> getExtensionClass(String name);
+    void setImmobilized(boolean isEnabled);
+
 
     /**
-     * Register an extension.
-     *
-     * @param extension  The extension to register.
+     * Determine if auto start is enabled.
      */
-    void registerType(Class<? extends ArenaExtension> extension);
+    boolean hasAutoStart();
 
+    /**
+     * Set auto start enabled.
+     */
+    void setAutoStart(boolean isEnabled);
+
+    /**
+     * Get the minimum number of players required
+     * to auto start.
+     */
+    int getMinAutoStartPlayers();
+
+    /**
+     * Set the minimum number of players required
+     * to auto start.
+     */
+    void setMinAutoStartPlayers(int minPlayers);
 }

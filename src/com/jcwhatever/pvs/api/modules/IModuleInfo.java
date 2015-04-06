@@ -23,67 +23,63 @@
  */
 
 
-package com.jcwhatever.pvs.api.arena.settings;
+package com.jcwhatever.pvs.api.modules;
 
-import com.jcwhatever.pvs.api.arena.options.LivesBehavior;
-import com.jcwhatever.pvs.api.arena.options.PointsBehavior;
+import java.util.List;
+import java.util.Set;
 
 /**
- * Provides settings for an arenas game manager
+ * Module info container
  */
-public interface GameManagerSettings extends PlayerManagerSettings {
+public interface IModuleInfo {
 
     /**
-     * Get the number of lives the players
-     * start with.
+     * Get the name of the module.
      */
-    int getStartLives();
+    String getName();
 
     /**
-     * Set the number of lives the players
-     * start with.
+     * Get the name of the module in lowercase.
      */
-    void setStartLives(int lives);
+    String getSearchName();
 
     /**
-     * Get the number of points players start with.
+     * Get the module display version.
      */
-    int getStartPoints();
+    String getVersion();
 
     /**
-     * Set the number of points players start with.
+     * Get the module description.
      */
-    void setStartPoints(int points);
+    String getDescription();
 
     /**
-     * Get the behavior of lives when players are
-     * forwarded to the arena.
+     * Get the modules author names.
      */
-    LivesBehavior getLivesBehavior();
+    List<String> getAuthors();
 
     /**
-     * Set the behavior of lives when players are
-     * forwarded to the arena.
+     * Get the logical version of the module.
      */
-    void setLivesBehavior(LivesBehavior behavior);
+    long getLogicalVersion();
 
     /**
-     * Get the behavior of points when players are
-     * forwarded to the arena.
+     * Get the names of required Bukkit dependencies.
      */
-    PointsBehavior getPointsBehavior();
+    Set<String> getBukkitDepends();
 
     /**
-     * Set the behavior of points when players are
-     * forwarded to the arena.
+     * Get the names of optional Bukkit dependencies.
      */
-    void setPointsBehavior(PointsBehavior behavior);
+    Set<String> getBukkitSoftDepends();
 
     /**
-     * Set entities such dropped items removed
-     * when the game ends.
-     *
-     * @param isEnabled  True to remove entities on game end.
+     * Get the names of required PV-Star module dependencies.
      */
-    void setPostGameEntityCleanup(boolean isEnabled);
+    Set<String> getModuleDepends();
+
+    /**
+     * Get the names of optional PV-Star module dependencies.
+     */
+    Set<String> getModuleSoftDepends();
 }

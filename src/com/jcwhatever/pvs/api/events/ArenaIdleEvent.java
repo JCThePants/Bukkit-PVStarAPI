@@ -24,7 +24,7 @@
 
 package com.jcwhatever.pvs.api.events;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 /*
  * Called when an arena leaves the busy state.
@@ -36,7 +36,7 @@ public class ArenaIdleEvent extends AbstractArenaEvent {
      *
      * @param arena  The arena.
      */
-    public ArenaIdleEvent(Arena arena) {
+    public ArenaIdleEvent(IArena arena) {
         super(arena);
     }
 }

@@ -25,7 +25,7 @@
 
 package com.jcwhatever.pvs.api.points;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 import java.util.List;
 import javax.annotation.Nullable;
@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
 /**
  * Manages points types.
  */
-public interface PointsManager {
+public interface IPointsManager {
 
     /**
      * Register a points type.
@@ -54,7 +54,7 @@ public interface PointsManager {
      *
      * @param arena  The arena.
      */
-    List<PointsType> getTypes(Arena arena);
+    List<PointsType> getTypes(IArena arena);
 
     /**
      * Get a points type by name.
@@ -67,9 +67,10 @@ public interface PointsManager {
 
     /**
      * Load types for an arena from config.
-     * For arena manager use.
+     *
+     * <p>For arena manager use.</p>
      *
      * @param arena  The arena.
      */
-    void loadTypes(Arena arena);
+    void loadTypes(IArena arena);
 }

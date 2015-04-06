@@ -26,7 +26,7 @@
 package com.jcwhatever.pvs.api.utils;
 
 import com.jcwhatever.pvs.api.PVStarAPI;
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.nucleus.Nucleus;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.nucleus.managed.scheduler.IScheduledTask;
@@ -53,7 +53,7 @@ public class ArenaScheduler {
      * @param delayTicks  Delay in ticks before executing the task
      * @param runnable    The task to run
      */
-    public static IScheduledTask runTaskLater(Arena arena, int delayTicks, Runnable runnable) {
+    public static IScheduledTask runTaskLater(IArena arena, int delayTicks, Runnable runnable) {
          return Nucleus.getScheduler()
                  .runTaskLater(PVStarAPI.getPlugin(), delayTicks, wrapRunnable(arena, runnable, false));
     }
@@ -65,7 +65,7 @@ public class ArenaScheduler {
      * @param arena     The arena the task is for
      * @param runnable  The task to run
      */
-    public static IScheduledTask runTaskLater(Arena arena, Runnable runnable) {
+    public static IScheduledTask runTaskLater(IArena arena, Runnable runnable) {
         return Nucleus.getScheduler()
                 .runTaskLater(PVStarAPI.getPlugin(), wrapRunnable(arena, runnable, false));
     }
@@ -79,7 +79,7 @@ public class ArenaScheduler {
      * @param interval      The delay in ticks between tasks
      * @param runnable      The task to run
      */
-    public static IScheduledTask runTaskRepeat(Arena arena, int initialDelay, int interval, Runnable runnable) {
+    public static IScheduledTask runTaskRepeat(IArena arena, int initialDelay, int interval, Runnable runnable) {
         PreCon.notNull(arena);
         PreCon.notNull(runnable);
         PreCon.positiveNumber(initialDelay);
@@ -89,7 +89,7 @@ public class ArenaScheduler {
                 .runTaskRepeat(PVStarAPI.getPlugin(), initialDelay, interval, wrapRunnable(arena, runnable, true));
     }
 
-    private static Runnable wrapRunnable(final Arena arena, final Runnable runnable, boolean isRepeating) {
+    private static Runnable wrapRunnable(final IArena arena, final Runnable runnable, boolean isRepeating) {
 
         if (!isRepeating)
             return runnable;

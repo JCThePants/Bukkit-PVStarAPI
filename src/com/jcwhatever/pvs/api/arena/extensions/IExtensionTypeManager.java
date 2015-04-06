@@ -23,34 +23,40 @@
  */
 
 
-package com.jcwhatever.pvs.api.arena.managers;
+package com.jcwhatever.pvs.api.arena.extensions;
 
-import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
-import com.jcwhatever.pvs.api.arena.settings.LobbyManagerSettings;
+import java.util.List;
+import java.util.Set;
+import javax.annotation.Nullable;
 
 /**
- * Manages an arenas lobby players.
+ * Manages extension types that are available to use on arenas.
  */
-public interface LobbyManager extends PlayerManager {
+public interface IExtensionTypeManager {
 
     /**
-     * Get the next group of players that are all ready.
+     * Get the names of all available extensions
+     */
+    Set<String> getExtensionNames();
+
+    /**
+     * Get all available extension types.
+     */
+    List<Class<? extends ArenaExtension>> getExtensionClasses();
+
+    /**
+     * Get an extension type by name.
      *
-     * @return Empty list if none available.
+     * @param name  The name of the extension
      */
-    ArenaPlayerCollection getReadyGroup();
+    @Nullable
+    Class<? extends ArenaExtension> getExtensionClass(String name);
 
     /**
-     * Get the next group of players that meat minimum players
-     * and minimum auto start players settings.
+     * Register an extension.
      *
-     * @return Empty list if none available.
+     * @param extension  The extension to register.
      */
-    ArenaPlayerCollection getNextGroup();
+    void registerType(Class<? extends ArenaExtension> extension);
 
-    /**
-     * Get the lobby manager settings.
-     */
-    LobbyManagerSettings getSettings();
 }
-

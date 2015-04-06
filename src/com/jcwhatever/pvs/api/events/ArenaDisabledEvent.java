@@ -25,7 +25,7 @@
 
 package com.jcwhatever.pvs.api.events;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 /**
  * Called when an arena is disabled.
@@ -37,7 +37,7 @@ public class ArenaDisabledEvent extends AbstractArenaEvent {
      *
      * @param arena  The event arena.
      */
-    public ArenaDisabledEvent(Arena arena) {
+    public ArenaDisabledEvent(IArena arena) {
         super(arena);
     }
 }

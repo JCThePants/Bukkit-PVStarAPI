@@ -25,8 +25,8 @@
 
 package com.jcwhatever.pvs.api.arena.managers;
 
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
 import com.jcwhatever.pvs.api.spawns.SpawnType;
 import com.jcwhatever.pvs.api.spawns.Spawnpoint;
@@ -38,12 +38,12 @@ import javax.annotation.Nullable;
 /**
  * Manages an arenas spawn points.
  */
-public interface SpawnManager {
+public interface ISpawnManager {
 
     /**
      * Get the arena the spawn manager is managing.
      */
-    Arena getArena();
+    IArena getArena();
 
     /**
      * Determine if there are lobby spawns available.
@@ -90,7 +90,7 @@ public interface SpawnManager {
      * @return  Null if the player is not in an arena.
      */
     @Nullable
-    Spawnpoint getRandomSpawn(ArenaPlayer player);
+    Spawnpoint getRandomSpawn(IArenaPlayer player);
 
     /**
      * Get a random lobby spawn.
@@ -197,7 +197,7 @@ public interface SpawnManager {
      * @param player  The player to reserve the spawn for.
      * @param spawn   The spawnpoint to reserve.
      */
-    void reserveSpawn(ArenaPlayer player, Spawnpoint spawn);
+    void reserveSpawn(IArenaPlayer player, Spawnpoint spawn);
 
     /**
      * Removes the reserved status of the spawnpoint reserved for a player
@@ -205,7 +205,7 @@ public interface SpawnManager {
      *
      * @param player  The player the spawn was reserved for.
      */
-    void unreserveSpawn(ArenaPlayer player);
+    void unreserveSpawn(IArenaPlayer player);
 
     /**
      * Clear all reserved spawns and make them available via the managers

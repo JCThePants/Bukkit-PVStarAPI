@@ -23,45 +23,34 @@
  */
 
 
-package com.jcwhatever.pvs.api.arena.settings;
+package com.jcwhatever.pvs.api.arena.managers;
+
+import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
+import com.jcwhatever.pvs.api.arena.settings.ILobbyManagerSettings;
 
 /**
- * Provides settings for an arenas lobby manager.
+ * Manages an arenas lobby players.
  */
-public interface LobbyManagerSettings extends PlayerManagerSettings {
+public interface ILobbyManager extends IPlayerManager {
 
     /**
-     * Determine if players are immobilized in the lobby.
-     */
-    boolean isImmobilized();
-
-    /**
-     * Set players immobilized in the lobby.
+     * Get the next group of players that are all ready.
      *
-     * @param isEnabled  True to immobilize players.
+     * @return Empty list if none available.
      */
-    void setImmobilized(boolean isEnabled);
-
-
-    /**
-     * Determine if auto start is enabled.
-     */
-    boolean hasAutoStart();
+    IArenaPlayerCollection getReadyGroup();
 
     /**
-     * Set auto start enabled.
+     * Get the next group of players that meat minimum players
+     * and minimum auto start players settings.
+     *
+     * @return Empty list if none available.
      */
-    void setAutoStart(boolean isEnabled);
+    IArenaPlayerCollection getNextGroup();
 
     /**
-     * Get the minimum number of players required
-     * to auto start.
+     * Get the lobby manager settings.
      */
-    int getMinAutoStartPlayers();
-
-    /**
-     * Set the minimum number of players required
-     * to auto start.
-     */
-    void setMinAutoStartPlayers(int minPlayers);
+    ILobbyManagerSettings getSettings();
 }
+

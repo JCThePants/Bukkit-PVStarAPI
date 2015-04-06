@@ -28,9 +28,9 @@ import com.jcwhatever.nucleus.collections.wrap.ConversionSetWrapper;
 import com.jcwhatever.nucleus.collections.wrap.SetWrapper;
 import com.jcwhatever.nucleus.utils.player.PlayerUtils;
 import com.jcwhatever.pvs.api.PVStarAPI;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
-import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerSet;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
+import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerSet;
 
 import org.bukkit.entity.Player;
 
@@ -39,13 +39,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * {@link HashSet} implementation of {@link ArenaPlayerCollection}.
+ * {@link HashSet} implementation of {@link IArenaPlayerCollection}.
  */
-public class ArenaPlayerHashSet extends SetWrapper<ArenaPlayer> implements ArenaPlayerSet {
+public class ArenaPlayerHashSet extends SetWrapper<IArenaPlayer> implements IArenaPlayerSet {
 
     public static final ArenaPlayerHashSet EMPTY = new ArenaPlayerHashSet(0).seal();
 
-    private final Set<ArenaPlayer> _set;
+    private final Set<IArenaPlayer> _set;
     private final Set<Player> _asPlayerSet = new PlayerSet();
 
     private boolean _isReadonly;
@@ -72,7 +72,7 @@ public class ArenaPlayerHashSet extends SetWrapper<ArenaPlayer> implements Arena
      * @param players     The players to initialize the set with.
      * @param isReadonly  True to make the set readonly, otherwise false.
      */
-    public ArenaPlayerHashSet(Collection<? extends ArenaPlayer> players, boolean isReadonly) {
+    public ArenaPlayerHashSet(Collection<? extends IArenaPlayer> players, boolean isReadonly) {
         _set = new HashSet<>(players);
         _isReadonly = isReadonly;
     }
@@ -97,12 +97,12 @@ public class ArenaPlayerHashSet extends SetWrapper<ArenaPlayer> implements Arena
     }
 
     @Override
-    protected Set<ArenaPlayer> set() {
+    protected Set<IArenaPlayer> set() {
         return _set;
     }
 
     @Override
-    protected boolean onPreAdd(ArenaPlayer player) {
+    protected boolean onPreAdd(IArenaPlayer player) {
 
         if (_isReadonly)
             throw new UnsupportedOperationException("The ArenaPlayer list is readonly.");
@@ -119,20 +119,20 @@ public class ArenaPlayerHashSet extends SetWrapper<ArenaPlayer> implements Arena
         return true;
     }
 
-    private class PlayerSet extends ConversionSetWrapper<Player, ArenaPlayer> {
+    private class PlayerSet extends ConversionSetWrapper<Player, IArenaPlayer> {
 
         @Override
-        protected Set<ArenaPlayer> set() {
+        protected Set<IArenaPlayer> set() {
             return _set;
         }
 
         @Override
-        protected Player convert(ArenaPlayer internal) {
+        protected Player convert(IArenaPlayer internal) {
             return PlayerUtils.getPlayer(internal);
         }
 
         @Override
-        protected ArenaPlayer unconvert(Object external) {
+        protected IArenaPlayer unconvert(Object external) {
             return PVStarAPI.getArenaPlayer(external);
         }
     }

@@ -29,7 +29,7 @@ import com.jcwhatever.nucleus.commands.AbstractCommand;
 import com.jcwhatever.nucleus.commands.arguments.CommandArguments;
 import com.jcwhatever.nucleus.commands.exceptions.InvalidArgumentException;
 import com.jcwhatever.pvs.api.PVStarAPI;
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.extensions.ArenaExtension;
 
 import org.bukkit.command.CommandSender;
@@ -43,7 +43,7 @@ import java.util.UUID;
  */
 public abstract class AbstractPVCommand extends AbstractCommand {
 
-    private CommandHelper _helper = PVStarAPI.getCommandHelper();
+    private ICommandHelper _helper = PVStarAPI.getCommandHelper();
 
     /**
      * Specifies under what conditions an arena can be
@@ -80,7 +80,7 @@ public abstract class AbstractPVCommand extends AbstractCommand {
      * @param returned  Specify return conditions.
      */
     @Nullable
-    protected Arena getSelectedArena(CommandSender sender, ArenaReturned returned) {
+    protected IArena getSelectedArena(CommandSender sender, ArenaReturned returned) {
         return _helper.getSelectedArena(sender, returned);
     }
 
@@ -94,7 +94,7 @@ public abstract class AbstractPVCommand extends AbstractCommand {
      * @param <T>  The extension type.
      */
     @Nullable
-    protected <T extends ArenaExtension> T getExtension(CommandSender sender, Arena arena, Class<T> clazz) {
+    protected <T extends ArenaExtension> T getExtension(CommandSender sender, IArena arena, Class<T> clazz) {
         return _helper.getExtension(sender, arena, clazz);
     }
 
@@ -105,7 +105,7 @@ public abstract class AbstractPVCommand extends AbstractCommand {
      * @param arenaName  The name or partial name of the arena to find.
      */
     @Nullable
-    protected Arena getArena(CommandSender sender, String arenaName) {
+    protected IArena getArena(CommandSender sender, String arenaName) {
         return _helper.getArena(sender, arenaName);
     }
 
@@ -115,7 +115,7 @@ public abstract class AbstractPVCommand extends AbstractCommand {
      * @param arenaName  The name of the arena.
      */
     @Nullable
-    protected Arena getArena(String arenaName) {
+    protected IArena getArena(String arenaName) {
         return _helper.getArena(arenaName);
     }
 

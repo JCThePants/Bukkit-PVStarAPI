@@ -26,8 +26,8 @@
 package com.jcwhatever.pvs.api.events.team;
 
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.collections.ArenaPlayerCollection;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
 import com.jcwhatever.pvs.api.events.AbstractArenaEvent;
 
@@ -37,7 +37,7 @@ import com.jcwhatever.pvs.api.events.AbstractArenaEvent;
 public abstract class AbstractTeamEvent extends AbstractArenaEvent {
 
     private final ArenaTeam _team;
-    private final ArenaPlayerCollection _teamPlayers;
+    private final IArenaPlayerCollection _teamPlayers;
 
     /**
      * Constructor.
@@ -46,7 +46,7 @@ public abstract class AbstractTeamEvent extends AbstractArenaEvent {
      * @param team           The event team.
      * @param teamPlayers    The players on the team.
      */
-    public AbstractTeamEvent(Arena arena, ArenaTeam team, ArenaPlayerCollection teamPlayers) {
+    public AbstractTeamEvent(IArena arena, ArenaTeam team, IArenaPlayerCollection teamPlayers) {
         super(arena);
 
         PreCon.notNull(team);
@@ -66,7 +66,7 @@ public abstract class AbstractTeamEvent extends AbstractArenaEvent {
     /**
      * Get the players on the team in an unmodifiable list.
      */
-    public ArenaPlayerCollection getTeamPlayers() {
+    public IArenaPlayerCollection getTeamPlayers() {
         return _teamPlayers;
     }
 }

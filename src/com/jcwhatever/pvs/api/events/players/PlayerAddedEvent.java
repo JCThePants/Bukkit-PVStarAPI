@@ -26,9 +26,9 @@
 package com.jcwhatever.pvs.api.events.players;
 
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.PlayerManager;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
 import com.jcwhatever.pvs.api.arena.options.AddPlayerReason;
 import org.bukkit.Location;
 
@@ -52,7 +52,7 @@ public class PlayerAddedEvent extends AbstractPlayerEvent {
      * @param reason         The reason the player is being added.
      * @param spawnLocation  The location the player will be teleported to, if any.
      */
-    public PlayerAddedEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager, AddPlayerReason reason,
+    public PlayerAddedEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager, AddPlayerReason reason,
                             @Nullable Location spawnLocation, @Nullable String message) {
         super(arena, player, relatedManager);
 

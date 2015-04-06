@@ -26,22 +26,21 @@
 package com.jcwhatever.pvs.api.arena.settings;
 
 import com.jcwhatever.nucleus.storage.IDataNode;
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 /**
- * Basic settings for player managers
+ * Basic settings for player managers.
  * (lobby, game, spectator)
  */
-public interface PlayerManagerSettings {
+public interface IPlayerManagerSettings {
 
     /**
      * Get the owning arena.
      */
-    Arena getArena();
+    IArena getArena();
 
     /**
      * Get the data node.
-     * @return
      */
     IDataNode getDataNode();
 

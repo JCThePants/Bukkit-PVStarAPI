@@ -33,10 +33,10 @@ import java.util.UUID;
 /**
  * Represents that statistics recorded for an arena.
  */
-public interface ArenaStats {
+public interface IArenaStats {
 
     /**
-     * The id of the arena the statistics are from.
+     * The ID of the arena the statistics are from.
      */
     UUID getArenaId();
 
@@ -44,7 +44,7 @@ public interface ArenaStats {
      * Get a statistics value.
      *
      * @param type          The statistic type.
-     * @param playerId      The id of the player.
+     * @param playerId      The ID of the player.
      * @param trackingType  The tracking type.
      */
     double getValue(StatType type, UUID playerId, StatTrackType trackingType);
@@ -53,7 +53,7 @@ public interface ArenaStats {
      * Get a statistics value.
      *
      * @param type          The statistic type.
-     * @param playerId      The id of the player as a {@link java.lang.String}.
+     * @param playerId      The ID of the player as a {@link java.lang.String}.
      * @param trackingType  The tracking type.
      */
     double getValue(StatType type, String playerId, StatTrackType trackingType);
@@ -63,7 +63,7 @@ public interface ArenaStats {
      * running of an arena and whose final result is added here once the arena ends.
      *
      * @param type      The statistic type.
-     * @param playerId  The id of the player.
+     * @param playerId  The ID of the player.
      * @param amount    The players score in the statistic type.
      *
      * @return  The new total statistic value.
@@ -71,7 +71,7 @@ public interface ArenaStats {
     double addScore(StatType type, UUID playerId, double amount);
 
     /**
-     * Get the ids of all players with a statistic type recorded in the arena as a
+     * Get the IDs of all players with a statistic type recorded in the arena as a
      * {@link java.util.Set} of {@link java.lang.String}.
      *
      * @param type  The statistic type.

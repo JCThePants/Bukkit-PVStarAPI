@@ -25,8 +25,8 @@
 
 package com.jcwhatever.pvs.api.spawns;
 
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
 import com.jcwhatever.nucleus.utils.coords.NamedLocation;
 import com.jcwhatever.nucleus.utils.PreCon;
@@ -181,7 +181,7 @@ public class Spawnpoint extends NamedLocation {
      * @return Null if the spawn type is not a spawner.
      */
     @Nullable
-    public List<Entity> spawn(Arena arena, int count) {
+    public List<Entity> spawn(IArena arena, int count) {
         PreCon.notNull(arena);
         PreCon.greaterThanZero(count);
 
@@ -196,7 +196,7 @@ public class Spawnpoint extends NamedLocation {
      *
      * @param player  The player to spawn.
      */
-    public void spawn(ArenaPlayer player) {
+    public void spawn(IArenaPlayer player) {
         PreCon.notNull(player);
 
         player.getPlayer().teleport(this, TeleportCause.PLUGIN);

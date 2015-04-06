@@ -26,9 +26,9 @@
 package com.jcwhatever.pvs.api.events.players;
 
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.PlayerManager;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
 
 import javax.annotation.Nullable;
 
@@ -45,7 +45,7 @@ public class PlayerReadyEvent extends AbstractPlayerEvent {
      * @param arena   The event arena.
      * @param player  The player who is ready.
      */
-    public PlayerReadyEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager, @Nullable String message) {
+    public PlayerReadyEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager, @Nullable String message) {
         super(arena, player, relatedManager);
 
         PreCon.notNull(relatedManager);

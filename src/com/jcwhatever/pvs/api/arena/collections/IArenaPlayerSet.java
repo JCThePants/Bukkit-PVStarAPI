@@ -22,12 +22,19 @@
  * THE SOFTWARE.
  */
 
+package com.jcwhatever.pvs.api.arena.collections;
 
-package com.jcwhatever.pvs.api.arena.settings;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+
+import org.bukkit.entity.Player;
+
+import java.util.Set;
 
 /**
- * Provides settings for an arenas spectator manager.
+ * Set of {@link IArenaPlayer}.
  */
-public interface SpectatorManagerSettings extends PlayerManagerSettings {
+public interface IArenaPlayerSet extends IArenaPlayerCollection, Set<IArenaPlayer> {
 
+    @Override
+    Set<Player> asPlayers();
 }

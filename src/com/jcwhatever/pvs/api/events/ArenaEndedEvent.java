@@ -25,7 +25,7 @@
 
 package com.jcwhatever.pvs.api.events;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 /**
  * Called when an arena game ends.
@@ -37,7 +37,7 @@ public class ArenaEndedEvent extends AbstractArenaEvent {
      *
      * @param arena  The event arena.
      */
-    public ArenaEndedEvent(Arena arena) {
+    public ArenaEndedEvent(IArena arena) {
         super(arena);
     }
 }

@@ -25,11 +25,11 @@
 
 package com.jcwhatever.pvs.api.arena.managers;
 
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
 import com.jcwhatever.pvs.api.arena.options.ArenaStartReason;
-import com.jcwhatever.pvs.api.arena.settings.GameManagerSettings;
+import com.jcwhatever.pvs.api.arena.settings.IGameManagerSettings;
 
 import java.util.Date;
 import javax.annotation.Nullable;
@@ -37,7 +37,7 @@ import javax.annotation.Nullable;
 /**
  * Manages an arenas game session/players.
  */
-public interface GameManager extends PlayerManager {
+public interface IGameManager extends IPlayerManager {
 
     /**
      * Get the start time of the last game.
@@ -52,14 +52,15 @@ public interface GameManager extends PlayerManager {
 
     /**
      * Determine if the game is over, but the arena is still running.
-     * Always returns false if the arena is not running.
+     *
+     * @return  Always returns false if the arena is not running.
      */
     boolean isGameOver();
 
     /**
      * Get the game manager settings.
      */
-    GameManagerSettings getSettings();
+    IGameManagerSettings getSettings();
 
     /**
      * Determine if the arena can be started.
@@ -90,7 +91,7 @@ public interface GameManager extends PlayerManager {
      *
      * @return  True if the player was forwarded.
      */
-    boolean forwardPlayer(ArenaPlayer player, Arena nextArena);
+    boolean forwardPlayer(IArenaPlayer player, IArena nextArena);
 
     /**
      * Set the winner of an arena and end the game.
@@ -99,7 +100,7 @@ public interface GameManager extends PlayerManager {
      *
      * @return  True if the player was set as the winner.
      */
-    boolean setWinner(ArenaPlayer player);
+    boolean setWinner(IArenaPlayer player);
 
     /**
      * Set the specified team as the winner and

@@ -28,15 +28,15 @@ package com.jcwhatever.pvs.api;
 import com.jcwhatever.nucleus.commands.CommandDispatcher;
 import com.jcwhatever.nucleus.events.manager.EventManager;
 import com.jcwhatever.nucleus.managed.messaging.IMessenger;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.extensions.ExtensionTypeManager;
-import com.jcwhatever.pvs.api.arena.managers.ArenaManager;
-import com.jcwhatever.pvs.api.commands.CommandHelper;
-import com.jcwhatever.pvs.api.modules.ModuleInfo;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.extensions.IExtensionTypeManager;
+import com.jcwhatever.pvs.api.arena.managers.IArenaManager;
+import com.jcwhatever.pvs.api.commands.ICommandHelper;
+import com.jcwhatever.pvs.api.modules.IModuleInfo;
 import com.jcwhatever.pvs.api.modules.PVStarModule;
-import com.jcwhatever.pvs.api.points.PointsManager;
-import com.jcwhatever.pvs.api.spawns.SpawnTypeManager;
-import com.jcwhatever.pvs.api.stats.StatsManager;
+import com.jcwhatever.pvs.api.points.IPointsManager;
+import com.jcwhatever.pvs.api.spawns.ISpawnTypeManager;
+import com.jcwhatever.pvs.api.stats.IStatsManager;
 
 import org.bukkit.plugin.Plugin;
 
@@ -60,32 +60,32 @@ public interface IPVStar extends Plugin  {
      *
      * @param player  The player object to wrap.
      */
-    ArenaPlayer getArenaPlayer(Object player);
+    IArenaPlayer getArenaPlayer(Object player);
 
     /**
-     * Get PV-Stars {@link com.jcwhatever.pvs.api.arena.managers.ArenaManager} implementation.
+     * Get PV-Stars {@link IArenaManager} implementation.
      */
-    ArenaManager getArenaManager();
+    IArenaManager getArenaManager();
 
     /**
-     * Get PV-Stars {@link com.jcwhatever.pvs.api.spawns.SpawnTypeManager} implementation.
+     * Get PV-Stars {@link ISpawnTypeManager} implementation.
      */
-    SpawnTypeManager getSpawnTypeManager();
+    ISpawnTypeManager getSpawnTypeManager();
 
     /**
-     * Get PV-Stars {@link com.jcwhatever.pvs.api.stats.StatsManager} implementation.
+     * Get PV-Stars {@link IStatsManager} implementation.
      */
-    StatsManager getStatsManager();
+    IStatsManager getStatsManager();
 
     /**
-     * Get PV-Stars {@link ExtensionTypeManager} implementation.
+     * Get PV-Stars {@link IExtensionTypeManager} implementation.
      */
-    ExtensionTypeManager getExtensionManager();
+    IExtensionTypeManager getExtensionManager();
 
     /**
-     * Get PV-Stars {@link com.jcwhatever.pvs.api.points.PointsManager} implementation.
+     * Get PV-Stars {@link IPointsManager} implementation.
      */
-    PointsManager getPointsManager();
+    IPointsManager getPointsManager();
 
     /**
      * Get PV-Stars command handler.
@@ -95,7 +95,7 @@ public interface IPVStar extends Plugin  {
     /**
      * Get command helper that contains utilities methods for commands.
      */
-    CommandHelper getCommandHelper();
+    ICommandHelper getCommandHelper();
 
     /**
      * Get PV-Stars global arena event manager.
@@ -125,5 +125,5 @@ public interface IPVStar extends Plugin  {
      *
      * @param module  The module to get information about.
      */
-    ModuleInfo getModuleInfo(PVStarModule module);
+    IModuleInfo getModuleInfo(PVStarModule module);
 }

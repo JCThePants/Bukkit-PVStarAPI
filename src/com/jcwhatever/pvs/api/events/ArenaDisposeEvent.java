@@ -25,7 +25,7 @@
 
 package com.jcwhatever.pvs.api.events;
 
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 /**
  * Called when an arena is being permanently removed.
@@ -37,7 +37,7 @@ public class ArenaDisposeEvent extends AbstractArenaEvent {
      *
      * @param arena  The event arena.
      */
-    public ArenaDisposeEvent(Arena arena) {
+    public ArenaDisposeEvent(IArena arena) {
         super(arena);
     }
 }

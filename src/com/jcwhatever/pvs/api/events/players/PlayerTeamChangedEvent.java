@@ -26,10 +26,10 @@
 package com.jcwhatever.pvs.api.events.players;
 
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
-import com.jcwhatever.pvs.api.arena.managers.PlayerManager;
+import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
 import com.jcwhatever.pvs.api.arena.options.TeamChangeReason;
 
 /**
@@ -46,7 +46,7 @@ public class PlayerTeamChangedEvent extends AbstractPlayerEvent {
      * @param arena         The event arena.
      * @param player        The event player.
      */
-    public PlayerTeamChangedEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
+    public PlayerTeamChangedEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager,
                                   ArenaTeam previousTeam, TeamChangeReason reason) {
         super(arena, player, relatedManager);
 

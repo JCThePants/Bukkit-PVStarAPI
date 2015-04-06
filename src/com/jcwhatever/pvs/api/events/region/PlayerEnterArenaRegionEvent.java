@@ -25,8 +25,8 @@
 
 package com.jcwhatever.pvs.api.events.region;
 
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.events.AbstractArenaEvent;
 import com.jcwhatever.nucleus.regions.options.EnterRegionReason;
 import com.jcwhatever.nucleus.utils.PreCon;
@@ -36,7 +36,7 @@ import com.jcwhatever.nucleus.utils.PreCon;
  */
 public class PlayerEnterArenaRegionEvent extends AbstractArenaEvent {
 
-    private final ArenaPlayer _player;
+    private final IArenaPlayer _player;
     private final EnterRegionReason _reason;
 
     /**
@@ -45,7 +45,7 @@ public class PlayerEnterArenaRegionEvent extends AbstractArenaEvent {
      * @param arena   The event arena.
      * @param player  The player entering the region.
      */
-    public PlayerEnterArenaRegionEvent(Arena arena, ArenaPlayer player, EnterRegionReason reason) {
+    public PlayerEnterArenaRegionEvent(IArena arena, IArenaPlayer player, EnterRegionReason reason) {
         super(arena);
         PreCon.notNull(player);
         PreCon.notNull(reason);
@@ -57,7 +57,7 @@ public class PlayerEnterArenaRegionEvent extends AbstractArenaEvent {
     /**
      * Get the player entering the region.
      */
-    public ArenaPlayer getPlayer() {
+    public IArenaPlayer getPlayer() {
         return _player;
     }
 

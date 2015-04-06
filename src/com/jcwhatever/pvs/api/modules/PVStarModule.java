@@ -50,7 +50,7 @@ public abstract class PVStarModule implements IDisposable {
             Nucleus.getLanguageManager().createContext(PVStarAPI.getPlugin(), this);
 
     private final Map<String, IDataNode> _customNodes = new HashMap<>(10);
-    private ModuleInfo _moduleInfo;
+    private IModuleInfo _moduleInfo;
     private IDataNode _dataNode;
     private boolean _isPreEnabled;
     private boolean _isEnabled;
@@ -254,7 +254,7 @@ public abstract class PVStarModule implements IDisposable {
     protected void onDispose() {}
 
     // get module info
-    private ModuleInfo getInfo() {
+    private IModuleInfo getInfo() {
         if (_moduleInfo == null)
             _moduleInfo = PVStarAPI.getPlugin().getModuleInfo(this);
 

@@ -26,7 +26,7 @@
 package com.jcwhatever.pvs.api.events;
 
 import com.jcwhatever.nucleus.mixins.ICancellable;
-import com.jcwhatever.pvs.api.arena.Arena;
+import com.jcwhatever.pvs.api.arena.IArena;
 
 /**
  * Called before an arena is enabled.
@@ -40,7 +40,7 @@ public class ArenaPreEnableEvent extends AbstractArenaEvent implements ICancella
      *
      * @param arena  The event arena.
      */
-    public ArenaPreEnableEvent(Arena arena) {
+    public ArenaPreEnableEvent(IArena arena) {
         super(arena);
     }
 

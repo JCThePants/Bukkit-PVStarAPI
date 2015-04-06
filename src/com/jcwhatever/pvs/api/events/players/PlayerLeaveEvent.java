@@ -25,9 +25,9 @@
 package com.jcwhatever.pvs.api.events.players;
 
 import com.jcwhatever.nucleus.utils.PreCon;
-import com.jcwhatever.pvs.api.arena.Arena;
-import com.jcwhatever.pvs.api.arena.ArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.PlayerManager;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
 import com.jcwhatever.pvs.api.arena.options.RemovePlayerReason;
 
 import org.bukkit.Location;
@@ -38,7 +38,7 @@ import javax.annotation.Nullable;
  * Called after a player is removed from an arena.
  *
  * <p>Not to be confused with {@link PlayerPreRemoveEvent} and {@link PlayerRemovedEvent},
- * which are used when a player is removed from an arenas {@link PlayerManager}.
+ * which are used when a player is removed from an arenas {@link IPlayerManager}.
  * (ie. lobby, game or spectator)</p>
  *
  * <p>Although {@link PlayerPreRemoveEvent} and {@link PlayerRemovedEvent} are
@@ -60,7 +60,7 @@ public class PlayerLeaveEvent extends AbstractPlayerEvent {
      * @param relatedManager  The manager the player is being removed from.
      * @param reason          The reason the player was removed.
      */
-    public PlayerLeaveEvent(Arena arena, ArenaPlayer player, PlayerManager relatedManager,
+    public PlayerLeaveEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager,
                               RemovePlayerReason reason, @Nullable Location restoreLocation) {
         super(arena, player, relatedManager);
 
