@@ -39,74 +39,20 @@ import com.jcwhatever.pvs.api.arena.IArena;
  */
 public abstract class ArenaExtension {
 
+    private ArenaExtensionRegistration _registration;
     private ArenaExtensionInfo _extensionInfo;
     private IArena _arena;
     private boolean _isInitialized;
-    private boolean _isEnabled;
+    private boolean _isAttached;
     private IDataNode _dataNode;
     private String _dataNodePath;
 
-    // Initialize module
-    final void init(ArenaExtensionInfo info, IArena arena) {
-        PreCon.notNull(info);
-        PreCon.notNull(arena);
-
-        if (_isInitialized)
-            throw new IllegalStateException("An arena module cannot be initialized more than once.");
-
-        _extensionInfo = info;
-        _arena = arena;
-
-        _dataNodePath = "arenas." + arena.getId() + ".extensions." + info.name();
-        _dataNode = DataStorage.get(PVStarAPI.getPlugin(), new DataPath(_dataNodePath));
-        _dataNode.load();
-
-        _isInitialized = true;
-    }
 
     /**
      * Get the arena the module instance was created for.
      */
     public final IArena getArena() {
         return _arena;
-    }
-
-    /**
-     * Determine if extension is enabled.
-     */
-    public final boolean isEnabled() {
-        return _isEnabled;
-    }
-
-    /**
-     * Enable the extension.
-     */
-    public final void enable() {
-        if (_isEnabled)
-            return;
-
-        _isEnabled = true;
-        onAttach();
-    }
-
-    /**
-     * Disable the extension.
-     */
-    public final void disable() {
-        if (!_isEnabled)
-            return;
-
-        _isEnabled = false;
-        onRemove();
-    }
-
-    /**
-     * Dispose of the extension.
-     */
-    public final void dispose() {
-        _isEnabled = false;
-        onDispose();
-        DataStorage.remove(PVStarAPI.getPlugin(), new DataPath(_dataNodePath));
     }
 
     /**
@@ -138,6 +84,24 @@ public abstract class ArenaExtension {
     }
 
     /**
+     * Register the extension.
+     *
+     * <p>For use by PV-Star implementation.</p>
+     *
+     * <p>Can only be registered once.</p>
+     *
+     * @param registration  The extension registration.
+     */
+    public final void register(ArenaExtensionRegistration registration) {
+        PreCon.notNull(registration);
+
+        if (_registration != null)
+            throw new IllegalStateException("Arena extension can only be registered once.");
+
+        _registration = registration;
+    }
+
+    /**
      * Invoked when the extension is attached to an arena.
      */
     protected abstract void onAttach();
@@ -148,8 +112,66 @@ public abstract class ArenaExtension {
     protected abstract void onRemove();
 
     /**
-     * Invoked when the extension is disposed.
+     * Registration used to allow implementation to access protected methods.
      */
-    protected void onDispose() {}
+    public static class ArenaExtensionRegistration {
+
+        /**
+         * Initialize an extension.
+         *
+         * @param extension  The extension to initialize.
+         * @param info       The extensions info.
+         * @param arena      The arena to attach the extension to.
+         */
+        public void init(ArenaExtension extension, ArenaExtensionInfo info, IArena arena) {
+            PreCon.notNull(extension);
+            PreCon.notNull(info);
+            PreCon.notNull(arena);
+            PreCon.isValid(extension._registration == this, "Invalid registration.");
+
+            if (extension._isInitialized)
+                throw new IllegalStateException("An arena module cannot be initialized more than once.");
+
+            extension._extensionInfo = info;
+            extension._arena = arena;
+
+            extension._dataNodePath = "arenas." + arena.getId() + ".extensions." + info.name();
+            extension._dataNode = DataStorage.get(PVStarAPI.getPlugin(), new DataPath(extension._dataNodePath));
+            extension._dataNode.load();
+
+            extension._isInitialized = true;
+        }
+
+        /**
+         * Finish initializing the extension by attaching it.
+         *
+         * @param extension  The extension to attach.
+         */
+        public void attach(ArenaExtension extension) {
+            PreCon.isValid(extension._registration == this, "Invalid registration.");
+
+            if (extension._isAttached)
+                throw new IllegalStateException("Extension is already attached.");
+
+            extension._isAttached = true;
+            extension.onAttach();
+        }
+
+        /**
+         * Remove an extension.
+         *
+         * @param extension  The extension to remove.
+         */
+        public void remove(ArenaExtension extension) {
+            PreCon.isValid(extension._registration == this, "Invalid registration.");
+
+            if (!extension._isAttached)
+                throw new IllegalStateException("Extension is not attached.");
+
+            extension._isAttached = false;
+            extension.onRemove();
+            DataStorage.remove(PVStarAPI.getPlugin(), new DataPath(extension._dataNodePath));
+        }
+    }
 }
 

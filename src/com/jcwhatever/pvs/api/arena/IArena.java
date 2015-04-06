@@ -31,7 +31,7 @@ import com.jcwhatever.nucleus.mixins.INamedInsensitive;
 import com.jcwhatever.nucleus.providers.permissions.IPermission;
 import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.pvs.api.arena.extensions.ArenaExtension;
-import com.jcwhatever.pvs.api.arena.extensions.ArenaExtensionManager;
+import com.jcwhatever.pvs.api.arena.extensions.IArenaExtensionManager;
 import com.jcwhatever.pvs.api.arena.managers.IGameManager;
 import com.jcwhatever.pvs.api.arena.managers.ILobbyManager;
 import com.jcwhatever.pvs.api.arena.managers.ISpawnManager;
@@ -119,7 +119,7 @@ public interface IArena extends INamedInsensitive, IDisposable {
     /**
      * Get the arenas extension manager.
      */
-    ArenaExtensionManager getExtensionManager();
+    IArenaExtensionManager getExtensionManager();
 
     /**
      * Get the arenas settings.

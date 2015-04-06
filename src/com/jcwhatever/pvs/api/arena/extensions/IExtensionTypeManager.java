@@ -58,5 +58,4 @@ public interface IExtensionTypeManager {
      * @param extension  The extension to register.
      */
     void registerType(Class<? extends ArenaExtension> extension);
-
 }
