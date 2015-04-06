@@ -27,7 +27,6 @@ package com.jcwhatever.pvs.api.modules;
 
 import com.jcwhatever.nucleus.Nucleus;
 import com.jcwhatever.nucleus.managed.language.ILanguageContext;
-import com.jcwhatever.nucleus.mixins.IDisposable;
 import com.jcwhatever.nucleus.providers.storage.DataStorage;
 import com.jcwhatever.nucleus.storage.DataPath;
 import com.jcwhatever.nucleus.storage.IDataNode;
@@ -44,12 +43,14 @@ import java.util.Set;
  *
  * <p>PV star modules must extend this class in order to be recognized.</p>
  */
-public abstract class PVStarModule implements IDisposable {
+public abstract class PVStarModule {
 
     private final ILanguageContext _languageContext =
             Nucleus.getLanguageManager().createContext(PVStarAPI.getPlugin(), this);
 
     private final Map<String, IDataNode> _customNodes = new HashMap<>(10);
+
+    private PVStarModuleRegistration _registration;
     private IModuleInfo _moduleInfo;
     private IDataNode _dataNode;
     private boolean _isPreEnabled;
@@ -136,64 +137,8 @@ public abstract class PVStarModule implements IDisposable {
     /**
      * Determine if the module has been disposed.
      */
-    @Override
     public final boolean isDisposed() {
         return _isDisposed;
-    }
-
-    /**
-     * Internal Use Only. Invoked before the module is enabled.
-     */
-    public final void preEnable() {
-
-        if (_isPreEnabled)
-            throw new RuntimeException(
-                    "Module named " + getName() + " is already pre-enabled. " +
-                    " Please note that the preEnable() method is reserved for internal use only.");
-
-        if (_isDisposed)
-            throw new RuntimeException(
-                    "Module named " + getName() + " is disposed and cannot be pre-enabled. " +
-                            " Please note that the preEnable() method is reserved for internal use only.");
-
-        _isPreEnabled = true;
-
-        onRegisterTypes();
-    }
-
-    /**
-     * Internal Use only. Invoked to enable the module.
-     */
-    public final void enable () {
-
-        if (_isEnabled)
-            throw new RuntimeException(
-                    "Module named " + getName() + " is already enabled. " +
-                            " Please note that the enable() method is reserved for internal use only.");
-
-        if (_isDisposed)
-            throw new RuntimeException(
-                    "Module named " + getName() + " is disposed and cannot be enabled. " +
-                            " Please note that the enable() method is reserved for internal use only.");
-
-        _isEnabled = true;
-
-        onEnable();
-    }
-
-    /**
-     * Internal Use Only. Invoked to dispose resources used by the module before it
-     * is discarded.
-     */
-    @Override
-    public final void dispose() {
-
-        if (_isDisposed)
-            return;
-
-        _isDisposed = true;
-
-        onDispose();
     }
 
     /**
@@ -239,7 +184,25 @@ public abstract class PVStarModule implements IDisposable {
     }
 
     /**
-     * Invoked during pre-enable. Types should be registered here.
+     * Register the module.
+     *
+     * <p>For internal implementation use.</p>
+     *
+     * @param registration  The registration.
+     */
+    public final void register(PVStarModuleRegistration registration) {
+        PreCon.notNull(registration);
+
+        if (_registration != null)
+            throw new IllegalStateException("PVStar module can only be registered once.");
+
+        _registration = registration;
+    }
+
+    /**
+     * Invoked during pre-enable.
+     *
+     * <p>Types should be registered here.</p>
      */
     protected abstract void onRegisterTypes();
 
@@ -250,6 +213,8 @@ public abstract class PVStarModule implements IDisposable {
 
     /**
      * Invoked when the module is disposed.
+     *
+     * <p>Intended for optional override.</p>
      */
     protected void onDispose() {}
 
@@ -259,5 +224,70 @@ public abstract class PVStarModule implements IDisposable {
             _moduleInfo = PVStarAPI.getPlugin().getModuleInfo(this);
 
         return _moduleInfo;
+    }
+
+    /**
+     * Registration to allow internal implementation to access protected methods.
+     */
+    public static class PVStarModuleRegistration {
+
+        /**
+         * Invoke before the module is enabled.
+         *
+         * @param module  The module to pre-enable.
+         */
+        public void preEnable(PVStarModule module) {
+            PreCon.notNull(module);
+            PreCon.isValid(module._registration == this, "Invalid registration.");
+
+            if (module._isPreEnabled) {
+                throw new IllegalStateException(
+                        "The module named " + module.getName() + " is already pre-enabled. ");
+            }
+
+            if (module._isDisposed) {
+                throw new IllegalStateException(
+                        "The module named " + module.getName() + " is disposed and cannot be pre-enabled. ");
+            }
+
+            module._isPreEnabled = true;
+
+            module.onRegisterTypes();
+        }
+
+        /**
+         * Invoke to enable the module.
+         *
+         * @param module  The module to enable.
+         */
+        public final void enable (PVStarModule module) {
+            PreCon.notNull(module);
+            PreCon.isValid(module._registration == this, "Invalid registration.");
+
+            if (module._isEnabled) {
+                throw new IllegalStateException("The module named " + module.getName() + " is already enabled.");
+            }
+
+            if (module._isDisposed) {
+                throw new IllegalStateException("The module named " + module.getName() +
+                        " is disposed and cannot be enabled.");
+            }
+
+            module._isEnabled = true;
+            module.onEnable();
+        }
+
+        /**
+         * Invoked to dispose resources used by the module before it is discarded.
+         */
+        public final void dispose(PVStarModule module) {
+
+            if (module._isDisposed)
+                throw new IllegalStateException("The module named " + module.getName() + " is already disposed.");
+
+            module._isDisposed = true;
+
+            module.onDispose();
+        }
     }
 }
