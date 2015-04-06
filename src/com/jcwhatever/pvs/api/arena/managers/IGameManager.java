@@ -29,7 +29,7 @@ import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
 import com.jcwhatever.pvs.api.arena.options.ArenaStartReason;
-import com.jcwhatever.pvs.api.arena.settings.IGameManagerSettings;
+import com.jcwhatever.pvs.api.arena.settings.IGameSettings;
 
 import java.util.Date;
 import javax.annotation.Nullable;
@@ -60,7 +60,7 @@ public interface IGameManager extends IPlayerManager {
     /**
      * Get the game manager settings.
      */
-    IGameManagerSettings getSettings();
+    IGameSettings getSettings();
 
     /**
      * Determine if the arena can be started.

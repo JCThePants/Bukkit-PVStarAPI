@@ -25,7 +25,7 @@
 
 package com.jcwhatever.pvs.api.arena.managers;
 
-import com.jcwhatever.pvs.api.arena.settings.ISpectatorManagerSettings;
+import com.jcwhatever.pvs.api.arena.settings.ISpectatorSettings;
 
 /**
  * Manages an arenas spectator players.
@@ -35,5 +35,5 @@ public interface ISpectatorManager extends IPlayerManager {
     /**
      * Get the spectator manager settings.
      */
-    ISpectatorManagerSettings getSettings();
+    ISpectatorSettings getSettings();
 }

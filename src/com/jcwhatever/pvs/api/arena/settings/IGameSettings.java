@@ -31,7 +31,7 @@ import com.jcwhatever.pvs.api.arena.options.PointsBehavior;
 /**
  * Provides settings for an arenas game manager
  */
-public interface IGameManagerSettings extends IPlayerManagerSettings {
+public interface IGameSettings extends IPlayerSettings {
 
     /**
      * Get the number of lives the players start with.

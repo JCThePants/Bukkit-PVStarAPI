@@ -29,7 +29,7 @@ import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
 import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 import com.jcwhatever.pvs.api.arena.options.ArenaPlayerRelation;
 import com.jcwhatever.pvs.api.arena.options.TeamChangeReason;
-import com.jcwhatever.pvs.api.arena.settings.IPlayerManagerSettings;
+import com.jcwhatever.pvs.api.arena.settings.IPlayerSettings;
 import com.jcwhatever.nucleus.mixins.IMeta;
 import com.jcwhatever.nucleus.mixins.INamed;
 import com.jcwhatever.nucleus.mixins.IPlayerReference;
@@ -178,14 +178,14 @@ public interface IArenaPlayer extends INamed, IMeta, IArenaOwned, IPlayerReferen
     IPlayerManager getRelatedManager();
 
     /**
-     * Get {@link IPlayerManagerSettings} implementation from the
+     * Get {@link IPlayerSettings} implementation from the
      * arena the player is in based on their current arena relation.
      *
      * <p>i.e. If the player is in the lobby, returns the lobby managers
      * settings.</p>
      */
     @Nullable
-    IPlayerManagerSettings getRelatedSettings();
+    IPlayerSettings getRelatedSettings();
 
     /**
      * Get the players meta data object for a specific arena,

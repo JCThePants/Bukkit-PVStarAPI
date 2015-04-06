@@ -32,7 +32,7 @@ import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
  * Basic settings for player managers.
  * (lobby, game, spectator)
  */
-public interface IPlayerManagerSettings extends IArenaOwned {
+public interface IPlayerSettings extends IArenaOwned {
 
     /**
      * Get the data node.

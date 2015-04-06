@@ -26,7 +26,7 @@
 package com.jcwhatever.pvs.api.arena.managers;
 
 import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
-import com.jcwhatever.pvs.api.arena.settings.ILobbyManagerSettings;
+import com.jcwhatever.pvs.api.arena.settings.ILobbySettings;
 
 /**
  * Manages an arenas lobby players.
@@ -51,6 +51,6 @@ public interface ILobbyManager extends IPlayerManager {
     /**
      * Get the lobby manager settings.
      */
-    ILobbyManagerSettings getSettings();
+    ILobbySettings getSettings();
 }
 
