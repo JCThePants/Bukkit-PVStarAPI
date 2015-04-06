@@ -34,9 +34,9 @@ import com.jcwhatever.pvs.api.arena.extensions.ArenaExtension;
 
 import org.bukkit.command.CommandSender;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
+import javax.annotation.Nullable;
 
 /**
  * A base command with PV-Star common utilities included.
@@ -57,19 +57,25 @@ public abstract class AbstractPVCommand extends AbstractCommand {
         /**
          * Return the arena only if it is not running.
          */
-        NOT_RUNNNING;
+        NOT_RUNNING;
 
         /**
-         * Get the proper {@Code ArenaReturned} constant for commands that can both provide info
-         * or change settings.
+         * Get the proper {@Code ArenaReturned} constant for commands that can both
+         * provide info or change settings.
          *
          * @param args               The command arguments.
-         * @param infoParameterName  The name of the parameter that toggles info. Should equal "info" for info.
+         * @param infoParameterName  The name of the parameter that toggles info.
+         *                           Should equal "info" for info.
          *
          * @throws InvalidArgumentException
          */
-        public static ArenaReturned getInfoToggled(CommandArguments args, String infoParameterName) throws InvalidArgumentException {
-            return args.getString(infoParameterName).equals("info") ? ArenaReturned.ALWAYS : ArenaReturned.NOT_RUNNNING;
+        public static ArenaReturned getInfoToggled(
+                CommandArguments args, String infoParameterName)
+                throws InvalidArgumentException {
+
+            return args.getString(infoParameterName).equals("info")
+                    ? ArenaReturned.ALWAYS
+                    : ArenaReturned.NOT_RUNNING;
         }
     }
 
@@ -94,7 +100,9 @@ public abstract class AbstractPVCommand extends AbstractCommand {
      * @param <T>  The extension type.
      */
     @Nullable
-    protected <T extends ArenaExtension> T getExtension(CommandSender sender, IArena arena, Class<T> clazz) {
+    protected <T extends ArenaExtension> T getExtension(
+            CommandSender sender, IArena arena, Class<T> clazz) {
+
         return _helper.getExtension(sender, arena, clazz);
     }
 
@@ -131,6 +139,4 @@ public abstract class AbstractPVCommand extends AbstractCommand {
     protected List<UUID> getArenaIds(CommandSender sender, String arenaNames) {
         return _helper.getArenaIds(sender, arenaNames);
     }
-
-
 }

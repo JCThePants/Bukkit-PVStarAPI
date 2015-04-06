@@ -28,7 +28,7 @@ package com.jcwhatever.pvs.api.events.players;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
+import com.jcwhatever.pvs.api.arena.context.IContextManager;
 
 import org.bukkit.Location;
 
@@ -49,8 +49,11 @@ public class PlayerArenaRespawnEvent extends AbstractPlayerEvent {
      * @param player           The player being respawned.
      * @param respawnLocation  The location the player will be respawned at.
      */
-    public PlayerArenaRespawnEvent(IArena arena, IArenaPlayer player,
-                                   @Nullable IPlayerManager relatedManager, Location respawnLocation) {
+    public PlayerArenaRespawnEvent(IArena arena,
+                                   IArenaPlayer player,
+                                   @Nullable IContextManager relatedManager,
+                                   Location respawnLocation) {
+
         super(arena, player, relatedManager);
 
         PreCon.notNull(respawnLocation);

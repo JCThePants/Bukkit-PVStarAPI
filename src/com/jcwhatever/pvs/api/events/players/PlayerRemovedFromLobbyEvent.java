@@ -22,33 +22,33 @@
  * THE SOFTWARE.
  */
 
+package com.jcwhatever.pvs.api.events.players;
 
-package com.jcwhatever.pvs.api.exceptions;
-
-import com.jcwhatever.pvs.api.arena.extensions.ArenaExtension;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.context.ILobbyContext;
+import com.jcwhatever.pvs.api.arena.options.ArenaContext;
+import com.jcwhatever.pvs.api.arena.options.RemoveFromContextReason;
 
 /**
- * Thrown when an arena extension type is missing its required
- * {@link com.jcwhatever.pvs.api.arena.extensions.ArenaExtensionInfo} annotation.
+ * Called after a player is removed from an arenas game context.
  */
-public class MissingExtensionAnnotationException extends RuntimeException {
-
-    String _msg;
+public class PlayerRemovedFromLobbyEvent extends PlayerRemovedFromContextEvent {
 
     /**
      * Constructor.
      *
-     * @param extClass  The extension type that is missing required annotation.
+     * @param arena         The event arena.
+     * @param player        The player who was removed.
+     * @param lobbyManager  The lobby manager the player is being removed from.
+     * @param reason        The reason the player was removed.
      */
-    public MissingExtensionAnnotationException(Class<? extends ArenaExtension> extClass) {
-        _msg = "An arena extension is missing its ArenaExtensionInfo annotation: " + extClass.getName();
-    }
+    public PlayerRemovedFromLobbyEvent(IArena arena,
+                                       IArenaPlayer player,
+                                       ILobbyContext lobbyManager,
+                                       ArenaContext context,
+                                       RemoveFromContextReason reason) {
 
-    /**
-     * Get the exception message.
-     */
-    @Override
-    public String getMessage() {
-        return _msg;
+        super(arena, player, lobbyManager, context, reason);
     }
 }

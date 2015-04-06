@@ -28,18 +28,21 @@ package com.jcwhatever.pvs.api.events.players;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
-import com.jcwhatever.pvs.api.arena.options.AddPlayerReason;
+import com.jcwhatever.pvs.api.arena.context.IContextManager;
+import com.jcwhatever.pvs.api.arena.options.AddToContextReason;
+import com.jcwhatever.pvs.api.arena.options.ArenaContext;
+
 import org.bukkit.Location;
 
 import javax.annotation.Nullable;
 
 /**
- * Called when player is added to an arena.
+ * Called when player is added to an arena context.
  */
-public class PlayerAddedEvent extends AbstractPlayerEvent {
+public class PlayerAddedToContextEvent extends AbstractPlayerEvent {
 
-    private final AddPlayerReason _reason;
+    private final AddToContextReason _reason;
+    private final ArenaContext _context;
     private Location _initialSpawnLocation;
     private Location _spawnLocation;
     private String _message;
@@ -52,13 +55,21 @@ public class PlayerAddedEvent extends AbstractPlayerEvent {
      * @param reason         The reason the player is being added.
      * @param spawnLocation  The location the player will be teleported to, if any.
      */
-    public PlayerAddedEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager, AddPlayerReason reason,
-                            @Nullable Location spawnLocation, @Nullable String message) {
+    public PlayerAddedToContextEvent(IArena arena,
+                                     IArenaPlayer player,
+                                     IContextManager relatedManager,
+                                     ArenaContext context,
+                                     AddToContextReason reason,
+                                     @Nullable Location spawnLocation,
+                                     @Nullable String message) {
+
         super(arena, player, relatedManager);
 
+        PreCon.notNull(context);
         PreCon.notNull(reason);
         PreCon.notNull(relatedManager);
 
+        _context = context;
         _reason = reason;
         _initialSpawnLocation = spawnLocation;
         _spawnLocation = spawnLocation;
@@ -66,9 +77,17 @@ public class PlayerAddedEvent extends AbstractPlayerEvent {
     }
 
     /**
+     * Get the context of the manager the player is being
+     * added to.
+     */
+    public ArenaContext getContext() {
+        return _context;
+    }
+
+    /**
      * Get the reason the player is being added.
      */
-    public AddPlayerReason getReason() {
+    public AddToContextReason getReason() {
         return _reason;
     }
 
@@ -82,7 +101,6 @@ public class PlayerAddedEvent extends AbstractPlayerEvent {
 
     /**
      * Get the current spawn location.
-     * @return
      */
     @Nullable
     public Location getSpawnLocation() {

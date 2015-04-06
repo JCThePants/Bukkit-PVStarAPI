@@ -23,7 +23,7 @@
  */
 
 
-package com.jcwhatever.pvs.api.arena.managers;
+package com.jcwhatever.pvs.api.arena.context;
 
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
@@ -37,7 +37,7 @@ import javax.annotation.Nullable;
 /**
  * Manages an arenas game session/players.
  */
-public interface IGameManager extends IPlayerManager {
+public interface IGameContext extends IContextManager {
 
     /**
      * Get the start time of the last game.

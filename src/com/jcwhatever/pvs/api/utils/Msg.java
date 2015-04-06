@@ -139,9 +139,9 @@ public class Msg {
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        IArenaPlayerCollection lobby = arena.getLobbyManager().getPlayers();
-        IArenaPlayerCollection spectators = arena.getSpectatorManager().getPlayers();
-        IArenaPlayerCollection gamers = arena.getGameManager().getPlayers();
+        IArenaPlayerCollection lobby = arena.getLobby().getPlayers();
+        IArenaPlayerCollection spectators = arena.getSpectators().getPlayers();
+        IArenaPlayerCollection gamers = arena.getGame().getPlayers();
 
         String formatted = TextUtils.format(message, params);
 

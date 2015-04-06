@@ -22,63 +22,54 @@
  * THE SOFTWARE.
  */
 
-
 package com.jcwhatever.pvs.api.events.players;
 
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-import com.jcwhatever.pvs.api.arena.ArenaTeam;
-import com.jcwhatever.pvs.api.arena.context.IContextManager;
-import com.jcwhatever.pvs.api.arena.options.TeamChangeReason;
+import com.jcwhatever.pvs.api.arena.options.ArenaContext;
 
 /**
- * Called after a players team is set.
+ * Called when a players arena context is changed.
  */
-public class PlayerTeamChangedEvent extends AbstractPlayerEvent {
+public class PlayerContextChangeEvent  extends AbstractPlayerEvent {
 
-    private final ArenaTeam _previousTeam;
-    private final TeamChangeReason _reason;
+    private final ArenaContext _previousContext;
+    private final ArenaContext _newContext;
 
     /**
      * Constructor.
      *
-     * @param arena   The event arena.
-     * @param player  The event player.
+     * @param arena            The event arena.
+     * @param player           The player being added.
+     * @param previousContext  The players previous arena context.
+     * @param newContext       The players new arena context.
      */
-    public PlayerTeamChangedEvent(IArena arena,
-                                  IArenaPlayer player,
-                                  IContextManager relatedManager,
-                                  ArenaTeam previousTeam,
-                                  TeamChangeReason reason) {
+    public PlayerContextChangeEvent(IArena arena,
+                                    IArenaPlayer player,
+                                    ArenaContext previousContext,
+                                    ArenaContext newContext) {
 
-        super(arena, player, relatedManager);
+        super(arena, player, player.getContextManager());
 
-        PreCon.notNull(previousTeam);
-        PreCon.notNull(reason);
+        PreCon.notNull(previousContext);
+        PreCon.notNull(newContext);
 
-        _previousTeam = previousTeam;
-        _reason = reason;
+        _previousContext = previousContext;
+        _newContext = newContext;
     }
 
     /**
-     * Get the team the player is on.
+     * Get the players previous context.
      */
-    public ArenaTeam getTeam() {
-        return getPlayer().getTeam();
+    public ArenaContext getPreviousContext() {
+        return _previousContext;
     }
 
     /**
-     * Get the team the player was previously on.
+     * Get the players new arena context.
      */
-    public ArenaTeam getPreviousTeam() {
-        return _previousTeam;
-    }
-
-    /**
-     * Get the reason for the team change.
-     */
-    public TeamChangeReason getReason() {
-        return _reason;
+    public ArenaContext getContext() {
+        return _newContext;
     }
 }

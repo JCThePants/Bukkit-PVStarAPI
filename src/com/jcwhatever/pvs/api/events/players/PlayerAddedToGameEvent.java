@@ -22,29 +22,20 @@
  * THE SOFTWARE.
  */
 
-
-package com.jcwhatever.pvs.api.arena.options;
+package com.jcwhatever.pvs.api.events.players;
 
 /**
- * Reasons for adding a player to an arena
- * or arena player manager.
+ * Called after a player is added to an arenas game context.
  */
-public enum AddPlayerReason {
+public class PlayerAddedToGameEvent extends PlayerAddedToContextEvent {
 
     /**
-     * The player is joining the arena.
+     * Constructor.
      */
-    PLAYER_JOIN,
+    public PlayerAddedToGameEvent(PlayerAddedToContextEvent event) {
 
-    /**
-     * The players relation to the arena
-     * is changing.
-     */
-    ARENA_RELATION_CHANGE,
-
-    /**
-     * The player is being forwarded to
-     * the arena.
-     */
-    FORWARDING
+        super(event.getArena(), event.getPlayer(), event.getContextManager(),
+                event.getContext(), event.getReason(), event.getSpawnLocation(),
+                event.getMessage());
+    }
 }

@@ -22,36 +22,64 @@
  * THE SOFTWARE.
  */
 
-
 package com.jcwhatever.pvs.api.arena.options;
 
+import com.jcwhatever.nucleus.utils.EnumUtils;
+
 /**
- * Describes a players relationship
- * to a an arena.
+ * Specifies reason for a player to leave an arena.
  */
-public enum ArenaPlayerRelation {
+public enum PlayerLeaveArenaReason {
 
     /**
-     * The player is not in an arena and has
-     * no relation.
+     * The player lost.
      */
-    NONE,
+    LOSE,
+    /**
+     * The game has ended.
+     */
+    GAME_ENDED,
+    /**
+     * The player logged out of the server.
+     */
+    LOGOUT,
+    /**
+     * The player left the arena.
+     */
+    PLAYER_LEAVE,
+    /**
+     * The player is being kicked from the arena.
+     *
+     * <p>Not to be confused with removal due to being kicked from the server,
+     * in which case {@link RemoveFromContextReason#LOGOUT} is used.</p>
+     */
+    KICK,
+    /**
+     * The player is being forwarded to or from another arena.
+     */
+    FORWARDING;
+
+    private RemoveFromContextReason _equivalent;
+
 
     /**
-     * The player is in the lobby.
+     * Get the {@link RemoveFromContextReason} equivalent constant.
      */
-    LOBBY,
+    public RemoveFromContextReason getContextEquivalent() {
+
+        if (_equivalent == null) {
+            _equivalent = EnumUtils.getEnum(name(), RemoveFromContextReason.class);
+        }
+
+        return _equivalent;
+    }
 
     /**
-     * The player is in game.
+     * Determine if a {@link RemoveFromContextReason} constant is equivalent.
+     *
+     * @param reason  The context reason to check.
      */
-    GAME,
-
-    /**
-     * The player is a spectator.
-     */
-    SPECTATOR
-
-
+    public boolean isEquivalent(RemoveFromContextReason reason) {
+        return getContextEquivalent() == reason;
+    }
 }
-

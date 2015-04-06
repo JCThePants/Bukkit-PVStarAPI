@@ -23,21 +23,33 @@
  */
 
 
-package com.jcwhatever.pvs.api.exceptions;
+package com.jcwhatever.pvs.api.arena.context;
+
+import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
+import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
+import com.jcwhatever.pvs.api.arena.options.ArenaContext;
 
 /**
- * Thrown when a class type does not have a required annotation.
+ * The base interface for player context managers.
+ * (Lobby, Game, Spectator)
  */
-public class MissingTypeInfoException extends RuntimeException {
+public interface IContextManager extends IArenaOwned {
 
-    private String _msg;
+    /**
+     * Get the managers context.
+     */
+    ArenaContext getContext();
 
-    public MissingTypeInfoException(Class<?> clazz) {
-        _msg = "Expected but did not find proper type info annotation on class: " + clazz.getName();
-    }
+    /**
+     * Get the players being managed.
+     */
+    IArenaPlayerCollection getPlayers();
 
-    @Override
-    public String getMessage() {
-        return _msg;
-    }
+    /**
+     * Tell all players being managed.
+     *
+     * @param message  The message to tell.
+     * @param params   Optional format parameters.
+     */
+    void tell(String message, Object... params);
 }

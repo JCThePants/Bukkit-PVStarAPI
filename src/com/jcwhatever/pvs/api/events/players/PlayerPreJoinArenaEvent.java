@@ -29,6 +29,7 @@ import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.options.JoinRejectReason;
+import com.jcwhatever.pvs.api.arena.options.PlayerJoinArenaReason;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -42,8 +43,9 @@ import javax.annotation.Nullable;
  * Event called before a player joins an arena through the arena method
  * {@link IArena#join}.
  */
-public class PlayerPreJoinEvent extends AbstractPlayerEvent implements ICancellable {
+public class PlayerPreJoinArenaEvent extends AbstractPlayerEvent implements ICancellable {
 
+    private final PlayerJoinArenaReason _reason;
     private final Map<JoinRejectReason, String> _rejectReasons = new EnumMap<>(JoinRejectReason.class);
     private boolean _isCancelled;
 
@@ -53,8 +55,19 @@ public class PlayerPreJoinEvent extends AbstractPlayerEvent implements ICancella
      * @param arena   The arena being joined.
      * @param player  The player joining.
      */
-    public PlayerPreJoinEvent(IArena arena, IArenaPlayer player) {
+    public PlayerPreJoinArenaEvent(IArena arena, IArenaPlayer player, PlayerJoinArenaReason reason) {
         super(arena, player, null);
+
+        PreCon.notNull(reason);
+
+        _reason = reason;
+    }
+
+    /**
+     * Get the reason the player is joining the arena.
+     */
+    public PlayerJoinArenaReason getReason() {
+        return _reason;
     }
 
     /**

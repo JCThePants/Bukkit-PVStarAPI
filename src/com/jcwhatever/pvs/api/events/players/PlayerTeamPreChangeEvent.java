@@ -30,7 +30,7 @@ import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
-import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
+import com.jcwhatever.pvs.api.arena.context.IContextManager;
 import com.jcwhatever.pvs.api.arena.options.TeamChangeReason;
 
 /**
@@ -46,11 +46,15 @@ public class PlayerTeamPreChangeEvent extends AbstractPlayerEvent implements ICa
     /**
      * Constructor.
      *
-     * @param arena         The event arena.
-     * @param player        The event player.
+     * @param arena   The event arena.
+     * @param player  The event player.
      */
-    public PlayerTeamPreChangeEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager,
-                                    ArenaTeam team, TeamChangeReason reason) {
+    public PlayerTeamPreChangeEvent(IArena arena,
+                                    IArenaPlayer player,
+                                    IContextManager relatedManager,
+                                    ArenaTeam team,
+                                    TeamChangeReason reason) {
+
         super(arena, player, relatedManager);
 
         PreCon.notNull(team);

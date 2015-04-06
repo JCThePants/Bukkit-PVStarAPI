@@ -25,15 +25,16 @@
 
 package com.jcwhatever.pvs.api.arena;
 
-import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
-import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
-import com.jcwhatever.pvs.api.arena.options.ArenaPlayerRelation;
-import com.jcwhatever.pvs.api.arena.options.TeamChangeReason;
-import com.jcwhatever.pvs.api.arena.settings.IPlayerSettings;
 import com.jcwhatever.nucleus.mixins.IMeta;
 import com.jcwhatever.nucleus.mixins.INamed;
 import com.jcwhatever.nucleus.mixins.IPlayerReference;
 import com.jcwhatever.nucleus.utils.MetaStore;
+import com.jcwhatever.pvs.api.arena.context.IContextManager;
+import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
+import com.jcwhatever.pvs.api.arena.options.ArenaContext;
+import com.jcwhatever.pvs.api.arena.options.PlayerLeaveArenaReason;
+import com.jcwhatever.pvs.api.arena.options.TeamChangeReason;
+import com.jcwhatever.pvs.api.arena.settings.IContextSettings;
 
 import org.bukkit.Location;
 
@@ -88,6 +89,42 @@ public interface IArenaPlayer extends INamed, IMeta, IArenaOwned, IPlayerReferen
     Date getJoinDate();
 
     /**
+     * Determine if the player is ready to play.
+     */
+    boolean isReady();
+
+    /**
+     * Set the player ready variable.
+     *
+     * @param isReady  True if the player is ready.
+     */
+    void setReady(boolean isReady);
+
+    /**
+     * Determine if the player is immobilized.
+     */
+    boolean isImmobilized();
+
+    /**
+     * Set the players immobilized flag.
+     *
+     * @param isImmobilized  True to immobilize player.
+     */
+    void setImmobilized(boolean isImmobilized);
+
+    /**
+     * Determine if the player is invulnerable to damage.
+     */
+    boolean isInvulnerable();
+
+    /**
+     * Set the players invulnerability flag.
+     *
+     * @param isInvulnerable  True to make the player invulnerable to damage.
+     */
+    void setInvulnerable(boolean isInvulnerable);
+
+    /**
      * Get the players team.
      */
     ArenaTeam getTeam();
@@ -130,74 +167,54 @@ public interface IArenaPlayer extends INamed, IMeta, IArenaOwned, IPlayerReferen
     IArenaPlayerGroup getPlayerGroup();
 
     /**
-     * Determine if the player is ready to play.
-     */
-    boolean isReady();
-
-    /**
-     * Set the player ready variable.
-     *
-     * @param isReady  True if the player is ready.
-     */
-    void setReady(boolean isReady);
-
-    /**
-     * Determine if the player is immobilized.
-     */
-    boolean isImmobilized();
-
-    /**
-     * Set the players immobilized flag.
-     *
-     * @param isImmobilized  True to immobilize player.
-     */
-    void setImmobilized(boolean isImmobilized);
-
-    /**
-     * Determine if the player is invulnerable to damage.
-     */
-    boolean isInvulnerable();
-
-    /**
-     * Set the players invulnerability flag.
-     *
-     * @param isInvulnerable  True to make the player invulnerable to damage.
-     */
-    void setInvulnerable(boolean isInvulnerable);
-
-    /**
      * Get the players relation to the arena.
      */
-    ArenaPlayerRelation getArenaRelation();
+    ArenaContext getContext();
 
     /**
-     * Get the manager responsible for the players current arena relation.
+     * Get the context manager the player belongs to in the current arena.
      * (i.e. Lobby, Game, Spectator)
+     *
+     * @return  The manager of the players arena context or null if not in
+     * an arena.
      */
     @Nullable
-    IPlayerManager getRelatedManager();
+    IContextManager getContextManager();
 
     /**
-     * Get {@link IPlayerSettings} implementation from the
+     * Get {@link IContextSettings} implementation from the
      * arena the player is in based on their current arena relation.
      *
      * <p>i.e. If the player is in the lobby, returns the lobby managers
      * settings.</p>
+     *
+     * @return  The settings of the players arena context or null if not in
+     * an arena.
      */
     @Nullable
-    IPlayerSettings getRelatedSettings();
+    IContextSettings getContextSettings();
+
+    /**
+     * Transfer a player from their current arena context to the
+     * specified manager context.
+     *
+     * @param context  The arena context to transfer the player to.
+     *
+     * @return  True if the player was transferred.
+     */
+    boolean changeContext(ArenaContext context);
 
     /**
      * Get the players meta data object for a specific arena,
      * which is used until the {@link IArenaPlayer} instance is disposed.
      *
-     * @param arenaId  The id of the arena.
+     * @param arenaId  The ID of the arena.
      */
     MetaStore getMeta(UUID arenaId);
 
     /**
-     * Get the global meta data object which is used until
-     * the {@link IArenaPlayer} instance is disposed.
+     * Get the global meta data object which is used until the
+     * {@link IArenaPlayer} instance is disposed.
      */
     @Override
     MetaStore getMeta();
@@ -219,5 +236,44 @@ public interface IArenaPlayer extends INamed, IMeta, IArenaOwned, IPlayerReferen
      * @param blame  The arena player to blame.
      */
     void kill(@Nullable IArenaPlayer blame);
+
+    /**
+     * Respawn the specified player at a spawnpoint appropriate to their
+     * current arena relation.
+     *
+     * <p>i.e. a lobby player gets teleported to one of the lobby spawns.</p>
+     *
+     * <p>This does not force a dead player to respawn. It simply teleports the
+     * player back to once of the spawnpoints related to the players current
+     * arena context relation.</p>
+     *
+     * @return  The location the player was spawned at or null if failed.
+     */
+    @Nullable
+    Location respawn();
+
+    /**
+     * Remove the player from the arena using the {@link PlayerLeaveArenaReason#PLAYER_LEAVE}
+     * reason.
+     *
+     * @return  True if successful, otherwise false.
+     */
+    boolean leaveArena();
+
+    /**
+     * Remove the player from the arena using the {@link PlayerLeaveArenaReason#KICK}
+     * reason.
+     *
+     * @return  True if successful, otherwise false.
+     */
+    boolean kick();
+
+    /**
+     * Remove the player from the arena using the {@link PlayerLeaveArenaReason#LOSE}
+     * reason.
+     *
+     * @return  True if successful, otherwise false.
+     */
+    boolean loseGame();
 }
 

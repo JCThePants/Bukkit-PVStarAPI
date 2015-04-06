@@ -104,11 +104,11 @@ public class ArenaScheduler {
                 IScheduledTask task = getTask();
 
                 if (_sessionToken == null)
-                    _sessionToken = arena.getGameManager().getStartTime();
+                    _sessionToken = arena.getGame().getStartTime();
 
                 if (task != null) {
-                    if (!arena.getGameManager().isRunning() ||
-                            _sessionToken != arena.getGameManager().getStartTime()) {
+                    if (!arena.getGame().isRunning() ||
+                            _sessionToken != arena.getGame().getStartTime()) {
                         cancelTask();
                         return;
                     }

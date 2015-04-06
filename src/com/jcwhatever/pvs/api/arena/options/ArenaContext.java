@@ -23,37 +23,32 @@
  */
 
 
-package com.jcwhatever.pvs.api.arena.managers;
-
-import com.jcwhatever.pvs.api.arena.ArenaTeam;
-import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
-
-import java.util.Set;
+package com.jcwhatever.pvs.api.arena.options;
 
 /**
- * Manages teams in an arena.
+ * Specifies an arena context (lobby, game or spectator)
  */
-public interface ITeamManager extends IArenaOwned {
+public enum ArenaContext {
 
     /**
-     * Get available teams in the arena. Available teams
-     * are determined by the teams set on spawnpoints in
-     * the spawn manager.
+     * The player is not in an arena and has
+     * no relation.
      */
-    Set<ArenaTeam> getAvailable();
+    NONE,
 
     /**
-     * Get the teams currently in the arena.
+     * The player is in the lobby.
      */
-    Set<ArenaTeam> getCurrentTeams();
+    LOBBY,
 
     /**
-     * Get the total number of teams possible in the arena.
+     * The player is in game.
      */
-    int totalTeams();
+    GAME,
 
     /**
-     * Get the number of teams currently in the arena.
+     * The player is a spectator.
      */
-    int totalCurrentTeams();
+    SPECTATOR
 }
+

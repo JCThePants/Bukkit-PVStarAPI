@@ -23,7 +23,7 @@
  */
 
 
-package com.jcwhatever.pvs.api.arena.managers;
+package com.jcwhatever.pvs.api.arena.context;
 
 import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
 import com.jcwhatever.pvs.api.arena.settings.ILobbySettings;
@@ -31,7 +31,7 @@ import com.jcwhatever.pvs.api.arena.settings.ILobbySettings;
 /**
  * Manages an arenas lobby players.
  */
-public interface ILobbyManager extends IPlayerManager {
+public interface ILobbyContext extends IContextManager {
 
     /**
      * Get the next group of players that are all ready.

@@ -27,7 +27,7 @@ package com.jcwhatever.pvs.api.events.players;
 
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
+import com.jcwhatever.pvs.api.arena.context.IContextManager;
 
 import javax.annotation.Nullable;
 
@@ -45,8 +45,11 @@ public class PlayerWinEvent extends AbstractPlayerEvent {
      * @param arena   The event arena.
      * @param player  The winning player.
      */
-    public PlayerWinEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager,
+    public PlayerWinEvent(IArena arena,
+                          IArenaPlayer player,
+                          IContextManager relatedManager,
                           @Nullable String message) {
+
         super(arena, player, relatedManager);
 
         _initialMessage = message;
@@ -54,8 +57,7 @@ public class PlayerWinEvent extends AbstractPlayerEvent {
     }
 
     /**
-     * Get the win message that was set when the event
-     * was called.
+     * Get the win message that was set when the event was called.
      */
     @Nullable
     public String getInitialMessage() {

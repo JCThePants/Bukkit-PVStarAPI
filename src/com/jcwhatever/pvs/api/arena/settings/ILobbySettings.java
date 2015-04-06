@@ -28,7 +28,7 @@ package com.jcwhatever.pvs.api.arena.settings;
 /**
  * Provides settings for an arenas lobby manager.
  */
-public interface ILobbySettings extends IPlayerSettings {
+public interface ILobbySettings extends IContextSettings {
 
     /**
      * Determine if players are immobilized in the lobby.

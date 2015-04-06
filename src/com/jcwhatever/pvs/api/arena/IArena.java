@@ -31,12 +31,11 @@ import com.jcwhatever.nucleus.providers.permissions.IPermission;
 import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.pvs.api.arena.extensions.ArenaExtension;
 import com.jcwhatever.pvs.api.arena.extensions.IArenaExtensionManager;
-import com.jcwhatever.pvs.api.arena.managers.IGameManager;
-import com.jcwhatever.pvs.api.arena.managers.ILobbyManager;
+import com.jcwhatever.pvs.api.arena.context.IGameContext;
+import com.jcwhatever.pvs.api.arena.context.ILobbyContext;
 import com.jcwhatever.pvs.api.arena.managers.ISpawnManager;
-import com.jcwhatever.pvs.api.arena.managers.ISpectatorManager;
+import com.jcwhatever.pvs.api.arena.context.ISpectatorContext;
 import com.jcwhatever.pvs.api.arena.managers.ITeamManager;
-import com.jcwhatever.pvs.api.arena.options.RemovePlayerReason;
 import com.jcwhatever.pvs.api.arena.settings.IArenaSettings;
 import com.jcwhatever.pvs.api.modules.PVStarModule;
 
@@ -93,32 +92,32 @@ public interface IArena extends INamedInsensitive {
     /**
      * Get the arenas lobby manager.
      */
-    ILobbyManager getLobbyManager();
+    ILobbyContext getLobby();
 
     /**
      * Get the arenas game manager.
      */
-    IGameManager getGameManager();
+    IGameContext getGame();
 
     /**
      * Get the arenas spectator manager.
      */
-    ISpectatorManager getSpectatorManager();
+    ISpectatorContext getSpectators();
 
     /**
      * Get the arenas team manager.
      */
-    ITeamManager getTeamManager();
+    ITeamManager getTeams();
 
     /**
      * Get the arenas spawn point manager.
      */
-    ISpawnManager getSpawnManager();
+    ISpawnManager getSpawns();
 
     /**
      * Get the arenas extension manager.
      */
-    IArenaExtensionManager getExtensionManager();
+    IArenaExtensionManager getExtensions();
 
     /**
      * Get the arenas settings.
@@ -160,13 +159,6 @@ public interface IArena extends INamedInsensitive {
     int getAvailableSlots();
 
     /**
-     * Determine if the specified player is in the arena.
-     * 
-     * @param player  The player to check.
-     */
-    boolean hasPlayer(IArenaPlayer player);
-
-    /**
      * Determine if players can join the arena.
      */
     boolean canJoin();
@@ -179,15 +171,4 @@ public interface IArena extends INamedInsensitive {
      * @return  True if the player was added to the arena.
      */
     boolean join(IArenaPlayer player);
-
-    /**
-     * Remove a player from the arena. Should not be used for arena relation
-     * changes or forwarding.
-     *
-     * @param player  The player to remove.
-     * @param reason  The reason the player is being removed.
-     *
-     * @return  True if the player was removed.
-     */
-    boolean remove(IArenaPlayer player, RemovePlayerReason reason);
 }

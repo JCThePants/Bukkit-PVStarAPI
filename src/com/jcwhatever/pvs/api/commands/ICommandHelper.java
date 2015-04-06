@@ -25,16 +25,22 @@
 
 package com.jcwhatever.pvs.api.commands;
 
+import com.jcwhatever.pvs.api.PVStarAPI;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.extensions.ArenaExtension;
 import com.jcwhatever.pvs.api.commands.AbstractPVCommand.ArenaReturned;
 
 import org.bukkit.command.CommandSender;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
+import javax.annotation.Nullable;
 
+/**
+ * Interface for a command helping utility object.
+ *
+ * @see PVStarAPI#getCommandHelper
+ */
 public interface ICommandHelper {
 
     /**

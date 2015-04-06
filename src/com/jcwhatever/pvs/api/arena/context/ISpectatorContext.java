@@ -23,29 +23,17 @@
  */
 
 
-package com.jcwhatever.pvs.api.events.players;
+package com.jcwhatever.pvs.api.arena.context;
 
-import com.jcwhatever.pvs.api.arena.IArena;
-import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.IGameManager;
-import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
-
-import javax.annotation.Nullable;
+import com.jcwhatever.pvs.api.arena.settings.ISpectatorSettings;
 
 /**
- * Event called when player joins an arena through the arena method
- * {@link IArena#join} or game manager method
- * {@link IGameManager#forwardPlayer}.
+ * Manages an arenas spectator players.
  */
-public class PlayerJoinedEvent extends AbstractPlayerEvent {
+public interface ISpectatorContext extends IContextManager {
 
     /**
-     * Constructor.
-     *
-     * @param arena   The arena being joined.
-     * @param player  The player joining.
+     * Get the spectator manager settings.
      */
-    public PlayerJoinedEvent(IArena arena, IArenaPlayer player, @Nullable IPlayerManager relatedManager) {
-        super(arena, player, relatedManager);
-    }
+    ISpectatorSettings getSettings();
 }

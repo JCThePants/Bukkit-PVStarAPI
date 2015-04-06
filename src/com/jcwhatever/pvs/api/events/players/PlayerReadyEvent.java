@@ -28,7 +28,7 @@ package com.jcwhatever.pvs.api.events.players;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
+import com.jcwhatever.pvs.api.arena.context.IContextManager;
 
 import javax.annotation.Nullable;
 
@@ -45,7 +45,11 @@ public class PlayerReadyEvent extends AbstractPlayerEvent {
      * @param arena   The event arena.
      * @param player  The player who is ready.
      */
-    public PlayerReadyEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager, @Nullable String message) {
+    public PlayerReadyEvent(IArena arena,
+                            IArenaPlayer player,
+                            IContextManager relatedManager,
+                            @Nullable String message) {
+
         super(arena, player, relatedManager);
 
         PreCon.notNull(relatedManager);
@@ -54,8 +58,8 @@ public class PlayerReadyEvent extends AbstractPlayerEvent {
     }
 
     /**
-     * Get message that will be displayed to players in the
-     * related player manager.
+     * Get message that will be displayed to players in the related player
+     * manager.
      */
     @Nullable
     public String getMessage() {
@@ -63,8 +67,8 @@ public class PlayerReadyEvent extends AbstractPlayerEvent {
     }
 
     /**
-     * Set the message that will be displayed to players in
-     * the related player manager.
+     * Set the message that will be displayed to players in the related player
+     * manager.
      *
      * @param message  The message to display.
      */

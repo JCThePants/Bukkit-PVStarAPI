@@ -25,32 +25,31 @@
 
 package com.jcwhatever.pvs.api.events.players;
 
+import com.jcwhatever.nucleus.mixins.ICancellable;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
-import com.jcwhatever.pvs.api.arena.options.RemovePlayerReason;
+import com.jcwhatever.pvs.api.arena.context.IContextManager;
+import com.jcwhatever.pvs.api.arena.options.AddToContextReason;
 
 /**
- * Called after a player is removed from an arena player manager (lobby, game or spectator).
- *
- * <p>Not to be confused with {@link PlayerLeaveEvent}, which is used when a player is
- * removed from the arena.</p>
+ * Called before a player is added to an arena player manager
+ * such as the lobby, game or spectator manager.
  */
-public class PlayerRemovedEvent extends AbstractPlayerEvent {
+public class PlayerPreAddToContextEvent extends AbstractPlayerEvent implements ICancellable {
 
-    private final RemovePlayerReason _reason;
+    private final AddToContextReason _reason;
+    private boolean _isCancelled;
 
     /**
      * Constructor.
      *
-     * @param arena           The event arena.
-     * @param player          The player who was removed.
-     * @param relatedManager  The manager the player is being removed from.
-     * @param reason          The reason the player was removed.
+     * @param arena   The event arena.
+     * @param player  The player to be added.
+     * @param reason  The reason the player is being added.
      */
-    public PlayerRemovedEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager,
-                              RemovePlayerReason reason) {
+    public PlayerPreAddToContextEvent(IArena arena, IArenaPlayer player, IContextManager relatedManager,
+                                      AddToContextReason reason) {
         super(arena, player, relatedManager);
 
         PreCon.notNull(reason);
@@ -60,9 +59,19 @@ public class PlayerRemovedEvent extends AbstractPlayerEvent {
     }
 
     /**
-     * Get the reason the player was removed.
+     * Get the reason the player is to be added.
      */
-    public RemovePlayerReason getReason() {
+    public AddToContextReason getReason() {
         return _reason;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return _isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        _isCancelled = isCancelled;
     }
 }

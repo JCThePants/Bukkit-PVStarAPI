@@ -22,53 +22,33 @@
  * THE SOFTWARE.
  */
 
+package com.jcwhatever.pvs.api.events.players;
 
-package com.jcwhatever.pvs.api.arena.options;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.context.IGameContext;
+import com.jcwhatever.pvs.api.arena.options.ArenaContext;
+import com.jcwhatever.pvs.api.arena.options.RemoveFromContextReason;
 
 /**
- * Describes reasons for a player to be removed
- * from an arena or arena player manager.
+ * Called after a player is removed from an arenas game context.
  */
-public enum RemovePlayerReason {
+public class PlayerRemovedFromGameEvent extends PlayerRemovedFromContextEvent {
 
     /**
-     * The player lost.
-     */
-    LOSE,
-
-    /**
-     * The game has ended.
-     */
-    GAME_ENDED,
-
-    /**
-     * The player logged out of the server.
-     */
-    LOGOUT,
-
-    /**
-     * The player left the arena.
-     */
-    PLAYER_LEAVE,
-
-    /**
-     * The players relationship to the arena
-     * is being changed.
-     */
-    ARENA_RELATION_CHANGE,
-
-    /**
-     * The player is being kicked from the arena.
+     * Constructor.
      *
-     * <p>Not to be confused with removal due to being
-     * kicked from the server, in which case {@link RemovePlayerReason#LOGOUT}
-     * is used.</p>
+     * @param arena        The event arena.
+     * @param player       The player who was removed.
+     * @param gameManager  The game manager the player is being removed from.
+     * @param reason       The reason the player was removed.
      */
-    KICK,
+    public PlayerRemovedFromGameEvent(IArena arena,
+                                      IArenaPlayer player,
+                                      IGameContext gameManager,
+                                      ArenaContext context,
+                                      RemoveFromContextReason reason) {
 
-    /**
-     * The player is being forwarded to or from another
-     * arena.
-     */
-    FORWARDING
+        super(arena, player, gameManager, context, reason);
+    }
 }

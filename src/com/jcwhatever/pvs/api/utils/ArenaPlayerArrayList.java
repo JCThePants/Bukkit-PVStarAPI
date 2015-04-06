@@ -76,15 +76,6 @@ public class ArenaPlayerArrayList extends ListWrapper<IArenaPlayer> implements I
         _isReadonly = isReadonly;
     }
 
-    /**
-     * Make the list read-only.
-     */
-    public ArenaPlayerArrayList seal() {
-        _isReadonly = true;
-
-        return this;
-    }
-
     @Override
     public boolean isReadOnly() {
         return _isReadonly;
@@ -116,6 +107,15 @@ public class ArenaPlayerArrayList extends ListWrapper<IArenaPlayer> implements I
             throw new UnsupportedOperationException("The ArenaPlayer list is readonly.");
 
         return true;
+    }
+
+    /*
+     * Make the list read-only.
+     */
+    private ArenaPlayerArrayList seal() {
+        _isReadonly = true;
+
+        return this;
     }
 
     private class PlayerList extends ConversionListWrapper<Player, IArenaPlayer> {

@@ -28,6 +28,7 @@ package com.jcwhatever.pvs.api.arena.managers;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
+import com.jcwhatever.pvs.api.arena.options.ArenaContext;
 import com.jcwhatever.pvs.api.spawns.SpawnType;
 import com.jcwhatever.pvs.api.spawns.Spawnpoint;
 
@@ -56,87 +57,43 @@ public interface ISpawnManager extends IArenaOwned {
     boolean hasSpectatorSpawns();
 
     /**
-     * Get all lobby spawn points. If there are no
-     * lobby spawns, returns all game spawns.
+     * Get all spawn points for a specific context.
      */
-    List<Spawnpoint> getLobbyOrGameSpawns();
-
-    /**
-     * Get all lobby spawn points.
-     */
-    List<Spawnpoint> getLobbySpawns();
-
-    /**
-     * Get all game spawn points.
-     */
-    List<Spawnpoint> getGameSpawns();
-
-    /**
-     * Get all spectator spawn points.
-     */
-    List<Spawnpoint> getSpectatorSpawns();
-
-    /**
-     * Get a random spawn for a player. The spawn returned correlates
-     * to the players current arena relation. (i.e player in lobby gets a lobby spawn)
-     *
-     * @param player  The player to get a random spawn for.
-     *
-     * @return  Null if the player is not in an arena.
-     */
-    @Nullable
-    Spawnpoint getRandomSpawn(IArenaPlayer player);
-
-    /**
-     * Get a random lobby spawn.
-     *
-     * @param team  The team the spawn is for.
-     */
-    @Nullable
-    Spawnpoint getRandomLobbySpawn(ArenaTeam team);
-
-
-    /**
-     * Get a random game spawn.
-     *
-     * @param team  The team the spawn is for.
-     */
-    @Nullable
-    Spawnpoint getRandomGameSpawn(ArenaTeam team);
-
-    /**
-     * Get a random spectator spawn.
-     *
-     * @param team  The team the spawn is for.
-     */
-    @Nullable
-    Spawnpoint getRandomSpectatorSpawn(ArenaTeam team);
+    List<Spawnpoint> getAll(ArenaContext context);
 
     /**
      * Get all spawnpoints
      */
-    List<Spawnpoint> getSpawns();
+    List<Spawnpoint> getAll();
 
     /**
      * Get all spawnpoints from a comma delimited string of spawn names.
      *
      * @param names  The names of the spawns to retrieve.
      */
-    List<Spawnpoint> getSpawns(String names);
+    List<Spawnpoint> getAll(String names);
 
     /**
      * Get all spawns of the specified type.
      *
      * @param type  The spawn type.
      */
-    List<Spawnpoint> getSpawns(SpawnType type);
+    List<Spawnpoint> getAll(SpawnType type);
 
     /**
      * Get all spawns for the specified team.
      *
      * @param team  The arena team.
      */
-    List<Spawnpoint> getSpawns(ArenaTeam team);
+    List<Spawnpoint> getAll(ArenaTeam team);
+
+    /**
+     * Get all spawns for the specified team.
+     *
+     * @param team     The arena team.
+     * @param context  The context of the spawn type.
+     */
+    List<Spawnpoint> getAll(ArenaTeam team, ArenaContext context);
 
     /**
      * Get all spawns for the specified team and type.
@@ -144,7 +101,7 @@ public interface ISpawnManager extends IArenaOwned {
      * @param type  The spawn type.
      * @param team  The arena team.
      */
-    List<Spawnpoint> getSpawns(SpawnType type, ArenaTeam team);
+    List<Spawnpoint> getAll(SpawnType type, ArenaTeam team);
 
     /**
      * Get a spawn by it's name.
@@ -152,21 +109,21 @@ public interface ISpawnManager extends IArenaOwned {
      * @param name  The name of the spawn.
      */
     @Nullable
-    Spawnpoint getSpawn(String name);
+    Spawnpoint get(String name);
 
     /**
      * Add a spawnpoint.
      *
      * @param spawn  The spawnpoint to add.
      */
-    boolean addSpawn(Spawnpoint spawn);
+    boolean add(Spawnpoint spawn);
 
     /**
      * Add a collection of spawnpoints.
      *
      * @param spawns  The collection to add
      */
-    void addSpawns(Collection<? extends Spawnpoint> spawns);
+    void addAll(Collection<? extends Spawnpoint> spawns);
 
     /**
      * Remove a spawnpoint.
@@ -175,15 +132,14 @@ public interface ISpawnManager extends IArenaOwned {
      *
      * @return  True if the spawnpoint was found and removed.
      */
-    boolean removeSpawn(Spawnpoint spawn);
+    boolean remove(Spawnpoint spawn);
 
     /**
      * Remove a collection of spawnpoints.
      *
      * @param spawns  The collection to remove.
      */
-    void removeSpawns(Collection<? extends Spawnpoint> spawns);
-
+    void removeAll(Collection<? extends Spawnpoint> spawns);
 
     /**
      * Reserves a spawn point for a player by removing it as a candidate
@@ -192,7 +148,7 @@ public interface ISpawnManager extends IArenaOwned {
      * @param player  The player to reserve the spawn for.
      * @param spawn   The spawnpoint to reserve.
      */
-    void reserveSpawn(IArenaPlayer player, Spawnpoint spawn);
+    void reserve(IArenaPlayer player, Spawnpoint spawn);
 
     /**
      * Removes the reserved status of the spawnpoint reserved for a player
@@ -200,7 +156,7 @@ public interface ISpawnManager extends IArenaOwned {
      *
      * @param player  The player the spawn was reserved for.
      */
-    void unreserveSpawn(IArenaPlayer player);
+    void unreserve(IArenaPlayer player);
 
     /**
      * Clear all reserved spawns and make them available via the managers

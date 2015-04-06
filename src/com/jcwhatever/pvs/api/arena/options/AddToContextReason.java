@@ -23,20 +23,52 @@
  */
 
 
-package com.jcwhatever.pvs.api.exceptions;
+package com.jcwhatever.pvs.api.arena.options;
 
-public class PlayerGroupExpectedException extends RuntimeException {
+import com.jcwhatever.nucleus.utils.EnumUtils;
 
-    private String _msg;
+import javax.annotation.Nullable;
 
-    public PlayerGroupExpectedException() {
-        _msg = "Player was expected to be in a player group but was not.";
+/**
+ * Reasons for adding a player to an arena context manager.
+ */
+public enum AddToContextReason {
+
+    /**
+     * The player is joining the arena.
+     */
+    PLAYER_JOIN,
+    /**
+     * The players relation to the arena is changing.
+     */
+    CONTEXT_CHANGE,
+    /**
+     * The player is being forwarded to the arena.
+     */
+    FORWARDING;
+
+    private PlayerJoinArenaReason _equivalent;
+
+    /**
+     * Get the {@link PlayerJoinArenaReason} equivalent constant.
+     *
+     * @return  The arena reason or null if no equivalent.
+     */
+    @Nullable
+    public PlayerJoinArenaReason getArenaEquivalent() {
+
+        if (_equivalent == null)
+            _equivalent = EnumUtils.getEnum(name(), PlayerJoinArenaReason.class);
+
+        return _equivalent;
     }
 
-    @Override
-    public String getMessage() {
-        return _msg;
+    /**
+     * Determine if a {@link PlayerJoinArenaReason} constant is equivalent.
+     *
+     * @param reason  The arena reason to check.
+     */
+    public boolean isEquivalent(PlayerJoinArenaReason reason) {
+        return reason == getArenaEquivalent();
     }
-
-
 }

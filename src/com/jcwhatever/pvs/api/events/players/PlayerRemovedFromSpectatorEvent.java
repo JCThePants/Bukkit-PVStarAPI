@@ -22,18 +22,33 @@
  * THE SOFTWARE.
  */
 
+package com.jcwhatever.pvs.api.events.players;
 
-package com.jcwhatever.pvs.api.arena.managers;
-
-import com.jcwhatever.pvs.api.arena.settings.ISpectatorSettings;
+import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.context.ISpectatorContext;
+import com.jcwhatever.pvs.api.arena.options.ArenaContext;
+import com.jcwhatever.pvs.api.arena.options.RemoveFromContextReason;
 
 /**
- * Manages an arenas spectator players.
+ * Called after a player is removed from an arenas game context.
  */
-public interface ISpectatorManager extends IPlayerManager {
+public class PlayerRemovedFromSpectatorEvent extends PlayerRemovedFromContextEvent {
 
     /**
-     * Get the spectator manager settings.
+     * Constructor.
+     *
+     * @param arena             The event arena.
+     * @param player            The player who was removed.
+     * @param spectatorManager  The spectator manager the player is being removed from.
+     * @param reason            The reason the player was removed.
      */
-    ISpectatorSettings getSettings();
+    public PlayerRemovedFromSpectatorEvent(IArena arena,
+                                           IArenaPlayer player,
+                                           ISpectatorContext spectatorManager,
+                                           ArenaContext context,
+                                           RemoveFromContextReason reason) {
+
+        super(arena, player, spectatorManager, context, reason);
+    }
 }

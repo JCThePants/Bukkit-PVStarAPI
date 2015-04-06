@@ -29,18 +29,18 @@ import com.jcwhatever.nucleus.mixins.ICancellable;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
-import com.jcwhatever.pvs.api.arena.options.RemovePlayerReason;
+import com.jcwhatever.pvs.api.arena.context.IContextManager;
+import com.jcwhatever.pvs.api.arena.options.RemoveFromContextReason;
 
 /**
  * Called before a player is removed from an arena.
  *
- * <p>Not to be confused with {@link PlayerLeaveEvent}, which is used when a player is
+ * <p>Not to be confused with {@link PlayerLeaveArenaEvent}, which is used when a player is
  * removed from the arena.</p>
  */
-public class PlayerPreRemoveEvent extends AbstractPlayerEvent implements ICancellable {
+public class PlayerPreRemoveFromContextEvent extends AbstractPlayerEvent implements ICancellable {
 
-    private final RemovePlayerReason _reason;
+    private final RemoveFromContextReason _reason;
     private boolean _isCancelled;
 
     /**
@@ -50,8 +50,11 @@ public class PlayerPreRemoveEvent extends AbstractPlayerEvent implements ICancel
      * @param player  The player to be removed.
      * @param reason  The reason the player is being removed.
      */
-    public PlayerPreRemoveEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager,
-                                RemovePlayerReason reason) {
+    public PlayerPreRemoveFromContextEvent(IArena arena,
+                                           IArenaPlayer player,
+                                           IContextManager relatedManager,
+                                           RemoveFromContextReason reason) {
+
         super(arena, player, relatedManager);
 
         PreCon.notNull(reason);
@@ -63,7 +66,7 @@ public class PlayerPreRemoveEvent extends AbstractPlayerEvent implements ICancel
     /**
      * Get the reason the player is being removed.
      */
-    public RemovePlayerReason getReason() {
+    public RemoveFromContextReason getReason() {
         return _reason;
     }
 

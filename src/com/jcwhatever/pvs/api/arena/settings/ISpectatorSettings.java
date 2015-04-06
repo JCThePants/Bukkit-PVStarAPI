@@ -28,6 +28,6 @@ package com.jcwhatever.pvs.api.arena.settings;
 /**
  * Provides settings for an arenas spectator manager.
  */
-public interface ISpectatorSettings extends IPlayerSettings {
+public interface ISpectatorSettings extends IContextSettings {
 
 }

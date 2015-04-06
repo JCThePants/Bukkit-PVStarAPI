@@ -28,57 +28,44 @@ package com.jcwhatever.pvs.api.events.players;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-import com.jcwhatever.pvs.api.arena.ArenaTeam;
+import com.jcwhatever.pvs.api.arena.context.IGameContext;
 import com.jcwhatever.pvs.api.arena.context.IContextManager;
-import com.jcwhatever.pvs.api.arena.options.TeamChangeReason;
+import com.jcwhatever.pvs.api.arena.options.PlayerJoinArenaReason;
+
+import javax.annotation.Nullable;
 
 /**
- * Called after a players team is set.
+ * Event called when player joins an arena through the arena method
+ * {@link IArena#join} or game manager method {@link IGameContext#forwardPlayer}.
  */
-public class PlayerTeamChangedEvent extends AbstractPlayerEvent {
+public class PlayerJoinedArenaEvent extends AbstractPlayerEvent {
 
-    private final ArenaTeam _previousTeam;
-    private final TeamChangeReason _reason;
+    private final PlayerJoinArenaReason _reason;
 
     /**
      * Constructor.
      *
-     * @param arena   The event arena.
-     * @param player  The event player.
+     * @param arena           The arena being joined.
+     * @param player          The player joining.
+     * @param reason          The reason the player is joining.
+     * @param relatedManager  The context manager that initiated the event.
      */
-    public PlayerTeamChangedEvent(IArena arena,
+    public PlayerJoinedArenaEvent(IArena arena,
                                   IArenaPlayer player,
-                                  IContextManager relatedManager,
-                                  ArenaTeam previousTeam,
-                                  TeamChangeReason reason) {
+                                  PlayerJoinArenaReason reason,
+                                  @Nullable IContextManager relatedManager) {
 
         super(arena, player, relatedManager);
 
-        PreCon.notNull(previousTeam);
         PreCon.notNull(reason);
 
-        _previousTeam = previousTeam;
         _reason = reason;
     }
 
     /**
-     * Get the team the player is on.
+     * Determine the reason the player is joining the arena.
      */
-    public ArenaTeam getTeam() {
-        return getPlayer().getTeam();
-    }
-
-    /**
-     * Get the team the player was previously on.
-     */
-    public ArenaTeam getPreviousTeam() {
-        return _previousTeam;
-    }
-
-    /**
-     * Get the reason for the team change.
-     */
-    public TeamChangeReason getReason() {
+    public PlayerJoinArenaReason getReason() {
         return _reason;
     }
 }

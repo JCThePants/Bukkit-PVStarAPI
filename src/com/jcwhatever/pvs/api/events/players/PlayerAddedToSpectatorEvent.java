@@ -22,38 +22,20 @@
  * THE SOFTWARE.
  */
 
-
-package com.jcwhatever.pvs.api.exceptions;
+package com.jcwhatever.pvs.api.events.players;
 
 /**
- * Thrown when an invalid name is detected.
+ * Called after a player is added to an arenas spectator context.
  */
-public class InvalidNameException extends RuntimeException {
-
-    private String _msg;
+public class PlayerAddedToSpectatorEvent extends PlayerAddedToContextEvent {
 
     /**
-     * Constructor. Default message used.
+     * Constructor.
      */
-    public InvalidNameException() {
-        _msg = "An invalid name was detected. Names should be alphanumeric, begin with a letter and contain no spaces. Underscores are allowed.";
-    }
+    public PlayerAddedToSpectatorEvent(PlayerAddedToContextEvent event) {
 
-    /**
-     * Constructor with custom message.
-     *
-     * @param message  Custom message.
-     */
-    public InvalidNameException(String message) {
-        _msg = message;
+        super(event.getArena(), event.getPlayer(), event.getContextManager(),
+                event.getContext(), event.getReason(), event.getSpawnLocation(),
+                event.getMessage());
     }
-
-    /**
-     * Get the exception message.
-     */
-    @Override
-    public String getMessage() {
-        return _msg;
-    }
-
 }

@@ -27,8 +27,9 @@ package com.jcwhatever.pvs.api.events.players;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
-import com.jcwhatever.pvs.api.arena.options.RemovePlayerReason;
+import com.jcwhatever.pvs.api.arena.context.IContextManager;
+import com.jcwhatever.pvs.api.arena.options.PlayerLeaveArenaReason;
+import com.jcwhatever.pvs.api.arena.options.RemoveFromContextReason;
 
 import org.bukkit.Location;
 
@@ -37,18 +38,18 @@ import javax.annotation.Nullable;
 /**
  * Called after a player is removed from an arena.
  *
- * <p>Not to be confused with {@link PlayerPreRemoveEvent} and {@link PlayerRemovedEvent},
- * which are used when a player is removed from an arenas {@link IPlayerManager}.
- * (ie. lobby, game or spectator)</p>
+ * <p>Not to be confused with {@link PlayerPreRemoveFromContextEvent} and
+ * {@link PlayerRemovedFromContextEvent}, which are used when a player is removed
+ * from an arenas {@link IContextManager}. (ie. lobby, game or spectator)</p>
  *
- * <p>Although {@link PlayerPreRemoveEvent} and {@link PlayerRemovedEvent} are
- * called before {@link PlayerLeaveEvent}, in cases where the player is not actually
- * leaving the arena ({@link RemovePlayerReason#ARENA_RELATION_CHANGE}),
- * {@link PlayerLeaveEvent} is not called.</p>
+ * <p>Although {@link PlayerPreRemoveFromContextEvent} and {@link PlayerRemovedFromContextEvent}
+ * are called before {@link PlayerLeaveArenaEvent}, in cases where the player is
+ * not actually leaving the arena ({@link RemoveFromContextReason#CONTEXT_CHANGE}),
+ * {@link PlayerLeaveArenaEvent} is not called.</p>
  */
-public class PlayerLeaveEvent extends AbstractPlayerEvent {
+public class PlayerLeaveArenaEvent extends AbstractPlayerEvent {
 
-    private final RemovePlayerReason _reason;
+    private final PlayerLeaveArenaReason _reason;
     private final Location _initialRestoreLocation;
     private Location _restoreLocation;
 
@@ -60,8 +61,12 @@ public class PlayerLeaveEvent extends AbstractPlayerEvent {
      * @param relatedManager  The manager the player is being removed from.
      * @param reason          The reason the player was removed.
      */
-    public PlayerLeaveEvent(IArena arena, IArenaPlayer player, IPlayerManager relatedManager,
-                              RemovePlayerReason reason, @Nullable Location restoreLocation) {
+    public PlayerLeaveArenaEvent(IArena arena,
+                                 IArenaPlayer player,
+                                 IContextManager relatedManager,
+                                 PlayerLeaveArenaReason reason,
+                                 @Nullable Location restoreLocation) {
+
         super(arena, player, relatedManager);
 
         PreCon.notNull(reason);
@@ -75,7 +80,7 @@ public class PlayerLeaveEvent extends AbstractPlayerEvent {
     /**
      * Get the reason the player was removed.
      */
-    public RemovePlayerReason getReason() {
+    public PlayerLeaveArenaReason getReason() {
         return _reason;
     }
 
@@ -83,9 +88,8 @@ public class PlayerLeaveEvent extends AbstractPlayerEvent {
      * Determine if the player is being restored to a location.
      */
     public boolean isRestoring() {
-        return _reason != RemovePlayerReason.FORWARDING &&
-                _reason != RemovePlayerReason.ARENA_RELATION_CHANGE &&
-                _reason != RemovePlayerReason.LOGOUT;
+        return _reason != PlayerLeaveArenaReason.FORWARDING &&
+                _reason != PlayerLeaveArenaReason.LOGOUT;
     }
 
     /**
