@@ -85,7 +85,7 @@ public class Msg {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public static void tell(Collection<IArenaPlayer> players, String message, Object...params) {
+    public static void tell(Collection<? extends IArenaPlayer> players, String message, Object...params) {
         PreCon.notNull(players);
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
@@ -209,7 +209,7 @@ public class Msg {
      * @param exclude  The player to exclude from the broadcast.
      * @param params   Optional format parameters.
      */
-    public static void broadcast(String message, Collection<Player> exclude, Object...params) {
+    public static void broadcast(String message, Collection<? extends Player> exclude, Object...params) {
         msg().broadcast(exclude, message, params);
     }
 
