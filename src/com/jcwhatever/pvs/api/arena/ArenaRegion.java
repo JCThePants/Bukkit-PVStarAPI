@@ -26,6 +26,7 @@
 package com.jcwhatever.pvs.api.arena;
 
 import com.jcwhatever.pvs.api.PVStarAPI;
+import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 import com.jcwhatever.pvs.api.events.region.ArenaRegionPreRestoreEvent;
 import com.jcwhatever.pvs.api.events.region.ArenaRegionPreSaveEvent;
 import com.jcwhatever.pvs.api.events.region.ArenaRegionRestoredEvent;
@@ -46,7 +47,7 @@ import org.bukkit.entity.Player;
  * A region that represents the bounds of an arena.
  */
 @RegionPriorityInfo(enter = RegionEventPriority.HIGH, leave = RegionEventPriority.LOW)
-public class ArenaRegion extends RestorableRegion {
+public class ArenaRegion extends RestorableRegion implements IArenaOwned {
 
     public static final MetaKey<ArenaRegion>
             ARENA_REGION_KEY = new MetaKey<ArenaRegion>(ArenaRegion.class);
@@ -68,9 +69,7 @@ public class ArenaRegion extends RestorableRegion {
         setEventListener(true);
     }
 
-    /**
-     * Get the owning arena.
-     */
+    @Override
     public IArena getArena() {
         return _arena;
     }

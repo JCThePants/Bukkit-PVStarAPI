@@ -26,6 +26,7 @@
 package com.jcwhatever.pvs.api.arena;
 
 import com.jcwhatever.pvs.api.arena.managers.IPlayerManager;
+import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 import com.jcwhatever.pvs.api.arena.options.ArenaPlayerRelation;
 import com.jcwhatever.pvs.api.arena.options.TeamChangeReason;
 import com.jcwhatever.pvs.api.arena.settings.IPlayerManagerSettings;
@@ -44,7 +45,7 @@ import javax.annotation.Nullable;
  * Wraps the {@link org.bukkit.entity.Player} object and carries extra arena
  * related meta data regarding the player.
  */
-public interface IArenaPlayer extends INamed, IMeta, IPlayerReference {
+public interface IArenaPlayer extends INamed, IMeta, IArenaOwned, IPlayerReference {
 
     /**
      * Get the players unique minecraft Id.
@@ -66,6 +67,7 @@ public interface IArenaPlayer extends INamed, IMeta, IPlayerReference {
     /**
      * Get the arena the player is currently in.
      */
+    @Override
     @Nullable
     IArena getArena();
 

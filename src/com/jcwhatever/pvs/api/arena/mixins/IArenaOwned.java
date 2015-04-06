@@ -22,25 +22,17 @@
  * THE SOFTWARE.
  */
 
+package com.jcwhatever.pvs.api.arena.mixins;
 
-package com.jcwhatever.pvs.api.events;
-
-import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArena;
-import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 
-public abstract class AbstractArenaEvent implements IArenaOwned {
+/**
+ * Mixin interface for a type that is owned by an arena.
+ */
+public interface IArenaOwned {
 
-    private IArena _arena;
-
-    public AbstractArenaEvent(IArena arena) {
-        PreCon.notNull(arena);
-
-        _arena = arena;
-    }
-
-    @Override
-    public final IArena getArena() {
-        return _arena;
-    }
+    /**
+     * Get the owning arena.
+     */
+    IArena getArena();
 }

@@ -25,9 +25,9 @@
 
 package com.jcwhatever.pvs.api.arena.managers;
 
-import com.jcwhatever.pvs.api.arena.IArena;
-import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
+import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 import com.jcwhatever.pvs.api.spawns.SpawnType;
 import com.jcwhatever.pvs.api.spawns.Spawnpoint;
 
@@ -38,12 +38,7 @@ import javax.annotation.Nullable;
 /**
  * Manages an arenas spawn points.
  */
-public interface ISpawnManager {
-
-    /**
-     * Get the arena the spawn manager is managing.
-     */
-    IArena getArena();
+public interface ISpawnManager extends IArenaOwned {
 
     /**
      * Determine if there are lobby spawns available.

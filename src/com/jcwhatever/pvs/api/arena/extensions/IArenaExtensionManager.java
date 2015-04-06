@@ -25,7 +25,7 @@
 
 package com.jcwhatever.pvs.api.arena.extensions;
 
-import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 
 import java.util.Set;
 import javax.annotation.Nullable;
@@ -33,12 +33,7 @@ import javax.annotation.Nullable;
 /**
  *  Manages extension instances for a specific arena instance.
  */
-public interface IArenaExtensionManager {
-
-    /**
-     * Get the owning arena.
-     */
-    IArena getArena();
+public interface IArenaExtensionManager extends IArenaOwned {
 
     /**
      * Determine if the arena has an extension.

@@ -25,20 +25,15 @@
 
 package com.jcwhatever.pvs.api.arena.managers;
 
-import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.ArenaTeam;
+import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 
 import java.util.Set;
 
 /**
  * Manages teams in an arena.
  */
-public interface ITeamManager {
-
-    /**
-     * Get the owning arena.
-     */
-    IArena getArena();
+public interface ITeamManager extends IArenaOwned {
 
     /**
      * Get available teams in the arena. Available teams

@@ -26,9 +26,9 @@
 package com.jcwhatever.pvs.api.arena.managers;
 
 import com.jcwhatever.nucleus.utils.Result;
-import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
+import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 import com.jcwhatever.pvs.api.arena.options.AddPlayerReason;
 import com.jcwhatever.pvs.api.arena.options.RemovePlayerReason;
 
@@ -38,12 +38,7 @@ import org.bukkit.Location;
  * The base interface for player managers.
  * (LobbyManager, GameManager, SpectatorManager)
  */
-public interface IPlayerManager {
-
-    /**
-     * Get the managers owning arena.
-     */
-    IArena getArena();
+public interface IPlayerManager extends IArenaOwned {
 
     /**
      * Get the players being managed.

@@ -26,18 +26,13 @@
 package com.jcwhatever.pvs.api.arena.settings;
 
 import com.jcwhatever.nucleus.storage.IDataNode;
-import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 
 /**
  * Basic settings for player managers.
  * (lobby, game, spectator)
  */
-public interface IPlayerManagerSettings {
-
-    /**
-     * Get the owning arena.
-     */
-    IArena getArena();
+public interface IPlayerManagerSettings extends IArenaOwned {
 
     /**
      * Get the data node.

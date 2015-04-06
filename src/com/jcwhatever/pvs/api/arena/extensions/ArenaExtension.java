@@ -31,13 +31,14 @@ import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.PVStarAPI;
 import com.jcwhatever.pvs.api.arena.IArena;
+import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 
 /**
  * Abstract implementation of an Arena extension.
  *
  * <p>Each instance is used for a single arena.</p>
  */
-public abstract class ArenaExtension {
+public abstract class ArenaExtension implements IArenaOwned {
 
     private ArenaExtensionRegistration _registration;
     private ArenaExtensionInfo _extensionInfo;
@@ -46,10 +47,10 @@ public abstract class ArenaExtension {
     private IDataNode _dataNode;
     private String _dataNodePath;
 
-
     /**
      * Get the arena the module instance was created for.
      */
+    @Override
     public final IArena getArena() {
         return _arena;
     }
