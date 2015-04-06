@@ -46,11 +46,6 @@ public interface IPlayerManager extends IArenaOwned {
     IArenaPlayerCollection getPlayers();
 
     /**
-     * Get the number of players being managed.
-     */
-    int getPlayerCount();
-
-    /**
      * Determine if the manager is managing the specified player.
      *
      * @param player  The player to check.
