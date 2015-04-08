@@ -25,8 +25,8 @@
 
 package com.jcwhatever.pvs.api;
 
-import com.jcwhatever.nucleus.commands.CommandDispatcher;
 import com.jcwhatever.nucleus.events.manager.EventManager;
+import com.jcwhatever.nucleus.managed.commands.ICommandDispatcher;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.extensions.IExtensionTypeManager;
 import com.jcwhatever.pvs.api.arena.managers.IArenaManager;
@@ -70,8 +70,8 @@ public final class PVStarAPI {
     /**
      * Get the command handler.
      */
-    public static CommandDispatcher getCommandHandler() {
-        return _implementation.getCommandHandler();
+    public static ICommandDispatcher getCommandDispatcher() {
+        return _implementation.getCommandDispatcher();
     }
 
     /**

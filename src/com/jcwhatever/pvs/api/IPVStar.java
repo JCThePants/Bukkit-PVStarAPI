@@ -25,8 +25,8 @@
 
 package com.jcwhatever.pvs.api;
 
-import com.jcwhatever.nucleus.commands.CommandDispatcher;
 import com.jcwhatever.nucleus.events.manager.EventManager;
+import com.jcwhatever.nucleus.managed.commands.ICommandDispatcher;
 import com.jcwhatever.nucleus.managed.messaging.IMessenger;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.extensions.IExtensionTypeManager;
@@ -90,7 +90,7 @@ public interface IPVStar extends Plugin  {
     /**
      * Get PV-Stars command handler.
      */
-    CommandDispatcher getCommandHandler();
+    ICommandDispatcher getCommandDispatcher();
 
     /**
      * Get command helper that contains utilities methods for commands.

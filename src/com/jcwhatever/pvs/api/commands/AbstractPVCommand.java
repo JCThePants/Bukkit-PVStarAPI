@@ -25,9 +25,9 @@
 
 package com.jcwhatever.pvs.api.commands;
 
-import com.jcwhatever.nucleus.commands.AbstractCommand;
-import com.jcwhatever.nucleus.commands.arguments.CommandArguments;
-import com.jcwhatever.nucleus.commands.exceptions.InvalidArgumentException;
+import com.jcwhatever.nucleus.managed.commands.arguments.ICommandArguments;
+import com.jcwhatever.nucleus.managed.commands.exceptions.InvalidArgumentException;
+import com.jcwhatever.nucleus.managed.commands.utils.AbstractCommand;
 import com.jcwhatever.pvs.api.PVStarAPI;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.extensions.ArenaExtension;
@@ -70,7 +70,7 @@ public abstract class AbstractPVCommand extends AbstractCommand {
          * @throws InvalidArgumentException
          */
         public static ArenaReturned getInfoToggled(
-                CommandArguments args, String infoParameterName)
+                ICommandArguments args, String infoParameterName)
                 throws InvalidArgumentException {
 
             return args.getString(infoParameterName).equals("info")
