@@ -25,6 +25,16 @@
 
 package com.jcwhatever.pvs.api.arena;
 
+import com.jcwhatever.nucleus.regions.IRegion;
+import com.jcwhatever.nucleus.regions.RegionPriorityInfo;
+import com.jcwhatever.nucleus.regions.RestorableRegion;
+import com.jcwhatever.nucleus.regions.file.IRegionFileFactory;
+import com.jcwhatever.nucleus.regions.file.basic.BasicFileFactory;
+import com.jcwhatever.nucleus.regions.options.EnterRegionReason;
+import com.jcwhatever.nucleus.regions.options.LeaveRegionReason;
+import com.jcwhatever.nucleus.regions.options.RegionEventPriority;
+import com.jcwhatever.nucleus.storage.IDataNode;
+import com.jcwhatever.nucleus.utils.MetaKey;
 import com.jcwhatever.pvs.api.PVStarAPI;
 import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 import com.jcwhatever.pvs.api.events.region.ArenaRegionPreRestoreEvent;
@@ -33,13 +43,6 @@ import com.jcwhatever.pvs.api.events.region.ArenaRegionRestoredEvent;
 import com.jcwhatever.pvs.api.events.region.ArenaRegionSavedEvent;
 import com.jcwhatever.pvs.api.events.region.PlayerEnterArenaRegionEvent;
 import com.jcwhatever.pvs.api.events.region.PlayerLeaveArenaRegionEvent;
-import com.jcwhatever.nucleus.regions.RegionPriorityInfo;
-import com.jcwhatever.nucleus.regions.RestorableRegion;
-import com.jcwhatever.nucleus.regions.options.EnterRegionReason;
-import com.jcwhatever.nucleus.regions.options.LeaveRegionReason;
-import com.jcwhatever.nucleus.regions.options.RegionEventPriority;
-import com.jcwhatever.nucleus.storage.IDataNode;
-import com.jcwhatever.nucleus.utils.MetaKey;
 
 import org.bukkit.entity.Player;
 
@@ -53,6 +56,7 @@ public class ArenaRegion extends RestorableRegion implements IArenaOwned {
             ARENA_REGION_KEY = new MetaKey<ArenaRegion>(ArenaRegion.class);
 
     private final IArena _arena;
+    private final FileFactory _fileFactory = new FileFactory();
 
     /**
      * Constructor.
@@ -72,6 +76,11 @@ public class ArenaRegion extends RestorableRegion implements IArenaOwned {
     @Override
     public IArena getArena() {
         return _arena;
+    }
+
+    @Override
+    public IRegionFileFactory getFileFactory() {
+        return _fileFactory;
     }
 
     /**
@@ -127,14 +136,6 @@ public class ArenaRegion extends RestorableRegion implements IArenaOwned {
     }
 
     /**
-     * The file prefix of region save files.
-     */
-    @Override
-    protected final String getFilePrefix() {
-        return "arena." + _arena.getId();
-    }
-
-    /**
      * Called when the arena region is saved to disk.
      */
     @Override
@@ -165,8 +166,16 @@ public class ArenaRegion extends RestorableRegion implements IArenaOwned {
      * Called when the arena region restore operation is complete.
      */
     @Override
-    protected void onRestore() {
+    protected void onRestoreComplete() {
         getArena().setIdle();
         _arena.getEventManager().call(this, new ArenaRegionRestoredEvent(_arena));
+    }
+
+    private class FileFactory extends BasicFileFactory {
+
+        @Override
+        public String getFilename(IRegion region) {
+            return "arena." + _arena.getId();
+        }
     }
 }
