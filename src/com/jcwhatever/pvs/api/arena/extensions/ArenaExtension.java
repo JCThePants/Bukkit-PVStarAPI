@@ -44,6 +44,7 @@ public abstract class ArenaExtension implements IArenaOwned {
     private ArenaExtensionInfo _extensionInfo;
     private IArena _arena;
     private boolean _isAttached;
+    private boolean _isEnabled;
     private IDataNode _dataNode;
     private String _dataNodePath;
 
@@ -77,6 +78,13 @@ public abstract class ArenaExtension implements IArenaOwned {
     }
 
     /**
+     * Determine if the extension is enabled.
+     */
+    public final boolean isEnabled() {
+        return _isEnabled;
+    }
+
+    /**
      * Register the extension.
      *
      * <p>For use by PV-Star implementation.</p>
@@ -96,13 +104,27 @@ public abstract class ArenaExtension implements IArenaOwned {
 
     /**
      * Invoked when the extension is attached to an arena.
+     *
+     * <p>Intended for optional override.</p>
      */
-    protected abstract void onAttach();
+    protected void onAttach() {}
 
     /**
-     * Invoked when the extension is removed from an arena.
+     * Invoked when the extension is permanently removed from an arena.
+     *
+     * <p>Intended for optional override.</p>
      */
-    protected abstract void onRemove();
+    protected void onDetach() {}
+
+    /**
+     * Invoked when the arena is enabled or loaded with the extension.
+     */
+    protected abstract void onEnable();
+
+    /**
+     * Invoked when the arena is disabled.
+     */
+    protected abstract void onDisable();
 
     /**
      * Registration used to allow implementation to access protected methods.
@@ -116,7 +138,9 @@ public abstract class ArenaExtension implements IArenaOwned {
          * @param info       The extensions info.
          * @param arena      The arena to attach the extension to.
          */
-        public void attach(ArenaExtension extension, ArenaExtensionInfo info, IArena arena) {
+        public void attach(ArenaExtension extension,
+                           ArenaExtensionInfo info, IArena arena, boolean isInitialAttach) {
+
             PreCon.notNull(extension);
             PreCon.notNull(info);
             PreCon.notNull(arena);
@@ -129,15 +153,18 @@ public abstract class ArenaExtension implements IArenaOwned {
             extension._arena = arena;
 
             extension._dataNodePath = "arenas." + arena.getId() + ".extensions." + info.name();
-            extension._dataNode = DataStorage.get(PVStarAPI.getPlugin(), new DataPath(extension._dataNodePath));
+            extension._dataNode = DataStorage
+                    .get(PVStarAPI.getPlugin(), new DataPath(extension._dataNodePath));
             extension._dataNode.load();
 
             extension._isAttached = true;
-            extension.onAttach();
+
+            if (isInitialAttach)
+                extension.onAttach();
         }
 
         /**
-         * Remove an extension.
+         * Permanently remove an extension.
          *
          * @param extension  The extension to remove.
          */
@@ -148,8 +175,38 @@ public abstract class ArenaExtension implements IArenaOwned {
                 throw new IllegalStateException("Extension is not attached.");
 
             extension._isAttached = false;
-            extension.onRemove();
+            extension.onDetach();
             DataStorage.remove(PVStarAPI.getPlugin(), new DataPath(extension._dataNodePath));
+        }
+
+        /**
+         * Enable an extension.
+         *
+         * @param extension  The extension to enable.
+         */
+        public void enable(ArenaExtension extension) {
+            PreCon.isValid(extension._registration == this, "Invalid registration.");
+
+            if (extension._isEnabled)
+                return;
+
+            extension._isEnabled = true;
+            extension.onEnable();
+        }
+
+        /**
+         * Disable an extension.
+         *
+         * @param extension  The extension to disable.
+         */
+        public void disable(ArenaExtension extension) {
+            PreCon.isValid(extension._registration == this, "Invalid registration.");
+
+            if (!extension._isEnabled)
+                return;
+
+            extension._isEnabled = false;
+            extension.onDisable();
         }
     }
 }
