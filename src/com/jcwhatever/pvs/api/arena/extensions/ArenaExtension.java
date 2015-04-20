@@ -174,7 +174,9 @@ public abstract class ArenaExtension implements IArenaOwned {
             if (!extension._isAttached)
                 throw new IllegalStateException("Extension is not attached.");
 
+            extension._isEnabled = false;
             extension._isAttached = false;
+            extension.onDisable();
             extension.onDetach();
             DataStorage.remove(PVStarAPI.getPlugin(), new DataPath(extension._dataNodePath));
         }
