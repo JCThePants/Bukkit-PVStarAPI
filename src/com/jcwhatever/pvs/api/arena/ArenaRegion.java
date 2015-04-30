@@ -37,6 +37,7 @@ import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.nucleus.utils.MetaKey;
 import com.jcwhatever.pvs.api.PVStarAPI;
 import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
+import com.jcwhatever.pvs.api.events.region.ArenaRegionDefinedEvent;
 import com.jcwhatever.pvs.api.events.region.ArenaRegionPreRestoreEvent;
 import com.jcwhatever.pvs.api.events.region.ArenaRegionPreSaveEvent;
 import com.jcwhatever.pvs.api.events.region.ArenaRegionRestoredEvent;
@@ -44,6 +45,7 @@ import com.jcwhatever.pvs.api.events.region.ArenaRegionSavedEvent;
 import com.jcwhatever.pvs.api.events.region.PlayerEnterArenaRegionEvent;
 import com.jcwhatever.pvs.api.events.region.PlayerLeaveArenaRegionEvent;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 /**
@@ -81,6 +83,14 @@ public class ArenaRegion extends RestorableRegion implements IArenaOwned {
     @Override
     public IRegionFileFactory getFileFactory() {
         return _fileFactory;
+    }
+
+    @Override
+    protected void onCoordsChanged(Location p1, Location p2) {
+        super.onCoordsChanged(p1, p2);
+
+        ArenaRegionDefinedEvent event = new ArenaRegionDefinedEvent(getArena());
+        getArena().getEventManager().call(this, event);
     }
 
     /**
