@@ -27,7 +27,7 @@ package com.jcwhatever.pvs.api.stats;
 
 import com.jcwhatever.pvs.api.stats.StatTracking.StatTrackType;
 
-import java.util.Set;
+import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -76,5 +76,16 @@ public interface IArenaStats {
      *
      * @param type  The statistic type.
      */
-    Set<String> getRawPlayerIds(StatType type);
+    Collection<String> getRawPlayerIds(StatType type);
+
+    /**
+     * Get the IDs of all players with a statistic type recorded in the arena as a
+     * {@link java.util.Set} of {@link java.lang.String}.
+     *
+     * @param type    The statistic type.
+     * @param output  The output collection to add results to.
+     *
+     * @return  The output collection.
+     */
+    <T extends Collection<String>> T getRawPlayerIds(StatType type, T output);
 }
