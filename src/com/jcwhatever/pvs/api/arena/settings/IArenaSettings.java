@@ -25,6 +25,7 @@
 
 package com.jcwhatever.pvs.api.arena.settings;
 
+import com.jcwhatever.pvs.api.arena.options.DropsCleanup;
 import org.bukkit.Location;
 
 import javax.annotation.Nullable;
@@ -142,4 +143,16 @@ public interface IArenaSettings {
      * @param location  The location. Null to use the world spawn location.
      */
     void setRemoveLocation(@Nullable Location location);
+
+    /**
+     * Determine how item drops in the arena region are cleaned up.
+     */
+    DropsCleanup getDropsCleanup();
+
+    /**
+     * Set item drops cleanup behaviour.
+     *
+     * @param cleanup  The cleanup behaviour.
+     */
+    void setDropsCleanup(DropsCleanup cleanup);
 }
