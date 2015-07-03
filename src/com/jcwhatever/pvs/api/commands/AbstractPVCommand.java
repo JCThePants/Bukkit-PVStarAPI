@@ -31,12 +31,11 @@ import com.jcwhatever.nucleus.managed.commands.utils.AbstractCommand;
 import com.jcwhatever.pvs.api.PVStarAPI;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.extensions.ArenaExtension;
-
 import org.bukkit.command.CommandSender;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
-import javax.annotation.Nullable;
 
 /**
  * A base command with PV-Star common utilities included.
@@ -73,7 +72,7 @@ public abstract class AbstractPVCommand extends AbstractCommand {
                 ICommandArguments args, String infoParameterName)
                 throws InvalidArgumentException {
 
-            return args.getString(infoParameterName).equals("info")
+            return args.isDefaultValue(infoParameterName)
                     ? ArenaReturned.ALWAYS
                     : ArenaReturned.NOT_RUNNING;
         }
