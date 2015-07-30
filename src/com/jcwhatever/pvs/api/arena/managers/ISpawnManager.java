@@ -32,9 +32,9 @@ import com.jcwhatever.pvs.api.arena.options.ArenaContext;
 import com.jcwhatever.pvs.api.spawns.SpawnType;
 import com.jcwhatever.pvs.api.spawns.Spawnpoint;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
-import javax.annotation.Nullable;
 
 /**
  * Manages an arenas spawn points.
@@ -163,5 +163,17 @@ public interface ISpawnManager extends IArenaOwned {
      * spawnpoint getter methods.
      */
     void clearReserved();
+
+    /**
+     * Get the total number of reserved spawns.
+     */
+    int totalReserved();
+
+    /**
+     * Get the number of spawns of the specified type that are reserved.
+     *
+     * @param spawnType  The spawn type.
+     */
+    int totalReserved(SpawnType spawnType);
 }
 
