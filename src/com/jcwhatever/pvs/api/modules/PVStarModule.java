@@ -212,6 +212,11 @@ public abstract class PVStarModule {
     protected abstract void onEnable();
 
     /**
+     * Invoked after arenas are loaded.
+     */
+    protected void onArenasLoaded() {}
+
+    /**
      * Invoked when the module is disposed.
      *
      * <p>Intended for optional override.</p>
@@ -278,9 +283,21 @@ public abstract class PVStarModule {
         }
 
         /**
+         * Invoke to notify arenas are loaded.
+         *
+         * @param module  The module to notify.
+         */
+        public final void arenasEnabled(PVStarModule module) {
+            PreCon.notNull(module);
+
+            module.onArenasLoaded();
+        }
+
+        /**
          * Invoked to dispose resources used by the module before it is discarded.
          */
         public final void dispose(PVStarModule module) {
+            PreCon.notNull(module);
 
             if (module._isDisposed)
                 throw new IllegalStateException("The module named " + module.getName() + " is already disposed.");
