@@ -70,7 +70,7 @@ public class ArenaRegion extends RestorableRegion implements IArenaOwned {
         super(PVStarAPI.getPlugin(), arena.getId().toString(), dataNode);
         _arena = arena;
 
-        getMeta().set(ARENA_REGION_KEY, this);
+        getMeta().setKey(ARENA_REGION_KEY, this);
 
         setEventListener(true);
     }
