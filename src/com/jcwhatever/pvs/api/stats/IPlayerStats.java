@@ -22,47 +22,36 @@
  * THE SOFTWARE.
  */
 
-
 package com.jcwhatever.pvs.api.stats;
 
-import javax.annotation.Nullable;
-import java.util.List;
 import java.util.UUID;
 
 /**
- * Manages statistics data storage and statistic types.
+ * Container for player statistics data.
  */
-public interface IStatsManager {
+public interface IPlayerStats {
 
     /**
-     * Register a statistic type.
+     * Get the ID of the player the statistics are for.
+     */
+    UUID getPlayerId();
+
+    /**
+     * Get a players statistic score.
      *
-     * @param type  The statistic type.
+     * @param type          The statistic type.
+     * @param trackingType  The tracking type.
      */
-    void registerType(StatType type);
+    double getScore(StatType type, StatTracking.StatTrackType trackingType);
 
     /**
-     * Get available statistic types.
-     */
-    List<StatType> getTypes();
-
-    /**
-     * Get a statistic type by name.
+     * Adds a score to the statistics.
      *
-     * @param name  The name of the statistic.
-     */
-    @Nullable
-    StatType getType(String name);
-
-    /**
-     * Get statistics for an arena.
+     * <p>A score is an amount compiled during the running of an arena and
+     * whose final result is added here once the arena ends.</p>
      *
-     * @param arenaId  The ID of the arena.
+     * @param type    The statistic type.
+     * @param amount  The players score in the statistic type.
      */
-    IArenaStats getArenaStats(UUID arenaId);
-
-    /**
-     * Create a new statistics filter.
-     */
-    IStatsFilter createFilter();
+    void addScore(StatType type, double amount);
 }

@@ -22,47 +22,26 @@
  * THE SOFTWARE.
  */
 
-
 package com.jcwhatever.pvs.api.stats;
 
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.UUID;
-
 /**
- * Manages statistics data storage and statistic types.
+ * Describes the desired order of a stat.
  */
-public interface IStatsManager {
+public enum StatOrder {
 
     /**
-     * Register a statistic type.
+     * Stat is ordered with highest values at the top
+     * and lowest values at the bottom.
      *
-     * @param type  The statistic type.
+     * <p>Describes a stat as being desirable to be a higher value.</p>
      */
-    void registerType(StatType type);
+    ASCENDING,
 
     /**
-     * Get available statistic types.
-     */
-    List<StatType> getTypes();
-
-    /**
-     * Get a statistic type by name.
+     * Stat is ordered with lowest values at the top
+     * and highest values at the bottom.
      *
-     * @param name  The name of the statistic.
+     * <p>Describes a stat as being desirable to be a lower value.</p>
      */
-    @Nullable
-    StatType getType(String name);
-
-    /**
-     * Get statistics for an arena.
-     *
-     * @param arenaId  The ID of the arena.
-     */
-    IArenaStats getArenaStats(UUID arenaId);
-
-    /**
-     * Create a new statistics filter.
-     */
-    IStatsFilter createFilter();
+    DESCENDING
 }

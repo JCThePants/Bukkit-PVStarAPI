@@ -25,9 +25,8 @@
 
 package com.jcwhatever.pvs.api.stats;
 
-import com.jcwhatever.pvs.api.stats.StatTracking.StatTrackType;
+import com.jcwhatever.nucleus.utils.observer.future.IFutureResult;
 
-import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -41,51 +40,9 @@ public interface IArenaStats {
     UUID getArenaId();
 
     /**
-     * Get a statistics value.
+     * Get a players statistics for the arena.
      *
-     * @param type          The statistic type.
-     * @param playerId      The ID of the player.
-     * @param trackingType  The tracking type.
-     */
-    double getValue(StatType type, UUID playerId, StatTrackType trackingType);
-
-    /**
-     * Get a statistics value.
-     *
-     * @param type          The statistic type.
-     * @param playerId      The ID of the player as a {@link java.lang.String}.
-     * @param trackingType  The tracking type.
-     */
-    double getValue(StatType type, String playerId, StatTrackType trackingType);
-
-    /**
-     * Adds a player score to the arena statistics. A score is an amount compiled during the
-     * running of an arena and whose final result is added here once the arena ends.
-     *
-     * @param type      The statistic type.
      * @param playerId  The ID of the player.
-     * @param amount    The players score in the statistic type.
-     *
-     * @return  The new total statistic value.
      */
-    double addScore(StatType type, UUID playerId, double amount);
-
-    /**
-     * Get the IDs of all players with a statistic type recorded in the arena as a
-     * {@link java.util.Set} of {@link java.lang.String}.
-     *
-     * @param type  The statistic type.
-     */
-    Collection<String> getRawPlayerIds(StatType type);
-
-    /**
-     * Get the IDs of all players with a statistic type recorded in the arena as a
-     * {@link java.util.Set} of {@link java.lang.String}.
-     *
-     * @param type    The statistic type.
-     * @param output  The output collection to add results to.
-     *
-     * @return  The output collection.
-     */
-    <T extends Collection<String>> T getRawPlayerIds(StatType type, T output);
+    IFutureResult<IPlayerStats> get(UUID playerId);
 }

@@ -22,47 +22,41 @@
  * THE SOFTWARE.
  */
 
-
 package com.jcwhatever.pvs.api.stats;
 
-import javax.annotation.Nullable;
+import com.jcwhatever.nucleus.utils.observer.future.IFutureResult;
+
 import java.util.List;
 import java.util.UUID;
 
 /**
- * Manages statistics data storage and statistic types.
+ * One-time statistics filter.
  */
-public interface IStatsManager {
+public interface IStatsFilter {
 
     /**
-     * Register a statistic type.
+     * Add an arena to retrieve data from.
      *
-     * @param type  The statistic type.
+     * @param arenaId  The ID of the arena to add.
      */
-    void registerType(StatType type);
+    void addArena(UUID arenaId);
 
     /**
-     * Get available statistic types.
-     */
-    List<StatType> getTypes();
-
-    /**
-     * Get a statistic type by name.
+     * Add a statistic to sort by.
      *
-     * @param name  The name of the statistic.
-     */
-    @Nullable
-    StatType getType(String name);
-
-    /**
-     * Get statistics for an arena.
+     * <p>The order statistics are added determines the priority.</p>
      *
-     * @param arenaId  The ID of the arena.
+     * @param type       The statistic type.
+     * @param trackType  The tracking type.
      */
-    IArenaStats getArenaStats(UUID arenaId);
+    void addStat(StatType type, StatTracking.StatTrackType trackType);
 
     /**
-     * Create a new statistics filter.
+     * Filter statistics based on pre-specified parameters.
+     *
+     * @param limit  The max number of results to return.
+     *
+     * @return  A future to retrieve the results with.
      */
-    IStatsFilter createFilter();
+    IFutureResult<List<IPlayerStats>> filter(int offset, int limit);
 }

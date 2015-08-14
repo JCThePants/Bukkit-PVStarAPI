@@ -41,6 +41,7 @@ public class StatType implements INamed {
     private final String _statName;
     private final String _displayName;
     private final StatTracking _tracking;
+    private final StatOrder _order;
     private final DecimalFormat _format;
 
     /**
@@ -50,8 +51,8 @@ public class StatType implements INamed {
      * @param displayName  The display name.
      * @param tracking     The tracking types.
      */
-    public StatType(String statName, String displayName, StatTracking tracking) {
-        this(statName, displayName, tracking, DEFAULT_FORMATTER);
+    public StatType(String statName, String displayName, StatTracking tracking, StatOrder order) {
+        this(statName, displayName, tracking, order, DEFAULT_FORMATTER);
     }
 
     /**
@@ -62,14 +63,18 @@ public class StatType implements INamed {
      * @param tracking     The tracking types.
      * @param format       The decimal formatter to use when display values.
      */
-    public StatType(String statName, String displayName, StatTracking tracking, DecimalFormat format) {
+    public StatType(String statName, String displayName,
+                    StatTracking tracking, StatOrder order, DecimalFormat format) {
         PreCon.notNullOrEmpty(statName);
         PreCon.notNullOrEmpty(displayName);
         PreCon.isValid(TextUtils.isValidName(statName), "Invalid StatType name.");
+        PreCon.notNull(tracking);
+        PreCon.notNull(order);
 
         _statName = statName;
         _displayName = displayName;
         _tracking = tracking;
+        _order = order;
         _format = format;
     }
 
@@ -90,6 +95,15 @@ public class StatType implements INamed {
      */
     public StatTracking getTracking() {
         return _tracking;
+    }
+
+    /**
+     * Get the stat ordering.
+     *
+     * <p>Describes if it's more desirable for a stat to be a high or low value.</p>
+     */
+    public StatOrder getOrder() {
+        return _order;
     }
 
     /**
