@@ -45,4 +45,16 @@ public interface IArenaStats {
      * @param playerId  The ID of the player.
      */
     IFutureResult<IPlayerStats> get(UUID playerId);
+
+    /**
+     * Adds a score to a players statistics.
+     *
+     * <p>A score is an amount compiled during the running of an arena and
+     * whose final result is added here once the arena ends.</p>
+     *
+     * @param playerId  The ID of the player to add the score to.
+     * @param type      The statistic type.
+     * @param amount    The players score in the statistic type.
+     */
+    void addScore(UUID playerId, StatType type, double amount);
 }
