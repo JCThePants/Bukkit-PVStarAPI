@@ -35,12 +35,12 @@ import com.jcwhatever.pvs.api.arena.options.ArenaContext;
 import com.jcwhatever.pvs.api.arena.options.PlayerLeaveArenaReason;
 import com.jcwhatever.pvs.api.arena.options.TeamChangeReason;
 import com.jcwhatever.pvs.api.arena.settings.IContextSettings;
-
+import com.jcwhatever.pvs.api.stats.ISessionStatTracker;
 import org.bukkit.Location;
 
+import javax.annotation.Nullable;
 import java.util.Date;
 import java.util.UUID;
-import javax.annotation.Nullable;
 
 /**
  * Wraps the {@link org.bukkit.entity.Player} object and carries extra arena
@@ -159,6 +159,11 @@ public interface IArenaPlayer extends INamed, IMeta, IArenaOwned, IPlayerReferen
      * @return  The new points value.
      */
     int incrementPoints(int amount);
+
+    /**
+     * Get the players current session statistics.
+     */
+    ISessionStatTracker getSessionStats();
 
     /**
      * Get the {@link IArenaPlayerGroup} the player is part of.
