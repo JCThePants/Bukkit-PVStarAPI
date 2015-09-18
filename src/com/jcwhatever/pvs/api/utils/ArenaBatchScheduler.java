@@ -29,7 +29,8 @@ import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.nucleus.managed.scheduler.IScheduledTask;
 
-import java.util.LinkedList;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Schedules arena tasks that can all be cancelled at the same time.
@@ -37,7 +38,7 @@ import java.util.LinkedList;
 public class ArenaBatchScheduler {
 
     private final IArena _arena;
-    private final LinkedList<IScheduledTask> _tasks = new LinkedList<>();
+    private final Deque<IScheduledTask> _tasks = new ArrayDeque<>(25);
 
     /**
      * Constructor.
