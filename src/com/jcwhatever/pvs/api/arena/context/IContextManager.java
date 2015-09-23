@@ -51,5 +51,5 @@ public interface IContextManager extends IArenaOwned {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    void tell(String message, Object... params);
+    void tell(CharSequence message, Object... params);
 }

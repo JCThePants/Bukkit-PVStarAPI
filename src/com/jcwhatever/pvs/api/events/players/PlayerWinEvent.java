@@ -77,7 +77,7 @@ public class PlayerWinEvent extends AbstractPlayerEvent {
      *
      * @param message  The message.
      */
-    public void setWinMessage(@Nullable String message) {
-        _message = message;
+    public void setWinMessage(@Nullable CharSequence message) {
+        _message = message != null ? message.toString() : null;
     }
 }

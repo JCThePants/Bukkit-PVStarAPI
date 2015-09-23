@@ -72,7 +72,7 @@ public class PlayerReadyEvent extends AbstractPlayerEvent {
      *
      * @param message  The message to display.
      */
-    public void setMessage(String message) {
-        _message = message;
+    public void setMessage(@Nullable CharSequence message) {
+        _message = message != null ? message.toString() : null;
     }
 }

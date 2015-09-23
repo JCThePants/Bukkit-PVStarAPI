@@ -31,13 +31,13 @@ import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.options.JoinRejectReason;
 import com.jcwhatever.pvs.api.arena.options.PlayerJoinArenaReason;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.annotation.Nullable;
 
 /**
  * Event called before a player joins an arena through the arena method
@@ -120,16 +120,16 @@ public class PlayerPreJoinArenaEvent extends AbstractPlayerEvent implements ICan
     /**
      * Reject the player join request.
      *
-     * @param reason            The reason the player is being rejected.
-     * @param rejectionMessage  The message to display to the player.
+     * @param reason   The reason the player is being rejected.
+     * @param message  The message to display to the player.
      */
-    public void rejectJoin(JoinRejectReason reason, @Nullable String rejectionMessage) {
+    public void rejectJoin(JoinRejectReason reason, @Nullable CharSequence message) {
         PreCon.notNull(reason);
 
         if (reason == JoinRejectReason.NONE)
             return;
 
-        _rejectReasons.put(reason, rejectionMessage);
+        _rejectReasons.put(reason, message != null ? message.toString() : null);
         _isCancelled = true;
     }
 

@@ -77,7 +77,7 @@ public class PlayerLoseEvent extends AbstractPlayerEvent {
      *
      * @param message  The message to display
      */
-    public void setLoseMessage(@Nullable String message) {
-        _message = message;
+    public void setLoseMessage(@Nullable CharSequence message) {
+        _message = message != null ? message.toString() : null;
     }
 }

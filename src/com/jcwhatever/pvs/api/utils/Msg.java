@@ -25,15 +25,14 @@
 
 package com.jcwhatever.pvs.api.utils;
 
-import com.jcwhatever.nucleus.managed.messaging.ChatPaginator;
 import com.jcwhatever.nucleus.managed.messaging.IMessenger;
 import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.nucleus.utils.text.TextUtils;
+import com.jcwhatever.nucleus.utils.text.components.IChatMessage;
 import com.jcwhatever.pvs.api.PVStarAPI;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -55,7 +54,7 @@ public class Msg {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public static void tell(CommandSender sender, String message, Object...params) {
+    public static void tell(CommandSender sender, CharSequence message, Object...params) {
         PreCon.notNull(sender);
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
@@ -70,7 +69,7 @@ public class Msg {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public static void tell(IArenaPlayer player, String message, Object...params) {
+    public static void tell(IArenaPlayer player, CharSequence message, Object...params) {
         PreCon.notNull(player);
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
@@ -85,12 +84,12 @@ public class Msg {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public static void tell(Collection<? extends IArenaPlayer> players, String message, Object...params) {
+    public static void tell(Collection<? extends IArenaPlayer> players, CharSequence message, Object...params) {
         PreCon.notNull(players);
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        String formatted = TextUtils.format(message, params);
+        IChatMessage formatted = TextUtils.format(message, params);
 
         for (IArenaPlayer player : players) {
             msg().tell(player.getPlayer(), formatted);
@@ -104,7 +103,7 @@ public class Msg {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public static void tellError(CommandSender sender, String message, Object...params) {
+    public static void tellError(CommandSender sender, CharSequence message, Object...params) {
         PreCon.notNull(sender);
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
@@ -119,7 +118,7 @@ public class Msg {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public static void tellError(IArenaPlayer player, String message, Object...params) {
+    public static void tellError(IArenaPlayer player, CharSequence message, Object...params) {
         PreCon.notNull(player);
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
@@ -134,7 +133,7 @@ public class Msg {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public static void tellArena(IArena arena, String message, Object... params) {
+    public static void tellArena(IArena arena, CharSequence message, Object... params) {
         PreCon.notNull(arena);
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
@@ -143,7 +142,7 @@ public class Msg {
         IArenaPlayerCollection spectators = arena.getSpectators().getPlayers();
         IArenaPlayerCollection gamers = arena.getGame().getPlayers();
 
-        String formatted = TextUtils.format(message, params);
+        IChatMessage formatted = TextUtils.format(message, params);
 
         for (IArenaPlayer player : lobby)
             tell(player.getPlayer(), formatted);
@@ -161,11 +160,11 @@ public class Msg {
      * @param message  The message to tell.
      * @param params   Optional format parameters.
      */
-    public static void tellNonArena(String message, Object... params) {
+    public static void tellNonArena(CharSequence message, Object... params) {
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        String formatted = TextUtils.format(message, params);
+        IChatMessage formatted = TextUtils.format(message, params);
 
         Collection<? extends Player> players = Bukkit.getOnlinePlayers();
         for (Player p : players) {
@@ -186,7 +185,7 @@ public class Msg {
      * @param message   The message to tell.
      * @param params    Optional format parameters.
      */
-    public static void tellImportant(UUID playerId, String context, String message, Object...params) {
+    public static void tellImportant(UUID playerId, String context, CharSequence message, Object...params) {
     	msg().tellImportant(playerId, context, message, params);
     }
 
@@ -196,7 +195,7 @@ public class Msg {
      * @param message  The message to broadcast.
      * @param params   Optional format parameters.
      */
-    public static void broadcast(String message, Object...params) {
+    public static void broadcast(CharSequence message, Object...params) {
         msg().broadcast(message, params);
 
     }
@@ -205,22 +204,12 @@ public class Msg {
      * Broadcast a message to all players on the server, excluding
      * the specified players.
      *
-     * @param message  The message to broadcast.
      * @param exclude  The player to exclude from the broadcast.
+     * @param message  The message to broadcast.
      * @param params   Optional format parameters.
      */
-    public static void broadcast(String message, Collection<? extends Player> exclude, Object...params) {
+    public static void broadcast(Collection<? extends Player> exclude, CharSequence message, Object...params) {
         msg().broadcast(exclude, message, params);
-    }
-
-    /**
-     * Get a paginator for listing things in chat.
-     *
-     * @param title   The title of the paginator.
-     * @param params  Optional format parameters.
-     */
-    public static ChatPaginator getPaginator(String title, Object...params) {
-        return new ChatPaginator(PVStarAPI.getPlugin(), 6, TextUtils.format(title, params));
     }
 
     /**
@@ -230,7 +219,7 @@ public class Msg {
      * @param message  The message to write.
      * @param params   Optional format parameters.
      */
-    public static void debug(String message, Object...params) {
+    public static void debug(CharSequence message, Object...params) {
         if (!PVStarAPI.getPlugin().isDebugging())
             return;
 
@@ -243,7 +232,7 @@ public class Msg {
      * @param message  The message to write.
      * @param params   Optional format parameters.
      */
-    public static void info(String message, Object...params) {
+    public static void info(CharSequence message, Object...params) {
 		msg().info(message, params);
 	}
 
@@ -253,7 +242,7 @@ public class Msg {
      * @param message  The message to write.
      * @param params   Optional format parameters.
      */
-    public static void warning(String message, Object...params) {
+    public static void warning(CharSequence message, Object...params) {
     	msg().warning(message, params);
     }
 
@@ -263,7 +252,7 @@ public class Msg {
      * @param message  The message to write.
      * @param params   Optional format parameters.
      */
-    public static void severe(String message, Object...params) {
+    public static void severe(CharSequence message, Object...params) {
     	msg().severe(message, params);
     }
 
