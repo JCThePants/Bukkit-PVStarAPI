@@ -39,7 +39,7 @@ import javax.annotation.Nullable;
 /**
  * Called when player is added to an arena context.
  */
-public class PlayerAddedToContextEvent extends AbstractPlayerEvent {
+public class PlayerAddToContextEvent extends AbstractPlayerEvent {
 
     private final AddToContextReason _reason;
     private final ArenaContext _context;
@@ -55,13 +55,13 @@ public class PlayerAddedToContextEvent extends AbstractPlayerEvent {
      * @param reason         The reason the player is being added.
      * @param spawnLocation  The location the player will be teleported to, if any.
      */
-    public PlayerAddedToContextEvent(IArena arena,
-                                     IArenaPlayer player,
-                                     IContextManager relatedManager,
-                                     ArenaContext context,
-                                     AddToContextReason reason,
-                                     @Nullable Location spawnLocation,
-                                     @Nullable String message) {
+    public PlayerAddToContextEvent(IArena arena,
+                                   IArenaPlayer player,
+                                   IContextManager relatedManager,
+                                   ArenaContext context,
+                                   AddToContextReason reason,
+                                   @Nullable Location spawnLocation,
+                                   @Nullable String message) {
 
         super(arena, player, relatedManager);
 

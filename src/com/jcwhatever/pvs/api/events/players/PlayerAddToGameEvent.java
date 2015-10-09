@@ -27,12 +27,12 @@ package com.jcwhatever.pvs.api.events.players;
 /**
  * Called after a player is added to an arenas game context.
  */
-public class PlayerAddedToGameEvent extends PlayerAddedToContextEvent {
+public class PlayerAddToGameEvent extends PlayerAddToContextEvent {
 
     /**
      * Constructor.
      */
-    public PlayerAddedToGameEvent(PlayerAddedToContextEvent event) {
+    public PlayerAddToGameEvent(PlayerAddToContextEvent event) {
 
         super(event.getArena(), event.getPlayer(), event.getContextManager(),
                 event.getContext(), event.getReason(), event.getSpawnLocation(),

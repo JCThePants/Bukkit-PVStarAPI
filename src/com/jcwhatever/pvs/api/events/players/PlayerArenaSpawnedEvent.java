@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-
 package com.jcwhatever.pvs.api.events.players;
 
 import com.jcwhatever.nucleus.utils.PreCon;
@@ -35,64 +34,45 @@ import org.bukkit.Location;
 import javax.annotation.Nullable;
 
 /**
- * Called when a player is respawned in an arena.
+ * Called after a player is spawned in an arena.
  */
-public class PlayerArenaRespawnEvent extends AbstractPlayerEvent {
+public class PlayerArenaSpawnedEvent extends AbstractPlayerEvent {
 
-    private Location _respawnLocation;
-    private Location _originalRespawnLocation;
+    private Location _location;
 
     /**
      * Constructor.
      *
      * @param arena            The event arena.
      * @param player           The player being respawned.
-     * @param respawnLocation  The location the player will be respawned at.
+     * @param spawnLocation  The location the player will be respawned at.
      */
-    public PlayerArenaRespawnEvent(IArena arena,
+    public PlayerArenaSpawnedEvent(IArena arena,
                                    IArenaPlayer player,
                                    @Nullable IContextManager relatedManager,
-                                   Location respawnLocation) {
+                                   Location spawnLocation) {
 
         super(arena, player, relatedManager);
 
-        PreCon.notNull(respawnLocation);
+        PreCon.notNull(spawnLocation);
 
-        _respawnLocation = respawnLocation;
-        _originalRespawnLocation = LocationUtils.copy(respawnLocation);
-    }
-
-    /**
-     * Get the respawn location set when the event was called.
-     */
-    public Location getInitialRespawnLocation() {
-        return _originalRespawnLocation.clone();
-    }
-
-    /**
-     * Get the respawn location set when the event was called.
-     */
-    public Location getInitialRespawnLocation(Location output) {
-        PreCon.notNull(output);
-
-        return LocationUtils.copy(_originalRespawnLocation, output);
+        _location = spawnLocation;
     }
 
     /**
      * Get the respawn location.
      */
-    public Location getRespawnLocation() {
-        return _respawnLocation;
+    public Location getSpawnLocation() {
+        return _location.clone();
     }
 
     /**
-     * Set the respawn location.
-     *
-     * @param location  The location.
+     * Get the respawn location.
      */
-    public void setRespawnLocation(Location location) {
-        PreCon.notNull(location);
+    public Location getSpawnLocation(Location output) {
+        PreCon.notNull(output);
 
-        LocationUtils.copy(location, _respawnLocation);
+        return LocationUtils.copy(_location, output);
     }
 }
+

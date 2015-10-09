@@ -25,14 +25,14 @@
 package com.jcwhatever.pvs.api.events.players;
 
 /**
- * Called after a player is added to an arenas lobby context.
+ * Called after a player is added to an arenas spectator context.
  */
-public class PlayerAddedToLobbyEvent extends PlayerAddedToContextEvent {
+public class PlayerAddToSpectatorEvent extends PlayerAddToContextEvent {
 
     /**
      * Constructor.
      */
-    public PlayerAddedToLobbyEvent(PlayerAddedToContextEvent event) {
+    public PlayerAddToSpectatorEvent(PlayerAddToContextEvent event) {
 
         super(event.getArena(), event.getPlayer(), event.getContextManager(),
                 event.getContext(), event.getReason(), event.getSpawnLocation(),
