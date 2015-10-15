@@ -25,6 +25,7 @@
 
 package com.jcwhatever.pvs.api.arena.settings;
 
+import com.jcwhatever.nucleus.managed.teleport.TeleportMode;
 import com.jcwhatever.nucleus.storage.IDataNode;
 import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 
@@ -131,4 +132,18 @@ public interface IContextSettings extends IArenaOwned {
      * @param isEnabled  True to enable spawn reserving.
      */
     void setPlayerSpawnsReserved(boolean isEnabled);
+
+    /**
+     * Get the teleport mode used when the player teleports to or within
+     * the context.
+     */
+    TeleportMode getTeleportMode();
+
+    /**
+     * Set the teleport mode used when the player teleports to or within
+     * the context.
+     *
+     * @param mode  The teleport mode.
+     */
+    void setTeleportMode(TeleportMode mode);
 }

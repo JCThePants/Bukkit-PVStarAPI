@@ -25,14 +25,14 @@
 
 package com.jcwhatever.pvs.api.arena.context;
 
+import com.jcwhatever.pvs.api.arena.ArenaTeam;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-import com.jcwhatever.pvs.api.arena.ArenaTeam;
 import com.jcwhatever.pvs.api.arena.options.ArenaStartReason;
 import com.jcwhatever.pvs.api.arena.settings.IGameSettings;
 
-import java.util.Date;
 import javax.annotation.Nullable;
+import java.util.Date;
 
 /**
  * Manages an arenas game session/players.
@@ -60,6 +60,7 @@ public interface IGameContext extends IContextManager {
     /**
      * Get the game manager settings.
      */
+    @Override
     IGameSettings getSettings();
 
     /**

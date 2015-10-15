@@ -28,6 +28,7 @@ package com.jcwhatever.pvs.api.arena.context;
 import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
 import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
 import com.jcwhatever.pvs.api.arena.options.ArenaContext;
+import com.jcwhatever.pvs.api.arena.settings.IContextSettings;
 
 /**
  * The base interface for player context managers.
@@ -39,6 +40,11 @@ public interface IContextManager extends IArenaOwned {
      * Get the managers context.
      */
     ArenaContext getContext();
+
+    /**
+     * Get the context settings.
+     */
+    IContextSettings getSettings();
 
     /**
      * Get the players being managed.

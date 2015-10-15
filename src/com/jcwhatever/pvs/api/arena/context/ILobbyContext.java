@@ -51,6 +51,7 @@ public interface ILobbyContext extends IContextManager {
     /**
      * Get the lobby manager settings.
      */
+    @Override
     ILobbySettings getSettings();
 }
 

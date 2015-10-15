@@ -35,5 +35,6 @@ public interface ISpectatorContext extends IContextManager {
     /**
      * Get the spectator manager settings.
      */
+    @Override
     ISpectatorSettings getSettings();
 }
