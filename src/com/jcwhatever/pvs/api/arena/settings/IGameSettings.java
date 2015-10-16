@@ -79,4 +79,18 @@ public interface IGameSettings extends IContextSettings {
      * @param isEnabled  True to remove entities on game end.
      */
     void setPostGameEntityCleanup(boolean isEnabled);
+
+    /**
+     * Get the number of ticks to delay before ending the game after a
+     * winner is declared.
+     */
+    int getEndDelayTicks();
+
+    /**
+     * Set the number of ticks to delay before ending the game after a
+     * winner is declared.
+     *
+     * @param delayTicks  The delay in ticks.
+     */
+    void setEndDelayTicks(int delayTicks);
 }
