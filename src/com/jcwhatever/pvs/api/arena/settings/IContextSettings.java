@@ -146,4 +146,20 @@ public interface IContextSettings extends IArenaOwned {
      * @param mode  The teleport mode.
      */
     void setTeleportMode(TeleportMode mode);
+
+    /**
+     * Get the max amount of ticks a player can stay in the death screen
+     * before being kicked.
+     *
+     * @return  The number of ticks or 0 if there is no limit.
+     */
+    int getMaxDeathTicks();
+
+    /**
+     * Set the max amount of ticks a player can stay in the death screen
+     * before being kicked.
+     *
+     * @param ticks  The number of ticks or 0 if there is no limit.
+     */
+    void setMaxDeathTicks(int ticks);
 }
