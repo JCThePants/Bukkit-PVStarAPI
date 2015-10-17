@@ -88,8 +88,7 @@ public class PlayerLeaveArenaEvent extends AbstractPlayerEvent {
      * Determine if the player is being restored to a location.
      */
     public boolean isRestoring() {
-        return _reason != PlayerLeaveArenaReason.FORWARDING &&
-                _reason != PlayerLeaveArenaReason.LOGOUT;
+        return _reason != PlayerLeaveArenaReason.FORWARDING;
     }
 
     /**
