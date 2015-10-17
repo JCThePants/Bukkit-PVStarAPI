@@ -81,6 +81,18 @@ public interface IContextSettings extends IArenaOwned {
     void setHungerEnabled(boolean isEnabled);
 
     /**
+     * Determine if auto heal is enabled in the arena context.
+     */
+    boolean isAutoHealEnabled();
+
+    /**
+     * Set arena auto heal disabled or allowed.
+     *
+     * @param isDisabled  True to allow auto heal, false to prevent.
+     */
+    void setAutoHealEnabled(boolean isDisabled);
+
+    /**
      * Determine if player armor is damageable.
      */
     boolean isArmorDamageable();
