@@ -75,4 +75,21 @@ public class PlayerReadyEvent extends AbstractPlayerEvent {
     public void setMessage(@Nullable CharSequence message) {
         _message = message != null ? message.toString() : null;
     }
+
+    /**
+     * Get the total number of players who are ready to play.
+     */
+    public int getTotalReady() {
+        IContextManager context = getContextManager();
+        if (context == null)
+            return 0;
+
+        int ready = 0;
+        for (IArenaPlayer arenaPlayer : context.getPlayers()) {
+            if (arenaPlayer.isReady()) {
+                ready++;
+            }
+        }
+        return ready;
+    }
 }
