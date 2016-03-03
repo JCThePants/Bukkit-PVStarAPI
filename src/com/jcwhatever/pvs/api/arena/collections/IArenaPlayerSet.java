@@ -26,15 +26,10 @@ package com.jcwhatever.pvs.api.arena.collections;
 
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
 
-import org.bukkit.entity.Player;
-
 import java.util.Set;
 
 /**
  * Set of {@link IArenaPlayer}.
  */
 public interface IArenaPlayerSet extends IArenaPlayerCollection, Set<IArenaPlayer> {
-
-    @Override
-    Set<Player> asPlayers();
 }

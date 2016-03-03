@@ -22,14 +22,14 @@
  * THE SOFTWARE.
  */
 
-package com.jcwhatever.pvs.api.arena.collections;
+package com.jcwhatever.pvs.api.arena;
 
-import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.nucleus.providers.npc.INpc;
 
-import java.util.List;
-
-/**
- * List of {@link IArenaPlayer}.
+/*
+ * 
  */
-public interface IArenaPlayerList extends IArenaPlayerCollection, List<IArenaPlayer> {
+public interface INpcPlayer extends IArenaPlayer {
+
+    INpc getNpc();
 }

@@ -24,36 +24,39 @@
 
 package com.jcwhatever.pvs.api.utils;
 
-import com.jcwhatever.nucleus.collections.wrap.ConversionListWrapper;
-import com.jcwhatever.nucleus.collections.wrap.ListWrapper;
-import com.jcwhatever.nucleus.utils.player.PlayerUtils;
-import com.jcwhatever.pvs.api.PVStarAPI;
+import com.jcwhatever.nucleus.collections.wrap.IteratorWrapper;
+import com.jcwhatever.nucleus.collections.wrap.ListIteratorWrapper;
+import com.jcwhatever.nucleus.providers.npc.INpc;
+import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.IBukkitPlayer;
+import com.jcwhatever.pvs.api.arena.INpcPlayer;
 import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerList;
-
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * {@link ArrayList} implementation of {@link IArenaPlayerList}.
  */
-public class ArenaPlayerArrayList extends ListWrapper<IArenaPlayer> implements IArenaPlayerList {
+public class ArenaPlayerArrayList extends ArrayList<IArenaPlayer> implements IArenaPlayerList {
 
     public static final ArenaPlayerArrayList EMPTY = new ArenaPlayerArrayList(0).seal();
-
-    private final List<IArenaPlayer> _list;
-    private final List<Player> _asPlayerList = new PlayerList();
-
     private boolean _isReadonly;
+
+    private List<Player> _players;
+    private List<INpc> _npcs;
 
     /**
      * Constructor.
      */
     public ArenaPlayerArrayList() {
-        _list = new ArrayList<>(15);
+        super(15);
     }
 
     /**
@@ -62,7 +65,7 @@ public class ArenaPlayerArrayList extends ListWrapper<IArenaPlayer> implements I
      * @param capacity  The initial capacity.
      */
     public ArenaPlayerArrayList(int capacity) {
-        _list = new ArrayList<>(capacity);
+        super(capacity);
     }
 
     /**
@@ -72,7 +75,20 @@ public class ArenaPlayerArrayList extends ListWrapper<IArenaPlayer> implements I
      * @param isReadonly  True to make the list readonly, otherwise false.
      */
     public ArenaPlayerArrayList(Collection<? extends IArenaPlayer> players, boolean isReadonly) {
-        _list = new ArrayList<>(players);
+        super(players);
+        _isReadonly = isReadonly;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param players     The players to initialize the collection with.
+     * @param isReadonly  True to make the list readonly, otherwise false.
+     */
+    public ArenaPlayerArrayList(ArenaPlayerArrayList players, boolean isReadonly) {
+        super(players);
+        _players = players._players;
+        _npcs = players._npcs;
         _isReadonly = isReadonly;
     }
 
@@ -82,31 +98,172 @@ public class ArenaPlayerArrayList extends ListWrapper<IArenaPlayer> implements I
     }
 
     @Override
-    public List<Player> asPlayers() {
-        return _asPlayerList;
+    public Collection<Player> toBukkit() {
+        if (_players != null)
+            return _players;
+
+        List<Player> players = new ArrayList<>(size());
+
+        for (IArenaPlayer arenaPlayer : this) {
+            if (arenaPlayer instanceof IBukkitPlayer)
+                players.add(((IBukkitPlayer) arenaPlayer).getPlayer());
+        }
+
+        return _players = Collections.unmodifiableList(players);
     }
 
     @Override
-    protected List<IArenaPlayer> list() {
-        return _list;
+    public <T extends Collection<Player>> T toBukkit(T output) {
+        PreCon.notNull(output);
+
+        if (output instanceof ArrayList)
+            ((ArrayList) output).ensureCapacity(output.size() + size());
+
+        output.addAll(toBukkit());
+        return output;
     }
 
     @Override
-    protected boolean onPreAdd(IArenaPlayer player) {
+    public Collection<INpc> getNpcPlayers() {
+        if (_npcs != null)
+            return _npcs;
 
+        List<INpc> npcs = new ArrayList<>(size());
+
+        for (IArenaPlayer arenaPlayer : this) {
+            if (arenaPlayer instanceof INpcPlayer)
+                npcs.add(((INpcPlayer) arenaPlayer).getNpc());
+        }
+
+        return _npcs = Collections.unmodifiableList(npcs);
+    }
+
+    @Override
+    public <T extends Collection<INpc>> T getNpcPlayers(T output) {
+        PreCon.notNull(output);
+
+        if (output instanceof ArrayList)
+            ((ArrayList) output).ensureCapacity(output.size() + size());
+
+        output.addAll(getNpcPlayers());
+        return output;
+    }
+
+    @Override
+    public boolean hasNpcPlayers() {
+        return !getNpcPlayers().isEmpty();
+    }
+
+    @Override
+    public int totalNpcPlayers() {
+        return getNpcPlayers().size();
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends IArenaPlayer> c) {
+        onModify();
+        return super.addAll(index, c);
+    }
+
+    @Override
+    public IArenaPlayer set(int index, IArenaPlayer element) {
+        onModify();
+        return super.set(index, element);
+    }
+
+    @Override
+    public void add(int index, IArenaPlayer element) {
+        onModify();
+        super.add(index, element);
+
+    }
+
+    @Override
+    public IArenaPlayer remove(int index) {
+        onModify();
+        return super.remove(index);
+    }
+
+    @Override
+    public boolean add(IArenaPlayer iArenaPlayer) {
+        onModify();
+        return super.add(iArenaPlayer);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        onModify();
+        return super.remove(o);
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends IArenaPlayer> c) {
+        onModify();
+        return super.addAll(c);
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        onModify();
+        return super.removeAll(c);
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        onModify();
+        return super.retainAll(c);
+    }
+
+    @Override
+    public Iterator<IArenaPlayer> iterator() {
+        return new IteratorWrapper<IArenaPlayer>() {
+
+            Iterator<IArenaPlayer> iterator =  ArenaPlayerArrayList.super.iterator();
+
+            @Override
+            protected Iterator<IArenaPlayer> iterator() {
+                return iterator;
+            }
+
+            @Override
+            protected boolean onRemove(IArenaPlayer player) {
+                onModify();
+                return true;
+            }
+        };
+    }
+
+    @Override
+    public ListIterator<IArenaPlayer> listIterator() {
+        return new ListIteratorWrapper<IArenaPlayer>() {
+
+            ListIterator<IArenaPlayer> iterator =  ArenaPlayerArrayList.super.listIterator();
+
+            @Override
+            protected ListIterator<IArenaPlayer> iterator() {
+                return iterator;
+            }
+
+            @Override
+            protected boolean onRemove(IArenaPlayer element) {
+                onModify();
+                return true;
+            }
+        };
+    }
+
+    @Override
+    public void clear() {
+        onModify();
+        super.clear();
+    }
+
+    private void onModify() {
         if (_isReadonly)
             throw new UnsupportedOperationException("The ArenaPlayer list is readonly.");
 
-        return true;
-    }
-
-    @Override
-    protected boolean onPreRemove(Object o) {
-
-        if (_isReadonly)
-            throw new UnsupportedOperationException("The ArenaPlayer list is readonly.");
-
-        return true;
+        _players = null;
+        _npcs = null;
     }
 
     /*
@@ -116,23 +273,5 @@ public class ArenaPlayerArrayList extends ListWrapper<IArenaPlayer> implements I
         _isReadonly = true;
 
         return this;
-    }
-
-    private class PlayerList extends ConversionListWrapper<Player, IArenaPlayer> {
-
-        @Override
-        protected List<IArenaPlayer> list() {
-            return _list;
-        }
-
-        @Override
-        protected Player convert(IArenaPlayer internal) {
-            return PlayerUtils.getPlayer(internal);
-        }
-
-        @Override
-        protected IArenaPlayer unconvert(Object external) {
-            return PVStarAPI.getArenaPlayer(external);
-        }
     }
 }

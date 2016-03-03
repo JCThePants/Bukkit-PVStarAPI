@@ -25,9 +25,9 @@
 
 package com.jcwhatever.pvs.api.arena;
 
+import com.jcwhatever.nucleus.managed.teleport.TeleportMode;
 import com.jcwhatever.nucleus.mixins.IMeta;
 import com.jcwhatever.nucleus.mixins.INamed;
-import com.jcwhatever.nucleus.mixins.IPlayerReference;
 import com.jcwhatever.nucleus.utils.MetaStore;
 import com.jcwhatever.pvs.api.arena.context.IContextManager;
 import com.jcwhatever.pvs.api.arena.mixins.IArenaOwned;
@@ -37,6 +37,7 @@ import com.jcwhatever.pvs.api.arena.options.TeamChangeReason;
 import com.jcwhatever.pvs.api.arena.settings.IContextSettings;
 import com.jcwhatever.pvs.api.stats.ISessionStatTracker;
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 
 import javax.annotation.Nullable;
 import java.util.Date;
@@ -46,10 +47,10 @@ import java.util.UUID;
  * Wraps the {@link org.bukkit.entity.Player} object and carries extra arena
  * related meta data regarding the player.
  */
-public interface IArenaPlayer extends INamed, IMeta, IArenaOwned, IPlayerReference {
+public interface IArenaPlayer extends INamed, IMeta, IArenaOwned {
 
     /**
-     * Get the players unique minecraft Id.
+     * Get the player instance unique ID.
      */
     UUID getUniqueId();
 
@@ -73,6 +74,24 @@ public interface IArenaPlayer extends INamed, IMeta, IArenaOwned, IPlayerReferen
      * @return  The output {@link Location}.
      */
     Location getLocation(Location output);
+
+    /**
+     * Get the player entity.
+     *
+     * @return  The entity or null if does not exist.
+     */
+    @Nullable
+    Entity getEntity();
+
+    /**
+     * Determine if the player is dead.
+     */
+    boolean isDead();
+
+    /**
+     * Determine if the player is on the server.
+     */
+    boolean isOnline();
 
     /**
      * Get the arena the player is currently in.
@@ -231,6 +250,30 @@ public interface IArenaPlayer extends INamed, IMeta, IArenaOwned, IPlayerReferen
     MetaStore getSessionMeta();
 
     /**
+     * Get the players health.
+     */
+    double getHealth();
+
+    /**
+     * Set the players health.
+     *
+     * @param health  The players health.
+     */
+    void setHealth(double health);
+
+    /**
+     * Get the players max health.
+     */
+    double getMaxHealth();
+
+    /**
+     * Set the players max health.
+     *
+     * @param maxHealth  The players max health.
+     */
+    void setMaxHealth(double maxHealth);
+
+    /**
      * Kill the player
      */
     void kill();
@@ -280,5 +323,24 @@ public interface IArenaPlayer extends INamed, IMeta, IArenaOwned, IPlayerReferen
      * @return  True if successful, otherwise false.
      */
     boolean loseGame();
+
+    /**
+     * Teleport the player.
+     *
+     * @param location  The location.
+     *
+     * @return  True if teleported, otherwise false.
+     */
+    boolean teleport(Location location);
+
+    /**
+     * Teleport the player.
+     *
+     * @param location  The location.
+     * @param mode      The teleport mode.
+     *
+     * @return  True if teleported, otherwise false.
+     */
+    boolean teleport(Location location, TeleportMode mode);
 }
 

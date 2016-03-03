@@ -25,14 +25,18 @@
 package com.jcwhatever.pvs.api.arena.collections;
 
 import com.jcwhatever.nucleus.mixins.IReadOnly;
+import com.jcwhatever.nucleus.providers.npc.INpc;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-
+import com.jcwhatever.pvs.api.arena.INpcPlayer;
 import org.bukkit.entity.Player;
 
 import java.util.Collection;
 
 /**
  * Collection of {@link IArenaPlayer}.
+ *
+ * <p>Should store instances of {@link INpcPlayer} separately to be retrieved
+ * via {@link #getNpcPlayers} method.</p>
  */
 public interface IArenaPlayerCollection extends Collection<IArenaPlayer>, IReadOnly {
 
@@ -45,8 +49,42 @@ public interface IArenaPlayerCollection extends Collection<IArenaPlayer>, IReadO
     boolean isReadOnly();
 
     /**
-     * Get a collection that represents the {@link IArenaPlayer}'s in the
-     * {@link IArenaPlayerCollection} as {@link Player}'s.
+     * Get all Bukkit players in the collection, not including Npc players.
      */
-    Collection<Player> asPlayers();
+    Collection<Player> toBukkit();
+
+    /**
+     * Add all Bukkit players in the collection to the specified output collection,
+     * not including Npc players.
+     *
+     * @param output  The output collection.
+     *
+     * @return  The output collection.
+     */
+    <T extends Collection<Player>> T toBukkit(T output);
+
+    /**
+     * Get all Npc players in the collection.
+     */
+    Collection<INpc> getNpcPlayers();
+
+    /**
+     * Add all Npc players in the collection to the specified output collection.
+     *
+     * @param output  The output collection.
+     *
+     * @return  The output collection.
+     */
+    <T extends Collection<INpc>> T getNpcPlayers(T output);
+
+    /**
+     * Determine if there are any Npc players in the collection.
+     */
+    boolean hasNpcPlayers();
+
+    /**
+     * Get the number of Npc's in the collection.
+     */
+    int totalNpcPlayers();
+
 }

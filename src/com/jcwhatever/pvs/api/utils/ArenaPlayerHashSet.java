@@ -24,37 +24,39 @@
 
 package com.jcwhatever.pvs.api.utils;
 
-import com.jcwhatever.nucleus.collections.wrap.ConversionSetWrapper;
-import com.jcwhatever.nucleus.collections.wrap.SetWrapper;
-import com.jcwhatever.nucleus.utils.player.PlayerUtils;
-import com.jcwhatever.pvs.api.PVStarAPI;
+import com.jcwhatever.nucleus.collections.wrap.IteratorWrapper;
+import com.jcwhatever.nucleus.providers.npc.INpc;
+import com.jcwhatever.nucleus.utils.PreCon;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.IBukkitPlayer;
+import com.jcwhatever.pvs.api.arena.INpcPlayer;
 import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
 import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerSet;
-
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
  * {@link HashSet} implementation of {@link IArenaPlayerCollection}.
  */
-public class ArenaPlayerHashSet extends SetWrapper<IArenaPlayer> implements IArenaPlayerSet {
+public class ArenaPlayerHashSet extends HashSet<IArenaPlayer> implements IArenaPlayerSet {
 
     public static final ArenaPlayerHashSet EMPTY = new ArenaPlayerHashSet(0).seal();
 
-    private final Set<IArenaPlayer> _set;
-    private final Set<Player> _asPlayerSet = new PlayerSet();
-
     private boolean _isReadonly;
+    private Set<Player> _players;
+    private Set<INpc> _npcs;
 
     /**
      * Constructor.
      */
     public ArenaPlayerHashSet() {
-        _set = new HashSet<>(15);
+        super(15);
     }
 
     /**
@@ -63,7 +65,7 @@ public class ArenaPlayerHashSet extends SetWrapper<IArenaPlayer> implements IAre
      * @param capacity  The initial capacity of the set.
      */
     public ArenaPlayerHashSet(int capacity) {
-        _set = new HashSet<>(capacity);
+        super(capacity);
     }
 
     /**
@@ -73,7 +75,20 @@ public class ArenaPlayerHashSet extends SetWrapper<IArenaPlayer> implements IAre
      * @param isReadonly  True to make the set readonly, otherwise false.
      */
     public ArenaPlayerHashSet(Collection<? extends IArenaPlayer> players, boolean isReadonly) {
-        _set = new HashSet<>(players);
+        super(players);
+        _isReadonly = isReadonly;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param players     The players to initialize the collection with.
+     * @param isReadonly  True to make the list readonly, otherwise false.
+     */
+    public ArenaPlayerHashSet(ArenaPlayerHashSet players, boolean isReadonly) {
+        super(players);
+        _players = players._players;
+        _npcs = players._npcs;
         _isReadonly = isReadonly;
     }
 
@@ -92,48 +107,127 @@ public class ArenaPlayerHashSet extends SetWrapper<IArenaPlayer> implements IAre
     }
 
     @Override
-    public Set<Player> asPlayers() {
-        return _asPlayerSet;
+    public Collection<Player> toBukkit() {
+        if (_players != null)
+            return _players;
+
+        Set<Player> players = new HashSet<>(size());
+
+        for (IArenaPlayer arenaPlayer : this) {
+            if (arenaPlayer instanceof IBukkitPlayer)
+                players.add(((IBukkitPlayer) arenaPlayer).getPlayer());
+        }
+
+        return _players = Collections.unmodifiableSet(players);
     }
 
     @Override
-    protected Set<IArenaPlayer> set() {
-        return _set;
+    public <T extends Collection<Player>> T toBukkit(T output) {
+        PreCon.notNull(output);
+
+        if (output instanceof ArrayList)
+            ((ArrayList) output).ensureCapacity(output.size() + size());
+
+        output.addAll(toBukkit());
+        return output;
     }
 
     @Override
-    protected boolean onPreAdd(IArenaPlayer player) {
+    public Collection<INpc> getNpcPlayers() {
+        if (_npcs != null)
+            return _npcs;
 
+        Set<INpc> npcs = new HashSet<>(size());
+
+        for (IArenaPlayer arenaPlayer : this) {
+            if (arenaPlayer instanceof INpcPlayer)
+                npcs.add(((INpcPlayer) arenaPlayer).getNpc());
+        }
+
+        return _npcs = Collections.unmodifiableSet(npcs);
+    }
+
+    @Override
+    public <T extends Collection<INpc>> T getNpcPlayers(T output) {
+        PreCon.notNull(output);
+
+        if (output instanceof ArrayList)
+            ((ArrayList) output).ensureCapacity(output.size() + size());
+
+        output.addAll(getNpcPlayers());
+        return output;
+    }
+
+    @Override
+    public boolean hasNpcPlayers() {
+        return !getNpcPlayers().isEmpty();
+    }
+
+    @Override
+    public int totalNpcPlayers() {
+        return getNpcPlayers().size();
+    }
+
+    @Override
+    public boolean add(IArenaPlayer iArenaPlayer) {
+        onModify();
+        return super.add(iArenaPlayer);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        onModify();
+        return super.remove(o);
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends IArenaPlayer> c) {
+        onModify();
+        return super.addAll(c);
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        onModify();
+        return super.removeAll(c);
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        onModify();
+        return super.retainAll(c);
+    }
+
+    @Override
+    public Iterator<IArenaPlayer> iterator() {
+        return new IteratorWrapper<IArenaPlayer>() {
+
+            Iterator<IArenaPlayer> iterator =  ArenaPlayerHashSet.super.iterator();
+
+            @Override
+            protected Iterator<IArenaPlayer> iterator() {
+                return iterator;
+            }
+
+            @Override
+            protected boolean onRemove(IArenaPlayer player) {
+                onModify();
+                return true;
+            }
+        };
+    }
+
+    @Override
+    public void clear() {
+        onModify();
+        super.clear();
+    }
+
+    private void onModify() {
         if (_isReadonly)
-            throw new UnsupportedOperationException("The ArenaPlayer list is readonly.");
+            throw new UnsupportedOperationException("The ArenaPlayer set is readonly.");
 
-        return true;
-    }
-
-    @Override
-    protected boolean onPreRemove(Object o) {
-
-        if (_isReadonly)
-            throw new UnsupportedOperationException("The ArenaPlayer list is readonly.");
-
-        return true;
-    }
-
-    private class PlayerSet extends ConversionSetWrapper<Player, IArenaPlayer> {
-
-        @Override
-        protected Set<IArenaPlayer> set() {
-            return _set;
-        }
-
-        @Override
-        protected Player convert(IArenaPlayer internal) {
-            return PlayerUtils.getPlayer(internal);
-        }
-
-        @Override
-        protected IArenaPlayer unconvert(Object external) {
-            return PVStarAPI.getArenaPlayer(external);
-        }
+        _players = null;
+        _npcs = null;
     }
 }

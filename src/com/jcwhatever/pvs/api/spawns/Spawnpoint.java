@@ -25,19 +25,18 @@
 
 package com.jcwhatever.pvs.api.spawns;
 
+import com.jcwhatever.nucleus.managed.teleport.TeleportMode;
+import com.jcwhatever.nucleus.utils.PreCon;
+import com.jcwhatever.nucleus.utils.coords.NamedLocation;
+import com.jcwhatever.pvs.api.arena.ArenaTeam;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
-import com.jcwhatever.pvs.api.arena.ArenaTeam;
-import com.jcwhatever.nucleus.utils.coords.NamedLocation;
-import com.jcwhatever.nucleus.utils.PreCon;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
-import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
-import java.util.List;
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * A named location used for specifying locations within arenas.
@@ -199,6 +198,6 @@ public class Spawnpoint extends NamedLocation {
     public void spawn(IArenaPlayer player) {
         PreCon.notNull(player);
 
-        player.getPlayer().teleport(this, TeleportCause.PLUGIN);
+        player.teleport(this, TeleportMode.TARGET_ONLY);
     }
 }

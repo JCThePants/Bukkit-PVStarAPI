@@ -35,6 +35,8 @@ import com.jcwhatever.pvs.api.points.IPointsManager;
 import com.jcwhatever.pvs.api.spawns.ISpawnTypeManager;
 import com.jcwhatever.pvs.api.stats.IStatsManager;
 
+import javax.annotation.Nullable;
+
 /**
  * PV-Star static API
  */
@@ -48,7 +50,10 @@ public final class PVStarAPI {
      * Get an {@link IArenaPlayer} wrapper for the specified player.
      *
      * @param player  The player.
+     *
+     * @return The player object or null if the argument is not valid.
      */
+    @Nullable
     public static IArenaPlayer getArenaPlayer(Object player) {
         return _implementation.getArenaPlayer(player);
     }

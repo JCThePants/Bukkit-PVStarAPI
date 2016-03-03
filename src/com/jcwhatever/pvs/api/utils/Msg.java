@@ -32,6 +32,7 @@ import com.jcwhatever.nucleus.utils.text.components.IChatMessage;
 import com.jcwhatever.pvs.api.PVStarAPI;
 import com.jcwhatever.pvs.api.arena.IArena;
 import com.jcwhatever.pvs.api.arena.IArenaPlayer;
+import com.jcwhatever.pvs.api.arena.IBukkitPlayer;
 import com.jcwhatever.pvs.api.arena.collections.IArenaPlayerCollection;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -74,7 +75,10 @@ public class Msg {
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        msg().tell(player.getPlayer(), message, params);
+        if (!(player instanceof IBukkitPlayer))
+            return;
+
+        msg().tell(((IBukkitPlayer) player).getPlayer(), message, params);
     }
 
     /**
@@ -92,7 +96,11 @@ public class Msg {
         IChatMessage formatted = TextUtils.format(message, params);
 
         for (IArenaPlayer player : players) {
-            msg().tell(player.getPlayer(), formatted);
+
+            if (!(player instanceof IBukkitPlayer))
+                continue;
+
+            msg().tell(((IBukkitPlayer) player).getPlayer(), formatted);
         }
     }
 
@@ -123,7 +131,10 @@ public class Msg {
         PreCon.notNullOrEmpty(message);
         PreCon.notNull(params);
 
-        msg().tell(player.getPlayer(), "{RED}" + message, params);
+        if (!(player instanceof IBukkitPlayer))
+            return;
+
+        msg().tell(((IBukkitPlayer) player).getPlayer(), "{RED}" + message, params);
     }
 
     /**
@@ -144,14 +155,29 @@ public class Msg {
 
         IChatMessage formatted = TextUtils.format(message, params);
 
-        for (IArenaPlayer player : lobby)
-            tell(player.getPlayer(), formatted);
+        for (IArenaPlayer player : lobby) {
 
-        for (IArenaPlayer player : spectators)
-            tell(player.getPlayer(), formatted);
+            if (!(player instanceof IBukkitPlayer))
+                continue;
 
-        for (IArenaPlayer player : gamers)
-            tell(player.getPlayer(), formatted);
+            tell(((IBukkitPlayer) player).getPlayer(), formatted);
+        }
+
+        for (IArenaPlayer player : spectators) {
+
+            if (!(player instanceof IBukkitPlayer))
+                continue;
+
+            tell(((IBukkitPlayer) player).getPlayer(), formatted);
+        }
+
+        for (IArenaPlayer player : gamers) {
+
+            if (!(player instanceof IBukkitPlayer))
+                return;
+
+            tell(((IBukkitPlayer) player).getPlayer(), formatted);
+        }
     }
 
     /**
